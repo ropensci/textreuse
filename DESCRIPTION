@@ -1,0 +1,16 @@
+Package: textreuse
+Type: Package
+Title: Detect Text Reuse and Document Similarity
+Version: 0.0.1.9000
+Authors@R: c(person("Lincoln", "Mullen", role = c("aut", "cre"),
+    email = "lincoln@lincolnmullen.com"),
+    person("Kellen", "Funk", role = "ctb"))
+Description: A set of functions for detecting passages which have been reused
+    across documents, as well as for calculating similarity between documents
+    based on those matches. These functions are intended in the first instance
+    for historical research, but should be more broadly applicable.
+License: MIT + file LICENSE
+LazyData: TRUE
+URL: https://github.com/lmullen/textreuse
+BugReports: https://github.com/lmullen/textreuse/issues
+VignetteBuilder: knitr
