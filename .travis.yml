@@ -1,0 +1,5 @@
+language: r
+r_github_packages:
+  - Rexamine/stringi
+  - hadley/stringr
+warnings_are_errors: true
