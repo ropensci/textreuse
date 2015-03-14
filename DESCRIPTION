@@ -14,3 +14,4 @@ LazyData: TRUE
 URL: https://github.com/lmullen/textreuse
 BugReports: https://github.com/lmullen/textreuse/issues
 VignetteBuilder: knitr
+Imports: stringr

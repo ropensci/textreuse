@@ -29,10 +29,12 @@ The actual analyses are available in [this GitHub repository](https://github.com
 
 ### Installation
 
-This package is not yet on CRAN. To install it from GitHub, use devtools:
+This package is not yet on CRAN. To install it from GitHub, use devtools. This package depends on the development version of [stringr](https://github.com/hadley/stringr), which in turn depends on [stringi](https://github.com/Rexamine/stringi/). You will also need to install them.
 
 ```{r eval=FALSE}
 # install.packages("devtools")
+devtools::install_github("Rexamine/stringi")
+devtools::install_github("hadley/stringr")
 devtools::install_github("lmullen/textreuse")
 ```
 

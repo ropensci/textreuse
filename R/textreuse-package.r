@@ -2,4 +2,5 @@
 #'
 #' @name textreuse
 #' @docType package
+#' @import stringr
 NULL
