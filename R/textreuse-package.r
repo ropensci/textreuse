@@ -9,16 +9,17 @@
 #'
 #' \emph{Final Report of the Commissioners on Practice and Pleadings}, in 2
 #' \emph{Documents of the Assembly of New York}, 73rd Sess., No. 16, (1850):
-#' 243-250, §§ 597-613.
+#' 243-250, sections 597-613.
 #' \href{http://books.google.com/books?id=9HEbAQAAIAAJ&pg=PA243#v=onepage&q&f=false}{Google
 #' Books}.
 #'
 #' \emph{An Act To Regulate Proceedings in Civil Cases}, 1851 \emph{California
-#' Laws} 51, 51-53 §§ 4-17; 101 §§ 313-316.
+#' Laws} 51, 51-53 sections 4-17; 101, sections 313-316.
 #' \href{http://books.google.com/books?id=4PHEAAAAIAAJ&pg=PA51#v=onepage&q&f=false}{Google
 #' Books}.
 #'
 #' @name textreuse
 #' @docType package
 #' @import stringr
+#' @import assertthat
 NULL
