@@ -3,7 +3,5 @@ word_list <- function(text) {
   text %>%
     str_split(boundary("word")) %>%
     `[[`(1) %>%
-    str_to_lower() %>%
-    unique() %>%
-    sort()
+    str_to_lower()
 }
