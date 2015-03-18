@@ -2,6 +2,8 @@
 textreuse: Detect Text Reuse and Document Similarity
 ----------------------------------------------------
 
+**This package is in very early development and does little as of yet.**
+
 This R package provides a set of functions for detecting passages which have been reused across documents, as well as for calculating similarity between documents based on those matches. These functions are intended in the first instance for historical research, but should be more broadly applicable.
 
 This package is part of a collaboration between [Lincoln Mullen](http://lincolnmullen.com) and [Kellen Funk](http://kellenfunk.org). For more about the project we are working on, see the following blog posts (though these precede this implementation):
