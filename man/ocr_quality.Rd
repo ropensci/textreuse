@@ -4,7 +4,7 @@
 \alias{ocr_quality}
 \title{Measure the quality of an text created with OCR}
 \usage{
-ocr_quality(text, method = c("dictionary"))
+ocr_quality(text, method = c("dictionary"), sample_size = -1L)
 }
 \arguments{
 \item{text}{A character vector. Each text (or chunk of a text) should be a
@@ -15,6 +15,10 @@ whether the words used in the text are found in a list of English words. It
 cannot identify OCR errors that result in the wrong English word. (See
 \code{\link{words_en}}.) Returns the ratio of words found in the list to
 the total number of words in the text.}}}
+
+\item{sample_size}{If this value is positive, then this many words from the
+\code{text} will be selected for comparison. This is useful for large
+texts.}
 }
 \value{
 A vector of numeric values between \code{0} and \code{1}.

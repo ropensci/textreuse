@@ -16,6 +16,9 @@
 #'   cannot identify OCR errors that result in the wrong English word. (See
 #'   \code{\link{words_en}}.) Returns the ratio of words found in the list to
 #'   the total number of words in the text.}}
+#' @param sample_size If this value is positive, then this many words from the
+#'   \code{text} will be selected for comparison. This is useful for large
+#'   texts.
 #' @return A vector of numeric values between \code{0} and \code{1}.
 #' @examples
 #' paragraph <- "Fourr score and sleven years ago our fathers brought
@@ -25,9 +28,10 @@
 #' ocr_quality(paragraph)
 #'
 #' @export
-ocr_quality <- function(text, method = c("dictionary")) {
+ocr_quality <- function(text, method = c("dictionary"), sample_size = -1L) {
   assert_that(is.character(text))
+  if(!missing(sample_size)) assert_that(is.count(sample_size))
   method <- match.arg(method)
   switch(method,
-         dictionary = ocr_dictionary(text))
+         dictionary = ocr_dictionary(text, sample_size))
 }
