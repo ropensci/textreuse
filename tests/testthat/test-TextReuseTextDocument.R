@@ -10,6 +10,14 @@ test_that("has the correct structure", {
   expect_named(doc, c("content", "ngrams", "meta"))
 })
 
+test_that("can set the metadata", {
+  expect_named(meta(doc), c("file"))
+  doc2 <- TextReuseTextDocument("newman.txt",
+                                meta = list(author = "Newman, John Henry"))
+  expect_named(meta(doc2), c("author", "file"))
+  expect_equal(meta(doc2, "author"), "Newman, John Henry")
+})
+
 test_that("provides the necessary methods", {
   expect_is(as.character(doc), c("String", "character"))
   expect_is(content(doc), "String", "character")

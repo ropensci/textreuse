@@ -4,13 +4,16 @@
 \alias{TextReuseTextDocument}
 \title{Create an TextReuseTextDocument object}
 \usage{
-TextReuseTextDocument(file, n = 5, ...)
+TextReuseTextDocument(file, n = 5, meta = NULL, ...)
 }
 \arguments{
 \item{file}{The path to a file, if \code{string} is not provided.}
 
 \item{n}{The value of \code{n} in the n-grams that are created by
 \link{ngrams}.}
+
+\item{meta}{A list with named elements for the metadata associated with this
+document.}
 
 \item{...}{Arguments are passed on to \link{readLines} if \code{file} is
   provided.}

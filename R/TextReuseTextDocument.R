@@ -6,6 +6,8 @@
 #' @param file The path to a file, if \code{string} is not provided.
 #' @param n The value of \code{n} in the n-grams that are created by
 #'   \link{ngrams}.
+#' @param meta A list with named elements for the metadata associated with this
+#'   document.
 #' @param ... Arguments are passed on to \link{readLines} if \code{file} is
 #'   provided.
 #'
@@ -16,7 +18,7 @@
 #'   \code{\link{ngrams}}.} \item{metadata}{The document metadata, including the
 #'   filename (if any) in \code{file}.} }
 #' @export
-TextReuseTextDocument <- function(file, n = 5, ...) {
+TextReuseTextDocument <- function(file, n = 5, meta = NULL, ...) {
 
   assert_that(is.readable(file))
   text <- readLines(file, ...) %>%
@@ -24,17 +26,25 @@ TextReuseTextDocument <- function(file, n = 5, ...) {
       NLP::as.String()
 
   assert_that(is.count(n))
-  ngrams(text, n = n)
+  ngrams <- ngrams(text, n = n)
+
+  if (missing(meta)) {
+    meta <- list(file = file)
+  } else {
+    assert_that(is.list(meta))
+    meta$file <- file
+  }
 
   doc <- list(
     content = text,
     ngrams  = ngrams,
-    meta    = list(file  = file)
+    meta    = meta
     )
 
   class(doc) <- c("TextReuseTextDocument", "TextDocument")
 
   doc
+
 }
 
 #' @export
@@ -56,6 +66,9 @@ print.TextReuseTextDocument <- function(doc) {
 }
 
 #' @export
-meta.TextReuseTextDocument <- function(doc) {
-  doc$meta
+meta.TextReuseTextDocument <- function(doc, tag = NULL) {
+  if (is.null(tag))
+    doc$meta
+  else
+    doc$meta[[tag]]
 }
