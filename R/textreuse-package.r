@@ -22,4 +22,5 @@
 #' @docType package
 #' @import stringr
 #' @import assertthat
+#' @importFrom NLP content meta
 NULL
