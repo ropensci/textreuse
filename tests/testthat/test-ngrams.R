@@ -4,7 +4,7 @@ sentence <- "This is a sentence which has a number of words in it; also some
              tricky puncuation and spacing. Does it work?"
 
 test_that("n-grams can be generated", {
-  results <- c("This is a sentence which",
+  results <- c("this is a sentence which",
                "is a sentence which has",
                "a sentence which has a",
                "sentence which has a number",
@@ -18,9 +18,9 @@ test_that("n-grams can be generated", {
                "it also some tricky puncuation",
                "also some tricky puncuation and",
                "some tricky puncuation and spacing",
-               "tricky puncuation and spacing Does",
-               "puncuation and spacing Does it",
-               "and spacing Does it work")
+               "tricky puncuation and spacing does",
+               "puncuation and spacing does it",
+               "and spacing does it work")
   expect_equal(ngrams(sentence, n = 5), results)
 })
 
@@ -30,4 +30,10 @@ test_that("different values of n work", {
 
   expect_equal(str_split(n3[1], boundary("word"))[[1]] %>% length(), 3)
   expect_equal(str_split(n5[1], boundary("word"))[[1]] %>% length(), 5)
+})
+
+test_that("ngrams can be uppercase", {
+  sentence <- ngrams("This is a Capital Word.", n = 4, lowercase = FALSE)
+  results  <- c("This is a Capital", "is a Capital Word")
+  expect_equal(sentence, results)
 })

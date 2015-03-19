@@ -4,12 +4,14 @@
 \alias{ngrams}
 \title{Break a text into n-grams}
 \usage{
-ngrams(string, n = 3)
+ngrams(string, n = 3, lowercase = TRUE)
 }
 \arguments{
 \item{string}{A character vector to be split into n-grams.}
 
 \item{n}{The value of \code{n}.}
+
+\item{lowercase}{Should the n-grams be made lowercase.}
 }
 \value{
 A character vector containing the n-grams.
