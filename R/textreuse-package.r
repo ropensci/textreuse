@@ -22,5 +22,5 @@
 #' @docType package
 #' @import stringr
 #' @import assertthat
-#' @importFrom NLP content meta
+#' @importFrom NLP content content<- meta meta<-
 NULL

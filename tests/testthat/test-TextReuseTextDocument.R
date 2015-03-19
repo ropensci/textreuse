@@ -23,6 +23,10 @@ test_that("provides the necessary methods", {
   expect_is(content(doc), "String", "character")
   expect_output(print(doc), "And now that I am about to trace")
   expect_is(meta(doc), c("list"))
+
+  doc3 <- TextReuseTextDocument("newman.txt")
+  meta(doc3)    <- list("author" = "Newman, John Henry")
+  content(doc3) <- "Replacing content"
 })
 
 test_that("has correct n-grams", {

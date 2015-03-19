@@ -48,27 +48,45 @@ TextReuseTextDocument <- function(file, n = 5, meta = NULL, ...) {
 }
 
 #' @export
-as.character.TextReuseTextDocument <- function(doc) {
-  doc$content
-}
-
-#' @export
-content.TextReuseTextDocument <- function(doc) {
-  doc$content
-}
-
-#' @export
-print.TextReuseTextDocument <- function(doc) {
-  doc$content %>%
+print.TextReuseTextDocument <- function(x, ...) {
+  x$content %>%
     str_sub(end = 100) %>%
     print()
-  invisible(doc)
+  invisible(x)
 }
 
 #' @export
-meta.TextReuseTextDocument <- function(doc, tag = NULL) {
+as.character.TextReuseTextDocument <- function(x, ...) {
+  x$content
+}
+
+#' @export
+#' @method content TextReuseTextDocument
+content.TextReuseTextDocument <- function(x) {
+  x$content
+}
+
+#' @export
+#' @method content<- TextReuseTextDocument
+`content<-.TextReuseTextDocument` <- function(x, value) {
+  assert_that(is.character(value))
+  x$content <- value
+  x
+}
+
+#' @export
+#' @method meta TextReuseTextDocument
+meta.TextReuseTextDocument <- function(doc, tag = NULL, ...) {
   if (is.null(tag))
     doc$meta
   else
     doc$meta[[tag]]
+}
+
+#' @export
+#' @method meta<- TextReuseTextDocument
+`meta<-.TextReuseTextDocument` <- function(x, value) {
+  assert_that(is.list(value))
+  x$meta <- value
+  x
 }
