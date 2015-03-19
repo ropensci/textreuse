@@ -17,6 +17,14 @@
 #'   text of the document.} \item{ngrams}{The document in shingled n-grams. See
 #'   \code{\link{ngrams}}.} \item{metadata}{The document metadata, including the
 #'   filename (if any) in \code{file}.} }
+#'
+#' @examples
+#' file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
+#' doc  <- TextReuseTextDocument(file, meta = list(title = "NY 1850"))
+#' print(doc)
+#' meta(doc)
+#' content(doc)
+#'
 #' @export
 TextReuseTextDocument <- function(file, n = 5, meta = NULL, ...) {
 

@@ -30,4 +30,11 @@ An object of class \code{TextReuseTextDocument}. This object inherits
 This function reads in a file and creates an object of class
 \code{TextReuseTextDocument}. This class is used for comparing documents.
 }
+\examples{
+file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
+doc  <- TextReuseTextDocument(file, meta = list(title = "NY 1850"))
+print(doc)
+meta(doc)
+content(doc)
+}
 
