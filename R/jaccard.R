@@ -38,7 +38,7 @@ jaccard_coef <- function(a, b) UseMethod("jaccard_coef")
 
 #' @export
 jaccard_coef.default <- function(a, b) {
-  assert_that(class(a) == class(b))
+  assert_that(all(class(a) == class(b)))
   length(intersect(a, b)) / length(union(a, b))
 }
 
