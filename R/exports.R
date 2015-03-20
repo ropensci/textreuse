@@ -1,12 +1,5 @@
 #' Exports
 #'
-#' Functions exported from other packages.
-#'
-#' @name %>%
-#' @export
-#' @rdname textreuse-exports
-NULL
-
 #' @importFrom NLP meta
 #' @name meta
 #' @export
