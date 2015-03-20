@@ -84,17 +84,22 @@ content.TextReuseTextDocument <- function(x) {
 
 #' @export
 #' @method meta TextReuseTextDocument
-meta.TextReuseTextDocument <- function(doc, tag = NULL, ...) {
+meta.TextReuseTextDocument <- function(x, tag = NULL, ...) {
   if (is.null(tag))
-    doc$meta
+    x$meta
   else
-    doc$meta[[tag]]
+    x$meta[[tag]]
 }
 
 #' @export
 #' @method meta<- TextReuseTextDocument
-`meta<-.TextReuseTextDocument` <- function(x, value) {
-  assert_that(is.list(value))
-  x$meta <- value
+`meta<-.TextReuseTextDocument` <- function(x, tag = NULL, ..., value) {
+  if (is.null(tag)) {
+    assert_that(is.list(value))
+    x$meta <- value
+  } else {
+    x$meta[[tag]] <- value
+  }
+
   x
 }

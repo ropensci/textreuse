@@ -26,7 +26,11 @@ test_that("provides the necessary methods", {
 
   doc3 <- TextReuseTextDocument("newman.txt")
   meta(doc3)    <- list("author" = "Newman, John Henry")
+  expect_equal(meta(doc3), list("author" = "Newman, John Henry"))
   content(doc3) <- "Replacing content"
+  expect_equal(content(doc3), "Replacing content")
+  meta(doc3, "author") <- "Cardinal Newman"
+  expect_equal(meta(doc3, "author"), "Cardinal Newman")
 })
 
 test_that("has correct n-grams", {
