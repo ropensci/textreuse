@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/lmullen/textreuse.svg)](https://travis-ci.org/lmullen/textreuse)
+[![Build Status](https://travis-ci.org/lmullen/textreuse.svg?branch=master)](https://travis-ci.org/lmullen/textreuse)
 
 textreuse: Detect Text Reuse and Document Similarity
 ----------------------------------------------------
