@@ -20,6 +20,8 @@
 #'
 #' @name textreuse
 #' @docType package
+#' @useDynLib textreuse
+#' @importFrom Rcpp sourceCpp
 #' @import stringr
 #' @import assertthat
 NULL

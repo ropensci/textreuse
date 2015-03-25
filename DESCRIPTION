@@ -17,6 +17,9 @@ VignetteBuilder: knitr
 Depends: R (>= 3.1.2)
 Imports: stringr,
     assertthat,
-    NLP
+    NLP,
+    Rcpp
 Suggests: testthat,
     knitr
+LinkingTo: Rcpp,
+    BH
