@@ -23,8 +23,9 @@ An object of class \code{TextReuseTextDocument}. This object inherits
   from the virtual S3 class \code{\link[NLP]{TextDocument}} in the NLP
   package. It contains the following elements: \describe{ \item{content}{The
   text of the document.} \item{ngrams}{The document in shingled n-grams. See
-  \code{\link{ngrams}}.} \item{metadata}{The document metadata, including the
-  filename (if any) in \code{file}.} }
+  \code{\link{ngrams}}.} \item{hashes}{Integer hashes of the n-grams.}
+  \item{metadata}{The document metadata, including the filename (if any) in
+  \code{file}.} }
 }
 \description{
 This function reads in a file and creates an object of class
@@ -35,6 +36,8 @@ file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
 doc  <- TextReuseTextDocument(file, meta = list(title = "NY 1850"))
 print(doc)
 meta(doc)
+\dontrun{
 content(doc)
+}
 }
 

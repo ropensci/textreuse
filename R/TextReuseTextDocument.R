@@ -15,15 +15,18 @@
 #'   from the virtual S3 class \code{\link[NLP]{TextDocument}} in the NLP
 #'   package. It contains the following elements: \describe{ \item{content}{The
 #'   text of the document.} \item{ngrams}{The document in shingled n-grams. See
-#'   \code{\link{ngrams}}.} \item{metadata}{The document metadata, including the
-#'   filename (if any) in \code{file}.} }
+#'   \code{\link{ngrams}}.} \item{hashes}{Integer hashes of the n-grams.}
+#'   \item{metadata}{The document metadata, including the filename (if any) in
+#'   \code{file}.} }
 #'
 #' @examples
 #' file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
 #' doc  <- TextReuseTextDocument(file, meta = list(title = "NY 1850"))
 #' print(doc)
 #' meta(doc)
+#' \dontrun{
 #' content(doc)
+#' }
 #'
 #' @export
 TextReuseTextDocument <- function(file, n = 5, meta = NULL, ...) {
@@ -36,6 +39,8 @@ TextReuseTextDocument <- function(file, n = 5, meta = NULL, ...) {
   assert_that(is.count(n))
   ngrams <- ngrams(text, n = n)
 
+  hashes <- hash_string(ngrams)
+
   if (missing(meta)) {
     meta <- list(file = file)
   } else {
@@ -46,6 +51,7 @@ TextReuseTextDocument <- function(file, n = 5, meta = NULL, ...) {
   doc <- list(
     content = text,
     ngrams  = ngrams,
+    hashes  = hashes,
     meta    = meta
     )
 

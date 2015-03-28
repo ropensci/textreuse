@@ -7,7 +7,7 @@ test_that("inherits from the correct classes", {
 })
 
 test_that("has the correct structure", {
-  expect_named(doc, c("content", "ngrams", "meta"))
+  expect_named(doc, c("content", "ngrams", "hashes", "meta"))
 })
 
 test_that("can set the metadata", {
