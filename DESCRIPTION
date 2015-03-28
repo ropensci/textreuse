@@ -20,6 +20,7 @@ Imports: stringr,
     NLP,
     Rcpp
 Suggests: testthat,
-    knitr
+    knitr,
+    magrittr
 LinkingTo: Rcpp,
     BH

@@ -1,0 +1,43 @@
+---
+title: "Text Reuse"
+author: "Lincoln Mullen"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Text Reuse}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r}
+library(textreuse)
+library(magrittr)
+```
+
+
+## Attempting minhash
+
+Load sample documents:
+
+```{r}
+ny_m <- system.file("extdata/ny1850-match.txt", package = "textreuse") %>% 
+  TextReuseTextDocument(n = 5)
+ca_m <- system.file("extdata/ca1851-match.txt", package = "textreuse") %>% 
+  TextReuseTextDocument(n = 5)
+ca_n <- system.file("extdata/ca1851-nomatch.txt", package = "textreuse") %>% 
+  TextReuseTextDocument(n = 5)
+
+corpus <- list(ny_m, ca_m, ca_n)
+```
+
+Generate the random integers then calculate minhashes.
+
+```{r}
+set.seed(4546)
+my_ints <- random_ints(200)
+
+minvals <- lapply(corpus, function(x) { minhash(x$ngrams, my_ints) })
+corpus_cf(minvals, minvals, jaccard_coef, id = NULL)
+```
+
+
