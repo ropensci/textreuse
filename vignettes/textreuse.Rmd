@@ -38,6 +38,87 @@ my_ints <- random_ints(200)
 
 minvals <- lapply(corpus, function(x) { minhash(x$ngrams, my_ints) })
 corpus_cf(minvals, minvals, jaccard_coef, id = NULL)
+
+minvals %>%  lapply(matrix, nrow = 1) %>% do.call(rbind, .) -> m
+msmall <- m[,1:3]
+
+```
+
+
+```{r}
+# This is so hideously unidiomatic not R, that maybe it will be easy to do as C++
+cf_rows <- function(m) {
+  n <- nrow(m)
+  s <- seq_len(n)
+  message("Rows in matrix: ", n)
+  d <- which(duplicated(m, MARGIN = 1) | duplicated(m, MARGIN = 1, fromLast = TRUE)) 
+  # d <- which(duplicated(m, MARGIN = 1))
+  message("Number of duplicates: ", (length(d)))
+  l <- vector("list", n)
+  for(i in d) { 
+    m_i <- m[i, , drop = FALSE]
+    for(j in d) {
+      if (i != j) {
+        m_j <- m[j, , drop = FALSE]
+        if (identical(m_i, m_j)) {
+          l[[i]] <- c(l[[i]], i, j)
+        }
+      }
+    }
+  }
+  l <- l[!sapply(l, is.null)]
+  l <- lapply(l, unique)
+  l <- lapply(l, sort)
+  l
+}
+```
+
+Test on matrix
+
+```{r}
+cf_rows(msmall)
+```
+
+Test performance
+
+```{r}
+library(microbenchmark)
+vals <- sample(1:6, 6e4, replace = TRUE)
+test_m <- matrix(vals, 1e4, 1e2)
+cf_rows(test_m[1:100,])
+system.time(cf_rows(test_m[1:10000,]))
+microbenchmark(cf_rows(test_m), times = 5)
+```
+
+The performance is not great, because it increases as the number of duplicates increases. But I think this is a good enough first attempt.
+
+But actually, I think this should be done with dist().
+
+```{r}
+msmall
+d <- as.matrix(dist(msmall))
+d
+labels(d)
+pairs <- which(d == 0, arr.ind = TRUE)
+pairs
+class(pairs)
+which(pairs)
+pairs[!(pairs[,1] == pairs[,2]), , drop = FALSE]
+```
+
+This time as a function:
+
+```{r}
+cf_rows_with_dist <- function(m) {
+  d <- as.matrix(dist(m))
+  pairs <- which(d == 0, arr.ind = TRUE)
+  pairs[!(pairs[,1] == pairs[,2]), , drop = FALSE]
+}
+```
+
+```{r}
+cf_rows_with_dist(msmall)
+system.time(cf_rows_with_dist(test_m))
 ```
 
 
