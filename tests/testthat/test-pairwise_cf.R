@@ -1,9 +1,9 @@
-context("Corpus comparison")
+context("Pairwise comparison")
 
 test_that("works on an abstract problem", {
   x <- list(1, 2, 3)
   y <- list(10, 20, 30)
-  res <- corpus_cf(x, y, `*`, id = NULL)
+  res <- pairwise_cf(x, y, `*`, id = NULL)
   expect_equal(res, matrix(c(10, 20, 30, 20, 40, 60, 30, 60, 90), nrow = 3))
 })
 
@@ -16,8 +16,8 @@ test_that("works on TextReuseTextDocument corpus", {
   ca_nomatch <- TextReuseTextDocument(ca_nomatch, meta = list(id = "ca_no"))
   corpus <- list(ny, ca_match, ca_nomatch)
 
-  res1 <- corpus_cf(corpus, corpus, jaccard_similarity, id = "id")
-  res2 <- corpus_cf(corpus, corpus, ratio_of_matches, id = "id")
+  res1 <- pairwise_cf(corpus, corpus, jaccard_similarity, id = "id")
+  res2 <- pairwise_cf(corpus, corpus, ratio_of_matches, id = "id")
 
   expect_equal(rownames(res1), c("ny", "ca_match", "ca_no"))
   expect_equal(colnames(res1), c("ny", "ca_match", "ca_no"))

@@ -1,4 +1,4 @@
-#' Compare documents in a corpus to one another
+#' Compare documents in a corpus to one another pairwise
 #'
 #' Given two lists containing documents of class
 #' \code{\link{TextReuseTextDocument}}, this function applies a comparison
@@ -28,11 +28,11 @@
 #'
 #' corpus <- list(ny, ca_match, ca_nomatch)
 #'
-#' corpus_cf(corpus, corpus, jaccard_similarity, id = "id")
-#' corpus_cf(corpus, corpus, ratio_of_matches, id = "id")
+#' pairwise_cf(corpus, corpus, jaccard_similarity, id = "id")
+#' pairwise_cf(corpus, corpus, ratio_of_matches, id = "id")
 #'
 #' @export
-corpus_cf <- function(x, y, f, ..., id = "file") {
+pairwise_cf <- function(x, y, f, ..., id = "file") {
   assert_that(is.list(x))
   assert_that(is.list(y))
 
