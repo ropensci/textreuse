@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Build Status](https://travis-ci.org/lmullen/textreuse.svg?branch=master)](https://travis-ci.org/lmullen/textreuse) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/textreuse)](http://cran.r-project.org/package=textreuse) [![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](http://cran.r-project.org/package=textreuse) [![Build Status](https://travis-ci.org/lmullen/textreuse.svg?branch=master)](https://travis-ci.org/lmullen/textreuse) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
 
 textreuse: Detect Text Reuse and Document Similarity
 ----------------------------------------------------
