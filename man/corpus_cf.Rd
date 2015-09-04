@@ -37,11 +37,11 @@ ca_nomatch <- TextReuseTextDocument(ca_nomatch, meta = list(id = "ca_no"))
 
 corpus <- list(ny, ca_match, ca_nomatch)
 
-corpus_cf(corpus, corpus, jaccard_coef, id = "id")
+corpus_cf(corpus, corpus, jaccard_similarity, id = "id")
 corpus_cf(corpus, corpus, ratio_of_matches, id = "id")
 }
 \seealso{
-See these document comparison functions, \code{\link{jaccard_coef}},
+See these document comparison functions, \code{\link{jaccard_similarity}},
   \code{\link{ratio_of_matches}}.
 }
 

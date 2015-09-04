@@ -12,5 +12,5 @@ test_that("minhash works on a character vector", {
   c <- minhash(c("This", "sentence", "is", "unlike", "the", "other"), random)
   expect_is(a, "integer")
   expect_equal(length(a), length(b))
-  expect_true(jaccard_coef(a, b) > jaccard_coef(a, c))
+  expect_true(jaccard_similarity(a, b) > jaccard_similarity(a, c))
 })

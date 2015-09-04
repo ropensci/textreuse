@@ -16,7 +16,7 @@ test_that("works on TextReuseTextDocument corpus", {
   ca_nomatch <- TextReuseTextDocument(ca_nomatch, meta = list(id = "ca_no"))
   corpus <- list(ny, ca_match, ca_nomatch)
 
-  res1 <- corpus_cf(corpus, corpus, jaccard_coef, id = "id")
+  res1 <- corpus_cf(corpus, corpus, jaccard_similarity, id = "id")
   res2 <- corpus_cf(corpus, corpus, ratio_of_matches, id = "id")
 
   expect_equal(rownames(res1), c("ny", "ca_match", "ca_no"))
@@ -24,7 +24,7 @@ test_that("works on TextReuseTextDocument corpus", {
   expect_equal(rownames(res2), c("ny", "ca_match", "ca_no"))
   expect_equal(colnames(res2), c("ny", "ca_match", "ca_no"))
 
-  jac_res <- jaccard_coef(ny, ca_match)
+  jac_res <- jaccard_similarity(ny, ca_match)
   rat_res1 <- ratio_of_matches(ny, ca_match)
   rat_res2 <- ratio_of_matches(ny, ca_nomatch)
 

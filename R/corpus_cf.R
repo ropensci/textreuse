@@ -14,7 +14,7 @@
 #'   \code{\link{TextReuseTextDocument}} to be used in row and column names of
 #'   the matrix. Set to \code{NULL} to remove row and column names.
 #'
-#' @seealso See these document comparison functions, \code{\link{jaccard_coef}},
+#' @seealso See these document comparison functions, \code{\link{jaccard_similarity}},
 #'   \code{\link{ratio_of_matches}}.
 #'
 #' @examples
@@ -28,7 +28,7 @@
 #'
 #' corpus <- list(ny, ca_match, ca_nomatch)
 #'
-#' corpus_cf(corpus, corpus, jaccard_coef, id = "id")
+#' corpus_cf(corpus, corpus, jaccard_similarity, id = "id")
 #' corpus_cf(corpus, corpus, ratio_of_matches, id = "id")
 #'
 #' @export
