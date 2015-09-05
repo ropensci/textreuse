@@ -115,9 +115,8 @@ NULL
 
 #' @export
 print.TextReuseTextDocument <- function(x, ...) {
-  x$content %>%
-    str_sub(end = 100) %>%
-    print()
+  pretty_print_metadata(x)
+  cat("content", ":", str_sub(x$content, end = 200))
   invisible(x)
 }
 

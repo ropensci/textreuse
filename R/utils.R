@@ -4,3 +4,8 @@ as_string <- function(x, collapse = " ") {
     str_c(collapse = " ") %>%
     NLP::as.String()
 }
+
+# Pretty print the metadata for a document
+pretty_print_metadata <- function(doc) {
+  lapply(names(doc$meta), function(x) cat(x, ":", doc$meta[[x]], "\n"))
+}
