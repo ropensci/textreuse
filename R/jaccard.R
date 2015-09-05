@@ -56,7 +56,7 @@ jaccard_similarity.default <- function(a, b) {
 #' @export
 jaccard_similarity.TextReuseTextDocument <- function(a, b) {
   assert_that(all(class(a) == class(b)))
-  jaccard_similarity(a$ngrams, b$ngrams)
+  jaccard_similarity(a$hashes, b$hashes)
 }
 
 #' @rdname jaccard
