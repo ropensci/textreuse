@@ -1,45 +1,65 @@
-#' Create an TextReuseTextDocument object
+#' TextReuseTextDocument
 #'
-#' This function reads in a file and creates an object of class
-#' \code{TextReuseTextDocument}. This class is used for comparing documents.
+#' This is the contructor function for \code{TextReuseTextDocument} objects.
+#' This class is used for comparing documents.
 #'
-#' @param file The path to a file, if \code{string} is not provided.
-#' @param n The value of \code{n} in the n-grams that are created by
-#'   \link{ngrams}.
+#' @param text A character vector containing the text of the document. This
+#'   argument can be skipped if supplying \code{file}.
+#' @param file The path to a text file, if \code{text} is not provided.
 #' @param meta A list with named elements for the metadata associated with this
 #'   document.
-#' @param ... Arguments are passed on to \link{readLines} if \code{file} is
-#'   provided.
+#' @param tokenizer A function to split the text into tokens. See
+#'   \code{\link{tokenizers}}.
+#' @param ... Arguments passed on to the \code{tokenizer}.
+#' @param hash_func A function to hash the tokens. See
+#'   \code{\link{hash_string}}.
+#' @param keep_tokens Should the tokens be saved in the document that is
+#'   returned or discarded?
+#' @param keep_text Should the text be saved in the document that is returned or
+#'   discarded?
+#'
+#' @details This constructor function follows a three-step process. It reads in
+#'   the text, either from a file or from memory. It then tokenizes that text.
+#'   Then it hashes the tokens. Most of the comparison functions in this package
+#'   rely only on the hashes to make the comparison. By passing \code{FALSE} to
+#'   \code{keep_tokens} and \code{keep_text}, you can avoid saving those
+#'   objects, which can result in significant memory savings for large corpora.
 #'
 #' @return An object of class \code{TextReuseTextDocument}. This object inherits
 #'   from the virtual S3 class \code{\link[NLP]{TextDocument}} in the NLP
 #'   package. It contains the following elements: \describe{ \item{content}{The
-#'   text of the document.} \item{ngrams}{The document in shingled n-grams. See
-#'   \code{\link{ngrams}}.} \item{hashes}{Integer hashes of the n-grams.}
-#'   \item{metadata}{The document metadata, including the filename (if any) in
-#'   \code{file}.} }
+#'   text of the document.} \item{tokens}{The tokens created from the text.}
+#'   \item{hashes}{Hashes created from the tokens.} \item{metadata}{The document
+#'   metadata, including the filename (if any) in \code{file}.} }
 #'
 #' @examples
 #' file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
-#' doc  <- TextReuseTextDocument(file, meta = list(title = "NY 1850"))
+#' doc  <- TextReuseTextDocument(file = file, meta = list(title = "NY 1850"))
 #' print(doc)
 #' meta(doc)
-#' \dontrun{
-#' content(doc)
-#' }
-#'
+#' \dontrun{content(doc)}
 #' @export
-TextReuseTextDocument <- function(file, n = 5, meta = NULL, ...) {
+TextReuseTextDocument <- function(text, file = NULL, meta = NULL,
+                                  tokenizer = ngrams, ...,
+                                  hash_func = hash_string,
+                                  keep_tokens = TRUE, keep_text = TRUE) {
 
-  assert_that(is.readable(file))
-  text <- readLines(file, ...) %>%
-      str_c(collapse = " ") %>%
-      NLP::as.String()
+  if (!is.null(file)) {
+    assert_that(missing(text))
+    assert_that(is.readable(file))
+    text <- as_string(readLines(file), "\n")
+  }
 
-  assert_that(is.count(n))
-  ngrams <- ngrams(text, n = n)
+  assert_that(is.character(text))
+  text <- as_string(text)
 
-  hashes <- hash_string(ngrams)
+  assert_that(is.function(tokenizer))
+  tokens <- tokenizer(text, ...)
+
+  hashes <- hash_func(tokens)
+
+  if (!keep_tokens) tokens <- NULL
+  if (!keep_text) text <- NULL
 
   if (missing(meta)) {
     meta <- list(file = file)
@@ -50,7 +70,7 @@ TextReuseTextDocument <- function(file, n = 5, meta = NULL, ...) {
 
   doc <- list(
     content = text,
-    ngrams  = ngrams,
+    tokens  = tokens,
     hashes  = hashes,
     meta    = meta
     )
@@ -106,6 +126,5 @@ meta.TextReuseTextDocument <- function(x, tag = NULL, ...) {
   } else {
     x$meta[[tag]] <- value
   }
-
   x
 }

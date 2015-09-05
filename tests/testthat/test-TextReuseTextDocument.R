@@ -1,18 +1,18 @@
 context("TextReuseTextDocument")
 
-doc <- TextReuseTextDocument("newman.txt")
+doc <- TextReuseTextDocument(file = "newman.txt")
 
 test_that("inherits from the correct classes", {
   expect_is(doc, c("TextReuseTextDocument", "TextDocument"))
 })
 
 test_that("has the correct structure", {
-  expect_named(doc, c("content", "ngrams", "hashes", "meta"))
+  expect_named(doc, c("content", "tokens", "hashes", "meta"))
 })
 
 test_that("can set the metadata", {
   expect_named(meta(doc), c("file"))
-  doc2 <- TextReuseTextDocument("newman.txt",
+  doc2 <- TextReuseTextDocument(file = "newman.txt",
                                 meta = list(author = "Newman, John Henry"))
   expect_named(meta(doc2), c("author", "file"))
   expect_equal(meta(doc2, "author"), "Newman, John Henry")
@@ -24,7 +24,7 @@ test_that("provides the necessary methods", {
   expect_output(print(doc), "And now that I am about to trace")
   expect_is(meta(doc), c("list"))
 
-  doc3 <- TextReuseTextDocument("newman.txt")
+  doc3 <- TextReuseTextDocument(file = "newman.txt")
   meta(doc3)    <- list("author" = "Newman, John Henry")
   expect_equal(meta(doc3), list("author" = "Newman, John Henry"))
   content(doc3) <- "Replacing content"
@@ -33,7 +33,13 @@ test_that("provides the necessary methods", {
   expect_equal(meta(doc3, "author"), "Cardinal Newman")
 })
 
-test_that("has correct n-grams", {
-  expect_equal(head(doc$ngrams, 3),
-               c("and now that i am", "now that i am about", "that i am about to"))
+test_that("has correct tokens", {
+  expect_equal(head(doc$tokens, 3),
+               c("and now that", "now that i", "that i am"))
+})
+
+test_that("can be created from a character vector not just a file", {
+  text <- "This is the text of the document."
+  doc <- TextReuseTextDocument(text)
+  expect_equal(text, as.character(doc))
 })

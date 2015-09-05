@@ -1,5 +1,3 @@
-#' Break a text into n-grams
-#'
 #' @param string A character vector to be split into n-grams.
 #' @param n The value of \code{n}.
 #' @param lowercase Should the n-grams be made lowercase.
@@ -7,6 +5,7 @@
 #' @details
 #' As a side-effect this function strips punctuation.
 #' @export
+#' @rdname tokenizers
 ngrams <- function(string, n = 3, lowercase = TRUE) {
 
   words <- str_split(string, boundary("word"))

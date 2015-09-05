@@ -2,42 +2,59 @@
 % Please edit documentation in R/TextReuseTextDocument.R
 \name{TextReuseTextDocument}
 \alias{TextReuseTextDocument}
-\title{Create an TextReuseTextDocument object}
+\title{TextReuseTextDocument}
 \usage{
-TextReuseTextDocument(file, n = 5, meta = NULL, ...)
+TextReuseTextDocument(text, file = NULL, meta = NULL, tokenizer = ngrams,
+  ..., hash_func = hash_string, keep_tokens = TRUE, keep_text = TRUE)
 }
 \arguments{
-\item{file}{The path to a file, if \code{string} is not provided.}
+\item{text}{A character vector containing the text of the document. This
+argument can be skipped if supplying \code{file}.}
 
-\item{n}{The value of \code{n} in the n-grams that are created by
-\link{ngrams}.}
+\item{file}{The path to a text file, if \code{text} is not provided.}
 
 \item{meta}{A list with named elements for the metadata associated with this
 document.}
 
-\item{...}{Arguments are passed on to \link{readLines} if \code{file} is
-  provided.}
+\item{tokenizer}{A function to split the text into tokens. See
+\code{\link{tokenizers}}.}
+
+\item{...}{Arguments passed on to the \code{tokenizer}.}
+
+\item{hash_func}{A function to hash the tokens. See
+\code{\link{hash_string}}.}
+
+\item{keep_tokens}{Should the tokens be saved in the document that is
+returned or discarded?}
+
+\item{keep_text}{Should the text be saved in the document that is returned or
+  discarded?}
 }
 \value{
 An object of class \code{TextReuseTextDocument}. This object inherits
   from the virtual S3 class \code{\link[NLP]{TextDocument}} in the NLP
   package. It contains the following elements: \describe{ \item{content}{The
-  text of the document.} \item{ngrams}{The document in shingled n-grams. See
-  \code{\link{ngrams}}.} \item{hashes}{Integer hashes of the n-grams.}
-  \item{metadata}{The document metadata, including the filename (if any) in
-  \code{file}.} }
+  text of the document.} \item{tokens}{The tokens created from the text.}
+  \item{hashes}{Hashes created from the tokens.} \item{metadata}{The document
+  metadata, including the filename (if any) in \code{file}.} }
 }
 \description{
-This function reads in a file and creates an object of class
-\code{TextReuseTextDocument}. This class is used for comparing documents.
+This is the contructor function for \code{TextReuseTextDocument} objects.
+This class is used for comparing documents.
+}
+\details{
+This constructor function follows a three-step process. It reads in
+  the text, either from a file or from memory. It then tokenizes that text.
+  Then it hashes the tokens. Most of the comparison functions in this package
+  rely only on the hashes to make the comparison. By passing \code{FALSE} to
+  \code{keep_tokens} and \code{keep_text}, you can avoid saving those
+  objects, which can result in significant memory savings for large corpora.
 }
 \examples{
 file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
-doc  <- TextReuseTextDocument(file, meta = list(title = "NY 1850"))
+doc  <- TextReuseTextDocument(file = file, meta = list(title = "NY 1850"))
 print(doc)
 meta(doc)
-\dontrun{
-content(doc)
-}
+\dontrun{content(doc)}
 }
 
