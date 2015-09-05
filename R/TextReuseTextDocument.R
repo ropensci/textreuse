@@ -71,7 +71,7 @@ print.TextReuseTextDocument <- function(x, ...) {
 
 #' @export
 as.character.TextReuseTextDocument <- function(x, ...) {
-  x$content
+  as.character(x$content)
 }
 
 #' @export
