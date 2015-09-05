@@ -9,3 +9,10 @@ as_string <- function(x, collapse = " ") {
 pretty_print_metadata <- function(doc) {
   lapply(names(doc$meta), function(x) cat(x, ":", doc$meta[[x]], "\n"))
 }
+
+#' Check if an object is a \code{\link{TextReuseTextDocument}}.
+#' @param x An R object to check.
+#' @export
+is.TextReuseTextDocument <- function(x) {
+  inherits(x, "TextReuseTextDocument")
+}
