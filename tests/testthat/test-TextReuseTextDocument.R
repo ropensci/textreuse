@@ -43,3 +43,13 @@ test_that("can be created from a character vector not just a file", {
   doc <- TextReuseTextDocument(text)
   expect_equal(text, as.character(doc))
 })
+
+test_that("can be retokenized", {
+  text <- "This is the text. But also this."
+  a <- TextReuseTextDocument(text, tokenizer = tokenize_words)
+  b <- tokenize(a, tokenizer = tokenize_sentences)
+  expect_false(identical(tokens(a), tokens(b)))
+  expect_false(identical(hashes(a), hashes(b)))
+  expect_equal(tokens(a), c("this", "is", "the", "text", "but", "also", "this"))
+  expect_equal(tokens(b), c("this is the text", "but also this"))
+})

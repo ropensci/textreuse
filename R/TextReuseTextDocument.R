@@ -1,6 +1,6 @@
 #' TextReuseTextDocument
 #'
-#' This is the contructor function for \code{TextReuseTextDocument} objects.
+#' This is the constructor function for \code{TextReuseTextDocument} objects.
 #' This class is used for comparing documents.
 #'
 #' @param text A character vector containing the text of the document. This
