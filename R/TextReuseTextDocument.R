@@ -37,7 +37,11 @@
 #' doc  <- TextReuseTextDocument(file = file, meta = list(title = "NY 1850"))
 #' print(doc)
 #' meta(doc)
-#' \dontrun{content(doc)}
+#' head(tokens(doc))
+#' head(hashes(doc))
+#' \dontrun{
+#' content(doc)
+#' }
 #' @export
 TextReuseTextDocument <- function(text, file = NULL, meta = NULL,
                                   tokenizer = ngrams, ...,
@@ -80,6 +84,34 @@ TextReuseTextDocument <- function(text, file = NULL, meta = NULL,
   doc
 
 }
+
+#' Accessors for TextReuseTextDocument objects
+#'
+#' The \code{meta} and \code{content} generics are defined by the NLP package. See the \code{\link[NLP]{generics}} documentation in that package.
+#'
+#' @importFrom NLP meta
+#' @name meta
+#' @export
+#' @rdname NLP-imports
+NULL
+
+#' @importFrom NLP meta<-
+#' @name meta<-
+#' @export
+#' @rdname NLP-imports
+NULL
+
+#' @importFrom NLP content
+#' @name content
+#' @export
+#' @rdname NLP-imports
+NULL
+
+#' @importFrom NLP content<-
+#' @name content<-
+#' @export
+#' @rdname NLP-imports
+NULL
 
 #' @export
 print.TextReuseTextDocument <- function(x, ...) {
@@ -126,5 +158,48 @@ meta.TextReuseTextDocument <- function(x, tag = NULL, ...) {
   } else {
     x$meta[[tag]] <- value
   }
+  x
+}
+
+#' Accessors for TextReuseTextDocument objects
+#'
+#' Accessor functions to read and write components of
+#' \code{\link{TextReuseTextDocument}} objects.
+#' @name TextReuseTextDocument-accessors
+#' @param x The object to acess.
+#' @param value The value to assign.
+NULL
+
+#' @export
+#' @rdname TextReuseTextDocument-accessors
+tokens <- function(x) UseMethod("tokens", x)
+
+#' @export
+tokens.TextReuseTextDocument <- function(x) x$tokens
+
+#' @export
+#' @rdname TextReuseTextDocument-accessors
+`tokens<-` <- function(x, value) UseMethod("tokens<-", x)
+
+#' @export
+`tokens<-.TextReuseTextDocument` <- function(x, value) {
+  x$tokens <- value
+  x
+}
+
+#' @export
+#' @rdname TextReuseTextDocument-accessors
+hashes <- function(x) UseMethod("hashes", x)
+
+#' @export
+hashes.TextReuseTextDocument <- function(x) x$hashes
+
+#' @export
+#' @rdname TextReuseTextDocument-accessors
+`hashes<-` <- function(x, value) UseMethod("hashes<-", x)
+
+#' @export
+`hashes<-.TextReuseTextDocument` <- function(x, value) {
+  x$hashes <- value
   x
 }

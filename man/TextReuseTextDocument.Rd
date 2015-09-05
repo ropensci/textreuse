@@ -55,6 +55,10 @@ file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
 doc  <- TextReuseTextDocument(file = file, meta = list(title = "NY 1850"))
 print(doc)
 meta(doc)
-\dontrun{content(doc)}
+head(tokens(doc))
+head(hashes(doc))
+\dontrun{
+content(doc)
+}
 }
 
