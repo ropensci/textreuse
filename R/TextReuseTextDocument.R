@@ -44,7 +44,7 @@
 #' }
 #' @export
 TextReuseTextDocument <- function(text, file = NULL, meta = NULL,
-                                  tokenizer = ngrams, ...,
+                                  tokenizer = tokenize_ngrams, ...,
                                   hash_func = hash_string,
                                   keep_tokens = TRUE, keep_text = TRUE) {
 

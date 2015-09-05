@@ -4,8 +4,9 @@
 \alias{TextReuseTextDocument}
 \title{TextReuseTextDocument}
 \usage{
-TextReuseTextDocument(text, file = NULL, meta = NULL, tokenizer = ngrams,
-  ..., hash_func = hash_string, keep_tokens = TRUE, keep_text = TRUE)
+TextReuseTextDocument(text, file = NULL, meta = NULL,
+  tokenizer = tokenize_ngrams, ..., hash_func = hash_string,
+  keep_tokens = TRUE, keep_text = TRUE)
 }
 \arguments{
 \item{text}{A character vector containing the text of the document. This
