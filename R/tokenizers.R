@@ -5,7 +5,7 @@
 #'
 #' @name tokenizers
 #' @param string A character vector of length 1 to be tokenized.
-#' @param lowercase Should the tokens be made lower case.
+#' @param lowercase Should the tokens be made lower case?
 #' @param n For n-gram tokenizers, the number of words in each n-gram.
 #' @details These functions will strip all punctuation.
 #' @return A character vector containing the tokens.
@@ -33,18 +33,9 @@ tokenize_sentences <- function(string, lowercase = TRUE) {
 #' @export
 #' @rdname tokenizers
 tokenize_ngrams <- function(string, lowercase = TRUE, n = 3) {
-
+  assert_that(is.count(n),
+              assertthat::is.string(string))
   words <- tokenize_words(string, lowercase = lowercase)
-
-  # Rolling subset of words, joined together
-  begin <- seq(1, length(words) - n + 1)
-
-  selections <- lapply(begin, function(x) {
-    seq(x, x + n - 1)
-  })
-
-  vapply(selections, function(x) {
-    words[x] %>% str_c(collapse = " ")
-  }, character(1))
-
+  assert_that(n < length(words))
+  shingle_ngrams(words, n = n)
 }

@@ -16,7 +16,7 @@ tokenize_ngrams(string, lowercase = TRUE, n = 3)
 \arguments{
 \item{string}{A character vector of length 1 to be tokenized.}
 
-\item{lowercase}{Should the tokens be made lower case.}
+\item{lowercase}{Should the tokens be made lower case?}
 
 \item{n}{For n-gram tokenizers, the number of words in each n-gram.}
 }
