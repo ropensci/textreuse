@@ -28,3 +28,16 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// skip_ngrams
+CharacterVector skip_ngrams(CharacterVector words, int n, int k);
+RcppExport SEXP textreuse_skip_ngrams(SEXP wordsSEXP, SEXP nSEXP, SEXP kSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< CharacterVector >::type words(wordsSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    __result = Rcpp::wrap(skip_ngrams(words, n, k));
+    return __result;
+END_RCPP
+}

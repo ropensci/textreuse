@@ -3,6 +3,7 @@
 \name{tokenizers}
 \alias{tokenize_ngrams}
 \alias{tokenize_sentences}
+\alias{tokenize_skip_ngrams}
 \alias{tokenize_words}
 \alias{tokenizers}
 \title{Split texts into tokens}
@@ -12,6 +13,8 @@ tokenize_words(string, lowercase = TRUE)
 tokenize_sentences(string, lowercase = TRUE)
 
 tokenize_ngrams(string, lowercase = TRUE, n = 3)
+
+tokenize_skip_ngrams(string, lowercase = TRUE, n = 3, k = 1)
 }
 \arguments{
 \item{string}{A character vector of length 1 to be tokenized.}
@@ -19,6 +22,10 @@ tokenize_ngrams(string, lowercase = TRUE, n = 3)
 \item{lowercase}{Should the tokens be made lower case?}
 
 \item{n}{For n-gram tokenizers, the number of words in each n-gram.}
+
+\item{k}{For the skip n-gram tokenizer, the maximum skip distance between
+words. The function will compute all skip n-grams between \code{0} and
+\code{k}.}
 }
 \value{
 A character vector containing the tokens.
@@ -29,5 +36,12 @@ functions returns shingled n-grams.
 }
 \details{
 These functions will strip all punctuation.
+}
+\examples{
+dylan <- "How many roads must a man walk down? The answer is blowin' in the wind."
+tokenize_words(dylan)
+tokenize_sentences(dylan)
+tokenize_ngrams(dylan, n = 2)
+tokenize_skip_ngrams(dylan, n = 3, k = 2)
 }
 

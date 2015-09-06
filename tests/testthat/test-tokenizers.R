@@ -58,4 +58,16 @@ test_that("tokenizers fail on non-strings", {
   expect_error(tokenize_words(text), "string is not a string")
   expect_error(tokenize_sentences(text), "string is not a string")
   expect_error(tokenize_ngrams(text), "string is not a string")
+  expect_error(tokenize_skip_ngrams(text), "string is not a string")
+})
+
+test_that("skip n-grams behave as expected", {
+  dylan <- "How many roads must a man walk down"
+  skips <- tokenize_skip_ngrams(dylan, n = 3, k = 2)
+  correct <- c("how many roads", "many roads must", "roads must a", "must a man",
+               "a man walk", "man walk down", "how must walk", "many a down",
+               "how roads a", "many must man", "roads a walk", "must man down")
+  expect_equal(sort(skips), sort(correct))
+  expect_equal(tokenize_skip_ngrams(dylan, n = 5, k = 0),
+               tokenize_ngrams(dylan, n = 5))
 })
