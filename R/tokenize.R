@@ -21,7 +21,7 @@ tokenize <- function(doc, tokenizer, ..., hash_func = hash_string,
               has_content(doc))
   doc$tokens <- tokenizer(doc$content, ...)
   doc$hashes <- hash_func(doc$tokens)
-  if (!keep_tokens) tokens <- NULL
-  if (!keep_text) text <- NULL
+  if (!keep_tokens) doc$tokens <- NULL
+  if (!keep_text) doc$text <- NULL
   doc
 }
