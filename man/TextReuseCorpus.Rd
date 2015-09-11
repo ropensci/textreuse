@@ -2,11 +2,14 @@
 % Please edit documentation in R/TextReuseCorpus.R
 \name{TextReuseCorpus}
 \alias{TextReuseCorpus}
+\alias{is.TextReuseCorpus}
 \title{TextReuseCorpus}
 \usage{
 TextReuseCorpus(paths, dir = NULL, meta = list(),
   progress = interactive(), tokenizer = tokenize_ngrams, ...,
   hash_func = hash_string, keep_tokens = TRUE, keep_text = TRUE)
+
+is.TextReuseCorpus(x)
 }
 \arguments{
 \item{paths}{A character vector of paths to files to be opened.}
@@ -31,6 +34,8 @@ returned or discarded?}
 
 \item{keep_text}{Should the text be saved in the documents that are returned or
 discarded?}
+
+\item{x}{An R object to check.}
 }
 \description{
 This is the contructor function for a \code{TextReuseCorpus}, modeled on the

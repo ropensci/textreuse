@@ -119,3 +119,10 @@ names.TextReuseCorpus <- function(x) {
   names(x$documents) <- value
   x
 }
+
+#' @param x An R object to check.
+#' @export
+#' @rdname TextReuseCorpus
+is.TextReuseCorpus <- function(x) {
+  inherits(x, "TextReuseCorpus")
+}
