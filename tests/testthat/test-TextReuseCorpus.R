@@ -42,3 +42,9 @@ test_that("prints sensibly", {
   expect_output(corpus_a, "TextReuseCorpus")
   expect_output(corpus_a, "Number of documents: 3")
 })
+
+test_that("can be retokenized", {
+  expect_equal(tokens(corpus_a[[1]])[1:2], c("4 every action", "every action shall"))
+  corpus_a <- tokenize(corpus_a, tokenize_words)
+  expect_equal(tokens(corpus_a[[1]])[1:2], c("4", "every"))
+})

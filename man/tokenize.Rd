@@ -2,13 +2,13 @@
 % Please edit documentation in R/tokenize.R
 \name{tokenize}
 \alias{tokenize}
-\title{Recompute the tokens for a document}
+\title{Recompute the tokens for a document or corpus}
 \usage{
-tokenize(doc, tokenizer, ..., hash_func = hash_string, keep_tokens = TRUE,
+tokenize(x, tokenizer, ..., hash_func = hash_string, keep_tokens = TRUE,
   keep_text = TRUE)
 }
 \arguments{
-\item{doc}{A TextReuseTextDocument.}
+\item{x}{A \code{\link{TextReuseTextDocument}} or \code{\link{TextReuseCorpus}}.}
 
 \item{tokenizer}{A function to split the text into tokens. See
 \code{\link{tokenizers}}.}
@@ -25,10 +25,11 @@ returned or discarded?}
 discarded?}
 }
 \value{
-The modified \code{\link{TextReuseTextDocument}}.
+The modified \code{\link{TextReuseTextDocument}} or \code{\link{TextReuseCorpus}}.
 }
 \description{
-Given a \code{\link{TextReuseTextDocument}}, this function recomputes its
-tokens and hashes with the functions specified.
+Given a \code{\link{TextReuseTextDocument}} or a
+\code{\link{TextReuseCorpus}}, this function recomputes the tokens and hashes
+with the functions specified.
 }
 
