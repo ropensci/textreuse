@@ -4,5 +4,5 @@
 ^README-*\.png$
 ^data-raw$
 ^\.travis\.yml$
-^data-raw$
 wordnet
+^appveyor\.yml$

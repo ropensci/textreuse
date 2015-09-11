@@ -1,5 +1,15 @@
 language: r
-r_github_packages:
-  - Rexamine/stringi
-  - hadley/stringr
 warnings_are_errors: true
+sudo: required
+r_binary_packages:
+  - stringr
+  - Rcpp
+  - knitr
+  - BH
+  - NLP
+  - assertthat
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+

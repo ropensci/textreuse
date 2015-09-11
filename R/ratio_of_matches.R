@@ -44,5 +44,5 @@ ratio_of_matches.default <- function(origin, destination) {
 #' @export
 ratio_of_matches.TextReuseTextDocument <- function(origin, destination) {
   assert_that(all(class(origin) == class(destination)))
-  ratio_of_matches(origin$ngrams, destination$ngrams)
+  ratio_of_matches(origin$hashes, destination$hashes)
 }

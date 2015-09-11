@@ -4,7 +4,7 @@ lines  <- system.file("extdata/ny1850-match.txt", package = "textreuse") %>%
   readLines()
 ngrams <- lines %>%
   str_c(collapse = " ") %>%
-  ngrams(n = 5)
+  tokenize_ngrams(n = 5)
 
 lines_hashed  <- hash_string(lines)
 ngrams_hashed <- hash_string(ngrams)

@@ -12,3 +12,11 @@ hash_string <- function(x) {
     .Call('textreuse_hash_string', PACKAGE = 'textreuse', x)
 }
 
+shingle_ngrams <- function(words, n) {
+    .Call('textreuse_shingle_ngrams', PACKAGE = 'textreuse', words, n)
+}
+
+skip_ngrams <- function(words, n, k) {
+    .Call('textreuse_skip_ngrams', PACKAGE = 'textreuse', words, n, k)
+}
+
