@@ -22,7 +22,7 @@
 #'   and row and column names set by the names of the documents in the corpus. A
 #'   value of \code{NA} in the matrix indicates that a comparison was not made.
 #'   In cases of directional comparisons, then the comparison reported is
-#'   \code{f(row, column)}, i.e. "row borrows from column."
+#'   \code{f(row, column)}.
 #'
 #' @seealso See these document comparison functions,
 #'   \code{\link{jaccard_similarity}}, \code{\link{ratio_of_matches}}.
