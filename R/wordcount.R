@@ -1,12 +1,13 @@
 #' Count words
 #'
 #' This function counts words in a text, for example, a character vector, a
-#' \code{\link{TextReuseTextDocument}}, or some other object that inherits from
-#' \code{\link[NLP]{TextDocument}}.
+#' \code{\link{TextReuseTextDocument}}, some other object that inherits from
+#' \code{\link[NLP]{TextDocument}}, or a all the documents in a
+#' \code{\link{TextReuseCorpus}}.
 #'
 #' @param x The object containing a text.
 #' @export
-#' @return An integer value for the word count.
+#' @return An integer vector for the word count.
 wordcount <- function(x) UseMethod("wordcount", x)
 
 #' @export
@@ -17,3 +18,8 @@ wordcount.default <- function(x) {
 
 #' @export
 wordcount.TextDocument <- function(x) wordcount(x$content)
+
+#' @export
+wordcount.TextReuseCorpus <- function(x) {
+  vapply(x$documents, wordcount, integer(1))
+}

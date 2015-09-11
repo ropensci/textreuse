@@ -10,11 +10,12 @@ wordcount(x)
 \item{x}{The object containing a text.}
 }
 \value{
-An integer value for the word count.
+An integer vector for the word count.
 }
 \description{
 This function counts words in a text, for example, a character vector, a
-\code{\link{TextReuseTextDocument}}, or some other object that inherits from
-\code{\link[NLP]{TextDocument}}.
+\code{\link{TextReuseTextDocument}}, some other object that inherits from
+\code{\link[NLP]{TextDocument}}, or a all the documents in a
+\code{\link{TextReuseCorpus}}.
 }
 
