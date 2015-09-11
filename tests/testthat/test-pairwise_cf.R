@@ -1,35 +1,20 @@
 context("Pairwise comparison")
 
-test_that("works on an abstract problem", {
-  x <- list(1, 2, 3)
-  y <- list(10, 20, 30)
-  res <- pairwise_cf(x, y, `*`, id = NULL)
-  expect_equal(res, matrix(c(10, 20, 30, 20, 40, 60, 30, 60, 90), nrow = 3))
+dir <- system.file("extdata", package = "textreuse")
+corpus <- TextReuseCorpus(dir = dir)
+cf1 <- pairwise_cf(corpus, jaccard_similarity)
+cf2 <- pairwise_cf(corpus, ratio_of_matches, directional = TRUE)
+
+test_that("returns matrix with correct properties", {
+  expect_is(cf1, "matrix")
+  expect_equal(rownames(cf1), names(corpus))
+  expect_is(cf1[1, 3], "numeric")
+  expect_is(cf2[3, 1], "numeric")
+  expect_equal(cf1[lower.tri(cf1, diag = TRUE)], rep(NA_real_, 6))
+  expect_equal(cf2[diag(cf2)], rep(NA_real_, 3))
 })
 
-test_that("works on TextReuseTextDocument corpus", {
-  ny         <- system.file("extdata/ny1850-match.txt", package = "textreuse")
-  ca_match   <- system.file("extdata/ca1851-match.txt", package = "textreuse")
-  ca_nomatch <- system.file("extdata/ca1851-nomatch.txt", package = "textreuse")
-  ny         <- TextReuseTextDocument(ny, meta = list(id = "ny"))
-  ca_match   <- TextReuseTextDocument(ca_match, meta = list(id = "ca_match"))
-  ca_nomatch <- TextReuseTextDocument(ca_nomatch, meta = list(id = "ca_no"))
-  corpus <- list(ny, ca_match, ca_nomatch)
-
-  res1 <- pairwise_cf(corpus, corpus, jaccard_similarity, id = "id")
-  res2 <- pairwise_cf(corpus, corpus, ratio_of_matches, id = "id")
-
-  expect_equal(rownames(res1), c("ny", "ca_match", "ca_no"))
-  expect_equal(colnames(res1), c("ny", "ca_match", "ca_no"))
-  expect_equal(rownames(res2), c("ny", "ca_match", "ca_no"))
-  expect_equal(colnames(res2), c("ny", "ca_match", "ca_no"))
-
-  jac_res <- jaccard_similarity(ny, ca_match)
-  rat_res1 <- ratio_of_matches(ny, ca_match)
-  rat_res2 <- ratio_of_matches(ny, ca_nomatch)
-
-  expect_equal(res1[1, 2], jac_res)
-  # Test directionality of comparison
-  expect_equal(res2[1, 2], rat_res1)
-  expect_equal(res2[1, 3], rat_res2)
+test_that("peforms calculations as expected", {
+  expect_equal(cf1[1,2], jaccard_similarity(corpus[[1]], corpus[[2]]))
+  expect_equal(cf2[3,2], ratio_of_matches(corpus[[3]], corpus[[2]]))
 })
