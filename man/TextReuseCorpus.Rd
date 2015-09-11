@@ -5,8 +5,8 @@
 \title{TextReuseCorpus}
 \usage{
 TextReuseCorpus(paths, dir = NULL, meta = list(),
-  tokenizer = tokenize_ngrams, ..., hash_func = hash_string,
-  keep_tokens = TRUE, keep_text = TRUE)
+  progress = interactive(), tokenizer = tokenize_ngrams, ...,
+  hash_func = hash_string, keep_tokens = TRUE, keep_text = TRUE)
 }
 \arguments{
 \item{paths}{A character vector of paths to files to be opened.}
@@ -15,6 +15,8 @@ TextReuseCorpus(paths, dir = NULL, meta = list(),
 
 \item{meta}{A list with named elements for the metadata associated with this
 corpus.}
+
+\item{progress}{Display a progress bar while loading files.}
 
 \item{tokenizer}{A function to split the text into tokens. See
 \code{\link{tokenizers}}.}

@@ -12,6 +12,7 @@
 #' @param dir A The path to a directory of text files.
 #' @param meta A list with named elements for the metadata associated with this
 #'   corpus.
+#' @param progress Display a progress bar while loading files.
 #' @param tokenizer A function to split the text into tokens. See
 #'   \code{\link{tokenizers}}.
 #' @param ... Arguments passed on to the \code{tokenizer}.
@@ -33,6 +34,7 @@
 #' corpus[[paths[3]]]
 #' @export
 TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
+                            progress = interactive(),
                             tokenizer = tokenize_ngrams, ...,
                             hash_func = hash_string,
                             keep_tokens = TRUE, keep_text = TRUE) {
@@ -44,11 +46,16 @@ TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
 
   vapply(paths, is.readable, logical(1), USE.NAMES = FALSE)
 
+  if (progress) pb <- txtProgressBar(min = 0, max = length(paths), style = 3)
   docs <- lapply(seq_along(paths), function(i) {
-    TextReuseTextDocument(file = paths[i], tokenizer = tokenizer, ...,
-                          hash_func = hash_func, keep_tokens = keep_tokens,
-                          keep_text = keep_text)
+    d <- TextReuseTextDocument(file = paths[i], tokenizer = tokenizer, ...,
+                               hash_func = hash_func, keep_tokens = keep_tokens,
+                               keep_text = keep_text)
+    if (progress) setTxtProgressBar(pb, i)
+    d
   })
+
+  if (progress) close(pb)
 
   names(docs) <- paths
 
