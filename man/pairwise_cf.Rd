@@ -4,7 +4,7 @@
 \alias{pairwise_cf}
 \title{Pairwise comparisons among documents in a corpus}
 \usage{
-pairwise_cf(corpus, f, ..., directional = FALSE)
+pairwise_cf(corpus, f, ..., directional = FALSE, progress = interactive())
 }
 \arguments{
 \item{corpus}{A \code{\link{TextReuseCorpus}}.}
@@ -14,14 +14,16 @@ pairwise_cf(corpus, f, ..., directional = FALSE)
 \item{...}{Additional arguments passed to \code{f}.}
 
 \item{directional}{Some comparison functions are commutative, so that
-  \code{f(a, b) == f(b, a)} (e.g., \code{\link{jaccard_similarity}}). Other
-  functions are directional, so that \code{f(a, b)} measures \code{a}'s
-  borrowing from \code{b}, which may not be the same as \code{f(b, a)} (e.g.,
-  \code{\link{ratio_of_matches}}). If \code{directional} is \code{FALSE},
-  then only the minimum number of comparisons will be made, i.e., the upper
-  triangle of the matrix. If \code{directional} is \code{TRUE}, then both
-  directional comparisons will be measured. In no case, however, will
-  documents be compared to themselves, i.e., the diagonal of the matrix.}
+\code{f(a, b) == f(b, a)} (e.g., \code{\link{jaccard_similarity}}). Other
+functions are directional, so that \code{f(a, b)} measures \code{a}'s
+borrowing from \code{b}, which may not be the same as \code{f(b, a)} (e.g.,
+\code{\link{ratio_of_matches}}). If \code{directional} is \code{FALSE},
+then only the minimum number of comparisons will be made, i.e., the upper
+triangle of the matrix. If \code{directional} is \code{TRUE}, then both
+directional comparisons will be measured. In no case, however, will
+documents be compared to themselves, i.e., the diagonal of the matrix.}
+
+\item{progress}{Display a progress bar while comparing documents.}
 }
 \value{
 A square matrix with dimensions equal to the length of the corpus,

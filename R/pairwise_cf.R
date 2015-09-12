@@ -17,6 +17,7 @@
 #'   triangle of the matrix. If \code{directional} is \code{TRUE}, then both
 #'   directional comparisons will be measured. In no case, however, will
 #'   documents be compared to themselves, i.e., the diagonal of the matrix.
+#' @param progress Display a progress bar while comparing documents.
 #'
 #' @return A square matrix with dimensions equal to the length of the corpus,
 #'   and row and column names set by the names of the documents in the corpus. A
@@ -38,7 +39,8 @@
 #' # A directional comparison
 #' pairwise_cf(corpus, ratio_of_matches, directional = TRUE)
 #' @export
-pairwise_cf <- function(corpus, f, ..., directional = FALSE) {
+pairwise_cf <- function(corpus, f, ..., directional = FALSE,
+                        progress = interactive()) {
   assert_that(is.TextReuseCorpus(corpus),
               is.function(f))
 
@@ -52,11 +54,21 @@ pairwise_cf <- function(corpus, f, ..., directional = FALSE) {
   else
     diag(m) <- NA
 
+
+  if (progress) {
+    num_pairs <- sum(!is.na(m))
+    message("Making ", prettyNum(num_pairs, big.mark = ","), " comparisons.")
+    pb <- txtProgressBar(min = 0, max = num_pairs, style = 3)
+  }
+
   for (i in seq_along(m)) {
     if (is.na(m[i])) next
     indexes <- arrayInd(i, dim(m))
     m[indexes] <- f(corpus[[indexes[1]]], corpus[[indexes[2]]])
+    if (progress) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
   }
+
+  if (progress) close(pb)
 
   m
 

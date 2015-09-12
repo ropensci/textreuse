@@ -46,7 +46,12 @@ TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
 
   vapply(paths, is.readable, logical(1), USE.NAMES = FALSE)
 
-  if (progress) pb <- txtProgressBar(min = 0, max = length(paths), style = 3)
+  if (progress) {
+    len <- length(paths)
+    message("Loading, tokenizing, and hashing ", prettyNum(len, big.mark = ","),
+            " documents.")
+    pb <- txtProgressBar(min = 0, max = len, style = 3)
+  }
   docs <- lapply(seq_along(paths), function(i) {
     d <- TextReuseTextDocument(file = paths[i], tokenizer = tokenizer, ...,
                                hash_func = hash_func, keep_tokens = keep_tokens,
