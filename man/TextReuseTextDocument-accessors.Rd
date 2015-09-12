@@ -21,6 +21,9 @@ hashes(x) <- value
 
 \item{value}{The value to assign.}
 }
+\value{
+Either a vector or a named list of vectors.
+}
 \description{
 Accessor functions to read and write components of
 \code{\link{TextReuseTextDocument}} objects.

@@ -48,3 +48,14 @@ test_that("can be retokenized", {
   corpus_a <- tokenize(corpus_a, tokenize_words)
   expect_equal(tokens(corpus_a[[1]])[1:2], c("4", "every"))
 })
+
+test_that("has methods for tokens and hashes", {
+  t <- tokens(corpus_a)
+  h <- hashes(corpus_b)
+  expect_is(h, "list")
+  expect_is(t, "list")
+  expect_is(t[[2]], "character")
+  expect_is(h[[1]], "integer")
+  expect_named(t, names(corpus_a))
+  expect_named(h, names(corpus_b))
+})

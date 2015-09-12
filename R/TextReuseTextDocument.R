@@ -168,6 +168,7 @@ meta.TextReuseTextDocument <- function(x, tag = NULL, ...) {
 #' @name TextReuseTextDocument-accessors
 #' @param x The object to acess.
 #' @param value The value to assign.
+#' @return Either a vector or a named list of vectors.
 NULL
 
 #' @export
@@ -176,6 +177,14 @@ tokens <- function(x) UseMethod("tokens", x)
 
 #' @export
 tokens.TextReuseTextDocument <- function(x) x$tokens
+
+#' @export
+tokens.TextReuseCorpus <- function(x) {
+  corpus_names <- names(x)
+  l <- lapply(x$documents, function(i) tokens(i))
+  names(l) <- corpus_names
+  l
+}
 
 #' @export
 #' @rdname TextReuseTextDocument-accessors
@@ -193,6 +202,14 @@ hashes <- function(x) UseMethod("hashes", x)
 
 #' @export
 hashes.TextReuseTextDocument <- function(x) x$hashes
+
+#' @export
+hashes.TextReuseCorpus <- function(x) {
+  corpus_names <- names(x)
+  l <- lapply(x$documents, function(i) hashes(i))
+  names(l) <- corpus_names
+  l
+}
 
 #' @export
 #' @rdname TextReuseTextDocument-accessors
