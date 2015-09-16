@@ -11,7 +11,7 @@ test_that("counts words correctly for different classes", {
 })
 
 test_that("counts words for a corpus", {
-  if (Sys.getenv("APPVEYOR")) skip("Skip on Appveyor")
+  skip_on_appveyor()
   wc <- wordcount(corpus)
   expect_true(!is.null(names(wc)))
   wc <- unname(wc)

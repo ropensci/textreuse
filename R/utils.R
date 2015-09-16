@@ -67,3 +67,9 @@ assertthat::on_failure(has_id) <- function(call, env) {
 sort_meta <- function(meta) {
   meta[order(names(meta))]
 }
+
+skip_on_appveyor <- function() {
+  if (!identical(Sys.getenv("APPVEYOR"), "true"))
+    return()
+  testthat::skip("On Appveyor")
+}
