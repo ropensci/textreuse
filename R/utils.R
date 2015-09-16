@@ -71,5 +71,5 @@ sort_meta <- function(meta) {
 skip_on_appveyor <- function() {
   if (!identical(Sys.getenv("APPVEYOR"), "True"))
     return()
-  skip("On Appveyor")
+  testthat::skip("On Appveyor")
 }
