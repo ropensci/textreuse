@@ -29,6 +29,14 @@
 #' @references Jure Leskovec, Anand Rajaraman, Jeff Ullman,
 #'  \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
 #'  (Cambridge University Press, 2011), ch. 3.
+#' @examples
+#' # Threshold for default values
+#' lsh_threshold(h = 200, b = 40)
+#'
+#' # Probability for varying values of s
+#' lsh_probability(h = 200, b = 40, s = .25)
+#' lsh_probability(h = 200, b = 40, s = .50)
+#' lsh_probability(h = 200, b = 40, s = .75)
 #' @export
 lsh_probability <- function(h, b, s) {
   assert_that(is.count(h),

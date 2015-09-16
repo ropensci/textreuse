@@ -41,6 +41,15 @@ that equation approxmiates an S-curve. This implies that there is a threshold
 
 \deqn{t = \frac{1}{b}^{\frac{1}{r}}}
 }
+\examples{
+# Threshold for default values
+lsh_threshold(h = 200, b = 40)
+
+# Probability for varying values of s
+lsh_probability(h = 200, b = 40, s = .25)
+lsh_probability(h = 200, b = 40, s = .50)
+lsh_probability(h = 200, b = 40, s = .75)
+}
 \references{
 Jure Leskovec, Anand Rajaraman, Jeff Ullman,
  \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
