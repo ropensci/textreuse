@@ -34,12 +34,12 @@
 #' names(corpus) <- filenames(names(corpus))
 #'
 #' # A non-directional comparison
-#' pairwise_cf(corpus, jaccard_similarity)
+#' pairwise_compare(corpus, jaccard_similarity)
 #'
 #' # A directional comparison
-#' pairwise_cf(corpus, ratio_of_matches, directional = TRUE)
+#' pairwise_compare(corpus, ratio_of_matches, directional = TRUE)
 #' @export
-pairwise_cf <- function(corpus, f, ..., directional = FALSE,
+pairwise_compare <- function(corpus, f, ..., directional = FALSE,
                         progress = interactive()) {
   assert_that(is.TextReuseCorpus(corpus),
               is.function(f))

@@ -2,8 +2,8 @@ context("Pairwise comparison")
 
 dir <- system.file("extdata", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir)
-cf1 <- pairwise_cf(corpus, jaccard_similarity)
-cf2 <- pairwise_cf(corpus, ratio_of_matches, directional = TRUE)
+cf1 <- pairwise_compare(corpus, jaccard_similarity)
+cf2 <- pairwise_compare(corpus, ratio_of_matches, directional = TRUE)
 
 test_that("returns matrix with correct properties", {
   expect_is(cf1, "matrix")
