@@ -62,10 +62,10 @@
 #'                           tokenizer = tokenize_ngrams, n = 5,
 #'                           hash_func = minhash)
 #' names(corpus) <- filenames(names(corpus))
-#' buckets <- lsh(corpus, bands = 50)
+#' buckets <- lsh(corpus, bands = 40)
 #' buckets
 #' @export
-lsh <- function(corpus, bands = 20, buckets = NULL) {
+lsh <- function(corpus, bands = 40, buckets = NULL) {
   assert_that(is.TextReuseCorpus(corpus),
               is.count(bands))
   if (is.null(buckets))

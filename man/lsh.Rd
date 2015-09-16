@@ -4,7 +4,7 @@
 \alias{lsh}
 \title{Locality sensitive hashing for minhash}
 \usage{
-lsh(corpus, bands = 20, buckets = NULL)
+lsh(corpus, bands = 40, buckets = NULL)
 }
 \arguments{
 \item{corpus}{A \code{\link{TextReuseCorpus}} to add to the cache.}
@@ -69,7 +69,7 @@ corpus <- TextReuseCorpus(dir = dir,
                           tokenizer = tokenize_ngrams, n = 5,
                           hash_func = minhash)
 names(corpus) <- filenames(names(corpus))
-buckets <- lsh(corpus, bands = 50)
+buckets <- lsh(corpus, bands = 40)
 buckets
 }
 \references{
