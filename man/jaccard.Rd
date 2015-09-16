@@ -2,6 +2,7 @@
 % Please edit documentation in R/jaccard.R
 \name{jaccard}
 \alias{jaccard}
+\alias{jaccard_bag_similarity}
 \alias{jaccard_dissimilarity}
 \alias{jaccard_similarity}
 \title{Calculate Jaccard similarity/dissimilarity coefficients}
@@ -9,11 +10,13 @@
 jaccard_similarity(a, b)
 
 jaccard_dissimilarity(a, b)
+
+jaccard_bag_similarity(a, b)
 }
 \arguments{
-\item{a}{The first set to be compared.}
+\item{a}{The first set (or bag) to be compared.}
 
-\item{b}{The second set to be compared.}
+\item{b}{The second set (or bag) to be compared.}
 }
 \description{
 These functions compute the Jaccard measures of similarity or dissimilarity
@@ -35,6 +38,12 @@ b)) / length(union(a, b))}
 The dissimilarity is simply
 
 \deqn{1 - J(A, B)}
+
+The Jaccard bag similarity treats \code{a} and \code{b} as bags rather than
+sets, so that the result is a fraction where the numerator is the sum of each
+matching element counted the minimum number of times it appears in each bag,
+and the denominator is the sum of the lengths of both bags. The maximum value
+for the Jaccard bag similarity is \code{0.5}.
 }
 \examples{
 jaccard_similarity(1:3, 2:4)
@@ -53,5 +62,15 @@ jaccard_similarity(ny, ca_match)
 
 # These two should have a lower Jaccard similarity coefficient
 jaccard_similarity(ny, ca_nomatch)
+
+a <- c("a", "a", "a", "b")
+b <- c("a", "a", "b", "b", "c")
+jaccard_similarity(a, b)
+jaccard_bag_similarity(a, b)
+}
+\references{
+Jure Leskovec, Anand Rajaraman, Jeff Ullman,
+  \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
+  (Cambridge University Press, 2011).
 }
 

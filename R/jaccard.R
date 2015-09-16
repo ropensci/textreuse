@@ -19,8 +19,14 @@
 #'
 #' \deqn{1 - J(A, B)}
 #'
-#' @param a The first set to be compared.
-#' @param b The second set to be compared.
+#' The Jaccard bag similarity treats \code{a} and \code{b} as bags rather than
+#' sets, so that the result is a fraction where the numerator is the sum of each
+#' matching element counted the minimum number of times it appears in each bag,
+#' and the denominator is the sum of the lengths of both bags. The maximum value
+#' for the Jaccard bag similarity is \code{0.5}.
+#'
+#' @param a The first set (or bag) to be compared.
+#' @param b The second set (or bag) to be compared.
 #'
 #' @examples
 #' jaccard_similarity(1:3, 2:4)
@@ -40,6 +46,13 @@
 #' # These two should have a lower Jaccard similarity coefficient
 #' jaccard_similarity(ny, ca_nomatch)
 #'
+#' a <- c("a", "a", "a", "b")
+#' b <- c("a", "a", "b", "b", "c")
+#' jaccard_similarity(a, b)
+#' jaccard_bag_similarity(a, b)
+#' @references Jure Leskovec, Anand Rajaraman, Jeff Ullman,
+#'   \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
+#'   (Cambridge University Press, 2011).
 #' @name jaccard
 NULL
 
@@ -66,4 +79,23 @@ jaccard_dissimilarity <- function(a, b) UseMethod("jaccard_dissimilarity")
 #' @export
 jaccard_dissimilarity.default <- function(a, b) {
   1 - jaccard_similarity(a, b)
+}
+
+#' @rdname jaccard
+#' @export
+jaccard_bag_similarity <- function(a, b) UseMethod("jaccard_bag_similarity")
+
+#' @export
+jaccard_bag_similarity.default <- function(a, b) {
+  matches <- intersect(a, b)
+  counts <- vapply(matches, function(x) min(sum(x == a), sum(x == b)),
+                   integer(1), USE.NAMES = FALSE)
+  denominator <- length(a) + length(b)
+  sum(counts) / denominator
+}
+
+#' @export
+jaccard_bag_similarity.TextReuseTextDocument <- function(a, b) {
+  assert_that(all(class(a) == class(b)))
+  jaccard_bag_similarity(a$hashes, b$hashes)
 }

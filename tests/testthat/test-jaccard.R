@@ -23,3 +23,9 @@ test_that("works with TextReuseTextDocument", {
   ca <- TextReuseTextDocument(file = ca)
   expect_is(jaccard_similarity(ny, ca), "numeric")
 })
+
+test_that("calculates bag similarity properly", {
+  a <- c("a", "a", "a", "b")
+  b <- c("a", "a", "b", "b", "c")
+  expect_equal(jaccard_bag_similarity(a, b), 1/3)
+})
