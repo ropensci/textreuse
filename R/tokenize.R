@@ -17,7 +17,7 @@
 #' @return The modified \code{\link{TextReuseTextDocument}} or \code{\link{TextReuseCorpus}}.
 #' @export
 tokenize <- function(x, tokenizer, ..., hash_func = hash_string,
-                     keep_tokens = TRUE, keep_text = TRUE) {
+                     keep_tokens = FALSE, keep_text = TRUE) {
   UseMethod("tokenize", x)
 }
 

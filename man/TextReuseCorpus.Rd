@@ -7,7 +7,7 @@
 \usage{
 TextReuseCorpus(paths, dir = NULL, meta = list(),
   progress = interactive(), tokenizer = tokenize_ngrams, ...,
-  hash_func = hash_string, keep_tokens = TRUE, keep_text = TRUE)
+  hash_func = hash_string, keep_tokens = FALSE, keep_text = TRUE)
 
 is.TextReuseCorpus(x)
 }

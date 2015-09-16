@@ -6,8 +6,8 @@ ca2 <- system.file("extdata/ca1851-match.txt", package = "textreuse")
 paths <- c(ca2, ca1, ny)
 dir <- system.file("extdata", package = "textreuse")
 meta <- list("Corpus name" = "B")
-corpus_a <- TextReuseCorpus(paths = paths)
-corpus_b <- TextReuseCorpus(dir = dir)
+corpus_a <- TextReuseCorpus(paths = paths, keep_tokens = TRUE)
+corpus_b <- TextReuseCorpus(dir = dir, keep_tokens = TRUE)
 
 test_that("loads from paths or directory identically", {
   expect_identical(corpus_a, corpus_b)
@@ -32,10 +32,11 @@ test_that("has the right classes", {
 })
 
 test_that("has subset methods", {
-  expect_identical(corpus_a[[1]], TextReuseTextDocument(file = paths[1]))
+  expect_identical(corpus_a[[1]],
+                   TextReuseTextDocument(file = paths[1], keep_tokens = TRUE))
   # by file path
   expect_identical(corpus_a[[filenames(paths[3])]],
-                   TextReuseTextDocument(file = paths[3]))
+                   TextReuseTextDocument(file = paths[3], keep_tokens = TRUE))
   expect_equal(length(corpus_a[2:3]), 2)
 })
 

@@ -34,7 +34,7 @@ TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
                             progress = interactive(),
                             tokenizer = tokenize_ngrams, ...,
                             hash_func = hash_string,
-                            keep_tokens = TRUE, keep_text = TRUE) {
+                            keep_tokens = FALSE, keep_text = TRUE) {
 
   if (missing(paths) & !is.null(dir)) {
     assert_that(is.dir(dir))

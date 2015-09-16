@@ -1,6 +1,6 @@
 context("TextReuseTextDocument")
 
-doc <- TextReuseTextDocument(file = "newman.txt")
+doc <- TextReuseTextDocument(file = "newman.txt", keep_tokens = TRUE)
 test_meta <- list(id = "test")
 
 test_that("inherits from the correct classes", {
@@ -47,8 +47,9 @@ test_that("can be created from a character vector not just a file", {
 
 test_that("can be retokenized", {
   text <- "This is the text. But also this."
-  a <- TextReuseTextDocument(text, meta = test_meta, tokenizer = tokenize_words)
-  b <- tokenize(a, tokenizer = tokenize_sentences)
+  a <- TextReuseTextDocument(text, meta = test_meta, tokenizer = tokenize_words,
+                             keep_tokens = TRUE)
+  b <- tokenize(a, tokenizer = tokenize_sentences, keep_tokens = TRUE)
   expect_false(identical(tokens(a), tokens(b)))
   expect_false(identical(hashes(a), hashes(b)))
   expect_equal(tokens(a), c("this", "is", "the", "text", "but", "also", "this"))

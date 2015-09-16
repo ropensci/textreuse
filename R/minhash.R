@@ -25,7 +25,8 @@
 #'
 #' # Example with a TextReuseTextDocument
 #' file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
-#' doc <- TextReuseTextDocument(file = file, hash_func = minhash)
+#' doc <- TextReuseTextDocument(file = file, hash_func = minhash,
+#'                              keep_tokens = TRUE)
 #' hashes(doc)
 #'
 #' # Example with a character vector

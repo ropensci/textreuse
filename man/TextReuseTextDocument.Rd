@@ -6,9 +6,9 @@
 \alias{is.TextReuseTextDocument}
 \title{TextReuseTextDocument}
 \usage{
-TextReuseTextDocument(text, file = NULL, meta = NULL,
+TextReuseTextDocument(text, file = NULL, meta = list(),
   tokenizer = tokenize_ngrams, ..., hash_func = hash_string,
-  keep_tokens = TRUE, keep_text = TRUE)
+  keep_tokens = FALSE, keep_text = TRUE)
 
 is.TextReuseTextDocument(x)
 

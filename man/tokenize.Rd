@@ -4,7 +4,7 @@
 \alias{tokenize}
 \title{Recompute the tokens for a document or corpus}
 \usage{
-tokenize(x, tokenizer, ..., hash_func = hash_string, keep_tokens = TRUE,
+tokenize(x, tokenizer, ..., hash_func = hash_string, keep_tokens = FALSE,
   keep_text = TRUE)
 }
 \arguments{
