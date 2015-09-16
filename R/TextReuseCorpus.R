@@ -43,6 +43,11 @@ TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
 
   vapply(paths, is.readable, logical(1), USE.NAMES = FALSE)
 
+  assert_that(is.function(tokenizer),
+              is.function(hash_func))
+  tokenizer_name <- as.character(substitute(tokenizer))
+  hash_func_name <- as.character(substitute(hash_func))
+
   if (progress) {
     len <- length(paths)
     message("Loading, tokenizing, and hashing ", prettyNum(len, big.mark = ","),
@@ -52,7 +57,9 @@ TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
   docs <- lapply(seq_along(paths), function(i) {
     d <- TextReuseTextDocument(file = paths[i], tokenizer = tokenizer, ...,
                                hash_func = hash_func, keep_tokens = keep_tokens,
-                               keep_text = keep_text)
+                               keep_text = keep_text,
+                               meta = list(tokenizer = tokenizer_name,
+                                           hash_func = hash_func_name))
     if (progress) setTxtProgressBar(pb, i)
     d
   })
@@ -62,6 +69,10 @@ TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
   names(docs) <- filenames(paths)
 
   assert_that(is.list(meta))
+  meta$tokenizer <- tokenizer_name
+  meta$hash_func <- hash_func_name
+
+  meta <- sort_meta(meta)
 
   corpus <- list(documents = docs, meta = meta)
   class(corpus) <- c("TextReuseCorpus", "Corpus")

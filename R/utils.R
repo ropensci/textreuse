@@ -63,3 +63,7 @@ assertthat::on_failure(has_id) <- function(call, env) {
   paste("When creating a document from a string instead of a file, the `id`",
         "field in the metadata list must be specified.")
 }
+
+sort_meta <- function(meta) {
+  meta[order(names(meta))]
+}

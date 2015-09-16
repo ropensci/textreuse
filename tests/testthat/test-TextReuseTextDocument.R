@@ -12,10 +12,10 @@ test_that("has the correct structure", {
 })
 
 test_that("can set the metadata", {
-  expect_named(meta(doc), c("file", "id"))
+  expect_named(meta(doc), c("file", "hash_func", "id", "tokenizer"))
   doc2 <- TextReuseTextDocument(file = "newman.txt",
                                 meta = list(author = "Newman, John Henry"))
-  expect_named(meta(doc2), c("author", "file", "id"))
+  expect_named(meta(doc2), c("author", "file", "hash_func", "id", "tokenizer"))
   expect_equal(meta(doc2, "author"), "Newman, John Henry")
 })
 

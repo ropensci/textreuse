@@ -63,9 +63,11 @@ TextReuseTextDocument <- function(text, file = NULL, meta = NULL,
   text <- as_string(text)
 
   assert_that(is.function(tokenizer))
+  tokenizer_name <- as.character(substitute(tokenizer))
   tokens <- tokenizer(text, ...)
 
   assert_that(is.function(hash_func))
+  hash_func_name <- as.character(substitute(hash_func))
   hashes <- hash_func(tokens)
 
   if (!keep_tokens) tokens <- NULL
@@ -73,12 +75,22 @@ TextReuseTextDocument <- function(text, file = NULL, meta = NULL,
 
   if (missing(meta)) {
     meta <- list(file = file,
-                 id = filenames(file))
-  } else if (!is.null(file)) {
-    assert_that(is.list(meta))
+                 id = filenames(file),
+                 tokenizer = tokenizer_name,
+                 hash_func = hash_func_name)
+  }
+  assert_that(is.list(meta))
+  if (!is.null(file)) {
     meta$file <- file
     meta$id <- filenames(file)
   }
+  # Don't overwrite these when called from TextReuseCorpus
+  if (is.null(meta$tokenizer) & is.null(meta$hash_func)) {
+    meta$tokenizer <- tokenizer_name
+    meta$hash_func <- hash_func_name
+  }
+
+  meta <- sort_meta(meta)
 
   doc <- list(
     content = text,
