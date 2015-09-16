@@ -20,7 +20,7 @@ test_that("has metadata", {
 })
 
 test_that("has accessor functions", {
-  expect_equal(names(corpus_a), paths)
+  expect_equal(names(corpus_a), filenames(paths))
   names(corpus_b) <- letters[1:3]
   expect_equal(names(corpus_b), letters[1:3])
   expect_equal(length(corpus_a), 3)
@@ -34,7 +34,8 @@ test_that("has the right classes", {
 test_that("has subset methods", {
   expect_identical(corpus_a[[1]], TextReuseTextDocument(file = paths[1]))
   # by file path
-  expect_identical(corpus_a[[paths[3]]], TextReuseTextDocument(file = paths[3]))
+  expect_identical(corpus_a[[filenames(paths[3])]],
+                   TextReuseTextDocument(file = paths[3]))
   expect_equal(length(corpus_a[2:3]), 2)
 })
 

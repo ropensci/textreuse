@@ -30,9 +30,9 @@
 #' ca_match   <- system.file("extdata/ca1851-match.txt", package = "textreuse")
 #' ca_nomatch <- system.file("extdata/ca1851-nomatch.txt", package = "textreuse")
 #'
-#' ny         <- TextReuseTextDocument(ny)
-#' ca_match   <- TextReuseTextDocument(ca_match)
-#' ca_nomatch <- TextReuseTextDocument(ca_nomatch)
+#' ny         <- TextReuseTextDocument(ny, meta = list(id = "ny"))
+#' ca_match   <- TextReuseTextDocument(ca_match, meta = list(id = "ca_match"))
+#' ca_nomatch <- TextReuseTextDocument(ca_nomatch, meta = list(id = "ca_nomatch"))
 #'
 #' # These two should have a higher Jaccard similarity coefficient
 #' jaccard_similarity(ny, ca_match)

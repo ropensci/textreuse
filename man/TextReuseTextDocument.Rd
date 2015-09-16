@@ -21,7 +21,10 @@ argument can be skipped if supplying \code{file}.}
 \item{file}{The path to a text file, if \code{text} is not provided.}
 
 \item{meta}{A list with named elements for the metadata associated with this
-document.}
+document. If a document is created using the \code{text} parameter, then
+you must provide an \code{id} field, e.g., \code{meta = list(id =
+"my_id")}. If the document is created using \code{file}, then the ID will
+be created from the file name.}
 
 \item{tokenizer}{A function to split the text into tokens. See
 \code{\link{tokenizers}}.}
@@ -61,7 +64,7 @@ This constructor function follows a three-step process. It reads in
 }
 \examples{
 file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
-doc  <- TextReuseTextDocument(file = file, meta = list(title = "NY 1850"))
+doc  <- TextReuseTextDocument(file = file, meta = list(id = "ny1850"))
 print(doc)
 meta(doc)
 head(tokens(doc))

@@ -34,7 +34,7 @@ check_banding <- function(l, b) {
 }
 
 assertthat::on_failure(check_banding) <- function(call, env) {
-  paste0("Bands times rows must equal the number of hashes.")
+  "Bands times rows must equal the number of hashes."
 }
 
 # Sequences for subsetting by bands in minhash
@@ -52,4 +52,14 @@ insert_into_hash <- function(k, v, hash) {
   else
     hash[[k]] <- v
   invisible()
+}
+
+# Test that meta exists and that it has an ID value
+has_id <- function(meta) {
+  !is.null(meta$id)
+}
+
+assertthat::on_failure(has_id) <- function(call, env) {
+  paste("When creating a document from a string instead of a file, the `id`",
+        "field in the metadata list must be specified.")
 }

@@ -7,7 +7,10 @@
 #'   argument can be skipped if supplying \code{file}.
 #' @param file The path to a text file, if \code{text} is not provided.
 #' @param meta A list with named elements for the metadata associated with this
-#'   document.
+#'   document. If a document is created using the \code{text} parameter, then
+#'   you must provide an \code{id} field, e.g., \code{meta = list(id =
+#'   "my_id")}. If the document is created using \code{file}, then the ID will
+#'   be created from the file name.
 #' @param tokenizer A function to split the text into tokens. See
 #'   \code{\link{tokenizers}}.
 #' @param ... Arguments passed on to the \code{tokenizer}.
@@ -34,7 +37,7 @@
 #'
 #' @examples
 #' file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
-#' doc  <- TextReuseTextDocument(file = file, meta = list(title = "NY 1850"))
+#' doc  <- TextReuseTextDocument(file = file, meta = list(id = "ny1850"))
 #' print(doc)
 #' meta(doc)
 #' head(tokens(doc))
@@ -48,9 +51,11 @@ TextReuseTextDocument <- function(text, file = NULL, meta = NULL,
                                   hash_func = hash_string,
                                   keep_tokens = TRUE, keep_text = TRUE) {
 
+  if (!missing(text)) assert_that(has_id(meta))
+
   if (!is.null(file)) {
-    assert_that(missing(text))
-    assert_that(is.readable(file))
+    assert_that(missing(text),
+                is.readable(file))
     text <- as_string(readLines(file), "\n")
   }
 
@@ -60,16 +65,19 @@ TextReuseTextDocument <- function(text, file = NULL, meta = NULL,
   assert_that(is.function(tokenizer))
   tokens <- tokenizer(text, ...)
 
+  assert_that(is.function(hash_func))
   hashes <- hash_func(tokens)
 
   if (!keep_tokens) tokens <- NULL
   if (!keep_text) text <- NULL
 
   if (missing(meta)) {
-    meta <- list(file = file)
-  } else {
+    meta <- list(file = file,
+                 id = filenames(file))
+  } else if (!is.null(file)) {
     assert_that(is.list(meta))
     meta$file <- file
+    meta$id <- filenames(file)
   }
 
   doc <- list(

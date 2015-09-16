@@ -23,15 +23,12 @@
 #' @param keep_text Should the text be saved in the documents that are returned or
 #'   discarded?
 #' @examples
-#' ny <- system.file("extdata/ny1850-match.txt", package = "textreuse")
-#' ca1 <- system.file("extdata/ca1851-nomatch.txt", package = "textreuse")
-#' ca2 <- system.file("extdata/ca1851-match.txt", package = "textreuse")
-#' paths <- c(ny, ca1, ca2)
-#' corpus <- TextReuseCorpus(paths, meta = list("description" = "Field Codes"))
-#' meta(corpus)
+#' dir <- system.file("extdata", package = "textreuse")
+#' corpus <- TextReuseCorpus(dir = dir, meta = list("description" = "Field Codes"))
 #' # Subset by position or file name
 #' corpus[[1]]
-#' corpus[[paths[3]]]
+#' names(corpus)
+#' corpus[["ca1851-match"]]
 #' @export
 TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
                             progress = interactive(),
@@ -62,7 +59,7 @@ TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
 
   if (progress) close(pb)
 
-  names(docs) <- paths
+  names(docs) <- filenames(paths)
 
   assert_that(is.list(meta))
 

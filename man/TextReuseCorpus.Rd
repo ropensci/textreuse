@@ -47,14 +47,11 @@ paths to text files using the \code{paths =} parameter, or a directory
 containing text files using the \code{dir =} parameter.
 }
 \examples{
-ny <- system.file("extdata/ny1850-match.txt", package = "textreuse")
-ca1 <- system.file("extdata/ca1851-nomatch.txt", package = "textreuse")
-ca2 <- system.file("extdata/ca1851-match.txt", package = "textreuse")
-paths <- c(ny, ca1, ca2)
-corpus <- TextReuseCorpus(paths, meta = list("description" = "Field Codes"))
-meta(corpus)
+dir <- system.file("extdata", package = "textreuse")
+corpus <- TextReuseCorpus(dir = dir, meta = list("description" = "Field Codes"))
 # Subset by position or file name
 corpus[[1]]
-corpus[[paths[3]]]
+names(corpus)
+corpus[["ca1851-match"]]
 }
 

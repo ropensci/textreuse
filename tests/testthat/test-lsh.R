@@ -1,12 +1,11 @@
 context("LSH")
 
-library("hash")
 dir <- system.file("extdata", package = "textreuse")
+set.seed(4235)
 minhash <- minhash_generator(200)
 corpus <- TextReuseCorpus(dir = dir,
                           tokenizer = tokenize_ngrams, n = 5,
                           hash_func = minhash)
-names(corpus) <- filenames(names(corpus))
 buckets <- lsh(corpus, bands = 50)
 candidates <- lsh_candidates(buckets)
 

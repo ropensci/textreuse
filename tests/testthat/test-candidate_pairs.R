@@ -1,7 +1,6 @@
 context("Candidate pairs")
 dir <- system.file("extdata", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir)
-names(corpus) <- filenames(names(corpus))
 m <- pairwise_cf(corpus, ratio_of_matches, directional = TRUE)
 pairs <- pairwise_candidates(m)
 
