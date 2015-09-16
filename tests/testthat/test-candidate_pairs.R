@@ -10,10 +10,3 @@ test_that("returns a data frame with correct properties", {
   expect_is(pairs, "tbl_df")
   expect_named(pairs, c("a", "b", "score"))
 })
-
-test_that("a and b are in correct order, so results are correct", {
-  r <- sample(1:nrow(pairs), 1)
-  expect_equal(pairs$score[r],
-               ratio_of_matches(corpus[[pairs$a[r]]], corpus[[pairs$b[r]]]))
-})
-

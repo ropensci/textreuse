@@ -4,10 +4,13 @@
 \alias{pairwise_candidates}
 \title{Candidate pairs from pairwise comparisons}
 \usage{
-pairwise_candidates(m)
+pairwise_candidates(m, directional = FALSE)
 }
 \arguments{
 \item{m}{A matrix from \code{\link{pairwise_cf}}.}
+
+\item{directional}{Should be set to the same value as in
+\code{\link{pairwise_cf}}.}
 }
 \value{
 A data frame containing all the non-\code{NA} values from \code{m}.
@@ -22,8 +25,11 @@ data frame of candidates for matches.
 \examples{
 dir <- system.file("extdata", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir)
-names(corpus) <- filenames(names(corpus))
-m <- pairwise_cf(corpus, ratio_of_matches, directional = TRUE)
-pairwise_candidates(m)
+
+m1 <- pairwise_cf(corpus, ratio_of_matches, directional = TRUE)
+pairwise_candidates(m1, directional = TRUE)
+
+m2 <- pairwise_cf(corpus, jaccard_similarity)
+pairwise_candidates(m2)
 }
 

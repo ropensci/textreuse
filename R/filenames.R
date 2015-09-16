@@ -19,5 +19,5 @@ filenames <- function(paths, extension = FALSE) {
   if (extension)
     return(f)
   else
-    str_replace(f, ".[:alpha:]{1,}$", "")
+    str_replace(f, "\\.[:alpha:]{1,}$", "")
 }

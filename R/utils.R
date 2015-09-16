@@ -73,3 +73,20 @@ skip_on_appveyor <- function() {
     return()
   testthat::skip("On Appveyor")
 }
+
+sort_df_by_rows <- function(df) {
+  assert_that(all(c("a", "b") %in% colnames(df)),
+              is.data.frame(df))
+  for (i in seq_len(nrow(df))) {
+    ordered <- sort(c(df[i, "a"], df[i, "b"]))
+    df[i, "a"] <- ordered[1]
+    df[i, "b"] <- ordered[2]
+  }
+  df
+}
+
+sort_df_by_columns <- function(df) {
+  assert_that(all(c("a", "b") %in% colnames(df)),
+              is.data.frame(df))
+  df[with(df, order(a, b)), ]
+}

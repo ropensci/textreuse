@@ -4,6 +4,8 @@
 #' data frame of candidates for matches.
 #'
 #' @param m A matrix from \code{\link{pairwise_cf}}.
+#' @param directional Should be set to the same value as in
+#'   \code{\link{pairwise_cf}}.
 #' @return A data frame containing all the non-\code{NA} values from \code{m}.
 #'   Columns \code{a} and \code{b} are the IDs from the original corpus as
 #'   passed to the comparison function. Column \code{score} is the score
@@ -11,11 +13,14 @@
 #' @examples
 #' dir <- system.file("extdata", package = "textreuse")
 #' corpus <- TextReuseCorpus(dir = dir)
-#' names(corpus) <- filenames(names(corpus))
-#' m <- pairwise_cf(corpus, ratio_of_matches, directional = TRUE)
-#' pairwise_candidates(m)
+#'
+#' m1 <- pairwise_cf(corpus, ratio_of_matches, directional = TRUE)
+#' pairwise_candidates(m1, directional = TRUE)
+#'
+#' m2 <- pairwise_cf(corpus, jaccard_similarity)
+#' pairwise_candidates(m2)
 #' @export
-pairwise_candidates <- function(m) {
+pairwise_candidates <- function(m, directional = FALSE) {
   assert_that(is.matrix(m))
   matches <- which(!is.na(m))
   indexes <- arrayInd(matches, dim(m))
@@ -24,5 +29,7 @@ pairwise_candidates <- function(m) {
   b <- colnames(m)[indexes[ , 2]]
   df <- data.frame(a = a, b = b, score = score, stringsAsFactors = FALSE)
   class(df) <- c("tbl_df", "tbl", "data.frame")
+  if (!directional) df <- sort_df_by_rows(df)
+  df <- sort_df_by_columns(df)
   df
 }
