@@ -1,5 +1,6 @@
 context("LSH")
 
+library("hash")
 dir <- system.file("extdata", package = "textreuse")
 minhash <- minhash_generator(200)
 corpus <- TextReuseCorpus(dir = dir,
