@@ -8,6 +8,8 @@ corpus <- TextReuseCorpus(dir = dir,
                           hash_func = minhash)
 buckets <- lsh(corpus, bands = 50)
 candidates <- lsh_candidates(buckets)
+corpus2 <- tokenize(corpus, tokenizer = tokenize_ngrams, n = 5)
+scores <- lsh_compare(candidates, corpus2, jaccard_similarity)
 
 test_that("returns a bucket", {
   expect_is(buckets, "hash")
@@ -39,4 +41,10 @@ test_that("additional documents can be added", {
   lsh(newman, bands = 50, buckets = buckets)
   end <- length(buckets)
   expect_equal(start + 50, end)
+})
+
+test_that("candidates can be scored", {
+  correct <- jaccard_similarity(corpus2[["ca1851-match"]],
+                                corpus2[["ny1850-match"]])
+  expect_equal(scores[1,3], correct)
 })
