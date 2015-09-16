@@ -15,10 +15,12 @@ URL: https://github.com/lmullen/textreuse
 BugReports: https://github.com/lmullen/textreuse/issues
 VignetteBuilder: knitr
 Depends: R (>= 3.1.2)
-Imports: stringr (>= 1.0.0),
-    assertthat (>= 0.1),
+Imports: assertthat (>= 0.1),
+    digest(>= 0.6.8),
+    hash (>= 2.2.6),
     NLP (>= 0.1.8),
-    Rcpp (>= 0.12.0)
+    Rcpp (>= 0.12.0),
+    stringr (>= 1.0.0)
 Suggests: testthat (>= 0.10.0),
     knitr (>= 1.11)
 LinkingTo: Rcpp,

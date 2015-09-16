@@ -27,3 +27,29 @@ has_content <- function(x) {
 assertthat::on_failure(has_content) <- function(call, env) {
   paste0(deparse(call$x), " does not have text in its content field.")
 }
+
+# Check whether the number of minhashes is evenly divisble by number of bands
+check_banding <- function(l, b) {
+  l %% b == 0
+}
+
+assertthat::on_failure(check_banding) <- function(call, env) {
+  paste0("Bands times rows must equal the number of hashes.")
+}
+
+# Sequences for subsetting by bands in minhash
+band_seq <- function(l, b) {
+  assert_that(check_banding(l, b))
+  r <- l / b
+  starts <- seq.int(from = 1, to = l, by = r)
+  lapply(starts, function(n) seq.int(n, n + r - 1, 1))
+}
+
+# Append to value if key already exists
+insert_into_hash <- function(k, v, hash) {
+  if (hash::has.key(k, hash))
+    hash[[k]] <- unique(c(hash[[k]], v))
+  else
+    hash[[k]] <- v
+  invisible()
+}
