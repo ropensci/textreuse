@@ -69,7 +69,7 @@ corpus <- TextReuseCorpus(dir = dir,
                           tokenizer = tokenize_ngrams, n = 5,
                           hash_func = minhash)
 names(corpus) <- filenames(names(corpus))
-buckets <- lsh(corpus, bands = 40)
+buckets <- lsh(corpus, bands = 50)
 buckets
 }
 \references{
