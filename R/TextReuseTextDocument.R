@@ -46,7 +46,7 @@
 #' content(doc)
 #' }
 #' @export
-TextReuseTextDocument <- function(text, file = NULL, meta = NULL,
+TextReuseTextDocument <- function(text, file = NULL, meta = list(),
                                   tokenizer = tokenize_ngrams, ...,
                                   hash_func = hash_string,
                                   keep_tokens = TRUE, keep_text = TRUE) {
