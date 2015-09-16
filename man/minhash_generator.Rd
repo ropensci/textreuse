@@ -4,10 +4,14 @@
 \alias{minhash_generator}
 \title{Generate a minhash function}
 \usage{
-minhash_generator(n = 200)
+minhash_generator(n = 200, seed = NULL)
 }
 \arguments{
 \item{n}{The number of minhashes that the returned function should generate.}
+
+\item{seed}{An option parameter to set the seed used in generating the random
+numbers to ensure that the same minhash function is used on repeated
+applications.}
 }
 \value{
 A function which will take a character vector and return \code{n}

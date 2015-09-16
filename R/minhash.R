@@ -11,6 +11,9 @@
 #' of \code{\link{TextReuseTextDocument}}.
 #'
 #' @param n The number of minhashes that the returned function should generate.
+#' @param seed An option parameter to set the seed used in generating the random
+#'   numbers to ensure that the same minhash function is used on repeated
+#'   applications.
 #' @return A function which will take a character vector and return \code{n}
 #'   minhashes.
 #' @references Jure Leskovec, Anand Rajaraman, Jeff Ullman,
@@ -33,8 +36,9 @@
 #' is.character(tokens(doc))
 #' minhash(tokens(doc))
 #' @export
-minhash_generator <- function(n = 200) {
+minhash_generator <- function(n = 200, seed = NULL) {
   assert_that(is.count(n))
+  if (!is.null(seed)) set.seed(seed)
   r <- random_ints(n)
   f <- function(x) {
     assert_that(is.character(x))

@@ -21,3 +21,11 @@ test_that("minhash works on a TextReuseTextDocument", {
   expect_is(hashes(doc), "integer")
   expect_equal(mhash(tokens(doc)), hashes(doc))
 })
+
+test_that("minhash_generator can take seeds and generate same results", {
+  mhash_a <- minhash_generator(n = 1000, seed = -5633)
+  mhash_b <- minhash_generator(n = 1000, seed = -5633)
+  mhash_c <- minhash_generator(n = 1000, seed = 12)
+  expect_equal(mhash_a(content(doc)), mhash_b(content(doc)))
+  expect_equal(mhash_a(content(doc)) == mhash_c(content(doc)), rep(FALSE, 1000))
+})
