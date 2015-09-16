@@ -88,5 +88,7 @@ sort_df_by_rows <- function(df) {
 sort_df_by_columns <- function(df) {
   assert_that(all(c("a", "b") %in% colnames(df)),
               is.data.frame(df))
-  df[with(df, order(a, b)), ]
+  df <- df[with(df, order(a, b)), ]
+  # rownames(df) <- NULL
+  df
 }

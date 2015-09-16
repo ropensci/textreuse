@@ -18,18 +18,19 @@ test_that("returns error if improper number of bands are chosen", {
 })
 
 test_that("returns pairs of candidates", {
-  expect_is(candidates, "list")
-  expect_equal(candidates[[1]], c("ca1851-match", "ny1850-match"))
+  expect_is(candidates, "data.frame")
+  expect_named(candidates, c("a", "b", "score"))
+  expect_equal(candidates[1, 1], "ca1851-match")
+  expect_equal(candidates[1, 2], "ny1850-match")
+  expect_equal(candidates[1, 3], NA_real_)
 })
 
-test_that("pairs of candidates or clusters of candidates",{
+test_that("pairs of candidates not clusters",{
   fake_cache <- hash::hash("qwe" = c("a", "b"),
                            "asd" = c("c"),
                            "zxc" = c("b", "c", "e"))
   pairs <- lsh_candidates(fake_cache)
-  clusters <- lsh_candidates(fake_cache, pairs = FALSE)
-  expect_equal(length(pairs), 4)
-  expect_equal(length(clusters), 2)
+  expect_equal(nrow(pairs), 4)
 })
 
 test_that("additional documents can be added", {

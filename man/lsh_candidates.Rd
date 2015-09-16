@@ -4,13 +4,10 @@
 \alias{lsh_candidates}
 \title{Candidate pairs from LSH comparisons}
 \usage{
-lsh_candidates(buckets, pairs = TRUE)
+lsh_candidates(buckets)
 }
 \arguments{
 \item{buckets}{A cache object returned from \code{\link{lsh}}.}
-
-\item{pairs}{If \code{TRUE}, pairs of candidates will be returned. Otherwise,
-clusters of candidates will be returned.}
 }
 \value{
 A list containing character vectors with the IDs of potential matches.
