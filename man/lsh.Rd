@@ -4,10 +4,11 @@
 \alias{lsh}
 \title{Locality sensitive hashing for minhash}
 \usage{
-lsh(corpus, bands = 40, buckets = NULL)
+lsh(x, bands = 40, buckets = NULL)
 }
 \arguments{
-\item{corpus}{A \code{\link{TextReuseCorpus}} to add to the cache.}
+\item{x}{A \code{\link{TextReuseCorpus}} or
+\code{\link{TextReuseTextDocument}} to add to the cache.}
 
 \item{bands}{The number of bands to use for locality sensitive hashing. The
 number of hashes in the documents in the corpus must be evenly divisible by
@@ -30,36 +31,36 @@ documents quickly, so that only likely pairs can be compared.
 }
 \details{
 Locality sensitive hashing is a technique for detecting document
-similarity that does not require pairwise comparisons. When comparing pairs of
-documents, the number of pairs grows rapidly, so that only the smallest
-corpora can be compared pairwise in a reasonable amount of computation time.
-Locality sensitive hashing, on the other hand, takes a document which has been
-tokenized and hashed using a minhash algorithm. (See
-\code{\link{minhash_generator}}.) Each set of minhash signatures is then
-broken into bands comprised of a certain number of rows. (For example, 200
-minhash signatures might be broken down into 20 bands each containing 10
-rows.) Each band is then hashed to a bucket. Documents with identical rows in
-a band will be hashed to the same bucket. The likelihood that a document will
-be marked as a potential duplicate is proportional to the number of bands and
-inversely proportional to the number of rows in each band.
+ similarity that does not require pairwise comparisons. When comparing pairs
+ of documents, the number of pairs grows rapidly, so that only the smallest
+ corpora can be compared pairwise in a reasonable amount of computation time.
+ Locality sensitive hashing, on the other hand, takes a document which has
+ been tokenized and hashed using a minhash algorithm. (See
+ \code{\link{minhash_generator}}.) Each set of minhash signatures is then
+ broken into bands comprised of a certain number of rows. (For example, 200
+ minhash signatures might be broken down into 20 bands each containing 10
+ rows.) Each band is then hashed to a bucket. Documents with identical rows
+ in a band will be hashed to the same bucket. The likelihood that a document
+ will be marked as a potential duplicate is proportional to the number of
+ bands and inversely proportional to the number of rows in each band.
 
-This technique means that documents hashed into a cache, so that the LSH
-signatures for each document only need to be computed once. Furthermore, so
-long as the same minhash and LSH functions are used, additional documents can
-be added to the cache at any time. And since minhash signatures are used, each
-document can be added to the cache fairly quickly.
+ This technique means that documents hashed into a cache, so that the LSH
+ signatures for each document only need to be computed once. Furthermore, so
+ long as the same minhash and LSH functions are used, additional documents
+ can be added to the cache at any time. And since minhash signatures are
+ used, each document can be added to the cache fairly quickly.
 
-This function returns a cache object. This object is a
-\href{https://en.wikipedia.org/wiki/Hash_table}{hash table} as implemented by
-the \href{https://cran.r-project.org/package=hash}{hash package}. Unlike every
-other type of R object, which has copy-on-modify semantics, this hash
-table/cache object does not. That means that the variable name is only a
-pointer to the actual hash table, and multiple variable names can point to the
-same hash table. If no cache object is passed to the function, then a new
-cache is generated.
+ This function returns a cache object. This object is a
+ \href{https://en.wikipedia.org/wiki/Hash_table}{hash table} as implemented
+ by the \href{https://cran.r-project.org/package=hash}{hash package}. Unlike
+ every other type of R object, which has copy-on-modify semantics, this hash
+ table/cache object does not. That means that the variable name is only a
+ pointer to the actual hash table, and multiple variable names can point to
+ the same hash table. If no cache object is passed to the function, then a
+ new cache is generated.
 
-This cache object can then be queried to detect pairs or clusters of
-documents.
+ This cache object can then be queried to detect pairs or clusters of
+ documents.
 }
 \examples{
 dir <- system.file("extdata", package = "textreuse")

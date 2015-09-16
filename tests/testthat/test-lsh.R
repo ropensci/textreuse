@@ -31,3 +31,11 @@ test_that("pairs of candidates or clusters of candidates",{
   expect_equal(length(pairs), 4)
   expect_equal(length(clusters), 2)
 })
+
+test_that("additional documents can be added", {
+  start <- length(buckets)
+  newman <- TextReuseTextDocument(file = "newman.txt", hash_func = minhash)
+  lsh(newman, bands = 50, buckets = buckets)
+  end <- length(buckets)
+  expect_equal(start + 50, end)
+})
