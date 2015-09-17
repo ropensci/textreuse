@@ -22,6 +22,7 @@ Imports: assertthat (>= 0.1),
     Rcpp (>= 0.12.0),
     stringr (>= 1.0.0)
 Suggests: testthat (>= 0.10.0),
-    knitr (>= 1.11)
+    knitr (>= 1.11),
+    rmarkdown (>= 0.8)
 LinkingTo: Rcpp,
     BH
