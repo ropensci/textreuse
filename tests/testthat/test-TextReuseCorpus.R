@@ -38,6 +38,7 @@ test_that("has subset methods", {
   expect_identical(corpus_a[[filenames(paths[3])]],
                    TextReuseTextDocument(file = paths[3], keep_tokens = TRUE))
   expect_equal(length(corpus_a[2:3]), 2)
+  expect_is(corpus_a[2:3], "TextReuseCorpus")
 })
 
 test_that("prints sensibly", {

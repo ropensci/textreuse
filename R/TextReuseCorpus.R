@@ -114,7 +114,8 @@ length.TextReuseCorpus <- function(x) {
 
 #' @export
 `[.TextReuseCorpus` <- function(x, i) {
-  x$documents[i]
+  x$documents <- x$documents[i]
+  x
 }
 
 #' @export
