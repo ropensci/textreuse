@@ -181,10 +181,11 @@ meta.TextReuseTextDocument <- function(x, tag = NULL, ...) {
   x
 }
 
-#' Accessors for TextReuseTextDocument objects
+#' Accessors for TextReuse objects
 #'
 #' Accessor functions to read and write components of
-#' \code{\link{TextReuseTextDocument}} objects.
+#' \code{\link{TextReuseTextDocument}} and \code{\link{TextReuseCorpus}}
+#' objects.
 #' @name TextReuseTextDocument-accessors
 #' @param x The object to acess.
 #' @param value The value to assign.

@@ -6,7 +6,7 @@
 \alias{hashes<-}
 \alias{tokens}
 \alias{tokens<-}
-\title{Accessors for TextReuseTextDocument objects}
+\title{Accessors for TextReuse objects}
 \usage{
 tokens(x)
 
@@ -26,6 +26,7 @@ Either a vector or a named list of vectors.
 }
 \description{
 Accessor functions to read and write components of
-\code{\link{TextReuseTextDocument}} objects.
+\code{\link{TextReuseTextDocument}} and \code{\link{TextReuseCorpus}}
+objects.
 }
 
