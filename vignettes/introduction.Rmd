@@ -11,7 +11,7 @@ vignette: >
 
 The textreuse package provides classes and functions to detect document similarity and text reuse in text corpora. This introductory vignette provides details on the `TextReuseTextDocument` and `TextReuseCorpus` classes, as well as functions for tokenizing, hashing, and measuring similarity. See the pairwise or minhash/LSH vignettes for details on solving text similarity problems.
 
-```{r}
+```{r eval=FALSE}
 vignette("introduction", package = "textreuse")
 vignette("pairwise", package = "textreuse")
 vignette("minhash", package = "textreuse")

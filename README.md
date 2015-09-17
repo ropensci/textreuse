@@ -80,7 +80,9 @@ pairwise_candidates(comparisons)
 Pairwise comparisons can be very time-consuming because they grow exponentially with the size of the corpus. (A corpus with 10 documents would require at least 45 comparisons; a corpus with 100 documents would require 4,950 comparisons; a corpus with 1,000 documents would require 499,500 comparisons.) That's why this package implements the minhash and locality sensitive hashing algorithms, which can detect candidate pairs much faster than pairwise comparisons in corpora of any significant size. For details, see the package vignettes.
 
 ``` r
-vignette(package = "textreuse")
+vignette("introduction", package = "textreuse")
+vignette("pairwise", package = "textreuse")
+vignette("minhash", package = "textreuse")
 ```
 
 ### Citation
