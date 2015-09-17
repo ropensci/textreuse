@@ -4,7 +4,7 @@
 \alias{lsh_compare}
 \title{Compare candidates identified by LSH}
 \usage{
-lsh_compare(candidates, corpus, f)
+lsh_compare(candidates, corpus, f, progress = interactive())
 }
 \arguments{
 \item{candidates}{A data frame returned by \code{\link{lsh_candidates}}.}
@@ -12,6 +12,8 @@ lsh_compare(candidates, corpus, f)
 \item{corpus}{The same \code{\link{TextReuseCorpus}} corpus which was used to generate the candidates.}
 
 \item{f}{A comparison function such as \code{\link{jaccard_similarity}}.}
+
+\item{progress}{Display a progress bar while comparing documents.}
 }
 \value{
 A data frame with values calculated for \code{score}.

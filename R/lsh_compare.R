@@ -13,6 +13,7 @@
 #' @param candidates A data frame returned by \code{\link{lsh_candidates}}.
 #' @param corpus The same \code{\link{TextReuseCorpus}} corpus which was used to generate the candidates.
 #' @param f A comparison function such as \code{\link{jaccard_similarity}}.
+#' @param progress Display a progress bar while comparing documents.
 #' @return A data frame with values calculated for \code{score}.
 #' @examples
 #' dir <- system.file("extdata", package = "textreuse")
@@ -25,19 +26,29 @@
 #' corpus <- tokenize(corpus, tokenize_ngrams, n = 5)
 #' lsh_compare(candidates, corpus, jaccard_similarity)
 #' @export
-lsh_compare <- function(candidates, corpus, f) {
+lsh_compare <- function(candidates, corpus, f, progress = interactive()) {
   assert_that(is.data.frame(candidates),
               all(names(df) == c("a", "b", "score")),
               is.function(f),
               is.TextReuseCorpus(corpus))
 
-  for (i in seq_len(nrow(candidates))) {
+  num_rows <- nrow(candidates)
+  if (progress) {
+    message("Making ", prettyNum(num_rows, big.mark = ","),
+            " comparisons.")
+    pb <- txtProgressBar(min = 0, max = num_rows, style = 3)
+  }
+
+  for (i in seq_len(num_rows)) {
     if (!is.na(candidates[i, "score"])) next()
     a <- candidates[i, "a"]
     b <- candidates[i, "b"]
     score <- f(corpus[[a]], corpus[[b]])
     candidates[i, "score"] <- score
+    if (progress) setTxtProgressBar(pb, i)
   }
+
+  if (progress) close(pb)
 
   candidates
 }
