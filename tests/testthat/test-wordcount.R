@@ -1,6 +1,6 @@
 context("Word counts")
 
-dir <- system.file("extdata", package = "textreuse")
+dir <- system.file("extdata/legal", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir)
 
 test_that("counts words correctly for different classes", {

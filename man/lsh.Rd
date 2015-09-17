@@ -63,7 +63,7 @@ Locality sensitive hashing is a technique for detecting document
  documents.
 }
 \examples{
-dir <- system.file("extdata", package = "textreuse")
+dir <- system.file("extdata/legal", package = "textreuse")
 set.seed(253)
 minhash <- minhash_generator(200)
 corpus <- TextReuseCorpus(dir = dir,

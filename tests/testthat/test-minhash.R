@@ -1,7 +1,7 @@
 context("Minhash")
 
 mhash <- minhash_generator()
-file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
+file <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")
 doc <- TextReuseTextDocument(file = file, hash_func = mhash, keep_tokens = TRUE)
 
 test_that("random integers can be generated", {

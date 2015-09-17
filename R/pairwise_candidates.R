@@ -11,7 +11,7 @@
 #'   passed to the comparison function. Column \code{score} is the score
 #'   returned by the comparison function.
 #' @examples
-#' dir <- system.file("extdata", package = "textreuse")
+#' dir <- system.file("extdata/legal", package = "textreuse")
 #' corpus <- TextReuseCorpus(dir = dir)
 #'
 #' m1 <- pairwise_compare(corpus, ratio_of_matches, directional = TRUE)

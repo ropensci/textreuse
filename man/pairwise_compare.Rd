@@ -40,7 +40,7 @@ function to every pairing of documents, and returns a matrix with the
 comparison scores.
 }
 \examples{
-dir <- system.file("extdata", package = "textreuse")
+dir <- system.file("extdata/legal", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir)
 names(corpus) <- filenames(names(corpus))
 

@@ -48,7 +48,7 @@ In this example we will load a tiny corpus of three documents. These documents a
 
 ```{r}
 library(textreuse)
-dir <- system.file("extdata", package = "textreuse")
+dir <- system.file("extdata/legal", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir, meta = list(title = "Civil procedure"),
                           tokenizer = tokenize_ngrams, n = 7)
 ```

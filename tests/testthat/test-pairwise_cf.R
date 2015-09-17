@@ -1,6 +1,6 @@
 context("Pairwise comparison")
 
-dir <- system.file("extdata", package = "textreuse")
+dir <- system.file("extdata/legal", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir)
 cf1 <- pairwise_compare(corpus, jaccard_similarity)
 cf2 <- pairwise_compare(corpus, ratio_of_matches, directional = TRUE)

@@ -1,6 +1,6 @@
 context("LSH")
 
-dir <- system.file("extdata", package = "textreuse")
+dir <- system.file("extdata/legal", package = "textreuse")
 set.seed(4235)
 minhash <- minhash_generator(200)
 corpus <- TextReuseCorpus(dir = dir,

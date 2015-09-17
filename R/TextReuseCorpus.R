@@ -23,7 +23,7 @@
 #' @param keep_text Should the text be saved in the documents that are returned or
 #'   discarded?
 #' @examples
-#' dir <- system.file("extdata", package = "textreuse")
+#' dir <- system.file("extdata/legal", package = "textreuse")
 #' corpus <- TextReuseCorpus(dir = dir, meta = list("description" = "Field Codes"))
 #' # Subset by position or file name
 #' corpus[[1]]

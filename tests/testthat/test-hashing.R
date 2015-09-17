@@ -1,6 +1,6 @@
 context("Hashing")
 
-lines  <- system.file("extdata/ny1850-match.txt", package = "textreuse") %>%
+lines  <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse") %>%
   readLines()
 ngrams <- lines %>%
   str_c(collapse = " ") %>%

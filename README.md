@@ -29,7 +29,7 @@ In this example we will load a tiny corpus of three documents. These documents a
 
 ``` r
 library(textreuse)
-dir <- system.file("extdata", package = "textreuse")
+dir <- system.file("extdata/legal", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir, meta = list(title = "Civil procedure"),
                           tokenizer = tokenize_ngrams, n = 7)
 ```
@@ -45,7 +45,7 @@ corpus
 #> tokenizer : tokenize_ngrams
 corpus[["ca1851-match"]]
 #> TextReuseTextDocument
-#> file : /Users/lmullen/Library/R/3.2/library/textreuse/extdata/ca1851-match.txt 
+#> file : /Users/lmullen/Library/R/3.2/library/textreuse/extdata/legal/ca1851-match.txt 
 #> hash_func : hash_string 
 #> id : ca1851-match 
 #> tokenizer : tokenize_ngrams 

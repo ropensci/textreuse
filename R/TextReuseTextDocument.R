@@ -36,7 +36,7 @@
 #'   metadata, including the filename (if any) in \code{file}.} }
 #'
 #' @examples
-#' file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
+#' file <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")
 #' doc  <- TextReuseTextDocument(file = file, meta = list(id = "ny1850"))
 #' print(doc)
 #' meta(doc)

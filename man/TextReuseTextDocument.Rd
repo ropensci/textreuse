@@ -63,7 +63,7 @@ This constructor function follows a three-step process. It reads in
   objects, which can result in significant memory savings for large corpora.
 }
 \examples{
-file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
+file <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")
 doc  <- TextReuseTextDocument(file = file, meta = list(id = "ny1850"))
 print(doc)
 meta(doc)

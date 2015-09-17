@@ -51,9 +51,9 @@
 #' ratio_of_matches(a, b)
 #' ratio_of_matches(b, a)
 #'
-#' ny         <- system.file("extdata/ny1850-match.txt", package = "textreuse")
-#' ca_match   <- system.file("extdata/ca1851-match.txt", package = "textreuse")
-#' ca_nomatch <- system.file("extdata/ca1851-nomatch.txt", package = "textreuse")
+#' ny         <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")
+#' ca_match   <- system.file("extdata/legal/ca1851-match.txt", package = "textreuse")
+#' ca_nomatch <- system.file("extdata/legal/ca1851-nomatch.txt", package = "textreuse")
 #'
 #' ny         <- TextReuseTextDocument(file = ny,
 #'                                     meta = list(id = "ny"))

@@ -33,7 +33,7 @@ set.seed(253)
 minhash <- minhash_generator(10)
 
 # Example with a TextReuseTextDocument
-file <- system.file("extdata/ny1850-match.txt", package = "textreuse")
+file <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")
 doc <- TextReuseTextDocument(file = file, hash_func = minhash,
                              keep_tokens = TRUE)
 hashes(doc)

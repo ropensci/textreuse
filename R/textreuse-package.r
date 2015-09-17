@@ -4,7 +4,7 @@
 #'
 #' The sample data provided in the files \code{ca1851-match.txt},
 #' \code{ca1851-nomatch.txt}, \code{ny1850-match.txt}, all of which are in the
-#' \code{extdata/} directory, are taken from the following nineteenth-century
+#' \code{extdata/legal} directory, are taken from the following nineteenth-century
 #' codes of civil procedure from California and New York.
 #'
 #' \emph{Final Report of the Commissioners on Practice and Pleadings}, in 2

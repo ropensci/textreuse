@@ -29,7 +29,7 @@
 #'   \code{\link{jaccard_similarity}}, \code{\link{ratio_of_matches}}.
 #'
 #' @examples
-#' dir <- system.file("extdata", package = "textreuse")
+#' dir <- system.file("extdata/legal", package = "textreuse")
 #' corpus <- TextReuseCorpus(dir = dir)
 #' names(corpus) <- filenames(names(corpus))
 #'

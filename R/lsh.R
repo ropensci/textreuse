@@ -56,7 +56,7 @@
 #'@seealso \code{\link{minhash_generator}}, \code{\link{lsh_candidates}},
 #'  \code{\link{lsh_probability}}, \code{\link{lsh_threshold}}
 #' @examples
-#' dir <- system.file("extdata", package = "textreuse")
+#' dir <- system.file("extdata/legal", package = "textreuse")
 #' set.seed(253)
 #' minhash <- minhash_generator(200)
 #' corpus <- TextReuseCorpus(dir = dir,

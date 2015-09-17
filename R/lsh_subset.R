@@ -5,7 +5,7 @@
 #' @return A character vector of document IDs from the candidate pairs, to be
 #'   used to subset the \code{\link{TextReuseCorpus}}.
 #' @examples
-#' dir <- system.file("extdata", package = "textreuse")
+#' dir <- system.file("extdata/legal", package = "textreuse")
 #' minhash <- minhash_generator(200, seed = 234)
 #' corpus <- TextReuseCorpus(dir = dir,
 #'                           tokenizer = tokenize_ngrams, n = 5,

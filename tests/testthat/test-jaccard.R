@@ -17,8 +17,8 @@ test_that("calculates the dissimilarity coefficient correctly", {
 })
 
 test_that("works with TextReuseTextDocument", {
-  ny <- system.file("extdata/ny1850-match.txt", package = "textreuse")
-  ca <- system.file("extdata/ca1851-match.txt", package = "textreuse")
+  ny <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")
+  ca <- system.file("extdata/legal/ca1851-match.txt", package = "textreuse")
   ny <- TextReuseTextDocument(file = ny)
   ca <- TextReuseTextDocument(file = ca)
   expect_is(jaccard_similarity(ny, ca), "numeric")

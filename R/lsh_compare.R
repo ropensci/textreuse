@@ -16,7 +16,7 @@
 #' @param progress Display a progress bar while comparing documents.
 #' @return A data frame with values calculated for \code{score}.
 #' @examples
-#' dir <- system.file("extdata", package = "textreuse")
+#' dir <- system.file("extdata/legal", package = "textreuse")
 #' minhash <- minhash_generator(200, seed = 234)
 #' corpus <- TextReuseCorpus(dir = dir,
 #'                           tokenizer = tokenize_ngrams, n = 5,

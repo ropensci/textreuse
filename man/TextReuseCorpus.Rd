@@ -47,7 +47,7 @@ paths to text files using the \code{paths =} parameter, or a directory
 containing text files using the \code{dir =} parameter.
 }
 \examples{
-dir <- system.file("extdata", package = "textreuse")
+dir <- system.file("extdata/legal", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir, meta = list("description" = "Field Codes"))
 # Subset by position or file name
 corpus[[1]]
