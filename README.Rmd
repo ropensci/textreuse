@@ -39,7 +39,7 @@ This package is not yet on CRAN. To install it from GitHub, use [devtools](https
 
 ```{r eval=FALSE}
 # install.packages("devtools")
-devtools::install_github("lmullen/textreuse")
+devtools::install_github("lmullen/textreuse", build_vignettes = TRUE)
 ```
 
 ### Example

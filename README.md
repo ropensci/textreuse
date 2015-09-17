@@ -20,7 +20,7 @@ This package is not yet on CRAN. To install it from GitHub, use [devtools](https
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("lmullen/textreuse")
+devtools::install_github("lmullen/textreuse", build_vignettes = TRUE)
 ```
 
 ### Example
@@ -49,7 +49,11 @@ corpus[["ca1851-match"]]
 #> hash_func : hash_string 
 #> id : ca1851-match 
 #> tokenizer : tokenize_ngrams 
-#> content : § 4. Every action shall be prosecuted in the name of the real party in interest, except as otherwise provided in this Act.  § 5. In the case of an assignment of a thing in action, the action by the as
+#> content : § 4. Every action shall be prosecuted in the name of the real party
+#> in interest, except as otherwise provided in this Act.
+#> 
+#> § 5. In the case of an assignment of a thing in action, the action by
+#> the as
 ```
 
 Now we can compare each of the documents to one another. The result is a matrix of scores. As we would expect, some documents are similar and others are not.
