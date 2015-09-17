@@ -1,0 +1,124 @@
+---
+title: "Introduction to the textreuse package"
+author: "Lincoln Mullen"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to the textreuse packages}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The textreuse package provides classes and functions to detect document similarity and text reuse in text corpora. This introductory vignette provides details on the `TextReuseTextDocument` and `TextReuseCorpus` classes, as well as functions for tokenizing, hashing, and measuring similarity. See the pairwise or minhash/LSH vignettes for details on solving text similarity problems.
+
+```{r}
+vignette("introduction", package = "textreuse")
+vignette("pairwise", package = "textreuse")
+vignette("minhash", package = "textreuse")
+```
+
+For these vignette we will use a small corpus of ten documents published by the [American Tract Society](https://en.wikipedia.org/wiki/American_Tract_Society) and available from the Internet Archive. The [full corpus](http://lincolnmullen.com/blog/corpus-of-american-tract-society-publications/) is also available to be downloaded if you wish to test the package.
+
+## TextReuse classes
+
+### TextReuseTextDocument
+
+The most basic class provided by this package is the `TextReuseTextDocument` class. This class contains the text of a document and its metadata. When the document is loaded, the text is also tokenized. (See the section on tokenizers below.) Those tokens are then hashed using a hash function. By default the hashes are retained and the tokens are discarded, since using only hashes results in a significant memory savings.
+
+Here we load a file into a `TextReuseTextDocument` and tokenize it into shingled n-grams, adding an option to retain the tokens.
+
+```{r}
+library(textreuse)
+file <- system.file("extdata/ats/doddridgephilip00doddrich.txt", 
+                    package = "textreuse")
+doc <- TextReuseTextDocument(file = file, meta = list("publisher" = "ATS"),
+                             tokenizer = tokenize_ngrams, n = 5,
+                             keep_tokens = TRUE)
+doc
+```
+
+We can see details of the document with accessor functions. These are derived from the S3 virtual class `TextDocument ` in the [NLP](https://cran.r-project.org/package=NLP) package. Notice that an ID has been assigned to the document based on the filename (without the extension). The name of the tokenizer and hash functions are also saved in the metadata.
+
+```{r}
+meta(doc)
+meta(doc, "id")
+meta(doc, "author") <- "Philip Doddridge"
+head(tokens(doc))
+head(hashes(doc))
+wordcount(doc)
+```
+
+In addition the `content()` function provides the unprocessed text of the document.
+
+### TextReuseCorpus
+
+The class `TextReuseCorpus` provides a list of `TextReuseTextDocuments`. It derives from the S3 virtual class `Corpus` in the [tm](https://cran.r-project.org/package=tm) package. It can be created from a directory of files (or by providing a vector of paths to files).
+
+```{r}
+dir <- system.file("extdata/ats", package = "textreuse")
+corpus <- TextReuseCorpus(dir = dir, tokenizer = tokenize_ngrams, n = 5)
+corpus
+```
+
+The names of the items in a `TextReuseCorpus` are the IDs of the documents. You can use these IDs to subset the corpus or to retrieve specific documents.
+
+```{r}
+names(corpus)
+corpus[["doddridgephilip00doddrich"]]
+corpus[c("calltounconv00baxt", "lifeofrevrichard00baxt")]
+```
+
+Accessor functions such as `meta()`, `tokens()`, `hashes()`, and `wordcount()` have methods that work on corpora.
+
+```{r}
+wordcount(corpus)
+```
+
+## Tokenizers
+
+One of the steps that is performed when loading a `TextReuseTextDocument`, either individual or in a corpus, is tokenization. Tokenization breaks up a text into pieces, often overlapping. These pieces are the features which are compared when measuring document similarity.
+
+The textreuse package provides a number of tokenizers.
+
+```{r}
+text <- "How many roads must a man walk down\nBefore you'll call him a man?"
+
+tokenize_words(text)
+tokenize_sentences(text)
+tokenize_ngrams(text, n = 3)
+tokenize_skip_ngrams(text, n = 3, k = 2)
+```
+
+You can write your own tokenizers or use tokenizers from other packages. The should accept a character vector as their first argument.
+
+## Hash functions
+
+This package provides one function to hash tokens to integers, `hash_string()`. 
+```{r}
+hash_string(tokenize_words(text))
+```
+
+You can write your own hash functions, or use those provided by the [digest](https://cran.r-project.org/package=digest) package.
+
+## Comparison functions
+
+This package provides a number of comparison functions for measuring similarity. These functions take either a set (in which each token is counted one time) or a bag (in which each token is counted as many times as it appears) and compares it to another set or bag.
+
+```{r}
+a <- tokenize_words(paste("How does it feel, how does it feel?",
+                          "To be without a home",
+                          "Like a complete unknown, like a rolling stone"))
+b <- tokenize_words(paste("How does it feel, how does it feel?",
+                          "To be on your own, with no direction home",
+                          "A complete unknown, like a rolling stone"))
+
+jaccard_similarity(a, b)
+jaccard_dissimilarity(a, b)
+jaccard_bag_similarity(a, b)
+ratio_of_matches(a, b)
+```
+
+See the documentation for `?similarity-functions` for details on what is measured with these functions.
+
+You can write your own similarity functions, which should accept two sets or bags, `a` and `b`, should work on both character and numeric vectors, since they are used with either tokens or hashes of tokens, and should return a single numeric score for the comparison.
+
