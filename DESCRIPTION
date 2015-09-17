@@ -2,12 +2,13 @@ Package: textreuse
 Type: Package
 Title: Detect Text Reuse and Document Similarity
 Version: 0.0.1.9000
+Date: 2015-09-16
 Authors@R: c(person("Lincoln", "Mullen", role = c("aut", "cre"),
     email = "lincoln@lincolnmullen.com"))
 Description: Tools for measuring similarity among documents and detecting
-    passages which have been reused. Implements similarity/dissimilarity
-    functions, pairwise comparison, and minhash and locality sensitive hashing
-    algorithms.
+    passages which have been reused. Implements shingled n-gram, skip n-gram,
+    and other tokenizers; similarity/dissimilarity functions; pairwise
+    comparisons; and minhash and locality sensitive hashing algorithms.
 License: MIT + file LICENSE
 LazyData: TRUE
 URL: https://github.com/lmullen/textreuse
