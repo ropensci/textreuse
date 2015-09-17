@@ -6,10 +6,10 @@
 #' @return A list containing character vectors with the IDs of potential matches.
 #' @examples
 #' dir <- system.file("extdata", package = "textreuse")
-#' minhash2 <- minhash_generator(200, seed = 234)
+#' minhash <- minhash_generator(200, seed = 234)
 #' corpus <- TextReuseCorpus(dir = dir,
 #'                           tokenizer = tokenize_ngrams, n = 5,
-#'                           hash_func = minhash2)
+#'                           hash_func = minhash)
 #' buckets <- lsh(corpus, bands = 50)
 #' lsh_candidates(buckets)
 #' @export
