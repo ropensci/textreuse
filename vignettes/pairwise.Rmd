@@ -22,8 +22,8 @@ corpus <- TextReuseCorpus(dir = dir, tokenizer = tokenize_ngrams, n = 5)
 We can use any of the comparison functions to compare two documents in the corpus. (Note that these functions, when applied to documents, compare their hashed tokens and not the tokens directly.)
 
 ```{r}
-jaccard_similarity(corpus[["doddridgephilip00doddrich"]], 
-                   corpus[["memoiroflifecha00dodd"]])
+jaccard_similarity(corpus[["remember00palm"]], 
+                   corpus[["remembermeorholy00palm"]])
 ```
 
 The `pairwise_compare()` function applies a comparison function to each pair of documents in a corpus. The result is a matrix with the scores for each comparison.
@@ -35,7 +35,7 @@ comparisons[1:4, 1:4]
 
 ```{r, echo=FALSE}
 comparisons <- pairwise_compare(corpus, jaccard_similarity)
-round(comparisons[1:4, 1:4], digits = 3)
+round(comparisons[1:3, 1:3], digits = 3)
 ```
 
 If you prefer, you can convert the matrix of all comparisons to a data frame of pairs and scores. Here we create the data frame and keep only the pairs with scores above a significant value.

@@ -17,7 +17,7 @@ vignette("pairwise", package = "textreuse")
 vignette("minhash", package = "textreuse")
 ```
 
-For these vignette we will use a small corpus of ten documents published by the [American Tract Society](https://en.wikipedia.org/wiki/American_Tract_Society) and available from the Internet Archive. The [full corpus](http://lincolnmullen.com/blog/corpus-of-american-tract-society-publications/) is also available to be downloaded if you wish to test the package.
+For these vignette we will use a small corpus of eight documents published by the [American Tract Society](https://en.wikipedia.org/wiki/American_Tract_Society) and available from the Internet Archive. The [full corpus](http://lincolnmullen.com/blog/corpus-of-american-tract-society-publications/) is also available to be downloaded if you wish to test the package.
 
 ## TextReuse classes
 
@@ -29,7 +29,7 @@ Here we load a file into a `TextReuseTextDocument` and tokenize it into shingled
 
 ```{r}
 library(textreuse)
-file <- system.file("extdata/ats/doddridgephilip00doddrich.txt", 
+file <- system.file("extdata/ats/remember00palm.txt", 
                     package = "textreuse")
 doc <- TextReuseTextDocument(file = file, meta = list("publisher" = "ATS"),
                              tokenizer = tokenize_ngrams, n = 5,
@@ -42,7 +42,7 @@ We can see details of the document with accessor functions. These are derived fr
 ```{r}
 meta(doc)
 meta(doc, "id")
-meta(doc, "author") <- "Philip Doddridge"
+meta(doc, "date") <- 1865
 head(tokens(doc))
 head(hashes(doc))
 wordcount(doc)
@@ -64,7 +64,7 @@ The names of the items in a `TextReuseCorpus` are the IDs of the documents. You 
 
 ```{r}
 names(corpus)
-corpus[["doddridgephilip00doddrich"]]
+corpus[["remember00palm"]]
 corpus[c("calltounconv00baxt", "lifeofrevrichard00baxt")]
 ```
 

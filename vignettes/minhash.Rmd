@@ -16,7 +16,7 @@ We begin by creating a minhash function. A minhash function converts tokenized t
 ```{r}
 library(textreuse)
 minhash <- minhash_generator(n = 240, seed = 3552)
-head(minhash(c("turn some tokens", "some tokens to", "tokens to hashes")))
+head(minhash(c("turn tokens into", "tokens into hashes", "into hashes fast")))
 ```
 
 Now when we load our corpus, we will tokenize our texts as usual, but we will use our generated `minhash()` function to generate the hashes.
@@ -70,7 +70,7 @@ corpus_subset <- corpus[subset]
 corpus_subset <- tokenize(corpus_subset, tokenizer = tokenize_ngrams, n = 5)
 ```
 
-Now we can use `lsh_compare()` to apply a similarity function to the candidate pairs of documents. Note that we only have to do 4 comparisons for all the candidates, instead of 45 when comparing all of the documents in the corpus pairwise.
+Now we can use `lsh_compare()` to apply a similarity function to the candidate pairs of documents. Note that we only have to do 3 comparisons for all the candidates, instead of 28 pairs when comparing all 8 documents in the corpus pairwise.
 
 ```{r}
 lsh_compare(candidates, corpus_subset, jaccard_similarity)
