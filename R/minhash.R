@@ -16,7 +16,7 @@
 #'   applications.
 #' @return A function which will take a character vector and return \code{n}
 #'   minhashes.
-#' @references Jure Leskovec, Anand Rajaraman, Jeff Ullman,
+#' @references Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
 #'   \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
 #'   (Cambridge University Press, 2011), ch. 3. See also Matthew Casperson,
 #'   "\href{http://matthewcasperson.blogspot.com/2013/11/minhash-for-dummies.html}{Minhash

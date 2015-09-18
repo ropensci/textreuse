@@ -91,7 +91,7 @@ jaccard_similarity(ny, ca_nomatch)
 ratio_of_matches(ny, ca_nomatch)
 }
 \references{
-Jure Leskovec, Anand Rajaraman, Jeff Ullman,
+Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
   \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
   (Cambridge University Press, 2011).
 }

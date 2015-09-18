@@ -51,7 +51,7 @@ lsh_probability(h = 200, b = 40, s = .50)
 lsh_probability(h = 200, b = 40, s = .75)
 }
 \references{
-Jure Leskovec, Anand Rajaraman, Jeff Ullman,
+Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
  \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
  (Cambridge University Press, 2011), ch. 3.
 }

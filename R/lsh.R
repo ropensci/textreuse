@@ -48,7 +48,7 @@
 #'@return A \code{\link[hash]{hash}} object where the keys are hashed from the
 #'  bands in locality sensitve hashing and the values are sets of potential
 #'  matches.
-#'@references Jure Leskovec, Anand Rajaraman, Jeff Ullman,
+#'@references Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
 #'  \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
 #'  (Cambridge University Press, 2011), ch. 3. See also Matthew Casperson,
 #'  "\href{http://matthewcasperson.blogspot.com/2013/11/minhash-for-dummies.html}{Minhash

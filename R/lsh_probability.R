@@ -26,7 +26,7 @@
 #'
 #' \deqn{t = \frac{1}{b}^{\frac{1}{r}}}
 #'
-#' @references Jure Leskovec, Anand Rajaraman, Jeff Ullman,
+#' @references Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
 #'  \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
 #'  (Cambridge University Press, 2011), ch. 3.
 #' @examples
