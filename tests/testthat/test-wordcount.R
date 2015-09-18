@@ -12,9 +12,11 @@ test_that("counts words correctly for different classes", {
 
 test_that("counts words for a corpus", {
   skip_on_appveyor()
-  wc <- wordcount(corpus)
-  expect_true(!is.null(names(wc)))
-  wc <- unname(wc)
-  expect_equal(wc, c(729, 217, 790))
+  if (.Platform$OS.type == "unix") {
+    wc <- wordcount(corpus)
+    expect_true(!is.null(names(wc)))
+    wc <- unname(wc)
+    expect_equal(wc, c(729, 217, 790))
+  }
 })
 
