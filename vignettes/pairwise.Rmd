@@ -1,0 +1,53 @@
+---
+title: "Pairwise comparisons for document similarity"
+author: "Lincoln Mullen"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Pairwise comparisons for document similarity}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The most straightforward way to compare documents within a corpus is to compare each document to every other document. 
+
+First we will load the corpus and tokenize it with shingled n-grams.
+
+```{r}
+library(textreuse)
+dir <- system.file("extdata/ats", package = "textreuse")
+corpus <- TextReuseCorpus(dir = dir, tokenizer = tokenize_ngrams, n = 5)
+```
+
+We can use any of the comparison functions to compare two documents in the corpus. (Note that these functions, when applied to documents, compare their hashed tokens and not the tokens directly.)
+
+```{r}
+jaccard_similarity(corpus[["doddridgephilip00doddrich"]], 
+                   corpus[["memoiroflifecha00dodd"]])
+```
+
+The `pairwise_compare()` function applies a comparison function to each pair of documents in a corpus. The result is a matrix with the scores for each comparison.
+
+```{r eval=FALSE}
+comparisons <- pairwise_compare(corpus, jaccard_similarity)
+comparisons[1:4, 1:4]
+```
+
+```{r, echo=FALSE}
+comparisons <- pairwise_compare(corpus, jaccard_similarity)
+round(comparisons[1:4, 1:4], digits = 3)
+```
+
+If you prefer, you can convert the matrix of all comparisons to a data frame of pairs and scores. Here we create the data frame and keep only the pairs with scores above a significant value.
+
+```{r}
+candidates <- pairwise_candidates(comparisons)
+candidates[candidates$score > 0.1, ]
+```
+
+The pairwise comparison method is inadequate for a corpus of any size, however. For a corpus of size $n$, the number of comparisons (assuming the comparisons are commutative) is $\frac{n^2 - n}{2}$. A corpus of 100 documents would require 4,950 comparisons; a corpus of 1,000 documents would require 499,500 comparisons. A better approach for corpora of any appreciable size is to use the minhash/LSH algorithms described in another vignette: 
+
+```{r eval=FALSE}
+vignette("minhash", package = "textreuse")
+```
+

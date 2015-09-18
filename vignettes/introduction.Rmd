@@ -120,5 +120,5 @@ ratio_of_matches(a, b)
 
 See the documentation for `?similarity-functions` for details on what is measured with these functions.
 
-You can write your own similarity functions, which should accept two sets or bags, `a` and `b`, should work on both character and numeric vectors, since they are used with either tokens or hashes of tokens, and should return a single numeric score for the comparison.
+You can write your own similarity functions, which should accept two sets or bags, `a` and `b`, should work on both character and numeric vectors, since they are used with either tokens or hashes of tokens, and should return a single numeric score for the comparison. You will need to implement a method for the `TextReuseTextDocument` class.
 
