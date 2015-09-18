@@ -50,4 +50,3 @@ The pairwise comparison method is inadequate for a corpus of any size, however. 
 ```{r eval=FALSE}
 vignette("minhash", package = "textreuse")
 ```
-

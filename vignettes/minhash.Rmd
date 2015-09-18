@@ -1,0 +1,79 @@
+---
+title: "Minhash and locality-sensitive hashing"
+author: "Lincoln Mullen"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Minhash and locality-sensitive hashing}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Performing pairwise comparisons in a corpus is time-consuming because the number of comparisons grows exponentially with the size of the corpus. Most of those comparisons, furthermore, are unnecessary because they do not result in matches. The combination of minhash and locality-sensitive hashing (LSH) seeks to solve these problems. They make it possible to compute possible matches only once for each document, so that the cost of computation grows linearly rather than exponentially. This vignette explains how to use the minhash and locality-sensitive hashing functions in this package. For an explanation of why they work, see Jure Leskovec, Anand Rajaraman, and Jeff Ullman, *[Mining of Massive Datasets](http://www.mmds.org/#book)* (Cambridge University Press, 2011), ch. 3. (This [blog post](http://matthewcasperson.blogspot.com/2013/11/minhash-for-dummies.html) is a more succinct explanation.)
+
+We begin by creating a minhash function. A minhash function converts tokenized text into a set of hash integers, then selects the minimum value. This is the equivalent of randomly selecting a token. The function then does the same thing repeatedly with different hashing functions, in effect selecting `n` random shingles. The additional hashing functions come from a bitwise XOR with random integers. That is why the `minhash_generator()` accepts a seed, so that we can re-create the same minhash function again. In other words, a minhash function converts a set of tokens of any length into `n` randomly selected and hashed tokens.
+
+```{r}
+library(textreuse)
+minhash <- minhash_generator(n = 240, seed = 3552)
+head(minhash(c("turn some tokens", "some tokens to", "tokens to hashes")))
+```
+
+Now when we load our corpus, we will tokenize our texts as usual, but we will use our generated `minhash()` function to generate the hashes.
+
+```{r}
+dir <- system.file("extdata/ats", package = "textreuse")
+corpus <- TextReuseCorpus(dir = dir, tokenizer = tokenize_ngrams, n = 5,
+                          hash_func = minhash)
+```
+
+Now all our documents are represented by `n = 200` randomly selected and hashed shingles. Comparing those shingles should be the equivalent of finding the Jaccard similarity of the two documents. However, we still have the problem of pairwise comparison.
+
+The locality-sensitive hashing algorithm, provided in this package by the `lsh()` function, solves this problem. LSH breaks the minhashes into a series of bands comprised of rows. For example, 200 minhashes might broken into 50 bands of 4 rows each. Each band is hashed to a bucket. If two documents have the exact same minhashes in a band, they will be hashed to the same bucket, and so will be considered candidate pairs. Each pair of documents has as many chances to be considered a candidate as their are bands, and the fewer rows there are in each band, the more likely it is that each document will match another.
+
+How likely is it, then, that we will detect a match? The probability of a match depends on the Jaccard similarity of a pair of documents. The more similar two documents are, the more likely they are to be considered candidates, which is what we want. The probability of a match is an S-curve (see Leskovec, Rajaraman, and Ullman), so there is a threshold Jaccard similarity above which documents are likely to be a match. We can calculate the likely threshold based on the number of minhashes and bands that we are using.
+
+```{r}
+lsh_threshold(h = 200, b = 50)
+lsh_threshold(h = 240, b = 80)
+```
+
+Using 240 minhashes and 80 bands, we will likely detect documents with an actual Jaccard similarity of above 0.232. We can also estimate the probability that a pair of documents with a Jaccard similarity `s` will be marked as potential matches.
+
+```{r}
+lsh_probability(h = 240, b = 80, s = 0.25)
+lsh_probability(h = 240, b =  80, s = 0.75)
+```
+
+These numbers seem reasonable for our purposes, so we will set the number of minhashes at 240 and the number of bands at 80.
+
+Now we can use the `lsh()` function to calculate the locality-sensitive hashes into a cache. Note that we are creating the cache for the first time. But if we pass an existing cache and (this is important) use the same minhash function and the same number of bands, we can pass an existing cache to the `lsh()` function with the `buckets = ` parameter. That way, we can continue to add new documents without having to recalculate the LSH signatures for the whole corpus. For a 640 document, 60 million word corpus, calculating the cache takes seconds, compared to hours of pairwise comparisons.
+
+```{r}
+buckets <- lsh(corpus, bands = 80)
+```
+
+We can extract the potential matches from the cache using `lsh_candidates()` (an analog of `pairwise_candidates()`).
+
+```{r}
+candidates <- lsh_candidates(buckets)
+candidates
+```
+
+Notice that LSH has identified the same four pairs of documents as potential matches that we found with pairwise comparisons, but did so much faster. But we do not have similarity scores; we only know that these documents are likely to have Jaccard similarity scores above the `r round(lsh_threshold(h = 240, b = 80), 3)` threshold.
+
+We could compute Jaccard similarities using the minhashes, or we could retokenize and hash only the candidate documents. We will do the later, using the `lsh_subset()` function to get just the documents that we want and the `tokenize()` function to retokenize all the documents in the subset corpus.
+
+```{r}
+subset <- lsh_subset(candidates)
+corpus_subset <- corpus[subset]
+corpus_subset <- tokenize(corpus_subset, tokenizer = tokenize_ngrams, n = 5)
+```
+
+Now we can use `lsh_compare()` to apply a similarity function to the candidate pairs of documents. Note that we only have to do 4 comparisons for all the candidates, instead of 45 when comparing all of the documents in the corpus pairwise.
+
+```{r}
+lsh_compare(candidates, corpus_subset, jaccard_similarity)
+```
+
+Note that these results are identical to what we calculated in the pairwise vignette, but required much less computation.
