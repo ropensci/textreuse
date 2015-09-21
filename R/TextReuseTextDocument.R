@@ -56,7 +56,7 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
   if (!is.null(file)) {
     assert_that(missing(text),
                 is.readable(file))
-    text <- as_string(readLines(file), "\n")
+    text <- as_string(readLines(file))
   }
 
   assert_that(is.character(text))
