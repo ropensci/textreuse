@@ -45,6 +45,7 @@
 #'  is passed to the function, it will be added to. Note that it is important
 #'  that you keep the minhash function and the number of bands consistent when
 #'  adding to the cache.
+#'@param progress Display a progress bar while comparing documents.
 #'@return A \code{\link[hash]{hash}} object where the keys are hashed from the
 #'  bands in locality sensitve hashing and the values are sets of potential
 #'  matches.
@@ -66,10 +67,13 @@
 #' buckets <- lsh(corpus, bands = 50)
 #' buckets
 #'@export
-lsh <- function(x, bands = 40, buckets = NULL) UseMethod("lsh", x)
+lsh <- function(x, bands = 40, buckets = NULL, progress = interactive()) {
+  UseMethod("lsh", x)
+}
 
 #' @export
-lsh.TextReuseCorpus <- function(x, bands = 40, buckets = NULL) {
+lsh.TextReuseCorpus <- function(x, bands = 40, buckets = NULL,
+                                progress = interactive()) {
   assert_that(is.count(bands))
   if (is.null(buckets))
     buckets <- hash::hash()
@@ -80,19 +84,29 @@ lsh.TextReuseCorpus <- function(x, bands = 40, buckets = NULL) {
 
   subsets <- band_seq(length(hash_list[[1]]), bands)
 
+  if (progress) {
+    pb_length <- length(hash_list) * length(subsets)
+    message("LSH progress")
+    pb <- txtProgressBar(min = 0, max = pb_length, style = 3)
+  }
+
   lapply(names(hash_list), function(n) {
     lapply(subsets, function(i) {
       key <- digest::digest(hash_list[[n]][i])
       insert_into_hash(key, n, buckets)
+      if (progress) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
     })
   })
+
+  if (progress) close(pb)
 
   buckets
 
 }
 
 #' @export
-lsh.TextReuseTextDocument <- function(x, bands = 40, buckets = NULL) {
+lsh.TextReuseTextDocument <- function(x, bands = 40, buckets = NULL,
+                                      progress = interactive()) {
   assert_that(is.count(bands),
               has_id(meta(x)))
   if (is.null(buckets))
@@ -104,10 +118,19 @@ lsh.TextReuseTextDocument <- function(x, bands = 40, buckets = NULL) {
 
   subsets <- band_seq(length(hash_vec), bands)
 
+  if (progress) {
+    pb_length <- length(subsets)
+    message("LSH progress")
+    pb <- txtProgressBar(min = 0, max = pb_length, style = 3)
+  }
+
   lapply(subsets, function(i) {
     key <- digest::digest(hash_vec[i])
     insert_into_hash(key, meta(x, "id"), buckets)
+    if (progress) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
   })
+
+  if (progress) close(pb)
 
   buckets
 

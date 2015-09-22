@@ -4,7 +4,7 @@
 \alias{lsh}
 \title{Locality sensitive hashing for minhash}
 \usage{
-lsh(x, bands = 40, buckets = NULL)
+lsh(x, bands = 40, buckets = NULL, progress = interactive())
 }
 \arguments{
 \item{x}{A \code{\link{TextReuseCorpus}} or
@@ -19,6 +19,8 @@ matches. If the value is \code{NULL} a new cache will be created. If a cache
 is passed to the function, it will be added to. Note that it is important
 that you keep the minhash function and the number of bands consistent when
 adding to the cache.}
+
+\item{progress}{Display a progress bar while comparing documents.}
 }
 \value{
 A \code{\link[hash]{hash}} object where the keys are hashed from the
