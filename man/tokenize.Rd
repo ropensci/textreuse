@@ -8,7 +8,8 @@ tokenize(x, tokenizer, ..., hash_func = hash_string, keep_tokens = FALSE,
   keep_text = TRUE)
 }
 \arguments{
-\item{x}{A \code{\link{TextReuseTextDocument}} or \code{\link{TextReuseCorpus}}.}
+\item{x}{A \code{\link{TextReuseTextDocument}} or
+\code{\link{TextReuseCorpus}}.}
 
 \item{tokenizer}{A function to split the text into tokens. See
 \code{\link{tokenizers}}.}
@@ -16,7 +17,7 @@ tokenize(x, tokenizer, ..., hash_func = hash_string, keep_tokens = FALSE,
 \item{...}{Arguments passed on to the \code{tokenizer}.}
 
 \item{hash_func}{A function to hash the tokens. See
-\code{\link{hash_string}}.}
+\code{\link{hash_string}}, \code{\link{minhash_generator}}.}
 
 \item{keep_tokens}{Should the tokens be saved in the document that is
 returned or discarded?}
@@ -25,7 +26,8 @@ returned or discarded?}
 discarded?}
 }
 \value{
-The modified \code{\link{TextReuseTextDocument}} or \code{\link{TextReuseCorpus}}.
+The modified \code{\link{TextReuseTextDocument}} or
+  \code{\link{TextReuseCorpus}}.
 }
 \description{
 Given a \code{\link{TextReuseTextDocument}} or a

@@ -55,3 +55,11 @@ test_that("can be retokenized", {
   expect_equal(tokens(a), c("this", "is", "the", "text", "but", "also", "this"))
   expect_equal(tokens(b), c("this is the text", "but also this"))
 })
+
+test_that("can rehash if it has tokens", {
+  tokenless <- TextReuseTextDocument(file = "newman.txt")
+  expect_true(has_tokens(doc))
+  expect_true(!has_tokens(tokenless))
+  expect_is(hashes(rehash(doc, hash_string)), "integer")
+  expect_error(rehash(tokenless), "tokens")
+})

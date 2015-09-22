@@ -3,6 +3,7 @@
 \name{TextReuseTextDocument}
 \alias{TextReuseTextDocument}
 \alias{has_content}
+\alias{has_tokens}
 \alias{is.TextReuseTextDocument}
 \title{TextReuseTextDocument}
 \usage{
@@ -13,6 +14,8 @@ TextReuseTextDocument(text, file = NULL, meta = list(),
 is.TextReuseTextDocument(x)
 
 has_content(x)
+
+has_tokens(x)
 }
 \arguments{
 \item{text}{A character vector containing the text of the document. This

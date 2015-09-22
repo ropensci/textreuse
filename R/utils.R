@@ -25,7 +25,18 @@ has_content <- function(x) {
 }
 
 assertthat::on_failure(has_content) <- function(call, env) {
-  paste0(deparse(call$x), " does not have text in its content field.")
+  paste0("Document does not have text in its content field.")
+}
+
+#' @export
+#' @rdname TextReuseTextDocument
+has_tokens <- function(x) {
+  assert_that(is.TextReuseTextDocument(x))
+  !is.null(x$tokens)
+}
+
+assertthat::on_failure(has_tokens) <- function(call, env) {
+  paste0("Document does not have tokens.")
 }
 
 # Check whether the number of minhashes is evenly divisble by number of bands

@@ -19,12 +19,12 @@ minhash <- minhash_generator(n = 240, seed = 3552)
 head(minhash(c("turn tokens into", "tokens into hashes", "into hashes fast")))
 ```
 
-Now when we load our corpus, we will tokenize our texts as usual, but we will use our generated `minhash()` function to generate the hashes.
+Now when we load our corpus, we will tokenize our texts as usual, but we will use our generated `minhash()` function to compute the hashes.
 
 ```{r}
 dir <- system.file("extdata/ats", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir, tokenizer = tokenize_ngrams, n = 5,
-                          hash_func = minhash)
+                          hash_func = minhash, keep_tokens = TRUE)
 ```
 
 Now all our documents are represented by `n = 200` randomly selected and hashed shingles. Comparing those shingles should be the equivalent of finding the Jaccard similarity of the two documents. However, we still have the problem of pairwise comparison.
@@ -62,12 +62,12 @@ candidates
 
 Notice that LSH has identified the same four pairs of documents as potential matches that we found with pairwise comparisons, but did so much faster. But we do not have similarity scores; we only know that these documents are likely to have Jaccard similarity scores above the `r round(lsh_threshold(h = 240, b = 80), 3)` threshold.
 
-We could compute Jaccard similarities using the minhashes, or we could retokenize and hash only the candidate documents. We will do the later, using the `lsh_subset()` function to get just the documents that we want and the `tokenize()` function to retokenize all the documents in the subset corpus.
+We could compute Jaccard similarities using the minhashes, or we could retokenize and hash only the candidate documents. We will do the later, using the `lsh_subset()` function to get just the documents that we want and the `rehash()` function to compute hashes for all of the tokens in the subset corpus. (If we had not keep the tokens with `keep_tokens = TRUE` above, we would have to retokenize with `tokenize()` instead.)
 
 ```{r}
 subset <- lsh_subset(candidates)
 corpus_subset <- corpus[subset]
-corpus_subset <- tokenize(corpus_subset, tokenizer = tokenize_ngrams, n = 5)
+corpus_subset <- rehash(corpus_subset, hash_string)
 ```
 
 Now we can use `lsh_compare()` to apply a similarity function to the candidate pairs of documents. Note that we only have to do 3 comparisons for all the candidates, instead of 28 pairs when comparing all 8 documents in the corpus pairwise.
