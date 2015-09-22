@@ -2,7 +2,7 @@ Package: textreuse
 Type: Package
 Title: Detect Text Reuse and Document Similarity
 Version: 0.0.1.9002
-Date: 2015-09-17
+Date: 2015-09-22
 Authors@R: c(person("Lincoln", "Mullen", role = c("aut", "cre"),
     email = "lincoln@lincolnmullen.com"))
 Description: Tools for measuring similarity among documents and detecting
