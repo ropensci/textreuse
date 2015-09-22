@@ -10,35 +10,6 @@ pretty_print_metadata <- function(doc) {
   lapply(names(doc$meta), function(x) cat(x, ":", doc$meta[[x]], "\n"))
 }
 
-#' @param x An R object to check.
-#' @export
-#' @rdname TextReuseTextDocument
-is.TextReuseTextDocument <- function(x) {
-  inherits(x, "TextReuseTextDocument")
-}
-
-#' @export
-#' @rdname TextReuseTextDocument
-has_content <- function(x) {
-  assert_that(is.TextReuseTextDocument(x))
-  !is.null(x$content)
-}
-
-assertthat::on_failure(has_content) <- function(call, env) {
-  paste0("Document does not have text in its content field.")
-}
-
-#' @export
-#' @rdname TextReuseTextDocument
-has_tokens <- function(x) {
-  assert_that(is.TextReuseTextDocument(x))
-  !is.null(x$tokens)
-}
-
-assertthat::on_failure(has_tokens) <- function(call, env) {
-  paste0("Document does not have tokens.")
-}
-
 # Check whether the number of minhashes is evenly divisble by number of bands
 check_banding <- function(l, b) {
   l %% b == 0

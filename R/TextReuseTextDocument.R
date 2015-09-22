@@ -241,3 +241,43 @@ hashes.TextReuseCorpus <- function(x) {
   x$hashes <- value
   x
 }
+
+#' @param x An R object to check.
+#' @export
+#' @rdname TextReuseTextDocument
+is.TextReuseTextDocument <- function(x) {
+  inherits(x, "TextReuseTextDocument")
+}
+
+#' @export
+#' @rdname TextReuseTextDocument
+has_content <- function(x) {
+  assert_that(is.TextReuseTextDocument(x))
+  !is.null(x$content)
+}
+
+assertthat::on_failure(has_content) <- function(call, env) {
+  paste0("Document does not have text in its content field.")
+}
+
+#' @export
+#' @rdname TextReuseTextDocument
+has_tokens <- function(x) {
+  assert_that(is.TextReuseTextDocument(x))
+  !is.null(x$tokens)
+}
+
+assertthat::on_failure(has_tokens) <- function(call, env) {
+  "Document does not have tokens."
+}
+
+#' @export
+#' @rdname TextReuseTextDocument
+has_hashes <- function(x) {
+  assert_that(is.TextReuseTextDocument(x))
+  !is.null(x$hashes)
+}
+
+assertthat::on_failure(has_hashes) <- function(call, env) {
+  "Document does not have hashes."
+}
