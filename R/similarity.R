@@ -127,9 +127,7 @@ ratio_of_matches <- function(a, b) UseMethod("ratio_of_matches")
 #' @export
 ratio_of_matches.default <- function(a, b) {
   assert_that(all(class(a) == class(b)))
-  common  <- intersect(a, b)
-  matches <- Filter(function(x) { x %in% common }, b)
-  length(matches) / length(b)
+  sum(b %in% a) / length(b)
 }
 
 #' @export
