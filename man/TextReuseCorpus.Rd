@@ -22,7 +22,8 @@ corpus.}
 \item{progress}{Display a progress bar while loading files.}
 
 \item{tokenizer}{A function to split the text into tokens. See
-\code{\link{tokenizers}}.}
+\code{\link{tokenizers}}. If value is \code{NULL}, then tokenizing and
+hashing will be skipped.}
 
 \item{...}{Arguments passed on to the \code{tokenizer}.}
 
@@ -32,8 +33,8 @@ corpus.}
 \item{keep_tokens}{Should the tokens be saved in the documents that are
 returned or discarded?}
 
-\item{keep_text}{Should the text be saved in the documents that are returned or
-discarded?}
+\item{keep_text}{Should the text be saved in the documents that are returned
+or discarded?}
 
 \item{x}{An R object to check.}
 }

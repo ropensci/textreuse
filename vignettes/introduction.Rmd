@@ -23,7 +23,7 @@ For these vignette we will use a small corpus of eight documents published by th
 
 ### TextReuseTextDocument
 
-The most basic class provided by this package is the `TextReuseTextDocument` class. This class contains the text of a document and its metadata. When the document is loaded, the text is also tokenized. (See the section on tokenizers below.) Those tokens are then hashed using a hash function. By default the hashes are retained and the tokens are discarded, since using only hashes results in a significant memory savings.
+The most basic class provided by this package is the `TextReuseTextDocument` class. This class contains the text of a document and its metadata. When the document is loaded, the text is also tokenized. (See the section on tokenizers below.) Those tokens are then hashed using a hash function. By default the hashes are retained and the tokens are discarded, since using only hashes results in a significant memory savings. 
 
 Here we load a file into a `TextReuseTextDocument` and tokenize it into shingled n-grams, adding an option to retain the tokens.
 
@@ -49,6 +49,8 @@ wordcount(doc)
 ```
 
 In addition the `content()` function provides the unprocessed text of the document.
+
+The assumption is that is that you want to tokenize and hash the tokens from the start. If, however, you wish to do any of those steps yourself, you can load a document with `tokenizer = NULL`, then use `tokenize()` or `rehash()` to recompute the tokens and hashes.
 
 ### TextReuseCorpus
 

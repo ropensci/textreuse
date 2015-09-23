@@ -14,14 +14,15 @@
 #'   corpus.
 #' @param progress Display a progress bar while loading files.
 #' @param tokenizer A function to split the text into tokens. See
-#'   \code{\link{tokenizers}}.
+#'   \code{\link{tokenizers}}. If value is \code{NULL}, then tokenizing and
+#'   hashing will be skipped.
 #' @param ... Arguments passed on to the \code{tokenizer}.
 #' @param hash_func A function to hash the tokens. See
 #'   \code{\link{hash_string}}.
 #' @param keep_tokens Should the tokens be saved in the documents that are
 #'   returned or discarded?
-#' @param keep_text Should the text be saved in the documents that are returned or
-#'   discarded?
+#' @param keep_text Should the text be saved in the documents that are returned
+#'   or discarded?
 #' @examples
 #' dir <- system.file("extdata/legal", package = "textreuse")
 #' corpus <- TextReuseCorpus(dir = dir, meta = list("description" = "Field Codes"))

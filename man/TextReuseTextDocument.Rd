@@ -33,7 +33,8 @@ you must provide an \code{id} field, e.g., \code{meta = list(id =
 be created from the file name.}
 
 \item{tokenizer}{A function to split the text into tokens. See
-\code{\link{tokenizers}}.}
+\code{\link{tokenizers}}. If value is \code{NULL}, then tokenizing and
+hashing will be skipped.}
 
 \item{...}{Arguments passed on to the \code{tokenizer}.}
 

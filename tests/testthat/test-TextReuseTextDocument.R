@@ -63,3 +63,9 @@ test_that("can rehash if it has tokens", {
   expect_is(hashes(rehash(doc, hash_string)), "integer")
   expect_error(rehash(tokenless), "tokens")
 })
+
+test_that("can be created with no tokens", {
+  doc <- TextReuseTextDocument(file = "newman.txt", tokenizer = NULL)
+  expect_false(has_tokens(doc))
+  expect_false(has_hashes(doc))
+})

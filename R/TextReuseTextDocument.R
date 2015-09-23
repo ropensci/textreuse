@@ -12,7 +12,8 @@
 #'   "my_id")}. If the document is created using \code{file}, then the ID will
 #'   be created from the file name.
 #' @param tokenizer A function to split the text into tokens. See
-#'   \code{\link{tokenizers}}.
+#'   \code{\link{tokenizers}}. If value is \code{NULL}, then tokenizing and
+#'   hashing will be skipped.
 #' @param ... Arguments passed on to the \code{tokenizer}.
 #' @param hash_func A function to hash the tokens. See
 #'   \code{\link{hash_string}}.
@@ -62,13 +63,22 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
   assert_that(is.character(text))
   text <- as_string(text)
 
-  assert_that(is.function(tokenizer))
-  tokenizer_name <- as.character(substitute(tokenizer))
-  tokens <- tokenizer(text, ...)
+  if (!is.null(tokenizer)) {
 
-  assert_that(is.function(hash_func))
-  hash_func_name <- as.character(substitute(hash_func))
-  hashes <- hash_func(tokens)
+    assert_that(is.function(tokenizer))
+    tokenizer_name <- as.character(substitute(tokenizer))
+    tokens <- tokenizer(text, ...)
+
+    assert_that(is.function(hash_func))
+    hash_func_name <- as.character(substitute(hash_func))
+    hashes <- hash_func(tokens)
+
+  } else {
+    tokens <- NULL
+    hashes <- NULL
+    tokenizer_name <- NULL
+    hash_func_name <- NULL
+  }
 
   if (!keep_tokens) tokens <- NULL
   if (!keep_text) text <- NULL
