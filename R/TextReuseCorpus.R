@@ -44,10 +44,15 @@ TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
 
   vapply(paths, is.readable, logical(1), USE.NAMES = FALSE)
 
-  assert_that(is.function(tokenizer),
-              is.function(hash_func))
-  tokenizer_name <- as.character(substitute(tokenizer))
-  hash_func_name <- as.character(substitute(hash_func))
+  if (!is.null(tokenizer)) {
+    assert_that(is.function(tokenizer),
+                is.function(hash_func))
+    tokenizer_name <- as.character(substitute(tokenizer))
+    hash_func_name <- as.character(substitute(hash_func))
+  } else {
+    tokenizer_name <- NULL
+    hash_func_name <- NULL
+  }
 
   if (progress) {
     len <- length(paths)
@@ -73,7 +78,7 @@ TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
   meta$tokenizer <- tokenizer_name
   meta$hash_func <- hash_func_name
 
-  meta <- sort_meta(meta)
+  if (!is.null(names(meta))) meta <- sort_meta(meta)
 
   corpus <- list(documents = docs, meta = meta)
   class(corpus) <- c("TextReuseCorpus", "Corpus")
