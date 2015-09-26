@@ -92,7 +92,9 @@ lsh.TextReuseCorpus <- function(x, bands = 40, buckets = NULL,
 
   lapply(names(hash_list), function(n) {
     lapply(subsets, function(i) {
-      key <- digest::digest(hash_list[[n]][i])
+      rows <- hash_list[[n]][i]
+      attr(rows, "band") <- i
+      key <- digest::digest(rows)
       insert_into_hash(key, n, buckets)
       if (progress) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
     })
@@ -125,7 +127,9 @@ lsh.TextReuseTextDocument <- function(x, bands = 40, buckets = NULL,
   }
 
   lapply(subsets, function(i) {
-    key <- digest::digest(hash_vec[i])
+    rows <- hash_vec[i]
+    attr(rows, "band") <- i
+    key <- digest::digest(rows)
     insert_into_hash(key, meta(x, "id"), buckets)
     if (progress) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
   })
