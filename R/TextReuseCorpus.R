@@ -49,15 +49,16 @@ TextReuseCorpus <- function(paths, dir = NULL, meta = list(),
                 is.function(hash_func))
     tokenizer_name <- as.character(substitute(tokenizer))
     hash_func_name <- as.character(substitute(hash_func))
+    loading_msg <- "Loading, tokenizing, and hashing "
   } else {
     tokenizer_name <- NULL
     hash_func_name <- NULL
+    loading_msg <- "Loading "
   }
 
   if (progress) {
     len <- length(paths)
-    message("Loading, tokenizing, and hashing ", prettyNum(len, big.mark = ","),
-            " documents.")
+    message(loading_msg, prettyNum(len, big.mark = ","), " documents.")
     pb <- txtProgressBar(min = 0, max = len, style = 3)
   }
   docs <- lapply(seq_along(paths), function(i) {
