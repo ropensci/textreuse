@@ -1,6 +1,6 @@
 #' TextReuseCorpus
 #'
-#' This is the contructor function for a \code{TextReuseCorpus}, modeled on the
+#' This is the constructor function for a \code{TextReuseCorpus}, modeled on the
 #' virtual S3 class \code{\link[tm]{Corpus}} from the \code{tm} package. The
 #' object is a \code{TextReuseCorpus}, which is basically a list containing
 #' objects of class \code{\link{TextReuseTextDocument}}. Arguments are passed
