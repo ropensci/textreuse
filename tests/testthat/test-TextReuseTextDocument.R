@@ -73,7 +73,8 @@ test_that("can be created with no tokens", {
 test_that("skips documents that are too short", {
   expect_warning(short_doc <-
                    TextReuseTextDocument(text = "Too short",
-                                         meta = list(id = "short")),
+                                         meta = list(id = "short"),
+                                         skip_short = TRUE),
                  "Skipping document with ID")
   expect_null(short_doc)
 })

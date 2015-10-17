@@ -14,12 +14,12 @@
 #' Only one of the \code{paths}, \code{dir}, or \code{text} parameters should be
 #' specified.
 #'
-#' @details This constructor function will skip very short or empty documents. A
-#'   very short document is one where there are two few words to create at least
-#'   two n-grams. For example, if five-grams are desired, then a document must
-#'   be at least six words long. If no value of \code{n} is provided, then the
-#'   function assumes a value of \code{n = 3}. A warning will be printed with
-#'   the document ID of each skipped document.
+#' @details If \code{skip_short = TRUE}, this function will skip very short or
+#'   empty documents. A very short document is one where there are two few words
+#'   to create at least two n-grams. For example, if five-grams are desired,
+#'   then a document must be at least six words long. If no value of \code{n} is
+#'   provided, then the function assumes a value of \code{n = 3}. A warning will
+#'   be printed with the document ID of each skipped document.
 #'
 #' @param paths A character vector of paths to files to be opened.
 #' @param dir The path to a directory of text files.
@@ -49,7 +49,9 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                             progress = interactive(),
                             tokenizer = tokenize_ngrams, ...,
                             hash_func = hash_string,
-                            keep_tokens = FALSE, keep_text = TRUE) {
+                            keep_tokens = FALSE,
+                            keep_text = TRUE,
+                            skip_short = TRUE) {
 
   if (!is.null(tokenizer)) {
     assert_that(is.function(tokenizer),
@@ -86,6 +88,7 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                                  hash_func = hash_func,
                                  keep_tokens = keep_tokens,
                                  keep_text = keep_text,
+                                 skip_short = skip_short,
                                  meta = list(id = names(text)[i],
                                              tokenizer = tokenizer_name,
                                              hash_func = hash_func_name))
@@ -116,6 +119,7 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                                  hash_func = hash_func,
                                  keep_tokens = keep_tokens,
                                  keep_text = keep_text,
+                                 skip_short = skip_short,
                                  meta = list(tokenizer = tokenizer_name,
                                              hash_func = hash_func_name))
       if (progress) setTxtProgressBar(pb, i)
@@ -128,7 +132,7 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
   }
 
   # Filter documents that were skipped because they were too short
-  docs <- Filter(Negate(is.null), docs)
+  if (skip_short) docs <- Filter(Negate(is.null), docs)
 
   assert_that(is.list(meta))
   meta$tokenizer <- tokenizer_name

@@ -10,7 +10,7 @@
 \usage{
 TextReuseTextDocument(text, file = NULL, meta = list(),
   tokenizer = tokenize_ngrams, ..., hash_func = hash_string,
-  keep_tokens = FALSE, keep_text = TRUE)
+  keep_tokens = FALSE, keep_text = TRUE, skip_short = TRUE)
 
 is.TextReuseTextDocument(x)
 
@@ -45,7 +45,9 @@ hashing will be skipped.}
 returned or discarded?}
 
 \item{keep_text}{Should the text be saved in the document that is returned or
-  discarded?}
+discarded?}
+
+\item{skip_short}{Should short documents be skipped? (See details.)}
 
 \item{x}{An R object to check.}
 }
@@ -69,12 +71,12 @@ This constructor function follows a three-step process. It reads in
   \code{keep_tokens} and \code{keep_text}, you can avoid saving those
   objects, which can result in significant memory savings for large corpora.
 
-  This constructor function will return \code{NULL} for very short or empty
-  documents. A very short document is one where there are two few words to
-  create at least two n-grams. For example, if five-grams are desired, then a
-  document must be at least six words long. If no value of \code{n} is
-  provided, then the function assumes a value of \code{n = 3}. A warning will
-  be printed with the document ID of a skipped document.
+  If \code{skip_short = TRUE}, this function will return \code{NULL} for very
+  short or empty documents. A very short document is one where there are two
+  few words to create at least two n-grams. For example, if five-grams are
+  desired, then a document must be at least six words long. If no value of
+  \code{n} is provided, then the function assumes a value of \code{n = 3}. A
+  warning will be printed with the document ID of a skipped document.
 }
 \examples{
 file <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")
