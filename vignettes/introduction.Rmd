@@ -93,7 +93,20 @@ tokenize_ngrams(text, n = 3)
 tokenize_skip_ngrams(text, n = 3, k = 2)
 ```
 
-You can write your own tokenizers or use tokenizers from other packages. The should accept a character vector as their first argument.
+You can write your own tokenizers or use tokenizers from other packages. They should accept a character vector as their first argument.
+
+As an example, we will write a tokenizer function using the \link[stringr]{stringr} package which splits a text on new lines, perhaps useful for poetry. Notice that the function takes a single string and returns a character vector with one element for each line. (A more robust tokenizer might strip blank lines and punction, include an option for lowercasing the text, and check for the validity of arguments.)
+
+```{r}
+poem <- "Roses are red\nViolets are blue\nI like using R\nAnd you should too"
+cat(poem)
+
+tokenize_lines <- function(string) {
+  stringr::str_split(string, "\n+")[[1]]
+}
+
+tokenize_lines(poem)
+```
 
 ## Hash functions
 
