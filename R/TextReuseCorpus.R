@@ -15,7 +15,7 @@
 #' specified.
 #'
 #' @param paths A character vector of paths to files to be opened.
-#' @param dir A The path to a directory of text files.
+#' @param dir The path to a directory of text files.
 #' @param text A character vector (possibly named) of documents.
 #' @param meta A list with named elements for the metadata associated with this
 #'   corpus.

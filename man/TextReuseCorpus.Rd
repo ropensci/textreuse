@@ -14,7 +14,7 @@ is.TextReuseCorpus(x)
 \arguments{
 \item{paths}{A character vector of paths to files to be opened.}
 
-\item{dir}{A The path to a directory of text files.}
+\item{dir}{The path to a directory of text files.}
 
 \item{text}{A character vector (possibly named) of documents.}
 
