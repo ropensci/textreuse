@@ -6,3 +6,4 @@
 ^\.travis\.yml$
 wordnet
 ^appveyor\.yml$
+^CONDUCT\.md$
