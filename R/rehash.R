@@ -4,7 +4,7 @@
 #' \code{\link{TextReuseCorpus}}, this function recomputes the hashes with the
 #' function specified. This implies that you have retained the tokens with the
 #' \code{keep_tokens = TRUE} parameter. This function is intended to be used
-#' which changing from keeping only minhashes of the tokens to keeping hashes of
+#' when changing from keeping only minhashes of the tokens to keeping hashes of
 #' all the tokens. See the vignette on minhash/LSH.
 #'
 #' @param x A \code{\link{TextReuseTextDocument}} or
