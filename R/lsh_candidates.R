@@ -44,6 +44,6 @@ lsh_candidates <- function(buckets) {
   }
   df <- data.frame(a = a, b = b, score = NA_real_, stringsAsFactors = FALSE)
   df <- unique(sort_df_by_columns(sort_df_by_rows(df)))
-  class(df) <- c("tbl_df", "tbl", "data.frame")
+  class(df) <- c("tbl_df", "tbl", "data.frame", "textreuse_candidates")
   df
 }

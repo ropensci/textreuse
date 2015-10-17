@@ -46,6 +46,14 @@ assertthat::on_failure(has_id) <- function(call, env) {
         "field in the metadata list must be specified.")
 }
 
+is_candidates_df <- function(x) {
+  inherits(x, "textreuse_candidates")
+}
+
+assertthat::on_failure(is_candidates_df) <- function(call, env) {
+  "Object is not a candidates data frame."
+}
+
 sort_meta <- function(meta) {
   meta[order(names(meta))]
 }

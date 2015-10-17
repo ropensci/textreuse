@@ -27,8 +27,7 @@
 #' lsh_compare(candidates, corpus, jaccard_similarity)
 #' @export
 lsh_compare <- function(candidates, corpus, f, progress = interactive()) {
-  assert_that(is.data.frame(candidates),
-              all(names(df) == c("a", "b", "score")),
+  assert_that(is_candidates_df(candidates),
               is.function(f),
               is.TextReuseCorpus(corpus))
 
