@@ -77,7 +77,7 @@ pairwise_candidates(comparisons)
 #> 3 ca1851-nomatch   ny1850-match 0.0000000
 ```
 
-Pairwise comparisons can be very time-consuming because they grow exponentially with the size of the corpus. (A corpus with 10 documents would require at least 45 comparisons; a corpus with 100 documents would require 4,950 comparisons; a corpus with 1,000 documents would require 499,500 comparisons.) That's why this package implements the minhash and locality sensitive hashing algorithms, which can detect candidate pairs much faster than pairwise comparisons in corpora of any significant size. For details, see the package vignettes.
+Pairwise comparisons can be very time-consuming because they grow geometrically with the size of the corpus. (A corpus with 10 documents would require at least 45 comparisons; a corpus with 100 documents would require 4,950 comparisons; a corpus with 1,000 documents would require 499,500 comparisons.) That's why this package implements the minhash and locality sensitive hashing algorithms, which can detect candidate pairs much faster than pairwise comparisons in corpora of any significant size. For details, see the package vignettes.
 
 ``` r
 vignette("introduction", package = "textreuse")
@@ -95,7 +95,7 @@ citation("textreuse")
 #> To cite package 'textreuse' in publications use:
 #> 
 #>   Lincoln Mullen (2015). textreuse: Detect Text Reuse and Document
-#>   Similarity. R package version 0.0.1.9000.
+#>   Similarity. R package version 0.0.1.9004.
 #>   https://github.com/lmullen/textreuse
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -104,7 +104,7 @@ citation("textreuse")
 #>     title = {textreuse: Detect Text Reuse and Document Similarity},
 #>     author = {Lincoln Mullen},
 #>     year = {2015},
-#>     note = {R package version 0.0.1.9000},
+#>     note = {R package version 0.0.1.9004},
 #>     url = {https://github.com/lmullen/textreuse},
 #>   }
 ```
