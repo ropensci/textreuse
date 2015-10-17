@@ -64,3 +64,22 @@ test_that("has methods for tokens and hashes", {
   expect_named(t, names(corpus_a))
   expect_named(h, names(corpus_b))
 })
+
+test_that("can create corpus from a character vector with or without IDs", {
+  doc_vec <- c("This is document one", "This is document two")
+  doc_vec_named <- doc_vec
+  names(doc_vec_named) <- c("One", "Two")
+  corpus_from_vec <- TextReuseCorpus(text = doc_vec, tokenize = NULL)
+  corpus_from_named <- TextReuseCorpus(text = doc_vec_named, tokenize = NULL)
+  expect_equal(length(corpus_from_vec), 2)
+  expect_equal(length(corpus_from_named), 2)
+  expect_equal(as.character(content(corpus_from_vec[[2]])),
+               "This is document two")
+  expect_equal(as.character(content(corpus_from_named[[1]])),
+               "This is document one")
+  expect_equal(meta(corpus_from_vec[[1]], "id"), "doc-1")
+  expect_equal(meta(corpus_from_named[[2]], "id"), "Two")
+  expect_equal(corpus_from_vec[["doc-2"]], corpus_from_vec[[2]])
+  expect_equal(corpus_from_named[["One"]], corpus_from_named[[1]])
+  expect_error(TextReuseCorpus(text = "Document", dir = "/tmp"))
+})

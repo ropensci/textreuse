@@ -5,7 +5,7 @@
 \alias{is.TextReuseCorpus}
 \title{TextReuseCorpus}
 \usage{
-TextReuseCorpus(paths, dir = NULL, meta = list(),
+TextReuseCorpus(paths, dir = NULL, text = NULL, meta = list(),
   progress = interactive(), tokenizer = tokenize_ngrams, ...,
   hash_func = hash_string, keep_tokens = FALSE, keep_text = TRUE)
 
@@ -15,6 +15,8 @@ is.TextReuseCorpus(x)
 \item{paths}{A character vector of paths to files to be opened.}
 
 \item{dir}{A The path to a directory of text files.}
+
+\item{text}{A character vector (possibly named) of documents.}
 
 \item{meta}{A list with named elements for the metadata associated with this
 corpus.}
@@ -43,9 +45,15 @@ This is the constructor function for a \code{TextReuseCorpus}, modeled on the
 virtual S3 class \code{\link[tm]{Corpus}} from the \code{tm} package. The
 object is a \code{TextReuseCorpus}, which is basically a list containing
 objects of class \code{\link{TextReuseTextDocument}}. Arguments are passed
-along to that constructor function. You can pass either a character vector of
-paths to text files using the \code{paths =} parameter, or a directory
-containing text files using the \code{dir =} parameter.
+along to that constructor function. To create the corpus, you can pass either
+a character vector of paths to text files using the \code{paths =} parameter,
+a directory containing text files (with any extension) using the \code{dir =}
+parameter, or a character vector of documents using the \code{text = }
+parameter, where each element in the characer vector is a document. If the
+character vector passed to \code{text = } has names, then those names will be
+used as the document IDs. Otherwise, IDs will be assigned to the documents.
+Only one of the \code{paths}, \code{dir}, or \code{text} parameters should be
+specified.
 }
 \examples{
 dir <- system.file("extdata/legal", package = "textreuse")
