@@ -109,6 +109,8 @@ citation("textreuse")
 #>   }
 ```
 
-### Contributing
+### Contributing and acknowledgements
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+Thanks to [Noam Ross](http://www.noamross.net/) for his thorough [peer review](https://github.com/ropensci/onboarding/issues/20) of this package for [rOpenSci](https://ropensci.org/).
