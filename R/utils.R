@@ -50,12 +50,6 @@ sort_meta <- function(meta) {
   meta[order(names(meta))]
 }
 
-skip_on_appveyor <- function() {
-  if (!identical(Sys.getenv("APPVEYOR"), "True"))
-    return()
-  testthat::skip("On Appveyor")
-}
-
 sort_df_by_rows <- function(df) {
   assert_that(all(c("a", "b") %in% colnames(df)),
               is.data.frame(df))

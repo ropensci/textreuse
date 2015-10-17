@@ -48,12 +48,10 @@ test_that("prints sensibly", {
 
 test_that("can be retokenized", {
   skip_on_appveyor()
-  if (.Platform$OS.type == "unix") {
-    expect_equal(tokens(corpus_a[[1]])[1:2],
-                 c("4 every action", "every action shall"))
-    corpus_a <- tokenize(corpus_a, tokenize_words)
-    expect_equal(tokens(corpus_a[[1]])[1:2], c("4", "every"))
-  }
+  expect_equal(tokens(corpus_a[[1]])[1:2],
+               c("4 every action", "every action shall"))
+  corpus_a <- tokenize(corpus_a, tokenize_words)
+  expect_equal(tokens(corpus_a[[1]])[1:2], c("4", "every"))
 })
 
 test_that("has methods for tokens and hashes", {
