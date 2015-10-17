@@ -48,6 +48,8 @@ head(hashes(doc))
 wordcount(doc)
 ```
 
+The `tokens()` and `hashes()` function return the tokens and hashes associated with the document. The `meta()` function returns a named list of all the metadata fields. If that function is called with a specific ID, as in `meta(doc, "myfield")`, then the value for only that field is returned. You can also assign to the metadata as a whole or a specific field, as in the example above.
+
 In addition the `content()` function provides the unprocessed text of the document.
 
 The assumption is that is that you want to tokenize and hash the tokens from the start. If, however, you wish to do any of those steps yourself, you can load a document with `tokenizer = NULL`, then use `tokenize()` or `rehash()` to recompute the tokens and hashes.
