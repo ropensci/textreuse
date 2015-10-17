@@ -56,6 +56,6 @@ tokenize_skip_ngrams <- function(string, lowercase = TRUE, n = 3, k = 1) {
               is.count(k) | k == 0,
               assertthat::is.string(string))
   words <- tokenize_words(string, lowercase = lowercase)
-  assert_that(n + n* k - k <= length(words))
+  assert_that(n + n * k - k <= length(words))
   skip_ngrams(words, n = n, k = k)
 }
