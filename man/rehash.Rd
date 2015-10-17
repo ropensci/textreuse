@@ -11,7 +11,7 @@ rehash(x, hash_func)
 \code{\link{TextReuseCorpus}}.}
 
 \item{hash_func}{A function to hash the tokens. See
-\code{\link{hash_string}}, \code{\link{minhash_generator}}.}
+  \code{\link{hash_string}}, \code{\link{minhash_generator}}.}
 }
 \value{
 The modified \code{\link{TextReuseTextDocument}} or
@@ -24,5 +24,14 @@ function specified. This implies that you have retained the tokens with the
 \code{keep_tokens = TRUE} parameter. This function is intended to be used
 when changing from keeping only minhashes of the tokens to keeping hashes of
 all the tokens. See the vignette on minhash/LSH.
+}
+\examples{
+dir <- system.file("extdata/legal", package = "textreuse")
+minhash1 <- minhash_generator(seed = 1)
+corpus <- TextReuseCorpus(dir = dir, hash_func = minhash1, keep_tokens = TRUE)
+head(hashes(corpus[[1]]))
+minhash2 <- minhash_generator(seed = 2)
+corpus <- rehash(corpus, minhash2)
+head(hashes(corpus[[2]]))
 }
 

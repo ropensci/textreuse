@@ -23,7 +23,7 @@ tokenize(x, tokenizer, ..., hash_func = hash_string, keep_tokens = FALSE,
 returned or discarded?}
 
 \item{keep_text}{Should the text be saved in the document that is returned or
-discarded?}
+  discarded?}
 }
 \value{
 The modified \code{\link{TextReuseTextDocument}} or
@@ -33,5 +33,11 @@ The modified \code{\link{TextReuseTextDocument}} or
 Given a \code{\link{TextReuseTextDocument}} or a
 \code{\link{TextReuseCorpus}}, this function recomputes the tokens and hashes
 with the functions specified.
+}
+\examples{
+dir <- system.file("extdata/legal", package = "textreuse")
+corpus <- TextReuseCorpus(dir = dir, tokenizer = NULL)
+corpus <- tokenize(corpus, tokenize_ngrams)
+head(tokens(corpus[[1]]))
 }
 
