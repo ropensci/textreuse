@@ -10,7 +10,7 @@ pretty_print_metadata <- function(doc) {
   lapply(names(doc$meta), function(x) cat(x, ":", doc$meta[[x]], "\n"))
 }
 
-# Check whether the number of minhashes is evenly divisble by number of bands
+# Check whether the number of minhashes is evenly divisible by number of bands
 check_banding <- function(l, b) {
   l %% b == 0
 }
