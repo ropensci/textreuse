@@ -14,6 +14,13 @@
 #' Only one of the \code{paths}, \code{dir}, or \code{text} parameters should be
 #' specified.
 #'
+#' @details This constructor function will skip very short or empty documents. A
+#'   very short document is one where there are two few words to create at least
+#'   two n-grams. For example, if five-grams are desired, then a document must
+#'   be at least six words long. If no value of \code{n} is provided, then the
+#'   function assumes a value of \code{n = 3}. A warning will be printed with
+#'   the document ID of each skipped document.
+#'
 #' @param paths A character vector of paths to files to be opened.
 #' @param dir The path to a directory of text files.
 #' @param text A character vector (possibly named) of documents.
@@ -74,7 +81,8 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
       names(text) <- str_c("doc-", 1:length(text))
 
     docs <- lapply(seq_along(text), function(i) {
-      d <- TextReuseTextDocument(text = text[i], tokenizer = tokenizer, ...,
+      d <- TextReuseTextDocument(text = text[i],
+                                 tokenizer = tokenizer, ...,
                                  hash_func = hash_func,
                                  keep_tokens = keep_tokens,
                                  keep_text = keep_text,
@@ -118,6 +126,9 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
 
     names(docs) <- filenames(paths)
   }
+
+  # Filter documents that were skipped because they were too short
+  docs <- Filter(Negate(is.null), docs)
 
   assert_that(is.list(meta))
   meta$tokenizer <- tokenizer_name

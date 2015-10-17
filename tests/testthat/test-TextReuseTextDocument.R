@@ -69,3 +69,11 @@ test_that("can be created with no tokens", {
   expect_false(has_tokens(doc))
   expect_false(has_hashes(doc))
 })
+
+test_that("skips documents that are too short", {
+  expect_warning(short_doc <-
+                   TextReuseTextDocument(text = "Too short",
+                                         meta = list(id = "short")),
+                 "Skipping document with ID")
+  expect_null(short_doc)
+})

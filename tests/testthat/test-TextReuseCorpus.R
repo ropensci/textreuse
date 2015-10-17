@@ -83,3 +83,10 @@ test_that("can create corpus from a character vector with or without IDs", {
   expect_equal(corpus_from_named[["One"]], corpus_from_named[[1]])
   expect_error(TextReuseCorpus(text = "Document", dir = "/tmp"))
 })
+
+test_that("skips documents that are too short", {
+  texts <- c("short" = "Too short", "long" = "Just long enough yo")
+  expect_warning(short_docs <- TextReuseCorpus(text = texts),
+                 "Skipping document with ID")
+  expect_lt(length(short_docs), length(texts))
+})

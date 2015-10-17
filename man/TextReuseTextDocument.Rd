@@ -68,6 +68,13 @@ This constructor function follows a three-step process. It reads in
   rely only on the hashes to make the comparison. By passing \code{FALSE} to
   \code{keep_tokens} and \code{keep_text}, you can avoid saving those
   objects, which can result in significant memory savings for large corpora.
+
+  This constructor function will return \code{NULL} for very short or empty
+  documents. A very short document is one where there are two few words to
+  create at least two n-grams. For example, if five-grams are desired, then a
+  document must be at least six words long. If no value of \code{n} is
+  provided, then the function assumes a value of \code{n = 3}. A warning will
+  be printed with the document ID of a skipped document.
 }
 \examples{
 file <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")

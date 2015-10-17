@@ -29,6 +29,13 @@
 #'   \code{keep_tokens} and \code{keep_text}, you can avoid saving those
 #'   objects, which can result in significant memory savings for large corpora.
 #'
+#'   This constructor function will return \code{NULL} for very short or empty
+#'   documents. A very short document is one where there are two few words to
+#'   create at least two n-grams. For example, if five-grams are desired, then a
+#'   document must be at least six words long. If no value of \code{n} is
+#'   provided, then the function assumes a value of \code{n = 3}. A warning will
+#'   be printed with the document ID of a skipped document.
+#'
 #' @return An object of class \code{TextReuseTextDocument}. This object inherits
 #'   from the virtual S3 class \code{\link[NLP]{TextDocument}} in the NLP
 #'   package. It contains the following elements: \describe{ \item{content}{The
@@ -62,6 +69,18 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
 
   assert_that(is.character(text))
   text <- as_string(text)
+
+  # Check length of document
+  n_call <- match.call(expand.dots = TRUE)[["n"]]
+  if (is.null(n_call))
+    n_call <- 3
+  if (wordcount(text) < n_call + 1) {
+    warning("Skipping document with ID '", meta$id,
+            "' because it has too few words ",
+            "to create at least two n-grams with n = ", n_call, ".",
+            call. = FALSE, noBreaks. = TRUE)
+    return(NULL)
+  }
 
   if (!is.null(tokenizer)) {
 

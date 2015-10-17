@@ -78,6 +78,8 @@ Accessor functions such as `meta()`, `tokens()`, `hashes()`, and `wordcount()` h
 wordcount(corpus)
 ```
 
+Note that when creating a corpus, very short or empty documents will be skipped with a warning. A document must have enough words to create at least two n-grams. For example, if five-grams are desired, then the document must have at least six words.
+
 ## Tokenizers
 
 One of the steps that is performed when loading a `TextReuseTextDocument`, either individual or in a corpus, is tokenization. Tokenization breaks up a text into pieces, often overlapping. These pieces are the features which are compared when measuring document similarity.

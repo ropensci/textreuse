@@ -55,6 +55,14 @@ used as the document IDs. Otherwise, IDs will be assigned to the documents.
 Only one of the \code{paths}, \code{dir}, or \code{text} parameters should be
 specified.
 }
+\details{
+This constructor function will skip very short or empty documents. A
+  very short document is one where there are two few words to create at least
+  two n-grams. For example, if five-grams are desired, then a document must
+  be at least six words long. If no value of \code{n} is provided, then the
+  function assumes a value of \code{n = 3}. A warning will be printed with
+  the document ID of each skipped document.
+}
 \examples{
 dir <- system.file("extdata/legal", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir, meta = list("description" = "Field Codes"))
