@@ -16,11 +16,12 @@ BugReports: https://github.com/lmullen/textreuse/issues
 VignetteBuilder: knitr
 Depends: R (>= 3.1.2)
 Imports: assertthat (>= 0.1),
-    digest(>= 0.6.8),
-    hash (>= 2.2.6),
+    digest (>= 0.6.8),
+    dplyr (>= 0.4.3),
     NLP (>= 0.1.8),
     Rcpp (>= 0.12.0),
-    stringr (>= 1.0.0)
+    stringr (>= 1.0.0),
+    tidyr (>= 0.3.1)
 Suggests: testthat (>= 0.11.0),
     knitr (>= 1.11),
     rmarkdown (>= 0.8)

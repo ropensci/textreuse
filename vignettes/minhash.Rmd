@@ -9,6 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r, echo=FALSE, message=FALSE}
+library(dplyr)
+```
+
 Performing pairwise comparisons in a corpus is time-consuming because the number of comparisons grows geometrically with the size of the corpus. Most of those comparisons, furthermore, are unnecessary because they do not result in matches. The combination of minhash and locality-sensitive hashing (LSH) seeks to solve these problems. They make it possible to compute possible matches only once for each document, so that the cost of computation grows linearly rather than exponentially. This vignette explains how to use the minhash and locality-sensitive hashing functions in this package. For an explanation of why they work, see Jure Leskovec, Anand Rajaraman, and Jeff Ullman, *[Mining of Massive Datasets](http://www.mmds.org/#book)* (Cambridge University Press, 2011), ch. 3. (This [blog post](http://matthewcasperson.blogspot.com/2013/11/minhash-for-dummies.html) is a more succinct explanation.)
 
 We begin by creating a minhash function. A minhash function converts tokenized text into a set of hash integers, then selects the minimum value. This is the equivalent of randomly selecting a token. The function then does the same thing repeatedly with different hashing functions, in effect selecting `n` random shingles. The additional hashing functions come from a bitwise XOR with random integers. That is why the `minhash_generator()` accepts a seed, so that we can re-create the same minhash function again. In other words, a minhash function converts a set of tokens of any length into `n` randomly selected and hashed tokens.
@@ -47,11 +51,14 @@ lsh_probability(h = 240, b =  80, s = 0.75)
 
 These numbers seem reasonable for our purposes, so we will set the number of minhashes at 240 and the number of bands at 80.
 
-Now we can use the `lsh()` function to calculate the locality-sensitive hashes into a cache. Note that we are creating the cache for the first time. But if we pass an existing cache and (this is important) use the same minhash function and the same number of bands, we can pass an existing cache to the `lsh()` function with the `buckets = ` parameter. That way, we can continue to add new documents without having to recalculate the LSH signatures for the whole corpus. For a 640 document, 60 million word corpus, calculating the cache takes seconds, compared to hours of pairwise comparisons.
+Now we can use the `lsh()` function to calculate the locality-sensitive hashes for our documents. 
 
 ```{r}
 buckets <- lsh(corpus, bands = 80)
+buckets
 ```
+
+Note that using the LSH method only requires us to calculate the signatures (or buckets) for each document one time. This implies that we can take several data frames of LSH signatures and bind their rows together (e.g., with `dplyr::bind_rows()`). This permits us to compute the signatures for only part of a corpus at a time, or to continue to add to the corpus. Note, however, that you **must** use the same minhash function, generating the same number of minhashes and using the same seed and you **must** use the same number of bands in order to get valid results.
 
 We can extract the potential matches from the cache using `lsh_candidates()` (an analog of `pairwise_candidates()`).
 

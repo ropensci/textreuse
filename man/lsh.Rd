@@ -4,28 +4,24 @@
 \alias{lsh}
 \title{Locality sensitive hashing for minhash}
 \usage{
-lsh(x, bands = 40, buckets = NULL, progress = interactive())
+lsh(x, bands, progress = interactive())
 }
 \arguments{
 \item{x}{A \code{\link{TextReuseCorpus}} or
-\code{\link{TextReuseTextDocument}} to add to the cache.}
+\code{\link{TextReuseTextDocument}}.}
 
 \item{bands}{The number of bands to use for locality sensitive hashing. The
 number of hashes in the documents in the corpus must be evenly divisible by
-the number of bands.}
-
-\item{buckets}{A \code{\link[hash]{hash}} object that caches the potential
-matches. If the value is \code{NULL} a new cache will be created. If a cache
-is passed to the function, it will be added to. Note that it is important
-that you keep the minhash function and the number of bands consistent when
-adding to the cache.}
+the number of bands. See \code{\link{lsh_threshold}} and
+\code{\link{lsh_probability}} for guidance in selecting the number of bands
+and hashes.}
 
 \item{progress}{Display a progress bar while comparing documents.}
 }
 \value{
-A \code{\link[hash]{hash}} object where the keys are hashed from the
- bands in locality sensitve hashing and the values are sets of potential
- matches.
+A data frame (with the additional class \code{lsh_buckets}),
+ containing a column with the document IDs and a column with their LSH
+ signatures, or buckets.
 }
 \description{
 Locality sensitive hashing (LSH) discovers potential matches among a corpus of
@@ -46,32 +42,22 @@ Locality sensitive hashing is a technique for detecting document
  will be marked as a potential duplicate is proportional to the number of
  bands and inversely proportional to the number of rows in each band.
 
- This technique means that documents hashed into a cache, so that the LSH
- signatures for each document only need to be computed once. Furthermore, so
- long as the same minhash and LSH functions are used, additional documents
- can be added to the cache at any time. And since minhash signatures are
- used, each document can be added to the cache fairly quickly.
+ This function returns a data frame with the additional class
+ \code{lsh_buckets}. The LSH technique only requires that the signatures for
+ each document be calculated once. So it is possible, as long as one uses the
+ same minhash function and the same number of bands, to combine the outputs
+ from this function at different times. The output can thus be treated as a
+ kind of cache of LSH signatures.
 
- This function returns a cache object. This object is a
- \href{https://en.wikipedia.org/wiki/Hash_table}{hash table} as implemented
- by the \href{https://cran.r-project.org/package=hash}{hash package}. Unlike
- every other type of R object, which has copy-on-modify semantics, this hash
- table/cache object does not. That means that the variable name is only a
- pointer to the actual hash table, and multiple variable names can point to
- the same hash table. If no cache object is passed to the function, then a
- new cache is generated.
-
- This cache object can then be queried to detect pairs or clusters of
- documents.
+ To extract pairs of documents from the output of this function, see
+ \code{\link{lsh_candidates}}.
 }
 \examples{
 dir <- system.file("extdata/legal", package = "textreuse")
-set.seed(253)
-minhash <- minhash_generator(200)
+minhash <- minhash_generator(200, seed = 235)
 corpus <- TextReuseCorpus(dir = dir,
                           tokenizer = tokenize_ngrams, n = 5,
                           hash_func = minhash)
-names(corpus) <- filenames(names(corpus))
 buckets <- lsh(corpus, bands = 50)
 buckets
 }

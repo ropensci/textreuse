@@ -16,7 +16,6 @@
 #' corpus[lsh_subset(candidates)]
 #' @export
 lsh_subset <- function(candidates) {
-  assert_that(is.data.frame(candidates),
-              all(names(df) == c("a", "b", "score")))
+  assert_that(is_candidates_df(candidates))
   sort(unique(c(candidates$a, candidates$b)))
 }

@@ -52,3 +52,7 @@
 #' @import stringr
 #' @import assertthat
 NULL
+
+if (getRversion() >= "2.15.1") {
+ utils::globalVariables(c("doc.x", "doc.y", "up", "dn", "a", "b"))
+}

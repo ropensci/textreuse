@@ -17,124 +17,133 @@
 #'  will be marked as a potential duplicate is proportional to the number of
 #'  bands and inversely proportional to the number of rows in each band.
 #'
-#'  This technique means that documents hashed into a cache, so that the LSH
-#'  signatures for each document only need to be computed once. Furthermore, so
-#'  long as the same minhash and LSH functions are used, additional documents
-#'  can be added to the cache at any time. And since minhash signatures are
-#'  used, each document can be added to the cache fairly quickly.
+#'  This function returns a data frame with the additional class
+#'  \code{lsh_buckets}. The LSH technique only requires that the signatures for
+#'  each document be calculated once. So it is possible, as long as one uses the
+#'  same minhash function and the same number of bands, to combine the outputs
+#'  from this function at different times. The output can thus be treated as a
+#'  kind of cache of LSH signatures.
 #'
-#'  This function returns a cache object. This object is a
-#'  \href{https://en.wikipedia.org/wiki/Hash_table}{hash table} as implemented
-#'  by the \href{https://cran.r-project.org/package=hash}{hash package}. Unlike
-#'  every other type of R object, which has copy-on-modify semantics, this hash
-#'  table/cache object does not. That means that the variable name is only a
-#'  pointer to the actual hash table, and multiple variable names can point to
-#'  the same hash table. If no cache object is passed to the function, then a
-#'  new cache is generated.
-#'
-#'  This cache object can then be queried to detect pairs or clusters of
-#'  documents.
+#'  To extract pairs of documents from the output of this function, see
+#'  \code{\link{lsh_candidates}}.
 #'
 #'@param x A \code{\link{TextReuseCorpus}} or
-#'  \code{\link{TextReuseTextDocument}} to add to the cache.
+#'  \code{\link{TextReuseTextDocument}}.
 #'@param bands The number of bands to use for locality sensitive hashing. The
 #'  number of hashes in the documents in the corpus must be evenly divisible by
-#'  the number of bands.
-#'@param buckets A \code{\link[hash]{hash}} object that caches the potential
-#'  matches. If the value is \code{NULL} a new cache will be created. If a cache
-#'  is passed to the function, it will be added to. Note that it is important
-#'  that you keep the minhash function and the number of bands consistent when
-#'  adding to the cache.
+#'  the number of bands. See \code{\link{lsh_threshold}} and
+#'  \code{\link{lsh_probability}} for guidance in selecting the number of bands
+#'  and hashes.
 #'@param progress Display a progress bar while comparing documents.
-#'@return A \code{\link[hash]{hash}} object where the keys are hashed from the
-#'  bands in locality sensitve hashing and the values are sets of potential
-#'  matches.
+#'
+#'@return A data frame (with the additional class \code{lsh_buckets}),
+#'  containing a column with the document IDs and a column with their LSH
+#'  signatures, or buckets.
+#'
 #'@references Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
 #'  \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
 #'  (Cambridge University Press, 2011), ch. 3. See also Matthew Casperson,
 #'  "\href{http://matthewcasperson.blogspot.com/2013/11/minhash-for-dummies.html}{Minhash
 #'   for Dummies}" (November 14, 2013).
+#'
 #'@seealso \code{\link{minhash_generator}}, \code{\link{lsh_candidates}},
 #'  \code{\link{lsh_probability}}, \code{\link{lsh_threshold}}
+#'
 #' @examples
 #' dir <- system.file("extdata/legal", package = "textreuse")
-#' set.seed(253)
-#' minhash <- minhash_generator(200)
+#' minhash <- minhash_generator(200, seed = 235)
 #' corpus <- TextReuseCorpus(dir = dir,
 #'                           tokenizer = tokenize_ngrams, n = 5,
 #'                           hash_func = minhash)
-#' names(corpus) <- filenames(names(corpus))
 #' buckets <- lsh(corpus, bands = 50)
 #' buckets
 #'@export
-lsh <- function(x, bands = 40, buckets = NULL, progress = interactive()) {
+lsh <- function(x, bands, progress = interactive()) {
   UseMethod("lsh", x)
 }
 
 #' @export
-lsh.TextReuseCorpus <- function(x, bands = 40, buckets = NULL,
-                                progress = interactive()) {
+lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
+
   assert_that(is.count(bands))
-  if (is.null(buckets))
-    buckets <- hash::hash()
-  else
-    assert_that(hash::is.hash(buckets))
 
-  hash_list <- hashes(x)
+  h <- length(hashes(x[[1]])) # number of hashes
+  d <- length(x) # number of documents
+  r <- h / bands # number of rows
 
-  subsets <- band_seq(length(hash_list[[1]]), bands)
+  assert_that(check_banding(h, bands))
 
-  if (progress) {
-    pb_length <- length(hash_list) * length(subsets)
-    message("LSH progress")
-    pb <- txtProgressBar(min = 0, max = pb_length, style = 3)
-  }
+  # To assign rows in data frame to bands
+  b_assign <-  dplyr::data_frame(band =
+      rep(vapply(1:bands, function(i) rep(i, r), integer(r)), d)
+    )
 
-  lapply(names(hash_list), function(n) {
-    lapply(subsets, function(i) {
-      rows <- hash_list[[n]][i]
-      attr(rows, "band") <- i
-      key <- digest::digest(rows)
-      insert_into_hash(key, n, buckets)
-      if (progress) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
-    })
-  })
+  all_hashes <- hashes(x)
+  col_names <- names(all_hashes)
+
+  buckets <- all_hashes %>%
+    dplyr::as_data_frame() %>%
+    tidyr::gather_("doc", "hash", col_names) %>%
+    dplyr::mutate_(doc = ~as.character(doc)) %>%
+    dplyr::bind_cols(b_assign) %>%
+    dplyr::group_by_(~doc, ~band)
+
+    rm(b_assign)
+
+    if (progress) {
+      message("Calculating LSH buckets")
+      pb <- txtProgressBar(min = 0, max = d * bands, style = 3)
+    }
+
+  # include the band in the signature hash to avoid false matches
+  buckets <- buckets %>%
+    dplyr::summarize_(buckets = ~digest_progress(list(hash, unique(band)),
+                                                 pb, progress))
 
   if (progress) close(pb)
+
+  buckets <- buckets %>%
+    dplyr::select_(~-band) %>%
+    dplyr::ungroup()
+
+  class(buckets) <- c(class(buckets), "lsh_buckets")
 
   buckets
 
 }
 
+# A wrapper around digest to be able to use the progress bar
+digest_progress <- function(x, pb, progress) {
+  bucket <- digest::digest(x)
+  if (progress) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
+  bucket
+}
+
 #' @export
-lsh.TextReuseTextDocument <- function(x, bands = 40, buckets = NULL,
-                                      progress = interactive()) {
-  assert_that(is.count(bands),
-              has_id(meta(x)))
-  if (is.null(buckets))
-    buckets <- hash::hash()
-  else
-    assert_that(hash::is.hash(buckets))
+lsh.TextReuseTextDocument <- function(x, bands, progress) {
 
-  hash_vec <- hashes(x)
+  assert_that(is.count(bands))
 
-  subsets <- band_seq(length(hash_vec), bands)
+  all_hashes <- hashes(x)
+  h <- length(all_hashes) # number of hashes
+  r <- h / bands # number of rows
 
-  if (progress) {
-    pb_length <- length(subsets)
-    message("LSH progress")
-    pb <- txtProgressBar(min = 0, max = pb_length, style = 3)
-  }
+  assert_that(check_banding(h, bands))
 
-  lapply(subsets, function(i) {
-    rows <- hash_vec[i]
-    attr(rows, "band") <- i
-    key <- digest::digest(rows)
-    insert_into_hash(key, meta(x, "id"), buckets)
-    if (progress) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
-  })
+  # To assign rows in data frame to bands
+  b_assign <-  dplyr::data_frame(band =
+      rep(vapply(1:bands, function(i) rep(i, r), integer(r)), 1)
+    )
 
-  if (progress) close(pb)
+
+  buckets <- dplyr::data_frame(doc = x$meta$id, hash = all_hashes) %>%
+    dplyr::bind_cols(b_assign) %>%
+    dplyr::group_by_(~doc, ~band) %>%
+    dplyr::summarize_(buckets = ~digest::digest(list(hash, unique(band)))) %>%
+    dplyr::select_(~-band) %>%
+    dplyr::ungroup()
+
+  class(buckets) <- c(class(buckets), "lsh_buckets")
 
   buckets
 

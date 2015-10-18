@@ -37,6 +37,8 @@
 #'   returned or discarded?
 #' @param keep_text Should the text be saved in the documents that are returned
 #'   or discarded?
+#' @param skip_short Should short documents be skipped? (See details.)
+#'
 #' @examples
 #' dir <- system.file("extdata/legal", package = "textreuse")
 #' corpus <- TextReuseCorpus(dir = dir, meta = list("description" = "Field Codes"))
@@ -44,6 +46,7 @@
 #' corpus[[1]]
 #' names(corpus)
 #' corpus[["ca1851-match"]]
+#'
 #' @export
 TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                             progress = interactive(),

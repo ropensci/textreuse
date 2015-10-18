@@ -7,14 +7,14 @@
 lsh_candidates(buckets)
 }
 \arguments{
-\item{buckets}{A cache object returned from \code{\link{lsh}}.}
+\item{buckets}{A data frame returned from \code{\link{lsh}}.}
 }
 \value{
-A list containing character vectors with the IDs of potential matches.
+A data frame of candidate pairs.
 }
 \description{
-Given a cache object from an LSH comparison, this function returns the
-potential candidates.
+Given a data frame of LSH buckets returned from \code{\link{lsh}}, this
+function returns the potential candidates.
 }
 \examples{
 dir <- system.file("extdata/legal", package = "textreuse")

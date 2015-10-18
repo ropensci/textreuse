@@ -39,6 +39,8 @@ returned or discarded?}
 \item{keep_text}{Should the text be saved in the documents that are returned
 or discarded?}
 
+\item{skip_short}{Should short documents be skipped? (See details.)}
+
 \item{x}{An R object to check.}
 }
 \description{
