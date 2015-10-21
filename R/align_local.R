@@ -1,21 +1,35 @@
 #' @export
 # http://etherealbits.com/2013/04/string-alignment-dynamic-programming-dna/
 align_local <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
-                        delete_mark = "#") {
+                        edit_mark = "#") {
+ assert_that(identical(class(a), class(b)))
+ UseMethod("align_local", a)
+}
+
+#' @export
+align_local.TextReuseTextDocument <- function(a, b, match = 2L, mismatch = -1L,
+                                              gap = -1L, edit_mark = "#") {
+  align_local(content(a), content(b), match = match, mismatch = mismatch,
+              gap = gap, edit_mark = edit_mark)
+}
+
+#' @export
+align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
+                                edit_mark = "#") {
 
   assert_that(is.string(a),
               is.string(b),
               is_integer_like(match),
               is_integer_like(mismatch),
               is_integer_like(gap),
-              is.string(delete_mark))
+              is.string(edit_mark))
 
-  if (match <= 0 || mismatch > 0 || gap > 0 || !(nchar(delete_mark) == 1)) {
+  if (match <= 0 || mismatch > 0 || gap > 0 || !(str_length(edit_mark) == 1)) {
     stop("The scoring parameters should have the following characteristics:\n",
          "    - `match` should be a positive integer\n",
          "    - `mismatch` should be a negative integer or zero\n",
          "    - `gap` should be a negative integer or zero\n",
-         "    - `delete_mark` should be a single character\n")
+         "    - `edit_mark` should be a single character\n")
   }
 
   # Keep everything as integers because IntegerMatrix saves memory
@@ -86,11 +100,11 @@ align_local <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
       row_i <- row_i - 1
       bword <- b_orig[row_i - 1]
       b_out[out_i] <- bword
-      a_out[out_i] <- mark_chars(bword, delete_mark)
+      a_out[out_i] <- mark_chars(bword, edit_mark)
     } else if (left == max_cell) {
       col_i <- col_i - 1
       aword <- a_orig[col_i - 1]
-      b_out[out_i] <- mark_chars(aword, delete_mark)
+      b_out[out_i] <- mark_chars(aword, edit_mark)
       a_out[out_i] <- aword
     } else if (diagn == max_cell) {
       row_i <- row_i - 1
@@ -106,9 +120,9 @@ align_local <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
         a_out[out_i] <- aword
       } else {
         b_out[out_i] <- bword
-        a_out[out_i] <- mark_chars(bword, delete_mark)
+        a_out[out_i] <- mark_chars(bword, edit_mark)
         out_i <- out_i + 1
-        b_out[out_i] <- mark_chars(aword, delete_mark)
+        b_out[out_i] <- mark_chars(aword, edit_mark)
         a_out[out_i] <- aword
       }
     }
