@@ -9,8 +9,9 @@
 This R package provides a set of functions for measuring similarity among
 documents and detecting passages which have been reused. It implements
 shingled n-gram, skip n-gram, and other tokenizers; similarity/dissimilarity
-functions; pairwise comparisons; and minhash and locality sensitive hashing
-algorithms.
+functions; pairwise comparisons; minhash and locality sensitive hashing
+algorithms, and a version of the Smith-Waterman local alignment algorithm
+suitable for natural language.
 }
 \details{
 The best place to begin with this package in the introductory vignette.

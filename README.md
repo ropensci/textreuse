@@ -10,9 +10,7 @@ An R package for detecting text reuse and document similarity in a corpus.
 
 ### Description
 
-This R package provides a set of functions for measuring similarity among documents and detecting passages which have been reused. It implements shingled n-gram, skip n-gram, and other tokenizers; similarity/dissimilarity functions; pairwise comparisons; and minhash and locality sensitive hashing algorithms.
-
-The package was written to facilitate historical research among legal texts, but it is broadly useful for, for example, detecting duplicate documents in a corpus prior to text analysis. The classes provides by this package follow the model of other natural language processing packages for R, especially the [NLP](https://cran.r-project.org/package=NLP) and [tm](https://cran.r-project.org/package=tm) packages. (However, this package has no dependency on Java, which should make it easier to install.)
+This R package provides a set of functions for measuring similarity among documents and detecting passages which have been reused. It implements shingled n-gram, skip n-gram, and other tokenizers; similarity/dissimilarity functions; pairwise comparisons; minhash and locality sensitive hashing algorithms; and a version of the Smith-Waterman local alignment algorithm suitable for natural language. It is broadly useful for, for example, detecting duplicate documents in a corpus prior to text analysis, or for identifying borrowed passages between texts. The classes provides by this package follow the model of other natural language processing packages for R, especially the [NLP](https://cran.r-project.org/package=NLP) and [tm](https://cran.r-project.org/package=tm) packages. (However, this package has no dependency on Java, which should make it easier to install.)
 
 ### Installation
 
