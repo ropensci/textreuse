@@ -48,6 +48,7 @@ test_that("prints sensibly", {
 
 test_that("can be retokenized", {
   skip_on_appveyor()
+  skip_on_os("windows")
   expect_equal(tokens(corpus_a[[1]])[1:2],
                c("4 every action", "every action shall"))
   corpus_a <- tokenize(corpus_a, tokenize_words)
