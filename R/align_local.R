@@ -56,7 +56,8 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   m <- sw_matrix(m, a, b, match, mismatch, gap, progress)
 
   # Find the starting place in the matrix
-  max_match <- which(m == max(m), arr.ind = TRUE, useNames = FALSE)
+  alignment_score <- max(m)
+  max_match <- which(m == alignment_score, arr.ind = TRUE, useNames = FALSE)
 
   if (nrow(max_match) > 1) {
     message("Multiple best alignments found; selecting only one of them.")
@@ -139,7 +140,7 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   a_out <- str_c(rev(a_out[!is.na(a_out)]), collapse = " ")
 
   # Create the alignment object
-  alignment <- list(a_edits = a_out, b_edits = b_out)
+  alignment <- list(a_edits = a_out, b_edits = b_out, score = alignment_score)
   class(alignment) <- "textreuse_alignment"
 
   alignment
@@ -149,6 +150,7 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
 #' @export
 print.textreuse_alignment <- function(x, ...) {
   cat("TextReuse alignment\n")
+  cat("Alignment score:", x$score, "\n")
   cat("Document A:\n")
   cat(str_wrap(x$a_edits, width = 72))
   cat("\n\nDocument B:\n")
