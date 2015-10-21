@@ -1,11 +1,10 @@
 #' @export
 # http://etherealbits.com/2013/04/string-alignment-dynamic-programming-dna/
-align_local <- function(a, b, tokenizer = tokenize_words, ...,
-                        match = 2L, mismatch = -1L, gap = -1L,
+align_local <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
                         delete_mark = "#") {
 
-  assert_that(is.character(a),
-              is.character(b),
+  assert_that(is.string(a),
+              is.string(b),
               is_integer_like(match),
               is_integer_like(mismatch),
               is_integer_like(gap),
@@ -24,15 +23,13 @@ align_local <- function(a, b, tokenizer = tokenize_words, ...,
   mismatch <- as.integer(mismatch)
   gap      <- as.integer(gap)
 
-  # Prepare the character vectors
-  if (length(a) == 1 & length(b) == 1) {
-    assert_that(is.function(tokenizer))
-    a <- tokenizer(a, ...)
-    b <- tokenizer(b, ...)
-  } else {
-    if (!missing(tokenizer))
-      stop("Do not specify a tokenizer if providing character vectors.")
-  }
+  # Prepare the character vectors. Tokenize to words to compare word by word.
+  # Use all lower case for the comparison, but use original capitalization in
+  # the output.
+  a_orig <- tokenize_words(a, lowercase = FALSE)
+  b_orig <- tokenize_words(b, lowercase = FALSE)
+  a <- str_to_lower(a_orig)
+  b <- str_to_lower(b_orig)
 
   # Create the integer matrix
   m <- matrix(0L, length(b) + 1L, length(a) + 1L)
@@ -87,24 +84,24 @@ align_local <- function(a, b, tokenizer = tokenize_words, ...,
     # to `a` and the rows correspond to `b`.
     if (up == max_cell) {
       row_i <- row_i - 1
-      bword <- b[row_i - 1]
+      bword <- b_orig[row_i - 1]
       b_out[out_i] <- bword
       a_out[out_i] <- mark_chars(bword, delete_mark)
     } else if (left == max_cell) {
       col_i <- col_i - 1
-      aword <- a[col_i - 1]
+      aword <- a_orig[col_i - 1]
       b_out[out_i] <- mark_chars(aword, delete_mark)
       a_out[out_i] <- aword
     } else if (diagn == max_cell) {
       row_i <- row_i - 1
       col_i <- col_i - 1
-      bword <-  b[row_i - 1]
-      aword <- a[col_i - 1]
+      bword <-  b_orig[row_i - 1]
+      aword <- a_orig[col_i - 1]
 
       # Diagonals are a special case, because instead of an insertion or a
       # deletion we might have a substitution of words. If that is the case,
       # then treat it like a double insertion and deletion.
-      if (aword == bword) {
+      if (str_to_lower(aword) == str_to_lower(bword)) {
         b_out[out_i] <- bword
         a_out[out_i] <- aword
       } else {
