@@ -51,6 +51,8 @@
 #' @importFrom Rcpp sourceCpp
 #' @import stringr
 #' @import assertthat
+#' @importFrom stats runif
+#' @importFrom utils getTxtProgressBar setTxtProgressBar txtProgressBar
 NULL
 
 if (getRversion() >= "2.15.1") {
