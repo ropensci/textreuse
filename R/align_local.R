@@ -1,21 +1,22 @@
 #' @export
 # http://etherealbits.com/2013/04/string-alignment-dynamic-programming-dna/
 align_local <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
-                        edit_mark = "#") {
+                        edit_mark = "#", progress = interactive()) {
  assert_that(identical(class(a), class(b)))
  UseMethod("align_local", a)
 }
 
 #' @export
 align_local.TextReuseTextDocument <- function(a, b, match = 2L, mismatch = -1L,
-                                              gap = -1L, edit_mark = "#") {
+                                              gap = -1L, edit_mark = "#",
+                                              progress = interactive()) {
   align_local(content(a), content(b), match = match, mismatch = mismatch,
               gap = gap, edit_mark = edit_mark)
 }
 
 #' @export
 align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
-                                edit_mark = "#") {
+                                edit_mark = "#", progress = interactive()) {
 
   assert_that(is.string(a),
               is.string(b),
@@ -50,8 +51,11 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   # rownames(m) <- c(NA, b)
   # colnames(m) <- c(NA, a)
 
+  # Only show a progress bar for long computations
+  if (length(m) < 1e6) progress <- FALSE
+
   # Calculate the matrix of possible paths
-  m <- sw_matrix(m, a, b, match, mismatch, gap)
+  m <- sw_matrix(m, a, b, match, mismatch, gap, progress)
 
   # Find the starting place in the matrix
   max_match <- which(m == max(m), arr.ind = TRUE, useNames = FALSE)

@@ -42,8 +42,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // sw_matrix
-IntegerMatrix sw_matrix(IntegerMatrix m, CharacterVector a, CharacterVector b, int match, int mismatch, int gap);
-RcppExport SEXP textreuse_sw_matrix(SEXP mSEXP, SEXP aSEXP, SEXP bSEXP, SEXP matchSEXP, SEXP mismatchSEXP, SEXP gapSEXP) {
+IntegerMatrix sw_matrix(IntegerMatrix m, CharacterVector a, CharacterVector b, int match, int mismatch, int gap, bool progress);
+RcppExport SEXP textreuse_sw_matrix(SEXP mSEXP, SEXP aSEXP, SEXP bSEXP, SEXP matchSEXP, SEXP mismatchSEXP, SEXP gapSEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -53,7 +53,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type match(matchSEXP);
     Rcpp::traits::input_parameter< int >::type mismatch(mismatchSEXP);
     Rcpp::traits::input_parameter< int >::type gap(gapSEXP);
-    __result = Rcpp::wrap(sw_matrix(m, a, b, match, mismatch, gap));
+    Rcpp::traits::input_parameter< bool >::type progress(progressSEXP);
+    __result = Rcpp::wrap(sw_matrix(m, a, b, match, mismatch, gap, progress));
     return __result;
 END_RCPP
 }
