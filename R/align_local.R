@@ -47,12 +47,20 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   b <- str_to_lower(b_orig)
 
   # Only show a progress bar for long computations
-  if ((length(a) + 1L) * (length(b) + 1L) < 1e7) progress <- FALSE
+  n_rows <- length(b) + 1L
+  n_cols <- length(a) + 1L
+  if (n_rows * n_cols < 1e7) progress <- FALSE
 
   # Create the integer matrix
-  m <- matrix(0L, length(b) + 1L, length(a) + 1L)
+  if (progress) {
+    message("Preparing a matrix with ",
+            prettyNum(n_rows * n_cols, big.mark = ","),
+            " elements.")
+  }
+  m <- matrix(0L, n_rows, n_cols)
 
   # Calculate the matrix of possible paths
+  if (progress) message("Computing the optimal local alignment.")
   m <- sw_matrix(m, a, b, match, mismatch, gap, progress)
 
   # Find the starting place in the matrix
@@ -60,8 +68,11 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   max_match <- which(m == alignment_score, arr.ind = TRUE, useNames = FALSE)
 
   if (nrow(max_match) > 1) {
-    message("Multiple best alignments found; selecting only one of them.")
+    warning("Multiple optimal local alignments found; selecting only one of them.",
+            call. = FALSE)
   }
+
+  if (progress) message("Extracting the local alignment.")
 
   # Create output vectors which are as long as conceivably necessary
   a_out <- vector(mode = "character", length = max(max_match))
