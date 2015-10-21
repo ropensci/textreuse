@@ -77,7 +77,7 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   out_i = out_i + 1L # Advance the out vector position
 
   # Begin moving up, left, or diagonally within the matrix till we hit a zero
-  while (m[row_i, col_i] != 0) {
+  while (m[row_i - 1, col_i - 1] != 0) {
 
     # Values of the current cell, the cells up, left, diagonal, and the max
     up       <- m[row_i - 1, col_i]
@@ -130,9 +130,6 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
     # Move forward one position in the out vectors, no matter which direction
     # we moved
     out_i <- out_i + 1
-
-    # Don't run out of room in the `a` and `b` vectors
-    if (row_i == 2 || col_i == 2) break
 
   }
 
