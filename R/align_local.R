@@ -148,3 +148,13 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   alignment
 
 }
+
+#' @export
+print.textreuse_alignment <- function(x, ...) {
+  cat("TextReuse alignment\n")
+  cat("Document A:\n")
+  cat(str_wrap(x$a_edits, width = 72))
+  cat("\n\nDocument B:\n")
+  cat(str_wrap(x$b_edits, width = 72))
+  invisible(x)
+}
