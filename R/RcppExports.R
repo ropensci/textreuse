@@ -20,3 +20,7 @@ skip_ngrams <- function(words, n, k) {
     .Call('textreuse_skip_ngrams', PACKAGE = 'textreuse', words, n, k)
 }
 
+sw_matrix <- function(m, a, b, match, mismatch, gap) {
+    .Call('textreuse_sw_matrix', PACKAGE = 'textreuse', m, a, b, match, mismatch, gap)
+}
+

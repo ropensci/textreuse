@@ -59,6 +59,14 @@ assertthat::on_failure(is_candidates_df) <- function(call, env) {
   "Object is not a candidates data frame."
 }
 
+is_integer_like <- function(x) {
+  is.integer(x) | (is.scalar(x) & (x == as.integer(x)))
+}
+
+assertthat::on_failure(is_integer_like) <- function(call, env) {
+ paste0(deparse(call$x), " is not integer like.")
+}
+
 sort_meta <- function(meta) {
   meta[order(names(meta))]
 }
