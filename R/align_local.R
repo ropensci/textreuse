@@ -1,20 +1,25 @@
 #' @export
+# http://etherealbits.com/2013/04/string-alignment-dynamic-programming-dna/
 align_local <- function(a, b, tokenizer = tokenize_words, ...,
-                        match = 2L, mismatch = -1L, gap = -1L) {
+                        match = 2L, mismatch = -1L, gap = -1L,
+                        delete_mark = "#") {
 
   assert_that(is.character(a),
               is.character(b),
               is_integer_like(match),
               is_integer_like(mismatch),
-              is_integer_like(gap))
+              is_integer_like(gap),
+              is.string(delete_mark))
 
-  if (match <= 0 || mismatch > 0 || gap > 0) {
+  if (match <= 0 || mismatch > 0 || gap > 0 || !(nchar(delete_mark) == 1)) {
     stop("The scoring parameters should have the following characteristics:\n",
          "    - `match` should be a positive integer\n",
          "    - `mismatch` should be a negative integer or zero\n",
-         "    - `gap` should be a negative integer or zero\n")
+         "    - `gap` should be a negative integer or zero\n",
+         "    - `delete_mark` should be a single character\n")
   }
 
+  # Keep everything as integers because IntegerMatrix saves memory
   match    <- as.integer(match)
   mismatch <- as.integer(mismatch)
   gap      <- as.integer(gap)
@@ -31,13 +36,103 @@ align_local <- function(a, b, tokenizer = tokenize_words, ...,
 
   # Create the integer matrix
   m <- matrix(0L, length(b) + 1L, length(a) + 1L)
-  rownames(m) <- c(NA, b)
-  colnames(m) <- c(NA, a)
+  # rownames(m) <- c(NA, b)
+  # colnames(m) <- c(NA, a)
 
+  # Calculate the matrix of possible paths
   m <- sw_matrix(m, a, b, match, mismatch, gap)
 
-  m <- sw_traceback(m)
+  # Find the starting place in the matrix
+  max_match <- which(m == max(m), arr.ind = TRUE, useNames = FALSE)
 
-  m
+  if (nrow(max_match) > 1) {
+    message("Multiple best alignments found; selecting only one of them.")
+  }
+
+  # Create output vectors which are as long as conceivably necessary
+  a_out <- vector(mode = "character", length = max(max_match))
+  b_out <- vector(mode = "character", length = max(max_match))
+  a_out[] <- NA_character_
+  b_out[] <- NA_character_
+
+  # Initialize counters for the matrix and the output vector
+  row_i <- max_match[1, 1]
+  col_i <- max_match[1, 2]
+  out_i <- 1L
+
+  # Place our first known values in the output vectors
+  b_out[out_i] <- b[row_i - 1]
+  a_out[out_i] <- a[col_i - 1]
+  out_i = out_i + 1L # Advance the out vector position
+
+  # Begin moving up, left, or diagonally within the matrix till we hit a zero
+  while (m[row_i, col_i] != 0) {
+
+    # Values of the current cell, the cells up, left, diagonal, and the max
+    up       <- m[row_i - 1, col_i]
+    left     <- m[row_i, col_i - 1]
+    diagn    <- m[row_i - 1, col_i - 1]
+    max_cell <- max(up, left, diagn)
+
+    # Move in the direction of the maximum cell. If there are ties, choose up
+    # first, then left, then diagonal. Privilege up and left because they
+    # preserve edits.
+    #
+    # In each case add the current words to the out vectors. For moves up and
+    # and left there will be an insertion/deletion, so add a symbol like ####
+    # that is the same number of characters as the word in the other vector.
+    #
+    # Note that the index of the matrix is offset by one from character vectors
+    # a and b, so we use the row and column indices - 1. The column corresponds
+    # to `a` and the rows correspond to `b`.
+    if (up == max_cell) {
+      row_i <- row_i - 1
+      bword <- b[row_i - 1]
+      b_out[out_i] <- bword
+      a_out[out_i] <- mark_chars(bword, delete_mark)
+    } else if (left == max_cell) {
+      col_i <- col_i - 1
+      aword <- a[col_i - 1]
+      b_out[out_i] <- mark_chars(aword, delete_mark)
+      a_out[out_i] <- aword
+    } else if (diagn == max_cell) {
+      row_i <- row_i - 1
+      col_i <- col_i - 1
+      bword <-  b[row_i - 1]
+      aword <- a[col_i - 1]
+
+      # Diagonals are a special case, because instead of an insertion or a
+      # deletion we might have a substitution of words. If that is the case,
+      # then treat it like a double insertion and deletion.
+      if (aword == bword) {
+        b_out[out_i] <- bword
+        a_out[out_i] <- aword
+      } else {
+        b_out[out_i] <- bword
+        a_out[out_i] <- mark_chars(bword, delete_mark)
+        out_i <- out_i + 1
+        b_out[out_i] <- mark_chars(aword, delete_mark)
+        a_out[out_i] <- aword
+      }
+    }
+
+    # Move forward one position in the out vectors, no matter which direction
+    # we moved
+    out_i <- out_i + 1
+
+    # Don't run out of room in the `a` and `b` vectors
+    if (row_i == 2 || col_i == 2) break
+
+  }
+
+  # Clean up the outputs
+  b_out <- str_c(rev(b_out[!is.na(b_out)]), collapse = " ")
+  a_out <- str_c(rev(a_out[!is.na(a_out)]), collapse = " ")
+
+  # Create the alignment object
+  alignment <- list(a_edits = a_out, b_edits = b_out)
+  class(alignment) <- "textreuse_alignment"
+
+  alignment
 
 }

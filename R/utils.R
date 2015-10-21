@@ -89,3 +89,8 @@ sort_df_by_columns <- function(df) {
   # rownames(df) <- NULL
   df
 }
+
+# Given a word, create a string with the same number of marker characters
+mark_chars <- function(word, char) {
+  str_c(rep(char, str_length(word)), collapse = "")
+}
