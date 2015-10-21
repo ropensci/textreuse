@@ -64,7 +64,7 @@ is_integer_like <- function(x) {
 }
 
 assertthat::on_failure(is_integer_like) <- function(call, env) {
- paste0(deparse(call$x), " is not integer like.")
+ paste0(deparse(call$x), " is not a whole number.")
 }
 
 sort_meta <- function(meta) {

@@ -1,11 +1,19 @@
 #' @export
 align_local <- function(a, b, tokenizer = tokenize_words, ...,
                         match = 2L, mismatch = -1L, gap = -1L) {
+
   assert_that(is.character(a),
               is.character(b),
               is_integer_like(match),
               is_integer_like(mismatch),
               is_integer_like(gap))
+
+  if (match <= 0 || mismatch > 0 || gap > 0) {
+    stop("The scoring parameters should have the following characteristics:\n",
+         "    - `match` should be a positive integer\n",
+         "    - `mismatch` should be a negative integer or zero\n",
+         "    - `gap` should be a negative integer or zero\n")
+  }
 
   match    <- as.integer(match)
   mismatch <- as.integer(mismatch)
