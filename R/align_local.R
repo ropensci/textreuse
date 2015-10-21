@@ -46,13 +46,11 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   a <- str_to_lower(a_orig)
   b <- str_to_lower(b_orig)
 
+  # Only show a progress bar for long computations
+  if ((length(a) + 1L) * (length(b) + 1L) < 1e7) progress <- FALSE
+
   # Create the integer matrix
   m <- matrix(0L, length(b) + 1L, length(a) + 1L)
-  # rownames(m) <- c(NA, b)
-  # colnames(m) <- c(NA, a)
-
-  # Only show a progress bar for long computations
-  if (length(m) < 1e6) progress <- FALSE
 
   # Calculate the matrix of possible paths
   m <- sw_matrix(m, a, b, match, mismatch, gap, progress)
@@ -115,7 +113,6 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
       col_i <- col_i - 1
       bword <-  b_orig[row_i - 1]
       aword <- a_orig[col_i - 1]
-
       # Diagonals are a special case, because instead of an insertion or a
       # deletion we might have a substitution of words. If that is the case,
       # then treat it like a double insertion and deletion.
