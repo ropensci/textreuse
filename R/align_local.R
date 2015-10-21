@@ -36,6 +36,8 @@ align_local <- function(a, b, tokenizer = tokenize_words, ...,
 
   m <- sw_matrix(m, a, b, match, mismatch, gap)
 
+  m <- sw_traceback(m)
+
   m
 
 }

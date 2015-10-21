@@ -24,3 +24,7 @@ sw_matrix <- function(m, a, b, match, mismatch, gap) {
     .Call('textreuse_sw_matrix', PACKAGE = 'textreuse', m, a, b, match, mismatch, gap)
 }
 
+sw_traceback <- function(m) {
+    .Call('textreuse_sw_traceback', PACKAGE = 'textreuse', m)
+}
+

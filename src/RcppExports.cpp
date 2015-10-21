@@ -57,3 +57,14 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// sw_traceback
+IntegerMatrix sw_traceback(IntegerMatrix m);
+RcppExport SEXP textreuse_sw_traceback(SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type m(mSEXP);
+    __result = Rcpp::wrap(sw_traceback(m));
+    return __result;
+END_RCPP
+}
