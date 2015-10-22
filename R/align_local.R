@@ -1,5 +1,73 @@
+#' Local alignment of natural language texts
+#'
+#' This function takes two texts, either as strings or as
+#' \code{TextReuseTextDocument} objects, and finds the optimal local alignment
+#' of those texts. A local alignment finds the best matching subset of the two
+#' documents. This function adapts the
+#' \href{https://en.wikipedia.org/wiki/Smith-Waterman_algorithm}{Smith-Waterman
+#' algorithm}, used for genetic sequencing, for use with natural language. It
+#' compare the texts word by word (the comparison is case-insensitive) and
+#' scores them according to a set of parameters. These parameters define the
+#' score for a \code{match}, and the penalties for a \code{mismatch} and for
+#' opening a \code{gap} (i.e., the first mismatch in a potential sequence). The
+#' function then reports the optimal local alignment. Only the subset of the
+#' documents that is a match is included. Insertions or deletions in the text
+#' are reported with the \code{edit_mark} character.
+#'
+#' @param a A character vector of length one, or a
+#'   \code{\link{TextReuseTextDocument}}.
+#' @param b A character vector of length one, or a
+#'   \code{\link{TextReuseTextDocument}}.
+#' @param match The score to assign a matching word. Should be a positive
+#'   integer.
+#' @param mismatch The score to assign a mismatching word. Should be a negative
+#'   integer or zero.
+#' @param gap The penalty for opening a gap in the sequence. Should be a
+#'   negative integer or zero.
+#' @param edit_mark A single character used for displaying for displaying
+#'   insertions/deletions in the documents.
+#' @param progress Display a progress bar and messages while computing the
+#'   alignment.
+#'
+#' @return A list with the class \code{textreuse_alignment}. This list contains
+#'   several elements: \itemize{ \item \code{a_edit} and \code{b_edit}:
+#'   Character vectors of the sequences with edits marked. \item \code{score}:
+#'   The score of the optimal alignment. }
+#'
+#' @details
+#'
+#' The compute time of this function is proportional to the product of the
+#' lengths of the two documents. Thus, longer documents will take considerably
+#' more time to compute. This function has been tested with pairs of documents
+#' containing about 25 thousand words each.
+#'
+#' If the function reports that there were multiple optimal alignments, then it
+#' is likely that there is no strong match in the document.
+#'
+#' The score reported for the local alignment is dependent on both the size of
+#' the documents and on the strength of the match, as well as on the parameters
+#' for match, mismatch, and gap penalties, so the scores are not directly
+#' comparable.
+#'
+#' @references For a useful description of the algorithm, see
+#'   \href{http://etherealbits.com/2013/04/string-alignment-dynamic-programming-dna/}{this
+#'   post}. For the application of the Smith-Waterman algorithm to natural
+#'   language, see David A. Smith, Ryan Cordell, and Elizabeth Maddock Dillon,
+#'   "Infectious Texts: Modeling Text Reuse in Nineteenth-Century Newspapers."
+#'   IEEE International Conference on Big Data, 2013,
+#'   \url{http://hdl.handle.net/2047/d20004858}.
+#'
+#' @examples
+#' align_local("The answer is blowin' in the wind.",
+#'             "As the Bob Dylan song says, the answer is blowing in the wind.")
+#'
+#' # Example of matching documents from a corpus
+#' dir <- system.file("extdata/legal", package = "textreuse")
+#' corpus <- TextReuseCorpus(dir = dir, progress = FALSE)
+#' alignment <- align_local(corpus[["ca1851-match"]], corpus[["ny1850-match"]])
+#' str(alignment)
+#'
 #' @export
-# http://etherealbits.com/2013/04/string-alignment-dynamic-programming-dna/
 align_local <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
                         edit_mark = "#", progress = interactive()) {
  assert_that(identical(class(a), class(b)))
@@ -47,8 +115,8 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   b <- str_to_lower(b_orig)
 
   # Only show a progress bar for long computations
-  n_rows <- length(b) + 1L
-  n_cols <- length(a) + 1L
+  n_rows <- length(b) + 1
+  n_cols <- length(a) + 1
   if (n_rows * n_cols < 1e7) progress <- FALSE
 
   # Create the integer matrix
