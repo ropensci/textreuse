@@ -220,7 +220,7 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
 
   # Create the alignment object
   alignment <- list(a_edits = a_out, b_edits = b_out, score = alignment_score)
-  class(alignment) <- "textreuse_alignment"
+  class(alignment) <- c("textreuse_alignment", "list")
 
   alignment
 
