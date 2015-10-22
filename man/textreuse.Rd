@@ -25,6 +25,8 @@ specific paths for working with the package.
 
 \code{vignette("textreuse-minhash", package = "textreuse")}
 
+\code{vignette("textreuse-alignment", package = "textreuse")}
+
 Another good place to beign with the package is the documentation for loading
 documents (\code{\link{TextReuseTextDocument}} and
 \code{\link{TextReuseCorpus}}), for \link{tokenizers},

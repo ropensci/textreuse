@@ -75,6 +75,7 @@ Pairwise comparisons can be very time-consuming because they grow geometrically 
 vignette("textreuse-introduction", package = "textreuse")
 vignette("textreuse-pairwise", package = "textreuse")
 vignette("textreuse-minhash", package = "textreuse")
+vignette("textreuse-alignment", package = "textreuse")
 ```
 
 ### Citation
