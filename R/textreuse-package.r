@@ -9,14 +9,14 @@
 #'
 #' The best place to begin with this package in the introductory vignette.
 #'
-#' \code{vignette("introduction", package = "textreuse")}
+#' \code{vignette("textreuse-introduction", package = "textreuse")}
 #'
 #' After reading that vignette, the "pairwise" and "minhash" vignettes introduce
 #' specific paths for working with the package.
 #'
-#' \code{vignette("pairwise", package = "textreuse")}
+#' \code{vignette("textreuse-pairwise", package = "textreuse")}
 #'
-#' \code{vignette("minhash", package = "textreuse")}
+#' \code{vignette("textreuse-minhash", package = "textreuse")}
 #'
 #' Another good place to beign with the package is the documentation for loading
 #' documents (\code{\link{TextReuseTextDocument}} and
