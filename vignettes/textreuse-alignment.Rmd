@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Local alignment is the process of finding taking two documents and finding the best subset of each document that aligns with one another. A commonly used local alignment algorithm for genetics is the [Smith-Waterman algorithm]. This package offers a version of the Smith-Waterman algorithm intended to be used for natural language processing.
+Local alignment is the process of finding taking two documents and finding the best subset of each document that aligns with one another. A commonly used local alignment algorithm for genetics is the [Smith-Waterman algorithm](https://en.wikipedia.org/wiki/Smith-Waterman_algorithm). This package offers a version of the Smith-Waterman algorithm intended to be used for natural language processing.
 
 Consider these two documents. The first is part of Shakespeare's *Measure for Measure*. The second is a made-up piece of literary criticism quoting the play, but our imaginary literary critic has bungled the quotation. This is a common class of problems (not bungling literary critics but) documents which contain pieces, often heavily modified, from other documents.
 
