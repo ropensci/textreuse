@@ -50,6 +50,7 @@
 #' @docType package
 #' @useDynLib textreuse
 #' @importFrom Rcpp sourceCpp
+#' @import RcppProgress
 #' @import stringr
 #' @import assertthat
 NULL
