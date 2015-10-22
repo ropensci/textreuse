@@ -1,0 +1,41 @@
+---
+title: "Text Alignment"
+author: "Lincoln Mullen"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Text alignment}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Local alignment is the process of finding taking two documents and finding the best subset of each document that aligns with one another. A commonly used local alignment algorithm for genetics is the [Smith-Waterman algorithm]. This package offers a version of the Smith-Waterman algorithm intended to be used for natural language processing.
+
+Consider these two documents. The first is part of Shakespeare's *Measure for Measure*. The second is a made-up piece of literary criticism quoting the play, but our imaginary literary critic has bungled the quotation. This is a common class of problems (not bungling literary critics but) documents which contain pieces, often heavily modified, from other documents.
+
+```{r}
+shakespeare <- paste(
+  "Haste still pays haste, and leisure answers leisure;",
+  "Like doth quit like, and MEASURE still FOR MEASURE.",
+  "Then, Angelo, thy fault's thus manifested;",
+  "Which, though thou wouldst deny, denies thee vantage.",
+  "We do condemn thee to the very block",
+  "Where Claudio stoop'd to death, and with like haste.",
+  "Away with him!")
+critic <- paste(
+  "The play comes to its culmination where Duke Vincentio, quoting from",
+  "the words of the Sermon on the Mount, says,",
+  "'Haste still goes very quickly , and leisure answers leisure;",
+  "Like doth cancel like, and measure still for measure.'",
+  "These titular words sum up the meaning of the play.")
+```
+
+We can uses the local alignment function to extract the part of the text that was borrowed. Notice that the resulting object shows us the changes that have been made.
+
+```{r}
+library(textreuse)
+align_local(shakespeare, critic)
+```
+
+See the documentation for the function to see how to tune the match: `?align_local`. This function works with character vectors or with documents of class `TextReuseTextDocument`.
+

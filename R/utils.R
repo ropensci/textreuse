@@ -59,6 +59,14 @@ assertthat::on_failure(is_candidates_df) <- function(call, env) {
   "Object is not a candidates data frame."
 }
 
+is_integer_like <- function(x) {
+  is.integer(x) | (is.scalar(x) & (x == as.integer(x)))
+}
+
+assertthat::on_failure(is_integer_like) <- function(call, env) {
+ paste0(deparse(call$x), " is not a whole number.")
+}
+
 sort_meta <- function(meta) {
   meta[order(names(meta))]
 }
@@ -80,4 +88,9 @@ sort_df_by_columns <- function(df) {
   df <- df[with(df, order(a, b)), ]
   # rownames(df) <- NULL
   df
+}
+
+# Given a word, create a string with the same number of marker characters
+mark_chars <- function(word, char) {
+  str_c(rep(char, str_length(word)), collapse = "")
 }

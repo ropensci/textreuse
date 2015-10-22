@@ -22,3 +22,7 @@ test_that("data frames can be sorted by columns", {
   rownames(df2) <- NULL
   expect_identical(df1, df2)
 })
+
+test_that("edit marks can be created correctly", {
+  expect_equal(mark_chars("word", "#"), "####")
+})

@@ -9,20 +9,23 @@
 This R package provides a set of functions for measuring similarity among
 documents and detecting passages which have been reused. It implements
 shingled n-gram, skip n-gram, and other tokenizers; similarity/dissimilarity
-functions; pairwise comparisons; and minhash and locality sensitive hashing
-algorithms.
+functions; pairwise comparisons; minhash and locality sensitive hashing
+algorithms, and a version of the Smith-Waterman local alignment algorithm
+suitable for natural language.
 }
 \details{
 The best place to begin with this package in the introductory vignette.
 
-\code{vignette("introduction", package = "textreuse")}
+\code{vignette("textreuse-introduction", package = "textreuse")}
 
 After reading that vignette, the "pairwise" and "minhash" vignettes introduce
 specific paths for working with the package.
 
-\code{vignette("pairwise", package = "textreuse")}
+\code{vignette("textreuse-pairwise", package = "textreuse")}
 
-\code{vignette("minhash", package = "textreuse")}
+\code{vignette("textreuse-minhash", package = "textreuse")}
+
+\code{vignette("textreuse-alignment", package = "textreuse")}
 
 Another good place to beign with the package is the documentation for loading
 documents (\code{\link{TextReuseTextDocument}} and
