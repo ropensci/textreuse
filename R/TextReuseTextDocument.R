@@ -17,6 +17,8 @@
 #' @param ... Arguments passed on to the \code{tokenizer}.
 #' @param hash_func A function to hash the tokens. See
 #'   \code{\link{hash_string}}.
+#' @param minhash_func A function to create minhash signatures of the document.
+#'   See \code{\link{minhash_generator}}.
 #' @param keep_tokens Should the tokens be saved in the document that is
 #'   returned or discarded?
 #' @param keep_text Should the text be saved in the document that is returned or
@@ -41,8 +43,11 @@
 #'   from the virtual S3 class \code{\link[NLP]{TextDocument}} in the NLP
 #'   package. It contains the following elements: \describe{ \item{content}{The
 #'   text of the document.} \item{tokens}{The tokens created from the text.}
-#'   \item{hashes}{Hashes created from the tokens.} \item{metadata}{The document
-#'   metadata, including the filename (if any) in \code{file}.} }
+#'   \item{hashes}{Hashes created from the tokens.} \item{minhashes}{The minhash
+#'   signature of the document.} \item{metadata}{The document metadata,
+#'   including the filename (if any) in \code{file}.} }
+#'
+#' @seealso \link[=TextReuseTextDocument-accessors]{Access for TextReuse objects}.
 #'
 #' @examples
 #' file <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")
@@ -58,6 +63,7 @@
 TextReuseTextDocument <- function(text, file = NULL, meta = list(),
                                   tokenizer = tokenize_ngrams, ...,
                                   hash_func = hash_string,
+                                  minhash_func = NULL,
                                   keep_tokens = FALSE,
                                   keep_text = TRUE,
                                   skip_short = TRUE) {
@@ -87,6 +93,7 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
     }
   }
 
+  # Tokenize and hash
   if (!is.null(tokenizer)) {
 
     assert_that(is.function(tokenizer))
@@ -97,11 +104,24 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
     hash_func_name <- as.character(substitute(hash_func))
     hashes <- hash_func(tokens)
 
+    # Also minhash if requested
+    if (!is.null(minhash_func)) {
+      assert_that(is.function(minhash_func))
+      minhash_func_name <- as.character(substitute(minhash_func))
+      minhashes <- minhash_func(tokens)
+    } else {
+      minhashes <- NULL
+      minhash_func_name <- NULL
+    }
+
   } else {
     tokens <- NULL
     hashes <- NULL
+    minhashes <- NULL
     tokenizer_name <- NULL
     hash_func_name <- NULL
+    minhash_func_name <- NULL
+
   }
 
   if (!keep_tokens) tokens <- NULL
@@ -111,7 +131,8 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
     meta <- list(file = file,
                  id = filenames(file),
                  tokenizer = tokenizer_name,
-                 hash_func = hash_func_name)
+                 hash_func = hash_func_name,
+                 minhash_func = minhash_func_name)
   }
   assert_that(is.list(meta))
   if (!is.null(file)) {
@@ -119,18 +140,21 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
     meta$id <- filenames(file)
   }
   # Don't overwrite these when called from TextReuseCorpus
-  if (is.null(meta$tokenizer) & is.null(meta$hash_func)) {
+  if (is.null(meta$tokenizer) & is.null(meta$hash_func) &
+      is.null(meta$minhash_func)) {
     meta$tokenizer <- tokenizer_name
     meta$hash_func <- hash_func_name
+    meta$minhash_func <- minhash_func_name
   }
 
   meta <- sort_meta(meta)
 
   doc <- list(
-    content = text,
-    tokens  = tokens,
-    hashes  = hashes,
-    meta    = meta
+    content   = text,
+    tokens    = tokens,
+    hashes    = hashes,
+    minhashes = minhashes,
+    meta      = meta
     )
 
   class(doc) <- c("TextReuseTextDocument", "TextDocument")
@@ -276,6 +300,31 @@ hashes.TextReuseCorpus <- function(x) {
   x
 }
 
+#' @export
+#' @rdname TextReuseTextDocument-accessors
+minhashes <- function(x) UseMethod("minhashes", x)
+
+#' @export
+minhashes.TextReuseTextDocument <- function(x) x$minhashes
+
+#' @export
+minhashes.TextReuseCorpus <- function(x) {
+  corpus_names <- names(x)
+  l <- lapply(x$documents, function(i) minhashes(i))
+  names(l) <- corpus_names
+  l
+}
+
+#' @export
+#' @rdname TextReuseTextDocument-accessors
+`minhashes<-` <- function(x, value) UseMethod("minhashes<-", x)
+
+#' @export
+`minhashes<-.TextReuseTextDocument` <- function(x, value) {
+  x$minhashes <- value
+  x
+}
+
 #' @param x An R object to check.
 #' @export
 #' @rdname TextReuseTextDocument
@@ -314,4 +363,15 @@ has_hashes <- function(x) {
 
 assertthat::on_failure(has_hashes) <- function(call, env) {
   "Document does not have hashes."
+}
+
+#' @export
+#' @rdname TextReuseTextDocument
+has_minhashes <- function(x) {
+  assert_that(is.TextReuseTextDocument(x))
+  !is.null(x$minhashes)
+}
+
+assertthat::on_failure(has_minhashes) <- function(call, env) {
+  "Document does not have a minhash signature."
 }

@@ -4,13 +4,15 @@
 \alias{TextReuseTextDocument}
 \alias{has_content}
 \alias{has_hashes}
+\alias{has_minhashes}
 \alias{has_tokens}
 \alias{is.TextReuseTextDocument}
 \title{TextReuseTextDocument}
 \usage{
 TextReuseTextDocument(text, file = NULL, meta = list(),
   tokenizer = tokenize_ngrams, ..., hash_func = hash_string,
-  keep_tokens = FALSE, keep_text = TRUE, skip_short = TRUE)
+  minhash_func = NULL, keep_tokens = FALSE, keep_text = TRUE,
+  skip_short = TRUE)
 
 is.TextReuseTextDocument(x)
 
@@ -19,6 +21,8 @@ has_content(x)
 has_tokens(x)
 
 has_hashes(x)
+
+has_minhashes(x)
 }
 \arguments{
 \item{text}{A character vector containing the text of the document. This
@@ -41,6 +45,9 @@ hashing will be skipped.}
 \item{hash_func}{A function to hash the tokens. See
 \code{\link{hash_string}}.}
 
+\item{minhash_func}{A function to create minhash signatures of the document.
+See \code{\link{minhash_generator}}.}
+
 \item{keep_tokens}{Should the tokens be saved in the document that is
 returned or discarded?}
 
@@ -56,8 +63,9 @@ An object of class \code{TextReuseTextDocument}. This object inherits
   from the virtual S3 class \code{\link[NLP]{TextDocument}} in the NLP
   package. It contains the following elements: \describe{ \item{content}{The
   text of the document.} \item{tokens}{The tokens created from the text.}
-  \item{hashes}{Hashes created from the tokens.} \item{metadata}{The document
-  metadata, including the filename (if any) in \code{file}.} }
+  \item{hashes}{Hashes created from the tokens.} \item{minhashes}{The minhash
+  signature of the document.} \item{metadata}{The document metadata,
+  including the filename (if any) in \code{file}.} }
 }
 \description{
 This is the constructor function for \code{TextReuseTextDocument} objects.
@@ -88,5 +96,8 @@ head(hashes(doc))
 \dontrun{
 content(doc)
 }
+}
+\seealso{
+\link[=TextReuseTextDocument-accessors]{Access for TextReuse objects}.
 }
 

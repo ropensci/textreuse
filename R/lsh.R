@@ -54,7 +54,7 @@
 #' minhash <- minhash_generator(200, seed = 235)
 #' corpus <- TextReuseCorpus(dir = dir,
 #'                           tokenizer = tokenize_ngrams, n = 5,
-#'                           hash_func = minhash)
+#'                           minhash_func = minhash)
 #' buckets <- lsh(corpus, bands = 50)
 #' buckets
 #'@export
@@ -67,7 +67,7 @@ lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
 
   assert_that(is.count(bands))
 
-  h <- length(hashes(x[[1]])) # number of hashes
+  h <- length(minhashes(x[[1]])) # number of hashes
   d <- length(x) # number of documents
   r <- h / bands # number of rows
 
@@ -78,10 +78,10 @@ lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
       rep(vapply(1:bands, function(i) rep(i, r), integer(r)), d)
     )
 
-  all_hashes <- hashes(x)
-  col_names <- names(all_hashes)
+  all_minhashes <- minhashes(x)
+  col_names <- names(all_minhashes)
 
-  buckets <- all_hashes %>%
+  buckets <- all_minhashes %>%
     dplyr::as_data_frame() %>%
     tidyr::gather_("doc", "hash", col_names) %>%
     dplyr::mutate_(doc = ~as.character(doc)) %>%
@@ -122,10 +122,11 @@ digest_progress <- function(x, pb, progress) {
 #' @export
 lsh.TextReuseTextDocument <- function(x, bands, progress) {
 
-  assert_that(is.count(bands))
+  assert_that(is.count(bands),
+              has_minhashes(x))
 
-  all_hashes <- hashes(x)
-  h <- length(all_hashes) # number of hashes
+  all_minhashes <- minhashes(x)
+  h <- length(all_minhashes) # number of hashes
   r <- h / bands # number of rows
 
   assert_that(check_banding(h, bands))
@@ -136,7 +137,7 @@ lsh.TextReuseTextDocument <- function(x, bands, progress) {
     )
 
 
-  buckets <- dplyr::data_frame(doc = x$meta$id, hash = all_hashes) %>%
+  buckets <- dplyr::data_frame(doc = x$meta$id, hash = all_minhashes) %>%
     dplyr::bind_cols(b_assign) %>%
     dplyr::group_by_(~doc, ~band) %>%
     dplyr::summarize_(buckets = ~digest::digest(list(hash, unique(band)))) %>%

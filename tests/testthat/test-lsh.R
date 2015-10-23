@@ -5,10 +5,9 @@ minhash <- minhash_generator(200, seed = 4236)
 corpus <- TextReuseCorpus(dir = dir,
                           tokenizer = tokenize_ngrams, n = 5,
                           keep_tokens = TRUE,
-                          hash_func = minhash)
+                          minhash_func = minhash)
 buckets <- lsh(corpus, bands = 50)
 candidates <- lsh_candidates(buckets)
-corpus <- rehash(corpus, hash_string)
 scores <- lsh_compare(candidates, corpus, jaccard_similarity)
 
 test_that("returns a data frame with additional class", {
@@ -29,7 +28,7 @@ test_that("returns pairs of candidates", {
 })
 
 test_that("additional documents can be added", {
-  corpus2 <- rehash(corpus, minhash)
+  corpus2 <- rehash(corpus, minhash, type = "minhashes")
   buckets1and2 <- lsh(corpus2[1:2], bands = 50)
   buckets3 <- lsh(corpus2[[3]], bands = 50)
   buckets_combined <- dplyr::bind_rows(buckets1and2, buckets3)

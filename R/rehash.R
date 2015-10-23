@@ -1,16 +1,15 @@
 #' Recompute the hashes for a document or corpus
 #'
 #' Given a \code{\link{TextReuseTextDocument}} or a
-#' \code{\link{TextReuseCorpus}}, this function recomputes the hashes with the
-#' function specified. This implies that you have retained the tokens with the
-#' \code{keep_tokens = TRUE} parameter. This function is intended to be used
-#' when changing from keeping only minhashes of the tokens to keeping hashes of
-#' all the tokens. See the vignette on minhash/LSH.
+#' \code{\link{TextReuseCorpus}}, this function recomputes either the hashes or
+#' the minhashes with the function specified. This implies that you have
+#' retained the tokens with the \code{keep_tokens = TRUE} parameter.
 #'
 #' @param x A \code{\link{TextReuseTextDocument}} or
 #'   \code{\link{TextReuseCorpus}}.
-#' @param hash_func A function to hash the tokens. See
-#'   \code{\link{hash_string}}, \code{\link{minhash_generator}}.
+#' @param func A function to either hash the tokens or to generate the minhash
+#'   signature. See \code{\link{hash_string}}, \code{\link{minhash_generator}}.
+#' @param type Recompute the \code{hashes} or \code{minhashes}?
 #'
 #' @return The modified \code{\link{TextReuseTextDocument}} or
 #'   \code{\link{TextReuseCorpus}}.
@@ -18,29 +17,42 @@
 #' @examples
 #' dir <- system.file("extdata/legal", package = "textreuse")
 #' minhash1 <- minhash_generator(seed = 1)
-#' corpus <- TextReuseCorpus(dir = dir, hash_func = minhash1, keep_tokens = TRUE)
-#' head(hashes(corpus[[1]]))
+#' corpus <- TextReuseCorpus(dir = dir, minhash_func = minhash1, keep_tokens = TRUE)
+#' head(minhashes(corpus[[1]]))
 #' minhash2 <- minhash_generator(seed = 2)
-#' corpus <- rehash(corpus, minhash2)
-#' head(hashes(corpus[[2]]))
+#' corpus <- rehash(corpus, minhash2, type = "minhashes")
+#' head(minhashes(corpus[[2]]))
 #'
 #' @export
-rehash <- function(x, hash_func) {
+rehash <- function(x, func, type = c("hashes", "minhashes")) {
   UseMethod("rehash", x)
 }
 
 #' @export
-rehash.TextReuseTextDocument <- function(x, hash_func) {
+rehash.TextReuseTextDocument <- function(x, func,
+                                         type = c("hashes", "minhashes")) {
   assert_that(has_tokens(x),
-              is.function(hash_func))
-  x$hashes <- hash_func(x$tokens)
-  x$meta$hash_func <- as.character(substitute(hash_func))
+              is.function(func))
+  type <- match.arg(type)
+
+  if (type == "hashes") {
+    x$hashes <- func(x$tokens)
+    x$meta$hash_func <- as.character(substitute(func))
+  } else if (type == "minhashes") {
+    x$minhashes <- func(x$tokens)
+    x$meta$minhash_func <- as.character(substitute(func))
+  }
   x
 }
 
 #' @export
-rehash.TextReuseCorpus <- function(x, hash_func) {
-  x$documents <- lapply(x$documents, rehash, hash_func)
-  x$meta$hash_func <- as.character(substitute(hash_func))
+rehash.TextReuseCorpus <- function(x, func,  type = c("hashes", "minhashes")) {
+  assert_that(is.function(func))
+  type <- match.arg(type)
+  x$documents <- lapply(x$documents, rehash, func, type)
+  if (type == "hashes")
+    x$meta$hash_func <- as.character(substitute(func))
+  else if (type == "minhashes")
+    x$meta$minhash_func <- as.character(substitute(func))
   x
 }

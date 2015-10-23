@@ -4,14 +4,16 @@
 \alias{rehash}
 \title{Recompute the hashes for a document or corpus}
 \usage{
-rehash(x, hash_func)
+rehash(x, func, type = c("hashes", "minhashes"))
 }
 \arguments{
 \item{x}{A \code{\link{TextReuseTextDocument}} or
 \code{\link{TextReuseCorpus}}.}
 
-\item{hash_func}{A function to hash the tokens. See
-  \code{\link{hash_string}}, \code{\link{minhash_generator}}.}
+\item{func}{A function to either hash the tokens or to generate the minhash
+signature. See \code{\link{hash_string}}, \code{\link{minhash_generator}}.}
+
+\item{type}{Recompute the \code{hashes} or \code{minhashes}?}
 }
 \value{
 The modified \code{\link{TextReuseTextDocument}} or
@@ -19,19 +21,17 @@ The modified \code{\link{TextReuseTextDocument}} or
 }
 \description{
 Given a \code{\link{TextReuseTextDocument}} or a
-\code{\link{TextReuseCorpus}}, this function recomputes the hashes with the
-function specified. This implies that you have retained the tokens with the
-\code{keep_tokens = TRUE} parameter. This function is intended to be used
-when changing from keeping only minhashes of the tokens to keeping hashes of
-all the tokens. See the vignette on minhash/LSH.
+\code{\link{TextReuseCorpus}}, this function recomputes either the hashes or
+the minhashes with the function specified. This implies that you have
+retained the tokens with the \code{keep_tokens = TRUE} parameter.
 }
 \examples{
 dir <- system.file("extdata/legal", package = "textreuse")
 minhash1 <- minhash_generator(seed = 1)
-corpus <- TextReuseCorpus(dir = dir, hash_func = minhash1, keep_tokens = TRUE)
-head(hashes(corpus[[1]]))
+corpus <- TextReuseCorpus(dir = dir, minhash_func = minhash1, keep_tokens = TRUE)
+head(minhashes(corpus[[1]]))
 minhash2 <- minhash_generator(seed = 2)
-corpus <- rehash(corpus, minhash2)
-head(hashes(corpus[[2]]))
+corpus <- rehash(corpus, minhash2, type = "minhashes")
+head(minhashes(corpus[[2]]))
 }
 
