@@ -132,6 +132,10 @@ For details, see the alignment vignette.
 vignette("textreuse-alignment", package = "textreuse")
 ```
 
+#### Parallel processing
+
+Loading the corpus and creating tokens benefit from using multiple cores, if available. (This works only on non-Windows machines.) To use multiple cores, set `options("mc.cores" = 4L)`, where the number is how many cores you wish to use.
+
 ### Citation
 
 If you use this package for scholarly research, I would appreciate a citation.

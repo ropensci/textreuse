@@ -68,6 +68,10 @@ If \code{skip_short = TRUE}, this function will skip very short or
   then a document must be at least six words long. If no value of \code{n} is
   provided, then the function assumes a value of \code{n = 3}. A warning will
   be printed with the document ID of each skipped document.
+
+  This function will use multiple cores on non-Windows machines if the
+  \code{"mc.cores"} option is set. For example, to use four cores:
+  \code{options("mc.cores" = 4L)}.
 }
 \examples{
 dir <- system.file("extdata/legal", package = "textreuse")
@@ -78,6 +82,7 @@ names(corpus)
 corpus[["ca1851-match"]]
 }
 \seealso{
-\link[=TextReuseTextDocument-accessors]{Access for TextReuse objects}.
+\link[=TextReuseTextDocument-accessors]{Access for TextReuse
+  objects}.
 }
 

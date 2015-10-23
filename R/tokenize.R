@@ -64,9 +64,10 @@ tokenize.TextReuseTextDocument <- function(x, tokenizer, ...,
 tokenize.TextReuseCorpus <- function(x, tokenizer, ..., hash_func = hash_string,
                                      minhash_func = NULL, keep_tokens = TRUE,
                                      keep_text = TRUE) {
-  x$documents <- lapply(x$documents, tokenize, tokenizer, ...,
-                        hash_func = hash_func, minhash_func = minhash_func,
-                        keep_tokens = keep_tokens, keep_text = keep_text)
+  apply_func <- get_apply_function()
+  x$documents <- apply_func(x$documents, tokenize, tokenizer, ...,
+                            hash_func = hash_func, minhash_func = minhash_func,
+                            keep_tokens = keep_tokens, keep_text = keep_text)
 
   x$meta$tokenizer <- as.character(substitute(tokenizer))
   x$meta$hash_func <- as.character(substitute(hash_func))

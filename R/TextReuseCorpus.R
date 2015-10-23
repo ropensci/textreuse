@@ -21,6 +21,10 @@
 #'   provided, then the function assumes a value of \code{n = 3}. A warning will
 #'   be printed with the document ID of each skipped document.
 #'
+#'   This function will use multiple cores on non-Windows machines if the
+#'   \code{"mc.cores"} option is set. For example, to use four cores:
+#'   \code{options("mc.cores" = 4L)}.
+#'
 #' @param paths A character vector of paths to files to be opened.
 #' @param dir The path to a directory of text files.
 #' @param text A character vector (possibly named) of documents.
@@ -41,7 +45,8 @@
 #'   or discarded?
 #' @param skip_short Should short documents be skipped? (See details.)
 #'
-#' @seealso \link[=TextReuseTextDocument-accessors]{Access for TextReuse objects}.
+#' @seealso \link[=TextReuseTextDocument-accessors]{Access for TextReuse
+#'   objects}.
 #'
 #' @examples
 #' dir <- system.file("extdata/legal", package = "textreuse")
@@ -79,6 +84,8 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
     loading_msg <- "Loading "
   }
 
+  apply_func <- get_apply_function()
+
   # If we get a character vector of documents, use that; otherwise load
   # the files from disk.
   if (!missing(text)) {
@@ -90,13 +97,16 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
     if (progress) {
       len <- length(text)
       message(loading_msg, prettyNum(len, big.mark = ","), " documents.")
-      pb <- txtProgressBar(min = 0, max = len, style = 3)
+      if (using_parallel())
+        progress <- FALSE
+      else
+        pb <- txtProgressBar(min = 0, max = len, style = 3)
     }
 
     if (is.null(names(text)))
       names(text) <- str_c("doc-", 1:length(text))
 
-    docs <- lapply(seq_along(text), function(i) {
+    docs <- apply_func(seq_along(text), function(i) {
       d <- TextReuseTextDocument(text = text[i],
                                  tokenizer = tokenizer, ...,
                                  hash_func = hash_func,
@@ -128,9 +138,12 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
     if (progress) {
       len <- length(paths)
       message(loading_msg, prettyNum(len, big.mark = ","), " documents.")
-      pb <- txtProgressBar(min = 0, max = len, style = 3)
+      if (using_parallel())
+        progress <- FALSE
+      else
+        pb <- txtProgressBar(min = 0, max = len, style = 3)
     }
-    docs <- lapply(seq_along(paths), function(i) {
+    docs <- apply_func(seq_along(paths), function(i) {
       d <- TextReuseTextDocument(file = paths[i], tokenizer = tokenizer, ...,
                                  hash_func = hash_func,
                                  minhash_func = minhash_func,

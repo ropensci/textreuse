@@ -49,7 +49,8 @@ rehash.TextReuseTextDocument <- function(x, func,
 rehash.TextReuseCorpus <- function(x, func,  type = c("hashes", "minhashes")) {
   assert_that(is.function(func))
   type <- match.arg(type)
-  x$documents <- lapply(x$documents, rehash, func, type)
+  apply_func <- get_apply_function()
+  x$documents <- apply_func(x$documents, rehash, func, type)
   if (type == "hashes")
     x$meta$hash_func <- as.character(substitute(func))
   else if (type == "minhashes")
