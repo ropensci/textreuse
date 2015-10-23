@@ -7,8 +7,8 @@
 \usage{
 TextReuseCorpus(paths, dir = NULL, text = NULL, meta = list(),
   progress = interactive(), tokenizer = tokenize_ngrams, ...,
-  hash_func = hash_string, keep_tokens = FALSE, keep_text = TRUE,
-  skip_short = TRUE)
+  hash_func = hash_string, minhash_func = NULL, keep_tokens = FALSE,
+  keep_text = TRUE, skip_short = TRUE)
 
 is.TextReuseCorpus(x)
 }
@@ -32,6 +32,9 @@ hashing will be skipped.}
 
 \item{hash_func}{A function to hash the tokens. See
 \code{\link{hash_string}}.}
+
+\item{minhash_func}{A function to create minhash signatures of the document.
+See \code{\link{minhash_generator}}.}
 
 \item{keep_tokens}{Should the tokens be saved in the documents that are
 returned or discarded?}
@@ -73,5 +76,8 @@ corpus <- TextReuseCorpus(dir = dir, meta = list("description" = "Field Codes"))
 corpus[[1]]
 names(corpus)
 corpus[["ca1851-match"]]
+}
+\seealso{
+\link[=TextReuseTextDocument-accessors]{Access for TextReuse objects}.
 }
 

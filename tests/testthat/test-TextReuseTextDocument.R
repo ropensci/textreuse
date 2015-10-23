@@ -8,11 +8,12 @@ test_that("inherits from the correct classes", {
 })
 
 test_that("has the correct structure", {
-  expect_named(doc, c("content", "tokens", "hashes", "meta"))
+  expect_named(doc, c("content", "tokens", "hashes", "minhashes", "meta"))
 })
 
 test_that("can set the metadata", {
-  expect_named(meta(doc), c("file", "hash_func", "id", "tokenizer"))
+  expect_named(meta(doc), c("file", "hash_func", "id", "minhash_func",
+                            "tokenizer"))
   doc2 <- TextReuseTextDocument(file = "newman.txt",
                                 meta = list(author = "Newman, John Henry"))
   expect_named(meta(doc2), c("author", "file", "hash_func", "id", "tokenizer"))

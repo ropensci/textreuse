@@ -54,6 +54,8 @@ In addition the `content()` function provides the unprocessed text of the docume
 
 The assumption is that is that you want to tokenize and hash the tokens from the start. If, however, you wish to do any of those steps yourself, you can load a document with `tokenizer = NULL`, then use `tokenize()` or `rehash()` to recompute the tokens and hashes.
 
+Note that a `TextReuseTextDocument` can actually contain two kinds of hashes. The `hashes()` accessor gives you integer representations of each of the tokens in the document: if there are 100,000 tokens in the document, there will be 100,000 hashes. The `minhashes()` accessor gives you a signature that represents the document as a whole but not the specific tokens within it. See the minhash vignette for details: `vignette("textreuse-minhash")`.
+
 ### TextReuseCorpus
 
 The class `TextReuseCorpus` provides a list of `TextReuseTextDocuments`. It derives from the S3 virtual class `Corpus` in the [tm](https://cran.r-project.org/package=tm) package. It can be created from a directory of files (or by providing a vector of paths to files).

@@ -33,11 +33,15 @@
 #' @param ... Arguments passed on to the \code{tokenizer}.
 #' @param hash_func A function to hash the tokens. See
 #'   \code{\link{hash_string}}.
+#' @param minhash_func A function to create minhash signatures of the document.
+#'   See \code{\link{minhash_generator}}.
 #' @param keep_tokens Should the tokens be saved in the documents that are
 #'   returned or discarded?
 #' @param keep_text Should the text be saved in the documents that are returned
 #'   or discarded?
 #' @param skip_short Should short documents be skipped? (See details.)
+#'
+#' @seealso \link[=TextReuseTextDocument-accessors]{Access for TextReuse objects}.
 #'
 #' @examples
 #' dir <- system.file("extdata/legal", package = "textreuse")
@@ -52,6 +56,7 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                             progress = interactive(),
                             tokenizer = tokenize_ngrams, ...,
                             hash_func = hash_string,
+                            minhash_func = NULL,
                             keep_tokens = FALSE,
                             keep_text = TRUE,
                             skip_short = TRUE) {
@@ -61,10 +66,16 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                 is.function(hash_func))
     tokenizer_name <- as.character(substitute(tokenizer))
     hash_func_name <- as.character(substitute(hash_func))
+    if (!is.null(minhash_func)) {
+      minhash_func_name <- as.character(substitute(minhash_func))
+    } else {
+      minhash_func_name <- NULL
+    }
     loading_msg <- "Loading, tokenizing, and hashing "
   } else {
     tokenizer_name <- NULL
     hash_func_name <- NULL
+    minhash_func_name <- NULL
     loading_msg <- "Loading "
   }
 
@@ -89,12 +100,14 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
       d <- TextReuseTextDocument(text = text[i],
                                  tokenizer = tokenizer, ...,
                                  hash_func = hash_func,
+                                 minhash_func = minhash_func,
                                  keep_tokens = keep_tokens,
                                  keep_text = keep_text,
                                  skip_short = skip_short,
                                  meta = list(id = names(text)[i],
                                              tokenizer = tokenizer_name,
-                                             hash_func = hash_func_name))
+                                             hash_func = hash_func_name,
+                                             minhash_func = minhash_func_name))
       if (progress) setTxtProgressBar(pb, i)
       d
     })
@@ -120,11 +133,13 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
     docs <- lapply(seq_along(paths), function(i) {
       d <- TextReuseTextDocument(file = paths[i], tokenizer = tokenizer, ...,
                                  hash_func = hash_func,
+                                 minhash_func = minhash_func,
                                  keep_tokens = keep_tokens,
                                  keep_text = keep_text,
                                  skip_short = skip_short,
                                  meta = list(tokenizer = tokenizer_name,
-                                             hash_func = hash_func_name))
+                                             hash_func = hash_func_name,
+                                             minhash_func = minhash_func_name))
       if (progress) setTxtProgressBar(pb, i)
       d
     })
@@ -140,6 +155,7 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
   assert_that(is.list(meta))
   meta$tokenizer <- tokenizer_name
   meta$hash_func <- hash_func_name
+  meta$minhash_func <- minhash_func_name
 
   if (!is.null(names(meta))) meta <- sort_meta(meta)
 

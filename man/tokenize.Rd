@@ -4,8 +4,8 @@
 \alias{tokenize}
 \title{Recompute the tokens for a document or corpus}
 \usage{
-tokenize(x, tokenizer, ..., hash_func = hash_string, keep_tokens = FALSE,
-  keep_text = TRUE)
+tokenize(x, tokenizer, ..., hash_func = hash_string, minhash_func = NULL,
+  keep_tokens = FALSE, keep_text = TRUE)
 }
 \arguments{
 \item{x}{A \code{\link{TextReuseTextDocument}} or
@@ -17,7 +17,10 @@ tokenize(x, tokenizer, ..., hash_func = hash_string, keep_tokens = FALSE,
 \item{...}{Arguments passed on to the \code{tokenizer}.}
 
 \item{hash_func}{A function to hash the tokens. See
-\code{\link{hash_string}}, \code{\link{minhash_generator}}.}
+\code{\link{hash_string}}.}
+
+\item{minhash_func}{A function to create minhash signatures. See
+\code{\link{minhash_generator}}.}
 
 \item{keep_tokens}{Should the tokens be saved in the document that is
 returned or discarded?}
@@ -32,7 +35,7 @@ The modified \code{\link{TextReuseTextDocument}} or
 \description{
 Given a \code{\link{TextReuseTextDocument}} or a
 \code{\link{TextReuseCorpus}}, this function recomputes the tokens and hashes
-with the functions specified.
+with the functions specified. Optionally, it can also recompute the minhash signatures.
 }
 \examples{
 dir <- system.file("extdata/legal", package = "textreuse")

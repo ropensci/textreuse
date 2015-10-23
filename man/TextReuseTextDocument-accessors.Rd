@@ -4,6 +4,8 @@
 \alias{TextReuseTextDocument-accessors}
 \alias{hashes}
 \alias{hashes<-}
+\alias{minhashes}
+\alias{minhashes<-}
 \alias{tokens}
 \alias{tokens<-}
 \title{Accessors for TextReuse objects}
@@ -15,6 +17,10 @@ tokens(x) <- value
 hashes(x)
 
 hashes(x) <- value
+
+minhashes(x)
+
+minhashes(x) <- value
 }
 \arguments{
 \item{x}{The object to acess.}

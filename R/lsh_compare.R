@@ -20,10 +20,9 @@
 #' minhash <- minhash_generator(200, seed = 234)
 #' corpus <- TextReuseCorpus(dir = dir,
 #'                           tokenizer = tokenize_ngrams, n = 5,
-#'                           hash_func = minhash)
+#'                           minhash_func = minhash)
 #' buckets <- lsh(corpus, bands = 50)
 #' candidates <- lsh_candidates(buckets)
-#' corpus <- tokenize(corpus, tokenize_ngrams, n = 5)
 #' lsh_compare(candidates, corpus, jaccard_similarity)
 #' @export
 lsh_compare <- function(candidates, corpus, f, progress = interactive()) {
