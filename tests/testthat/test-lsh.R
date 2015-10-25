@@ -41,3 +41,9 @@ test_that("candidates can be scored", {
                                 corpus[["ny1850-match"]])
   expect_equal(scores[[1,3]], correct)
 })
+
+test_that("can be queried for a single document", {
+  match <- lsh_query(buckets, "ca1851-match")
+  expect_equal(match$b, "ny1850-match")
+  expect_is(match, "textreuse_candidates")
+})

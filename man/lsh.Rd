@@ -70,6 +70,7 @@ Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
 }
 \seealso{
 \code{\link{minhash_generator}}, \code{\link{lsh_candidates}},
- \code{\link{lsh_probability}}, \code{\link{lsh_threshold}}
+ \code{\link{lsh_query}}, \code{\link{lsh_probability}},
+ \code{\link{lsh_threshold}}
 }
 
