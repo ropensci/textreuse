@@ -68,9 +68,11 @@ buckets
 
 Note that using the LSH method only requires us to calculate the signatures (or buckets) for each document one time. This implies that we can take several data frames of LSH signatures and bind their rows together (e.g., with `dplyr::bind_rows()`). This permits us to compute the signatures for only part of a corpus at a time, or to continue to add to the corpus. Note, however, that you **must** use the same minhash function, generating the same number of minhashes and using the same seed and you **must** use the same number of bands in order to get valid results.
 
-We can extract the potential matches from the cache using `lsh_candidates()` (an analog of `pairwise_candidates()`).
+We can extract the potential matches from the cache using `lsh_query()` or  `lsh_candidates()`. The first function returns matches for only one document, specified by its ID; the second functions returns all potential pairs of matches.
 
 ```{r}
+baxter_matches <- lsh_query(buckets, "calltounconv00baxt")
+baxter_matches
 candidates <- lsh_candidates(buckets)
 candidates
 ```
