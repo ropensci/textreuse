@@ -32,7 +32,7 @@ lsh_candidates <- function(buckets) {
     dplyr::arrange_(~a, ~b) %>%
     dplyr::mutate_(score = NA_real_)
 
-  class(candidates) <- c(class(candidates), "textreuse_candidates")
+  class(candidates) <- c("textreuse_candidates", class(candidates))
 
   candidates
 

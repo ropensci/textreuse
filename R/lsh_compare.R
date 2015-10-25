@@ -48,5 +48,7 @@ lsh_compare <- function(candidates, corpus, f, progress = interactive()) {
 
   if (progress) close(pb)
 
+  attr(candidates, "all-doc-ids") <- names(corpus)
+
   candidates
 }
