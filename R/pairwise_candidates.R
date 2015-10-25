@@ -30,6 +30,6 @@ pairwise_candidates <- function(m, directional = FALSE) {
   df <- data.frame(a = a, b = b, score = score, stringsAsFactors = FALSE)
   if (!directional) df <- sort_df_by_rows(df)
   df <- sort_df_by_columns(df)
-  class(df) <- c("tbl_df", "tbl", "data.frame", "textreuse_candidates")
+  class(df) <- c("textreuse_candidates", "tbl_df", "tbl", "data.frame")
   df
 }

@@ -42,6 +42,12 @@ test_that("candidates can be scored", {
   expect_equal(scores[[1,3]], correct)
 })
 
+test_that("scores can be converted to a matrix", {
+  m <- as.matrix(scores)
+  expect_is(m, "matrix")
+  expect_equal(colnames(m), sort(unique(c(scores$a, scores$b))))
+})
+
 test_that("can be queried for a single document", {
   match <- lsh_query(buckets, "ca1851-match")
   expect_equal(match$b, "ny1850-match")
