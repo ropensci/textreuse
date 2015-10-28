@@ -17,8 +17,10 @@ IntegerVector hash_string(CharacterVector x) {
 
   IntegerVector hash_vec(length);
 
+  std::string str;
+
   for(int i = 0; i < length; i++) {
-    std::string str = Rcpp::as<std::string>(x[i]);
+    str = Rcpp::as<std::string>(x[i]);
     hash_vec[i] = hash_fn(str);
   }
 
