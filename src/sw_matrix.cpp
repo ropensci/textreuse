@@ -18,12 +18,14 @@ IntegerMatrix sw_matrix(IntegerMatrix m, CharacterVector a, CharacterVector b,
       stop("Local alignment interrupted by user.\n");
     p.increment();
 
+    int score, deletion, insertion, value;
+
     for (int col_i = 0; col_i < cols; ++col_i) {
 
-      int score = (a[col_i] == b[row_i] ? match : mismatch) + m(row_i, col_i);
-      int deletion = m(row_i, col_i + 1) + gap;
-      int insertion = m(row_i +1, col_i) + gap;
-      int value = max(NumericVector::create(0, score, deletion, insertion));
+      score = (a[col_i] == b[row_i] ? match : mismatch) + m(row_i, col_i);
+      deletion = m(row_i, col_i + 1) + gap;
+      insertion = m(row_i +1, col_i) + gap;
+      value = max(NumericVector::create(0, score, deletion, insertion));
 
       m(row_i + 1, col_i + 1) = value;
 
