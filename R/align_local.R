@@ -154,8 +154,8 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   out_i <- 1L
 
   # Place our first known values in the output vectors
-  b_out[out_i] <- b[row_i - 1]
-  a_out[out_i] <- a[col_i - 1]
+  b_out[out_i] <- b_orig[row_i - 1]
+  a_out[out_i] <- a_orig[col_i - 1]
   out_i = out_i + 1L # Advance the out vector position
 
   # Begin moving up, left, or diagonally within the matrix till we hit a zero
