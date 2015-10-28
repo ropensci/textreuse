@@ -10,18 +10,15 @@ using namespace Rcpp;
 //' hash_string(s)
 //' @export
 // [[Rcpp::export]]
-IntegerVector hash_string(CharacterVector x) {
+IntegerVector hash_string(std::vector < std::string > x) {
 
   boost::hash<std::string> hash_fn;
-  int length = x.size();
+  unsigned int length = x.size();
 
   IntegerVector hash_vec(length);
 
-  std::string str;
-
-  for(int i = 0; i < length; i++) {
-    str = Rcpp::as<std::string>(x[i]);
-    hash_vec[i] = hash_fn(str);
+  for(unsigned int i = 0; i < length; i++) {
+    hash_vec[i] = hash_fn(x[i]);
   }
 
   return hash_vec;

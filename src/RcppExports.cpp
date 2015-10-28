@@ -6,12 +6,12 @@
 using namespace Rcpp;
 
 // hash_string
-IntegerVector hash_string(CharacterVector x);
+IntegerVector hash_string(std::vector < std::string > x);
 RcppExport SEXP textreuse_hash_string(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< std::vector < std::string > >::type x(xSEXP);
     __result = Rcpp::wrap(hash_string(x));
     return __result;
 END_RCPP
