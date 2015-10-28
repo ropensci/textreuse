@@ -79,3 +79,13 @@ test_that("skips documents that are too short", {
                  "Skipping document with ID")
   expect_null(short_doc)
 })
+
+test_that("gives warning when skipping short documents from file", {
+  skip_on_cran()
+  too_short <- tempfile("tooshort", fileext = ".txt")
+  writeLines("Two words", too_short)
+  expect_warning(short_doc <- TextReuseTextDocument(file = too_short, n = 5),
+                 "Skipping document with ID 'tooshort")
+  expect_null(short_doc)
+  file.remove(too_short)
+})

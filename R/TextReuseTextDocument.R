@@ -79,13 +79,16 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
   assert_that(is.character(text))
   text <- as_string(text)
 
+  # Define document ID early
+  document_id <- ifelse(is.null(meta$id), filenames(file), meta$id)
+
   # Check length of document
   if (skip_short) {
     n_call <- match.call(expand.dots = TRUE)[["n"]]
     if (is.null(n_call))
       n_call <- 3
     if (wordcount(text) < n_call + 1) {
-      warning("Skipping document with ID '", meta$id,
+      warning("Skipping document with ID '", document_id,
               "' because it has too few words ",
               "to create at least two n-grams with n = ", n_call, ".",
               call. = FALSE, noBreaks. = TRUE)
@@ -129,7 +132,7 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
 
   if (missing(meta)) {
     meta <- list(file = file,
-                 id = filenames(file),
+                 id = document_id,
                  tokenizer = tokenizer_name,
                  hash_func = hash_func_name,
                  minhash_func = minhash_func_name)
@@ -137,7 +140,7 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
   assert_that(is.list(meta))
   if (!is.null(file)) {
     meta$file <- file
-    meta$id <- filenames(file)
+    meta$id <- document_id
   }
   # Don't overwrite these when called from TextReuseCorpus
   if (is.null(meta$tokenizer) & is.null(meta$hash_func) &
