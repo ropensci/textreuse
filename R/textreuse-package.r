@@ -1,12 +1,4 @@
-#' textreuse: Detect Text Reuse and Document Similarity
-#'
-#' This R package provides a set of functions for measuring similarity among
-#' documents and detecting passages which have been reused. It implements
-#' shingled n-gram, skip n-gram, and other tokenizers; similarity/dissimilarity
-#' functions; pairwise comparisons; minhash and locality sensitive hashing
-#' algorithms, and a version of the Smith-Waterman local alignment algorithm
-#' suitable for natural language.
-#'
+#'@details
 #' The best place to begin with this package in the introductory vignette.
 #'
 #' \code{vignette("textreuse-introduction", package = "textreuse")}
@@ -47,16 +39,13 @@
 #'   \href{http://books.google.com/books?id=4PHEAAAAIAAJ&pg=PA51#v=onepage&q&f=false}{Google
 #'    Books}.
 #'
-#' @name textreuse
-#' @aliases textreuse-package
-#' @docType package
 #' @useDynLib textreuse
 #' @importFrom Rcpp sourceCpp
 #' @import RcppProgress
 #' @import stringr
 #' @import assertthat
 #' @importFrom utils getTxtProgressBar setTxtProgressBar txtProgressBar
-NULL
+"_PACKAGE"
 
 if (getRversion() >= "2.15.1") {
  utils::globalVariables(c("doc.x", "doc.y", "up", "dn", "a", "b"))
