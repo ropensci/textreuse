@@ -55,7 +55,6 @@
 #' @import RcppProgress
 #' @import stringr
 #' @import assertthat
-#' @importFrom stats runif
 #' @importFrom utils getTxtProgressBar setTxtProgressBar txtProgressBar
 NULL
 

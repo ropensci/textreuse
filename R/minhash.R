@@ -60,5 +60,5 @@ minhash_generator <- function(n = 200, seed = NULL) {
 # @examples
 # random_ints(3)
 random_ints <- function(n) {
-  as.integer(runif(n, -2147483648, 2147483647))
+  as.integer(stats::runif(n, -2147483648, 2147483647))
 }
