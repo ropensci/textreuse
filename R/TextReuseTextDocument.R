@@ -166,33 +166,21 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
 
 }
 
-#' Accessors for TextReuseTextDocument objects
-#'
-#' The \code{meta} and \code{content} generics are defined by the NLP package. See the \code{\link[NLP]{generics}} documentation in that package.
-#'
 #' @importFrom NLP meta
-#' @name meta
 #' @export
-#' @rdname NLP-imports
-NULL
+NLP::meta
 
 #' @importFrom NLP meta<-
-#' @name meta<-
 #' @export
-#' @rdname NLP-imports
-NULL
+NLP::`meta<-`
 
 #' @importFrom NLP content
-#' @name content
 #' @export
-#' @rdname NLP-imports
-NULL
+NLP::content
 
 #' @importFrom NLP content<-
-#' @name content<-
 #' @export
-#' @rdname NLP-imports
-NULL
+NLP::`content<-`
 
 #' @export
 print.TextReuseTextDocument <- function(x, ...) {
