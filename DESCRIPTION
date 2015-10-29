@@ -16,8 +16,10 @@ LazyData: TRUE
 URL: https://github.com/lmullen/textreuse
 BugReports: https://github.com/lmullen/textreuse/issues
 VignetteBuilder: knitr
-Depends: R (>= 3.1.2)
-Imports: assertthat (>= 0.1),
+Depends:
+    R (>= 3.1.2)
+Imports:
+    assertthat (>= 0.1),
     digest (>= 0.6.8),
     dplyr (>= 0.4.3),
     NLP (>= 0.1.8),
@@ -25,7 +27,9 @@ Imports: assertthat (>= 0.1),
     RcppProgress  (>= 0.1),
     stringr (>= 1.0.0),
     tidyr (>= 0.3.1)
-Suggests: testthat (>= 0.11.0),
+Suggests:
+    testthat (>= 0.11.0),
     knitr (>= 1.11),
     rmarkdown (>= 0.8)
 LinkingTo: BH, Rcpp, RcppProgress
+RoxygenNote: 5.0.0
