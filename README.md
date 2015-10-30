@@ -6,7 +6,7 @@ An R package for detecting text reuse and document similarity in a corpus.
 
 **Author:** [Lincoln Mullen](http://lincolnmullen.com)<br> **License:** [MIT](http://opensource.org/licenses/MIT)<br>
 
-[![Build Status](https://travis-ci.org/lmullen/textreuse.svg?branch=master)](https://travis-ci.org/lmullen/textreuse) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
+[![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
 
 ### Description
 
@@ -18,7 +18,7 @@ This package is not yet on CRAN. To install it from GitHub, use [devtools](https
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("lmullen/textreuse", build_vignettes = TRUE)
+devtools::install_github("ropensci/textreuse", build_vignettes = TRUE)
 ```
 
 ### Examples
@@ -169,8 +169,8 @@ citation("textreuse")
 #> To cite package 'textreuse' in publications use:
 #> 
 #>   Lincoln Mullen (2015). textreuse: Detect Text Reuse and Document
-#>   Similarity. R package version 0.0.1.9006.
-#>   https://github.com/lmullen/textreuse
+#>   Similarity. R package version 0.1.0.
+#>   https://github.com/ropensci/textreuse
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -178,8 +178,8 @@ citation("textreuse")
 #>     title = {textreuse: Detect Text Reuse and Document Similarity},
 #>     author = {Lincoln Mullen},
 #>     year = {2015},
-#>     note = {R package version 0.0.1.9006},
-#>     url = {https://github.com/lmullen/textreuse},
+#>     note = {R package version 0.1.0},
+#>     url = {https://github.com/ropensci/textreuse},
 #>   }
 ```
 
