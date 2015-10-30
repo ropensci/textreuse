@@ -13,8 +13,8 @@ Description: Tools for measuring similarity among documents and detecting
     natural language.
 License: MIT + file LICENSE
 LazyData: TRUE
-URL: https://github.com/lmullen/textreuse
-BugReports: https://github.com/lmullen/textreuse/issues
+URL: https://github.com/ropensci/textreuse
+BugReports: https://github.com/ropensci/textreuse/issues
 VignetteBuilder: knitr
 Depends:
     R (>= 3.1.2)
