@@ -3,6 +3,7 @@
 \name{TextReuseCorpus}
 \alias{TextReuseCorpus}
 \alias{is.TextReuseCorpus}
+\alias{skipped}
 \title{TextReuseCorpus}
 \usage{
 TextReuseCorpus(paths, dir = NULL, text = NULL, meta = list(),
@@ -11,6 +12,8 @@ TextReuseCorpus(paths, dir = NULL, text = NULL, meta = list(),
   keep_text = TRUE, skip_short = TRUE)
 
 is.TextReuseCorpus(x)
+
+skipped(x)
 }
 \arguments{
 \item{paths}{A character vector of paths to files to be opened.}
@@ -67,7 +70,8 @@ If \code{skip_short = TRUE}, this function will skip very short or
   to create at least two n-grams. For example, if five-grams are desired,
   then a document must be at least six words long. If no value of \code{n} is
   provided, then the function assumes a value of \code{n = 3}. A warning will
-  be printed with the document ID of each skipped document.
+  be printed with the document ID of each skipped document. Use
+  \code{skipped()} to get the IDs of skipped documents.
 
   This function will use multiple cores on non-Windows machines if the
   \code{"mc.cores"} option is set. For example, to use four cores:
@@ -83,7 +87,7 @@ corpus[["ca1851-match"]]
 
 }
 \seealso{
-\link[=TextReuseTextDocument-accessors]{Access for TextReuse
+\link[=TextReuseTextDocument-accessors]{Accessors for TextReuse
   objects}.
 }
 

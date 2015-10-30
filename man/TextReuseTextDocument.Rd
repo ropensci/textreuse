@@ -98,6 +98,7 @@ content(doc)
 }
 }
 \seealso{
-\link[=TextReuseTextDocument-accessors]{Access for TextReuse objects}.
+\link[=TextReuseTextDocument-accessors]{Accessors for TextReuse
+  objects}.
 }
 

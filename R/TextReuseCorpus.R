@@ -19,7 +19,8 @@
 #'   to create at least two n-grams. For example, if five-grams are desired,
 #'   then a document must be at least six words long. If no value of \code{n} is
 #'   provided, then the function assumes a value of \code{n = 3}. A warning will
-#'   be printed with the document ID of each skipped document.
+#'   be printed with the document ID of each skipped document. Use
+#'   \code{skipped()} to get the IDs of skipped documents.
 #'
 #'   This function will use multiple cores on non-Windows machines if the
 #'   \code{"mc.cores"} option is set. For example, to use four cores:
@@ -45,7 +46,7 @@
 #'   or discarded?
 #' @param skip_short Should short documents be skipped? (See details.)
 #'
-#' @seealso \link[=TextReuseTextDocument-accessors]{Access for TextReuse
+#' @seealso \link[=TextReuseTextDocument-accessors]{Accessors for TextReuse
 #'   objects}.
 #'
 #' @examples
@@ -163,7 +164,13 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
   }
 
   # Filter documents that were skipped because they were too short
-  if (skip_short) docs <- Filter(Negate(is.null), docs)
+  if (skip_short) {
+    skipped <- names(Filter(is.null, docs))
+    docs <- Filter(Negate(is.null), docs)
+    if (length(skipped) > 0)
+      warning("Skipped ", length(skipped), " documents that were too short. ",
+              "Use `skipped()` to get their IDs.")
+  }
 
   assert_that(is.list(meta))
   meta$tokenizer <- tokenizer_name
@@ -174,6 +181,7 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
 
   corpus <- list(documents = docs, meta = meta)
   class(corpus) <- c("TextReuseCorpus", "Corpus")
+  attr(corpus, "skipped") <- skipped
 
   corpus
 
@@ -237,4 +245,11 @@ names.TextReuseCorpus <- function(x) {
 #' @rdname TextReuseCorpus
 is.TextReuseCorpus <- function(x) {
   inherits(x, "TextReuseCorpus")
+}
+
+#' @export
+#' @rdname TextReuseCorpus
+skipped <- function(x) {
+  assert_that(is.TextReuseCorpus(x))
+  attr(x, "skipped", exact = TRUE)
 }

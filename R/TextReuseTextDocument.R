@@ -47,7 +47,8 @@
 #'   signature of the document.} \item{metadata}{The document metadata,
 #'   including the filename (if any) in \code{file}.} }
 #'
-#' @seealso \link[=TextReuseTextDocument-accessors]{Access for TextReuse objects}.
+#' @seealso \link[=TextReuseTextDocument-accessors]{Accessors for TextReuse
+#'   objects}.
 #'
 #' @examples
 #' file <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")
