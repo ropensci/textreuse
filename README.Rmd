@@ -20,10 +20,13 @@ suppressPackageStartupMessages(library(dplyr))
 An R package for detecting text reuse and document similarity in a corpus.
 
 **Author:** [Lincoln Mullen](http://lincolnmullen.com)<br>
-**License:** [MIT](http://opensource.org/licenses/MIT)<br>
+**License:** [MIT](http://opensource.org/licenses/MIT)
+**Status:** Stable but in development
 
-[![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/lmullen/textreuse) 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/textreuse)](http://cran.r-project.org/package=textreuse)
+[![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](http://cran.r-project.org/package=textreuse)
+[![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) 
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/textreuse?branch=master)](https://ci.appveyor.com/project/ropensci/textreuse)
 
 ### Description 
 
@@ -31,7 +34,13 @@ This [R](https://www.r-project.org/) package provides a set of functions for mea
 
 ### Installation
 
-This package is not yet on CRAN. To install it from GitHub, use [devtools](https://github.com/hadley/devtools). 
+To install this package from CRAN:
+
+```{r eval=FALSE}
+install.packages("textreuse")
+```
+
+To install the development version from GitHub, use [devtools](https://github.com/hadley/devtools).  
 
 ```{r eval=FALSE}
 # install.packages("devtools")
