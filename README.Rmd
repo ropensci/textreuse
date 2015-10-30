@@ -21,7 +21,6 @@ An R package for detecting text reuse and document similarity in a corpus.
 
 **Author:** [Lincoln Mullen](http://lincolnmullen.com)<br>
 **License:** [MIT](http://opensource.org/licenses/MIT)<br>
-**Status:** In development
 
 [![Build Status](https://travis-ci.org/lmullen/textreuse.svg?branch=master)](https://travis-ci.org/lmullen/textreuse) 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
@@ -149,3 +148,7 @@ citation("textreuse")
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 Thanks to [Noam Ross](http://www.noamross.net/) for his thorough [peer review](https://github.com/ropensci/onboarding/issues/20) of this package for [rOpenSci](https://ropensci.org/).
+
+------------------------------------------------------------------------
+
+[![rOpenSCi logo](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)

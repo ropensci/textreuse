@@ -4,7 +4,7 @@ textreuse
 
 An R package for detecting text reuse and document similarity in a corpus.
 
-**Author:** [Lincoln Mullen](http://lincolnmullen.com)<br> **License:** [MIT](http://opensource.org/licenses/MIT)<br> **Status:** In development
+**Author:** [Lincoln Mullen](http://lincolnmullen.com)<br> **License:** [MIT](http://opensource.org/licenses/MIT)<br>
 
 [![Build Status](https://travis-ci.org/lmullen/textreuse.svg?branch=master)](https://travis-ci.org/lmullen/textreuse) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
 
@@ -155,6 +155,10 @@ For details, see the alignment vignette.
 vignette("textreuse-alignment", package = "textreuse")
 ```
 
+#### Parallel processing
+
+Loading the corpus and creating tokens benefit from using multiple cores, if available. (This works only on non-Windows machines.) To use multiple cores, set `options("mc.cores" = 4L)`, where the number is how many cores you wish to use.
+
 ### Citation
 
 If you use this package for scholarly research, I would appreciate a citation.
@@ -165,7 +169,7 @@ citation("textreuse")
 #> To cite package 'textreuse' in publications use:
 #> 
 #>   Lincoln Mullen (2015). textreuse: Detect Text Reuse and Document
-#>   Similarity. R package version 0.0.1.9005.
+#>   Similarity. R package version 0.0.1.9006.
 #>   https://github.com/lmullen/textreuse
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -174,7 +178,7 @@ citation("textreuse")
 #>     title = {textreuse: Detect Text Reuse and Document Similarity},
 #>     author = {Lincoln Mullen},
 #>     year = {2015},
-#>     note = {R package version 0.0.1.9005},
+#>     note = {R package version 0.0.1.9006},
 #>     url = {https://github.com/lmullen/textreuse},
 #>   }
 ```
@@ -184,3 +188,7 @@ citation("textreuse")
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 Thanks to [Noam Ross](http://www.noamross.net/) for his thorough [peer review](https://github.com/ropensci/onboarding/issues/20) of this package for [rOpenSci](https://ropensci.org/).
+
+------------------------------------------------------------------------
+
+[![rOpenSCi logo](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
