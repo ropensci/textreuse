@@ -50,9 +50,12 @@ assertthat::on_failure(is_lsh_buckets) <- function(call, env) {
   "Object is not a data frame of LSH buckets."
 }
 
-
+# People might run a candidates data frame through dplyr so that it loses its
+# class.
 is_candidates_df <- function(x) {
-  inherits(x, "textreuse_candidates")
+  class_check <- inherits(x, "textreuse_candidates")
+  col_check <- all(c("a", "b", "score") %in% names(x)) & inherits(x, "data.frame")
+  class_check | col_check
 }
 
 assertthat::on_failure(is_candidates_df) <- function(call, env) {
