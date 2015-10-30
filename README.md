@@ -6,7 +6,7 @@ An R package for detecting text reuse and document similarity in a corpus.
 
 **Author:** [Lincoln Mullen](http://lincolnmullen.com)<br> **License:** [MIT](http://opensource.org/licenses/MIT) **Status:** Stable but in development
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/textreuse)](http://cran.r-project.org/package=textreuse) [![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](http://cran.r-project.org/package=textreuse) [![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/ropensci/textreuse?branch=master)](https://ci.appveyor.com/project/ropensci/textreuse)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/textreuse)](http://cran.r-project.org/package=textreuse) [![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](http://cran.r-project.org/package=textreuse) [![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
 
 ### Description
 
