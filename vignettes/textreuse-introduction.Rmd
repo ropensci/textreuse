@@ -9,12 +9,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The textreuse package provides classes and functions to detect document similarity and text reuse in text corpora. This introductory vignette provides details on the `TextReuseTextDocument` and `TextReuseCorpus` classes, as well as functions for tokenizing, hashing, and measuring similarity. See the pairwise or minhash/LSH vignettes for details on solving text similarity problems.
+The textreuse package provides classes and functions to detect document similarity and text reuse in text corpora. This introductory vignette provides details on the `TextReuseTextDocument` and `TextReuseCorpus` classes, as well as functions for tokenizing, hashing, and measuring similarity. See the pairwise, minhash/LSH, or alignment vignettes for details on solving text similarity problems.
 
 ```{r eval=FALSE}
-vignette("introduction", package = "textreuse")
-vignette("pairwise", package = "textreuse")
-vignette("minhash", package = "textreuse")
+vignette("textreuse-pairwise", package = "textreuse")
+vignette("textreuse-minhash", package = "textreuse")
+vignette("textreuse-alignment", package = "textreuse")
 ```
 
 For these vignette we will use a small corpus of eight documents published by the [American Tract Society](https://en.wikipedia.org/wiki/American_Tract_Society) and available from the Internet Archive. The [full corpus](http://lincolnmullen.com/blog/corpus-of-american-tract-society-publications/) is also available to be downloaded if you wish to test the package.
@@ -62,7 +62,8 @@ The class `TextReuseCorpus` provides a list of `TextReuseTextDocuments`. It deri
 
 ```{r}
 dir <- system.file("extdata/ats", package = "textreuse")
-corpus <- TextReuseCorpus(dir = dir, tokenizer = tokenize_ngrams, n = 5)
+corpus <- TextReuseCorpus(dir = dir, tokenizer = tokenize_ngrams, n = 5,
+                          progress = FALSE)
 corpus
 ```
 

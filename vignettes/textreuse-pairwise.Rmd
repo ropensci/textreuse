@@ -16,7 +16,8 @@ First we will load the corpus and tokenize it with shingled n-grams.
 ```{r}
 library(textreuse)
 dir <- system.file("extdata/ats", package = "textreuse")
-corpus <- TextReuseCorpus(dir = dir, tokenizer = tokenize_ngrams, n = 5)
+corpus <- TextReuseCorpus(dir = dir, tokenizer = tokenize_ngrams, n = 5,
+                          progress = FALSE)
 ```
 
 We can use any of the comparison functions to compare two documents in the corpus. (Note that these functions, when applied to documents, compare their hashed tokens and not the tokens directly.)
@@ -29,12 +30,12 @@ jaccard_similarity(corpus[["remember00palm"]],
 The `pairwise_compare()` function applies a comparison function to each pair of documents in a corpus. The result is a matrix with the scores for each comparison.
 
 ```{r eval=FALSE}
-comparisons <- pairwise_compare(corpus, jaccard_similarity)
+comparisons <- pairwise_compare(corpus, jaccard_similarity, progress = FALSE)
 comparisons[1:4, 1:4]
 ```
 
 ```{r, echo=FALSE}
-comparisons <- pairwise_compare(corpus, jaccard_similarity)
+comparisons <- pairwise_compare(corpus, jaccard_similarity, progress = FALSE)
 round(comparisons[1:3, 1:3], digits = 3)
 ```
 

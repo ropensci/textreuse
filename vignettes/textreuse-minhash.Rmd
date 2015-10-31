@@ -10,7 +10,7 @@ vignette: >
 ---
 
 ```{r, echo=FALSE, message=FALSE}
-library(dplyr)
+library("dplyr")
 ```
 
 Performing pairwise comparisons in a corpus is time-consuming because the number of comparisons grows geometrically with the size of the corpus. Most of those comparisons, furthermore, are unnecessary because they do not result in matches. The combination of minhash and locality-sensitive hashing (LSH) seeks to solve these problems. They make it possible to compute possible matches only once for each document, so that the cost of computation grows linearly rather than exponentially. This vignette explains how to use the minhash and locality-sensitive hashing functions in this package. For an explanation of why they work, see Jure Leskovec, Anand Rajaraman, and Jeff Ullman, *[Mining of Massive Datasets](http://www.mmds.org/#book)* (Cambridge University Press, 2011), ch. 3. (This [blog post](http://matthewcasperson.blogspot.com/2013/11/minhash-for-dummies.html) is a more succinct explanation.)
@@ -28,7 +28,8 @@ Now when we load our corpus, we will tokenize our texts as usual, but we will us
 ```{r}
 dir <- system.file("extdata/ats", package = "textreuse")
 corpus <- TextReuseCorpus(dir = dir, tokenizer = tokenize_ngrams, n = 5,
-                          minhash_func = minhash, keep_tokens = TRUE)
+                          minhash_func = minhash, keep_tokens = TRUE,
+                          progress = FALSE)
 ```
 
 We can verify that we have minhashes in our corpus:
@@ -62,7 +63,7 @@ These numbers seem reasonable for our purposes, so we will set the number of min
 Now we can use the `lsh()` function to calculate the locality-sensitive hashes for our documents. 
 
 ```{r}
-buckets <- lsh(corpus, bands = 80)
+buckets <- lsh(corpus, bands = 80, progress = FALSE)
 buckets
 ```
 
@@ -82,7 +83,7 @@ Notice that LSH has identified the same three pairs of documents as potential ma
 Now we can use `lsh_compare()` to apply a similarity function to the candidate pairs of documents. Note that we only have to do 3 comparisons for all the candidates, instead of 28 pairs when comparing all 8 documents in the corpus pairwise.
 
 ```{r}
-lsh_compare(candidates, corpus, jaccard_similarity)
+lsh_compare(candidates, corpus, jaccard_similarity, progress = FALSE)
 ```
 
 Note that these results are identical to what we calculated in the pairwise vignette, but required much less computation.
