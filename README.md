@@ -140,7 +140,7 @@ vignette("textreuse-minhash", package = "textreuse")
 
 #### Text alignment
 
-We can also extract the optimal alignment between to documents with a version of the [Smith-Waterman](https://en.wikipedia.org/wiki/Smith-Waterman_algorithm), used for protein sequence alignment, adapted for natural language. Variations in the alignment will be marked.
+We can also extract the optimal alignment between to documents with a version of the [Smith-Waterman](https://en.wikipedia.org/wiki/Smith-Waterman_algorithm) algorithm, used for protein sequence alignment, adapted for natural language. The longest matching substring according to scoring values will be extracted, and variations in the alignment will be marked.
 
 ``` r
 a <- "'How do I know', she asked, 'if this is a good match?'"
@@ -176,7 +176,7 @@ citation("textreuse")
 #> 
 #>   Lincoln Mullen (2015). textreuse: Detect Text Reuse and Document
 #>   Similarity. R package version 0.1.0.
-#>   https://github.com/ropensci/textreuse
+#>   http://CRAN.R-project.org/package=textreuse
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -185,7 +185,7 @@ citation("textreuse")
 #>     author = {Lincoln Mullen},
 #>     year = {2015},
 #>     note = {R package version 0.1.0},
-#>     url = {https://github.com/ropensci/textreuse},
+#>     url = {http://CRAN.R-project.org/package=textreuse},
 #>   }
 ```
 
