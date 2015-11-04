@@ -51,7 +51,7 @@ devtools::install_github("ropensci/textreuse", build_vignettes = TRUE)
 
 There are three main approaches that one may take when using this package: pairwise comparions, minhashing/locality sensitive hashing, and extracting matching passages through text alignment.
 
-See the introductory vignette for a description of the classes provided by this package.
+See the [introductory vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-introduction.html) for a description of the classes provided by this package.
 
 ```{r eval = FALSE}
 vignette("textreuse-introduction", package = "textreuse")
@@ -89,7 +89,7 @@ We can convert that matrix to a data frame of pairs and scores if we prefer.
 pairwise_candidates(comparisons)
 ```
 
-See the pairwise vignette for a fuller description.
+See the [pairwise vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-pairwise.html) for a fuller description.
 
 ```{r eval=FALSE}
 vignette("textreuse-pairwise", package = "textreuse")
@@ -118,7 +118,7 @@ scores <- lsh_compare(candidates, ats, jaccard_similarity, progress = FALSE)
 scores
 ```
 
-For details, see the minhash vignette.
+For details, see the [minhash vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-minhash.html).
 
 ```{r eval=FALSE}
 vignette("textreuse-minhash", package = "textreuse")
@@ -134,7 +134,7 @@ b <- "'This is a match', he replied."
 align_local(a, b)
 ```
 
-For details, see the alignment vignette.
+For details, see the [text alignment vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-alignment.html).
 
 ```{r eval=FALSE}
 vignette("textreuse-alignment", package = "textreuse")
