@@ -1,4 +1,4 @@
-This is the initial release of the `textreuse` package.
+This is a patch release of the `textreuse` package. It fixes a problem with progress bars in vignettes and should also fix a related NOTE from CRAN checks of this package on Solaris x86.
 
 ## Test environments
 
@@ -8,6 +8,4 @@ This is the initial release of the `textreuse` package.
 
 ## R CMD check results
 
-There were no ERRORs or WARNINGs. 
-
-There was one NOTE identifying this as a new submission.
+There were no ERRORs, WARNINGs, or NOTES.
