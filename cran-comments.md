@@ -8,4 +8,6 @@ This is a patch release of the `textreuse` package. It fixes a problem with prog
 
 ## R CMD check results
 
-There were no ERRORs, WARNINGs, or NOTES.
+There were no ERRORs or WARNINGs. 
+
+There was one NOTE about this being a updated version of the package. The NOTE mentions three possible misspelled words, all of which are correctly spelled proper nouns or terms of art.
