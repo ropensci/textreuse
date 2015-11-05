@@ -47,12 +47,11 @@ test_that("prints sensibly", {
 })
 
 test_that("can be retokenized", {
-  skip_on_appveyor()
-  skip_on_os("windows")
   expect_equal(tokens(corpus_a[[1]])[1:2],
-               c("4 every action", "every action shall"))
+               tokenize_ngrams(content(corpus_a[[1]]))[1:2])
   corpus_a <- tokenize(corpus_a, tokenize_words)
-  expect_equal(tokens(corpus_a[[1]])[1:2], c("4", "every"))
+  expect_equal(tokens(corpus_a[[1]])[1:2],
+               tokenize_words(content(corpus_a[[1]]))[1:2])
 })
 
 test_that("has methods for tokens and hashes", {
