@@ -1,4 +1,6 @@
-This is a patch release of the `textreuse` package. It fixes a problem with progress bars in vignettes and should also fix a related NOTE from CRAN checks of this package on Solaris x86.
+This is a patch release of the `textreuse` package. It fixes two problems identified by Brian Ripley. It fixes a locale-related problem with one of the tests; it fixes a bad read identified by valgrind.
+
+Thanks to the CRAN maintainers for identifying these problems, and apologies for patches in quick succession.
 
 ## Test environments
 
