@@ -367,3 +367,13 @@ has_minhashes <- function(x) {
 assertthat::on_failure(has_minhashes) <- function(call, env) {
   "Document does not have a minhash signature."
 }
+
+has_minhashes_corpus <- function(x) {
+  assert_that(is.TextReuseCorpus(x))
+  all(vapply(minhashes(x), Negate(is.null), logical(1)))
+}
+
+assertthat::on_failure(has_minhashes_corpus) <- function(call, env) {
+  "Some documents in the corpus do not have a minhash signature."
+}
+

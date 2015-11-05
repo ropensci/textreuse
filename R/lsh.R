@@ -66,7 +66,8 @@ lsh <- function(x, bands, progress = interactive()) {
 #' @export
 lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
 
-  assert_that(is.count(bands))
+  assert_that(is.count(bands),
+              has_minhashes_corpus(x))
 
   h <- length(minhashes(x[[1]])) # number of hashes
   d <- length(x) # number of documents
