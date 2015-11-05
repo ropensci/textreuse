@@ -6,8 +6,10 @@ using namespace Rcpp;
 CharacterVector shingle_ngrams(CharacterVector words, int n) {
   int out_length = words.size() - n + 1;
   CharacterVector ngrams(out_length);
+  IntegerVector subset_sequence;
   for(int i = 0; i < out_length; i++) {
-    CharacterVector subset = words[i - 1 + seq_len(n)];
+    subset_sequence = i - 1 + seq_len(n);
+    CharacterVector subset = words[subset_sequence];
     std::string ngram;
     for(int j = 0; j < n; j++) {
       ngram += subset[j];
