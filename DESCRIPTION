@@ -32,4 +32,4 @@ Suggests:
     knitr (>= 1.11),
     rmarkdown (>= 0.8)
 LinkingTo: BH, Rcpp, RcppProgress
-RoxygenNote: 5.0.0
+RoxygenNote: 5.0.1
