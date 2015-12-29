@@ -76,7 +76,7 @@ names(corpus)
 corpus[["ca1851-match"]]
 ```
 
-Now we can compare each of the documents to one another. The `pairwise_compare()` document applies a comparison function (in this case, `jaccard_similarity()`) to every pair of documents. The result is a matrix of scores. As we would expect, some documents are similar and others are not.
+Now we can compare each of the documents to one another. The `pairwise_compare()` function applies a comparison function (in this case, `jaccard_similarity()`) to every pair of documents. The result is a matrix of scores. As we would expect, some documents are similar and others are not.
 
 ```{r}
 comparisons <- pairwise_compare(corpus, jaccard_similarity)

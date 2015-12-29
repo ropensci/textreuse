@@ -73,7 +73,7 @@ corpus[["ca1851-match"]]
 #> the as
 ```
 
-Now we can compare each of the documents to one another. The `pairwise_compare()` document applies a comparison function (in this case, `jaccard_similarity()`) to every pair of documents. The result is a matrix of scores. As we would expect, some documents are similar and others are not.
+Now we can compare each of the documents to one another. The `pairwise_compare()` function applies a comparison function (in this case, `jaccard_similarity()`) to every pair of documents. The result is a matrix of scores. As we would expect, some documents are similar and others are not.
 
 ``` r
 comparisons <- pairwise_compare(corpus, jaccard_similarity)
@@ -175,7 +175,7 @@ citation("textreuse")
 #> To cite package 'textreuse' in publications use:
 #> 
 #>   Lincoln Mullen (2015). textreuse: Detect Text Reuse and Document
-#>   Similarity. R package version 0.1.1.
+#>   Similarity. R package version 0.1.2.9000.
 #>   https://github.com/ropensci/textreuse
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -184,7 +184,7 @@ citation("textreuse")
 #>     title = {textreuse: Detect Text Reuse and Document Similarity},
 #>     author = {Lincoln Mullen},
 #>     year = {2015},
-#>     note = {R package version 0.1.1},
+#>     note = {R package version 0.1.2.9000},
 #>     url = {https://github.com/ropensci/textreuse},
 #>   }
 ```
