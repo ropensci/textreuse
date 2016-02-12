@@ -41,7 +41,7 @@ The functions \code{jaccard_similarity} and
 
   The Jaccard similarity coeffecient is defined as follows:
 
-  \deqn{J(A, B) = \frac{ | A \cup B | }{ | A \cap B | }}{ length(intersect(a,
+  \deqn{J(A, B) = \frac{ | A \cap B | }{ | A \cup B | }}{ length(intersect(a,
   b)) / length(union(a, b))}
 
   The Jaccard dissimilarity is simply
