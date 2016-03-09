@@ -1,20 +1,7 @@
 language: r
-warnings_are_errors: true
-sudo: required
-r_binary_packages:
-  - BH
-  - NLP
-  - Rcpp
-  - assertthat
-  - digest
-  - dplyr
-  - knitr
-  - rmarkdown
-  - stringr
-  - testthat
-  - tidyr
-notifications:
-  email:
-    on_success: change
-    on_failure: change
-
+r:
+  - oldrel
+  - release
+  - devel
+sudo: false
+cache: packages
