@@ -5,3 +5,11 @@ r:
   - devel
 sudo: false
 cache: packages
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
+  slack:
+    secure: gxP5b9VO52sKP72YB1iFwt5U73s6O1nq9o1vH6ddrvEIRgpzSQO7lIH8/KYfjj+eFRXCIWtFnrkar2kw2sfGJVERnJ9R13XtVDc23tApkZjacTxHUov39WbS4zI03Tb9pX86ywUNcs0rhVKok3CD9V80fybd3nFy8Vy/ugSBp7s=
+
