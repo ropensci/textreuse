@@ -39,8 +39,8 @@ lsh_compare <- function(candidates, corpus, f, progress = interactive()) {
 
   for (i in seq_len(num_rows)) {
     if (!is.na(candidates[i, "score"])) next()
-    a <- candidates[[i, "a"]]
-    b <- candidates[[i, "b"]]
+    a <- candidates$a[i]
+    b <- candidates$b[i]
     score <- f(corpus[[a]], corpus[[b]])
     candidates[i, "score"] <- score
     if (progress) setTxtProgressBar(pb, i)

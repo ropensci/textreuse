@@ -22,13 +22,12 @@ lsh_candidates <- function(buckets) {
 
   candidates <- buckets %>%
     dplyr::left_join(buckets, by = "buckets") %>%
-    dplyr::select_(~-buckets) %>%
-    dplyr::distinct_() %>%
     dplyr::filter_(~doc.x != doc.y) %>%
+    dplyr::distinct(doc.x, doc.y) %>%
     dplyr::arrange_(~doc.x, ~doc.y) %>%
-    dplyr::distinct_(dn = ~pmin(doc.x, doc.y), up = ~pmax(doc.x, doc.y)) %>%
-    dplyr::select_(~-up, ~-dn) %>%
-    dplyr::rename_(a = ~doc.x, b = ~doc.y) %>%
+    dplyr::mutate_(dn = ~pmin(doc.x, doc.y), up = ~pmax(doc.x, doc.y)) %>%
+    dplyr::distinct_(~up, ~dn) %>%
+    dplyr::select(a = dn, b = up) %>%
     dplyr::arrange_(~a, ~b) %>%
     dplyr::mutate_(score = NA_real_)
 

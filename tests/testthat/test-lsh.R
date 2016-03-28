@@ -19,12 +19,13 @@ test_that("returns error if improper number of bands are chosen", {
   expect_error(lsh(corpus, bands = 33), "The number of hashes")
 })
 
-test_that("returns pairs of candidates", {
+test_that("returns pairs of candidates without duplicates", {
   expect_is(candidates, "data.frame")
   expect_named(candidates, c("a", "b", "score"))
   expect_equal(candidates[[1, 1]], "ca1851-match")
   expect_equal(candidates[[1, 2]], "ny1850-match")
   expect_equal(candidates[[1, 3]], NA_real_)
+  expect_equal(nrow(candidates), 1)
 })
 
 test_that("additional documents can be added", {

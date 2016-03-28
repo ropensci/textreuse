@@ -19,9 +19,9 @@ as.matrix.textreuse_candidates <- function(x, ...) {
   diag(m) <- 1.0
 
   for (r in seq_len(nrow(x))) {
-    a <- x[[r, "a"]]
-    b <- x[[r, "b"]]
-    score <- x[[r, "score"]]
+    a <- x$a[r]
+    b <- x$b[r]
+    score <- x$score[r]
     m[a, b] <- score
     m[b, a] <- score
   }

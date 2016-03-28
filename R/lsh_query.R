@@ -32,7 +32,7 @@ lsh_query <- function(buckets, id) {
 
   res <- dplyr::data_frame(a = id, b = docs, score = NA_real_) %>%
     dplyr::filter_(~a != b) %>%
-    dplyr::distinct()
+    dplyr::distinct_(~a, ~b)
 
   class(res) <- c("textreuse_candidates", class(res))
 
