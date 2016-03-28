@@ -42,8 +42,8 @@ test_that("has subset methods", {
 })
 
 test_that("prints sensibly", {
-  expect_output(corpus_a, "TextReuseCorpus")
-  expect_output(corpus_a, "Number of documents: 3")
+  expect_output(print(corpus_a), "TextReuseCorpus")
+  expect_output(print(corpus_a), "Number of documents: 3")
 })
 
 test_that("can be retokenized", {
