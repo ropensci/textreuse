@@ -1,3 +1,8 @@
+# textreuse 0.1.3
+
+- Preventative maintenance release to avoid failing tests when new versions of 
+  the dplyr and testthat packages are released.
+
 # textreuse 0.1.2
 
 - Fix memory error in `shingle_ngrams()`
