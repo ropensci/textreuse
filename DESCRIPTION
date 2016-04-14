@@ -30,6 +30,7 @@ Imports:
 Suggests:
     testthat (>= 0.11.0),
     knitr (>= 1.11),
-    rmarkdown (>= 0.8)
+    rmarkdown (>= 0.8),
+    covr
 LinkingTo: BH, Rcpp, RcppProgress
 RoxygenNote: 5.0.1

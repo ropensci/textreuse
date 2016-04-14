@@ -6,7 +6,7 @@ An R package for detecting text reuse and document similarity in a corpus.
 
 **Author:** [Lincoln Mullen](http://lincolnmullen.com)<br> **License:** [MIT](http://opensource.org/licenses/MIT)<br> **Status:** Stable but in development
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/textreuse)](http://cran.r-project.org/package=textreuse) [![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](http://cran.r-project.org/package=textreuse) [![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/textreuse)](http://cran.r-project.org/package=textreuse) [![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](http://cran.r-project.org/package=textreuse) [![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse) [![Coverage Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://codecov.io/github/ropensci/textreuse?branch=master)
 
 ### Description
 
@@ -174,8 +174,8 @@ citation("textreuse")
 #> 
 #> To cite package 'textreuse' in publications use:
 #> 
-#>   Lincoln Mullen (2015). textreuse: Detect Text Reuse and Document
-#>   Similarity. R package version 0.1.2.9000.
+#>   Lincoln Mullen (2016). textreuse: Detect Text Reuse and Document
+#>   Similarity. R package version 0.1.3.
 #>   https://github.com/ropensci/textreuse
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -183,8 +183,8 @@ citation("textreuse")
 #>   @Manual{,
 #>     title = {textreuse: Detect Text Reuse and Document Similarity},
 #>     author = {Lincoln Mullen},
-#>     year = {2015},
-#>     note = {R package version 0.1.2.9000},
+#>     year = {2016},
+#>     note = {R package version 0.1.3},
 #>     url = {https://github.com/ropensci/textreuse},
 #>   }
 ```
