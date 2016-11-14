@@ -1,7 +1,7 @@
 context("LSH")
 
 dir <- system.file("extdata/legal", package = "textreuse")
-minhash <- minhash_generator(200, seed = 4236)
+minhash <- minhash_generator(200, seed = 9228)
 corpus <- TextReuseCorpus(dir = dir,
                           tokenizer = tokenize_ngrams, n = 5,
                           keep_tokens = TRUE,
