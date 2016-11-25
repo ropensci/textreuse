@@ -1,10 +1,10 @@
 This is a preventative maintenance release of the `textreuse` package. It fixes
-tests and functions that will fail when the in-development versions of the dplyr
-and testthat packages are published to CRAN.
+tests that will fail when the in-development version of the BH package is 
+released.
 
 ## Test environments
 
-* local OS X 10.11.3 install: R-release
+* local OS X 10.11.6 install: R-release
 * Ubuntu 14.04 (on Travis-CI): R-devel, R-release, R-oldrel
 * Win-builder: R-devel, R-release
 
