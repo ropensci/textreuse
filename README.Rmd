@@ -23,7 +23,7 @@ An R package for detecting text reuse and document similarity in a corpus.
 **License:** [MIT](http://opensource.org/licenses/MIT)<br>
 **Status:** Stable but in development
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/textreuse)](http://cran.r-project.org/package=textreuse)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
 [![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](http://cran.r-project.org/package=textreuse)
 [![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
@@ -52,7 +52,7 @@ devtools::install_github("ropensci/textreuse", build_vignettes = TRUE)
 
 There are three main approaches that one may take when using this package: pairwise comparions, minhashing/locality sensitive hashing, and extracting matching passages through text alignment.
 
-See the [introductory vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-introduction.html) for a description of the classes provided by this package.
+See the [introductory vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-introduction.html) for a description of the classes provided by this package.
 
 ```{r eval = FALSE}
 vignette("textreuse-introduction", package = "textreuse")
@@ -90,7 +90,7 @@ We can convert that matrix to a data frame of pairs and scores if we prefer.
 pairwise_candidates(comparisons)
 ```
 
-See the [pairwise vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-pairwise.html) for a fuller description.
+See the [pairwise vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-pairwise.html) for a fuller description.
 
 ```{r eval=FALSE}
 vignette("textreuse-pairwise", package = "textreuse")
@@ -119,7 +119,7 @@ scores <- lsh_compare(candidates, ats, jaccard_similarity, progress = FALSE)
 scores
 ```
 
-For details, see the [minhash vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-minhash.html).
+For details, see the [minhash vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-minhash.html).
 
 ```{r eval=FALSE}
 vignette("textreuse-minhash", package = "textreuse")
@@ -135,7 +135,7 @@ b <- "'This is a match', he replied."
 align_local(a, b)
 ```
 
-For details, see the [text alignment vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-alignment.html).
+For details, see the [text alignment vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-alignment.html).
 
 ```{r eval=FALSE}
 vignette("textreuse-alignment", package = "textreuse")

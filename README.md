@@ -6,7 +6,7 @@ An R package for detecting text reuse and document similarity in a corpus.
 
 **Author:** [Lincoln Mullen](http://lincolnmullen.com)<br> **License:** [MIT](http://opensource.org/licenses/MIT)<br> **Status:** Stable but in development
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/textreuse)](http://cran.r-project.org/package=textreuse) [![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](http://cran.r-project.org/package=textreuse) [![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse) [![Coverage Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://codecov.io/github/ropensci/textreuse?branch=master)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse) [![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](http://cran.r-project.org/package=textreuse) [![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse) [![Coverage Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://codecov.io/github/ropensci/textreuse?branch=master)
 
 ### Description
 
@@ -31,7 +31,7 @@ devtools::install_github("ropensci/textreuse", build_vignettes = TRUE)
 
 There are three main approaches that one may take when using this package: pairwise comparions, minhashing/locality sensitive hashing, and extracting matching passages through text alignment.
 
-See the [introductory vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-introduction.html) for a description of the classes provided by this package.
+See the [introductory vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-introduction.html) for a description of the classes provided by this package.
 
 ``` r
 vignette("textreuse-introduction", package = "textreuse")
@@ -61,7 +61,7 @@ names(corpus)
 #> [1] "ca1851-match"   "ca1851-nomatch" "ny1850-match"
 corpus[["ca1851-match"]]
 #> TextReuseTextDocument
-#> file : /Users/lmullen/Library/R/3.2/library/textreuse/extdata/legal/ca1851-match.txt 
+#> file : /Users/lmullen/Library/R/3.3/library/textreuse/extdata/legal/ca1851-match.txt 
 #> hash_func : hash_string 
 #> id : ca1851-match 
 #> minhash_func : 
@@ -88,16 +88,15 @@ We can convert that matrix to a data frame of pairs and scores if we prefer.
 
 ``` r
 pairwise_candidates(comparisons)
-#> Source: local data frame [3 x 3]
-#> 
+#> # A tibble: 3 × 3
 #>                a              b     score
-#>            (chr)          (chr)     (dbl)
+#> *          <chr>          <chr>     <dbl>
 #> 1   ca1851-match ca1851-nomatch 0.0000000
 #> 2   ca1851-match   ny1850-match 0.3842549
 #> 3 ca1851-nomatch   ny1850-match 0.0000000
 ```
 
-See the [pairwise vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-pairwise.html) for a fuller description.
+See the [pairwise vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-pairwise.html) for a fuller description.
 
 ``` r
 vignette("textreuse-pairwise", package = "textreuse")
@@ -124,15 +123,14 @@ buckets <- lsh(ats, bands = 50, progress = FALSE)
 candidates <- lsh_candidates(buckets)
 scores <- lsh_compare(candidates, ats, jaccard_similarity, progress = FALSE)
 scores
-#> Source: local data frame [2 x 3]
-#> 
+#> # A tibble: 2 × 3
 #>                       a                      b     score
-#>                   (chr)                  (chr)     (dbl)
+#>                   <chr>                  <chr>     <dbl>
 #> 1 practicalthought00nev thoughtsonpopery00nevi 0.4629868
 #> 2        remember00palm remembermeorholy00palm 0.7006189
 ```
 
-For details, see the [minhash vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-minhash.html).
+For details, see the [minhash vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-minhash.html).
 
 ``` r
 vignette("textreuse-minhash", package = "textreuse")
@@ -155,7 +153,7 @@ align_local(a, b)
 #> This is a #### match
 ```
 
-For details, see the [text alignment vignette](https://cran.r-project.org/web/packages/textreuse/vignettes/textreuse-alignment.html).
+For details, see the [text alignment vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-alignment.html).
 
 ``` r
 vignette("textreuse-alignment", package = "textreuse")
@@ -175,7 +173,7 @@ citation("textreuse")
 #> To cite package 'textreuse' in publications use:
 #> 
 #>   Lincoln Mullen (2016). textreuse: Detect Text Reuse and Document
-#>   Similarity. R package version 0.1.3.
+#>   Similarity. R package version 0.1.4.
 #>   https://github.com/ropensci/textreuse
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -184,7 +182,7 @@ citation("textreuse")
 #>     title = {textreuse: Detect Text Reuse and Document Similarity},
 #>     author = {Lincoln Mullen},
 #>     year = {2016},
-#>     note = {R package version 0.1.3},
+#>     note = {R package version 0.1.4},
 #>     url = {https://github.com/ropensci/textreuse},
 #>   }
 ```
