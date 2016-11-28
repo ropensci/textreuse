@@ -1,3 +1,8 @@
+# textreuse 0.1.4
+
+- Preventative maintenance release to avoid failing tests when new version of
+  BH is released.
+
 # textreuse 0.1.3
 
 - Preventative maintenance release to avoid failing tests when new versions of 
