@@ -146,7 +146,7 @@ You can write your own similarity functions, which should accept two sets or bag
 
 ## Parallelization
 
-This package will use multiple cores for a few functions is an option is set. This only benefits the corpus loading and tokenizing functions, which are often the slowest parts of an analysis. This is implemented with the [parallel package](https://cran.r-project.org/web/views/HighPerformanceComputing.html), and does not work on Windows machines. (Regardless of the options set, this package will never attempt to parallelize computations on Windows.)
+This package will use multiple cores for a few functions is an option is set. This only benefits the corpus loading and tokenizing functions, which are often the slowest parts of an analysis. This is implemented with the [parallel package](https://cran.r-project.org/view=HighPerformanceComputing), and does not work on Windows machines. (Regardless of the options set, this package will never attempt to parallelize computations on Windows.)
 
 To use the parallel option, you must specify the number of CPU cores that you wish to use:
 
