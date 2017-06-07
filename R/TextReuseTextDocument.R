@@ -88,7 +88,7 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
     n_call <- match.call(expand.dots = TRUE)[["n"]]
     if (is.null(n_call))
       n_call <- 3
-    if (wordcount(text) < n_call + 1) {
+    if (wordcount(text) < eval(n_call) + 1) {
       warning("Skipping document with ID '", document_id,
               "' because it has too few words ",
               "to create at least two n-grams with n = ", n_call, ".",
