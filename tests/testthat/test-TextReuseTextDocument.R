@@ -89,3 +89,10 @@ test_that("gives warning when skipping short documents from file", {
   expect_null(short_doc)
   file.remove(too_short)
 })
+
+test_that("number of words input can be a variable", {
+  i <- 1
+  expect_error(TextReuseTextDocument(file = "newman.txt",
+                                     tokenizer = tokenize_ngrams,
+                                     n = i), NA)
+})
