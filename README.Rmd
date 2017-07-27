@@ -28,6 +28,7 @@ An R package for detecting text reuse and document similarity in a corpus.
 [![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
 [![Coverage Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://codecov.io/github/ropensci/textreuse?branch=master)
+[![](https://badges.ropensci.org/20_status.svg)](https://github.com/ropensci/onboarding/issues/20)
 
 ### Description 
 
