@@ -4,7 +4,7 @@ Title: Detect Text Reuse and Document Similarity
 Version: 0.1.4.9000
 Date: 2016-11-28
 Authors@R: c(person("Lincoln", "Mullen", role = c("aut", "cre"),
-    email = "lincoln@lincolnmullen.com"))
+    email = "lincoln@lincolnmullen.com", comment = c(ORCID = "0000-0001-5103-6917")))
 Description: Tools for measuring similarity among documents and detecting
     passages which have been reused. Implements shingled n-gram, skip n-gram,
     and other tokenizers; similarity/dissimilarity functions; pairwise
@@ -33,4 +33,4 @@ Suggests:
     rmarkdown (>= 0.8),
     covr
 LinkingTo: BH, Rcpp, RcppProgress
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
