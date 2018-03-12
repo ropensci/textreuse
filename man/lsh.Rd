@@ -73,4 +73,3 @@ Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
  \code{\link{lsh_query}}, \code{\link{lsh_probability}},
  \code{\link{lsh_threshold}}
 }
-

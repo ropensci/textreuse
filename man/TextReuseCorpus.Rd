@@ -90,4 +90,3 @@ corpus[["ca1851-match"]]
 \link[=TextReuseTextDocument-accessors]{Accessors for TextReuse
   objects}.
 }
-

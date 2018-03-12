@@ -35,4 +35,3 @@ corpus <- rehash(corpus, minhash2, type = "minhashes")
 head(minhashes(corpus[[2]]))
 
 }
-

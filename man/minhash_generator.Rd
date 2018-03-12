@@ -52,4 +52,3 @@ Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
 \seealso{
 \code{\link{lsh}}
 }
-

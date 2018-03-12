@@ -84,4 +84,3 @@ For a useful description of the algorithm, see
   IEEE International Conference on Big Data, 2013,
   \url{http://hdl.handle.net/2047/d20004858}.
 }
-

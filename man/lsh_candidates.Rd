@@ -26,4 +26,3 @@ buckets <- lsh(corpus, bands = 50)
 lsh_candidates(buckets)
 
 }
-

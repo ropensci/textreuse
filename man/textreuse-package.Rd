@@ -4,7 +4,7 @@
 \name{textreuse-package}
 \alias{textreuse}
 \alias{textreuse-package}
-\title{Detect Text Reuse and Document Similarity}
+\title{textreuse: Detect Text Reuse and Document Similarity}
 \description{
 Tools for measuring similarity among documents and detecting
 passages which have been reused. Implements shingled n-gram, skip n-gram,
@@ -55,4 +55,15 @@ The sample data provided in the \code{extdata/legal} directory is
   \href{http://books.google.com/books?id=4PHEAAAAIAAJ&pg=PA51#v=onepage&q&f=false}{Google
    Books}.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/ropensci/textreuse}
+  \item Report bugs at \url{https://github.com/ropensci/textreuse/issues}
+}
 
+}
+\author{
+\strong{Maintainer}: Lincoln Mullen \email{lincoln@lincolnmullen.com} (0000-0001-5103-6917)
+
+}

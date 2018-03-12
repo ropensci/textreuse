@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // hash_string
 IntegerVector hash_string(std::vector < std::string > x);
-RcppExport SEXP textreuse_hash_string(SEXP xSEXP) {
+RcppExport SEXP _textreuse_hash_string(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -18,7 +18,7 @@ END_RCPP
 }
 // shingle_ngrams
 CharacterVector shingle_ngrams(CharacterVector words, int n);
-RcppExport SEXP textreuse_shingle_ngrams(SEXP wordsSEXP, SEXP nSEXP) {
+RcppExport SEXP _textreuse_shingle_ngrams(SEXP wordsSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -30,7 +30,7 @@ END_RCPP
 }
 // skip_ngrams
 CharacterVector skip_ngrams(CharacterVector words, int n, int k);
-RcppExport SEXP textreuse_skip_ngrams(SEXP wordsSEXP, SEXP nSEXP, SEXP kSEXP) {
+RcppExport SEXP _textreuse_skip_ngrams(SEXP wordsSEXP, SEXP nSEXP, SEXP kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -43,7 +43,7 @@ END_RCPP
 }
 // sw_matrix
 IntegerMatrix sw_matrix(IntegerMatrix m, CharacterVector a, CharacterVector b, int match, int mismatch, int gap, bool progress);
-RcppExport SEXP textreuse_sw_matrix(SEXP mSEXP, SEXP aSEXP, SEXP bSEXP, SEXP matchSEXP, SEXP mismatchSEXP, SEXP gapSEXP, SEXP progressSEXP) {
+RcppExport SEXP _textreuse_sw_matrix(SEXP mSEXP, SEXP aSEXP, SEXP bSEXP, SEXP matchSEXP, SEXP mismatchSEXP, SEXP gapSEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -57,4 +57,17 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(sw_matrix(m, a, b, match, mismatch, gap, progress));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_textreuse_hash_string", (DL_FUNC) &_textreuse_hash_string, 1},
+    {"_textreuse_shingle_ngrams", (DL_FUNC) &_textreuse_shingle_ngrams, 2},
+    {"_textreuse_skip_ngrams", (DL_FUNC) &_textreuse_skip_ngrams, 3},
+    {"_textreuse_sw_matrix", (DL_FUNC) &_textreuse_sw_matrix, 7},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_textreuse(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

@@ -17,4 +17,3 @@ A similarity matrix with row and column names containing document IDs.
 \description{
 These S3 methods convert a \code{textreuse_candidates} object to a matrix.
 }
-

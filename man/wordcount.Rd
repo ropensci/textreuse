@@ -18,4 +18,3 @@ This function counts words in a text, for example, a character vector, a
 \code{\link[NLP]{TextDocument}}, or a all the documents in a
 \code{\link{TextReuseCorpus}}.
 }
-

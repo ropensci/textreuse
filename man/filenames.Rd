@@ -25,4 +25,3 @@ filenames(paths, extension = TRUE)
 \seealso{
 \code{\link{basename}}
 }
-

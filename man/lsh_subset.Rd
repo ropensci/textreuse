@@ -28,4 +28,3 @@ candidates <- lsh_candidates(buckets)
 lsh_subset(candidates)
 corpus[lsh_subset(candidates)]
 }
-

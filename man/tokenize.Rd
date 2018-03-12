@@ -43,4 +43,3 @@ corpus <- TextReuseCorpus(dir = dir, tokenizer = NULL)
 corpus <- tokenize(corpus, tokenize_ngrams)
 head(tokens(corpus[[1]]))
 }
-

@@ -54,4 +54,3 @@ pairwise_compare(corpus, ratio_of_matches, directional = TRUE)
 See these document comparison functions,
   \code{\link{jaccard_similarity}}, \code{\link{ratio_of_matches}}.
 }
-

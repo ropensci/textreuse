@@ -30,4 +30,3 @@ lsh_query(buckets, "ny1850-match")
 \seealso{
 \code{\link{lsh}}, \code{\link{lsh_candidates}}
 }
-

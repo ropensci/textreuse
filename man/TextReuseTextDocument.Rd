@@ -2,11 +2,11 @@
 % Please edit documentation in R/TextReuseTextDocument.R
 \name{TextReuseTextDocument}
 \alias{TextReuseTextDocument}
+\alias{is.TextReuseTextDocument}
 \alias{has_content}
+\alias{has_tokens}
 \alias{has_hashes}
 \alias{has_minhashes}
-\alias{has_tokens}
-\alias{is.TextReuseTextDocument}
 \title{TextReuseTextDocument}
 \usage{
 TextReuseTextDocument(text, file = NULL, meta = list(),
@@ -101,4 +101,3 @@ content(doc)
 \link[=TextReuseTextDocument-accessors]{Accessors for TextReuse
   objects}.
 }
-

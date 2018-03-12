@@ -2,12 +2,12 @@
 % Please edit documentation in R/TextReuseTextDocument.R
 \name{TextReuseTextDocument-accessors}
 \alias{TextReuseTextDocument-accessors}
+\alias{tokens}
+\alias{tokens<-}
 \alias{hashes}
 \alias{hashes<-}
 \alias{minhashes}
 \alias{minhashes<-}
-\alias{tokens}
-\alias{tokens<-}
 \title{Accessors for TextReuse objects}
 \usage{
 tokens(x)
@@ -35,4 +35,3 @@ Accessor functions to read and write components of
 \code{\link{TextReuseTextDocument}} and \code{\link{TextReuseCorpus}}
 objects.
 }
-

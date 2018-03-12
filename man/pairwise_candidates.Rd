@@ -32,4 +32,3 @@ pairwise_candidates(m1, directional = TRUE)
 m2 <- pairwise_compare(corpus, jaccard_similarity)
 pairwise_candidates(m2)
 }
-

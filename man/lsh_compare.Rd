@@ -39,4 +39,3 @@ buckets <- lsh(corpus, bands = 50)
 candidates <- lsh_candidates(buckets)
 lsh_compare(candidates, corpus, jaccard_similarity)
 }
-
