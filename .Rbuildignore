@@ -8,3 +8,6 @@ wordnet
 ^appveyor\.yml$
 ^CONDUCT\.md$
 ^cran-comments\.md$
+^Makefile$
+^_pkgdown\.yml$
+docs/

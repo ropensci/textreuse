@@ -1,0 +1,10 @@
+url: http://lincolnmullen.com/software/textreuse
+
+template:
+  params:
+    bootswatch: united
+    ganalytics: "UA-25121492-1"
+
+authors:
+  Lincoln Mullen:
+    href: "http://lincolnmullen.com"
