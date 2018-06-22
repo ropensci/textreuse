@@ -21,7 +21,7 @@ suppressPackageStartupMessages(library(dplyr))
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
 [![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
 [![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/lmullen/textreuse?branch=master)](https://ci.appveyor.com/project/lmullen/textreuse)
+[![Build status](https://ci.appveyor.com/api/projects/status/9qwf0473xi8cyuoh/branch/master?svg=true)](https://ci.appveyor.com/project/lmullen/textreuse-6xljc/branch/master)
 [![Coverage Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://codecov.io/github/ropensci/textreuse?branch=master)
 [![rOpenSci badge](https://badges.ropensci.org/20_status.svg)](https://github.com/ropensci/onboarding/issues/20)
 
