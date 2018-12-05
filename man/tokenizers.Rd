@@ -3,12 +3,15 @@
 \name{tokenizers}
 \alias{tokenizers}
 \alias{tokenize_words}
+\alias{tokenize_characters}
 \alias{tokenize_sentences}
 \alias{tokenize_ngrams}
 \alias{tokenize_skip_ngrams}
 \title{Split texts into tokens}
 \usage{
 tokenize_words(string, lowercase = TRUE)
+
+tokenize_characters(string, lowercase = TRUE)
 
 tokenize_sentences(string, lowercase = TRUE)
 

@@ -30,6 +30,14 @@ tokenize_words <- function(string, lowercase = TRUE) {
 
 #' @export
 #' @rdname tokenizers
+tokenize_characters <- function(string, lowercase = TRUE) {
+  assert_that(assertthat::is.string(string))
+  out <- str_split(string, boundary("character"))[[1]]
+  if (lowercase) str_to_lower(out) else out
+}
+
+#' @export
+#' @rdname tokenizers
 tokenize_sentences <- function(string, lowercase = TRUE) {
   assert_that(assertthat::is.string(string))
   out <- str_split(string, boundary("sentence", skip_word_none = FALSE))[[1]]

@@ -26,6 +26,8 @@
 #'   negative integer or zero.
 #' @param edit_mark A single character used for displaying for displaying
 #'   insertions/deletions in the documents.
+#' @param tokenizer A function such as \code{\link{tokenize_words}} to use in
+#'   tokenizing the text. See \link{tokenizers}.
 #' @param progress Display a progress bar and messages while computing the
 #'   alignment.
 #'
@@ -51,7 +53,7 @@
 #'
 #' @references For a useful description of the algorithm, see
 #'   \href{http://etherealbits.com/2013/04/string-alignment-dynamic-programming-dna/}{this
-#'   post}. For the application of the Smith-Waterman algorithm to natural
+#'    post}. For the application of the Smith-Waterman algorithm to natural
 #'   language, see David A. Smith, Ryan Cordell, and Elizabeth Maddock Dillon,
 #'   "Infectious Texts: Modeling Text Reuse in Nineteenth-Century Newspapers."
 #'   IEEE International Conference on Big Data, 2013,
@@ -69,7 +71,9 @@
 #'
 #' @export
 align_local <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
-                        edit_mark = "#", progress = interactive()) {
+                        edit_mark = "#",
+                        tokenizer = tokenize_words,
+                        progress = interactive()) {
  assert_that(identical(class(a), class(b)))
  UseMethod("align_local", a)
 }
@@ -77,6 +81,7 @@ align_local <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
 #' @export
 align_local.TextReuseTextDocument <- function(a, b, match = 2L, mismatch = -1L,
                                               gap = -1L, edit_mark = "#",
+                                              tokenizer = tokenize_words,
                                               progress = interactive()) {
   align_local(content(a), content(b), match = match, mismatch = mismatch,
               gap = gap, edit_mark = edit_mark)
@@ -84,13 +89,16 @@ align_local.TextReuseTextDocument <- function(a, b, match = 2L, mismatch = -1L,
 
 #' @export
 align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
-                                edit_mark = "#", progress = interactive()) {
+                                edit_mark = "#",
+                                tokenizer = tokenize_words,
+                                progress = interactive()) {
 
   assert_that(is.string(a),
               is.string(b),
               is_integer_like(match),
               is_integer_like(mismatch),
               is_integer_like(gap),
+              is.function(tokenizer),
               is.string(edit_mark))
 
   if (match <= 0 || mismatch > 0 || gap > 0 || !(str_length(edit_mark) == 1)) {
@@ -98,7 +106,8 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
          "    - `match` should be a positive integer\n",
          "    - `mismatch` should be a negative integer or zero\n",
          "    - `gap` should be a negative integer or zero\n",
-         "    - `edit_mark` should be a single character\n")
+         "    - `edit_mark` should be a single character\n",
+         "    - `tokenizer` should be a function\n")
   }
 
   # Keep everything as integers because IntegerMatrix saves memory
@@ -109,8 +118,8 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   # Prepare the character vectors. Tokenize to words to compare word by word.
   # Use all lower case for the comparison, but use original capitalization in
   # the output.
-  a_orig <- tokenize_words(a, lowercase = FALSE)
-  b_orig <- tokenize_words(b, lowercase = FALSE)
+  a_orig <- tokenizer(a, lowercase = FALSE)
+  b_orig <- tokenizer(b, lowercase = FALSE)
   a <- str_to_lower(a_orig)
   b <- str_to_lower(b_orig)
 
