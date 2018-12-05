@@ -7,11 +7,11 @@
 \title{textreuse: Detect Text Reuse and Document Similarity}
 \description{
 Tools for measuring similarity among documents and detecting
-passages which have been reused. Implements shingled n-gram, skip n-gram,
-and other tokenizers; similarity/dissimilarity functions; pairwise
-comparisons; minhash and locality sensitive hashing algorithms; and a
-version of the Smith-Waterman local alignment algorithm suitable for
-natural language.
+    passages which have been reused. Implements shingled n-gram, skip n-gram,
+    and other tokenizers; similarity/dissimilarity functions; pairwise
+    comparisons; minhash and locality sensitive hashing algorithms; and a
+    version of the Smith-Waterman local alignment algorithm suitable for
+    natural language.
 }
 \details{
 The best place to begin with this package in the introductory vignette.

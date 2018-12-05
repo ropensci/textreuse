@@ -4,11 +4,8 @@
 \name{reexports}
 \alias{reexports}
 \alias{meta}
-\alias{reexports}
 \alias{meta<-}
-\alias{reexports}
 \alias{content}
-\alias{reexports}
 \alias{content<-}
 \title{Objects exported from other packages}
 \keyword{internal}
