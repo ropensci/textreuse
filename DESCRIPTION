@@ -13,7 +13,7 @@ Description: Tools for measuring similarity among documents and detecting
     natural language.
 License: MIT + file LICENSE
 LazyData: TRUE
-URL: https://github.com/ropensci/textreuse
+URL: https://docs.ropensci.org/textreuse, https://github.com/ropensci/textreuse
 BugReports: https://github.com/ropensci/textreuse/issues
 VignetteBuilder: knitr
 Depends:
