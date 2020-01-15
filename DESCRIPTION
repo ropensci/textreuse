@@ -33,4 +33,4 @@ Suggests:
     rmarkdown (>= 0.8),
     covr
 LinkingTo: BH, Rcpp, RcppProgress
-RoxygenNote: 7.0.2
+RoxygenNote: 6.0.1
