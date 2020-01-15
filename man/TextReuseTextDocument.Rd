@@ -9,10 +9,19 @@
 \alias{has_minhashes}
 \title{TextReuseTextDocument}
 \usage{
-TextReuseTextDocument(text, file = NULL, meta = list(),
-  tokenizer = tokenize_ngrams, ..., hash_func = hash_string,
-  minhash_func = NULL, keep_tokens = FALSE, keep_text = TRUE,
-  skip_short = TRUE)
+TextReuseTextDocument(
+  text,
+  file = NULL,
+  meta = list(),
+  tokenizer = tokenize_ngrams,
+  ...,
+  hash_func = hash_string,
+  minhash_func = NULL,
+  keep_tokens = FALSE,
+  keep_text = TRUE,
+  skip_short = TRUE,
+  encoding = "unknown"
+)
 
 is.TextReuseTextDocument(x)
 
@@ -55,6 +64,8 @@ returned or discarded?}
 discarded?}
 
 \item{skip_short}{Should short documents be skipped? (See details.)}
+
+\item{encoding}{Encoding to be used when reading files.}
 
 \item{x}{An R object to check.}
 }

@@ -6,10 +6,21 @@
 \alias{skipped}
 \title{TextReuseCorpus}
 \usage{
-TextReuseCorpus(paths, dir = NULL, text = NULL, meta = list(),
-  progress = interactive(), tokenizer = tokenize_ngrams, ...,
-  hash_func = hash_string, minhash_func = NULL, keep_tokens = FALSE,
-  keep_text = TRUE, skip_short = TRUE)
+TextReuseCorpus(
+  paths,
+  dir = NULL,
+  text = NULL,
+  meta = list(),
+  progress = interactive(),
+  tokenizer = tokenize_ngrams,
+  ...,
+  hash_func = hash_string,
+  minhash_func = NULL,
+  keep_tokens = FALSE,
+  keep_text = TRUE,
+  skip_short = TRUE,
+  encoding = "unknown"
+)
 
 is.TextReuseCorpus(x)
 
@@ -46,6 +57,8 @@ returned or discarded?}
 or discarded?}
 
 \item{skip_short}{Should short documents be skipped? (See details.)}
+
+\item{encoding}{Encoding to be used when reading files.}
 
 \item{x}{An R object to check.}
 }
