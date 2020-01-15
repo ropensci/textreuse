@@ -24,7 +24,8 @@
 #' @param keep_text Should the text be saved in the document that is returned or
 #'   discarded?
 #' @param skip_short Should short documents be skipped? (See details.)
-#'
+#' @param encoding Encoding to be used when reading files.
+#' 
 #' @details This constructor function follows a three-step process. It reads in
 #'   the text, either from a file or from memory. It then tokenizes that text.
 #'   Then it hashes the tokens. Most of the comparison functions in this package
@@ -67,14 +68,15 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
                                   minhash_func = NULL,
                                   keep_tokens = FALSE,
                                   keep_text = TRUE,
-                                  skip_short = TRUE) {
+                                  skip_short = TRUE,
+                                  encoding = "unknown") {
 
   if (!missing(text)) assert_that(has_id(meta))
 
   if (!is.null(file)) {
     assert_that(missing(text),
                 is.readable(file))
-    text <- as_string(readLines(file))
+    text <- as_string(readLines(file, encoding = encoding))
   }
 
   assert_that(is.character(text))
