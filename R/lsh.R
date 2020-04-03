@@ -108,7 +108,7 @@ lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
     dplyr::select_(~-band) %>%
     dplyr::ungroup()
 
-  class(buckets) <- c(class(buckets), "lsh_buckets")
+  class(buckets) <- c("lsh_buckets", class(buckets))
 
   buckets
 
@@ -146,7 +146,7 @@ lsh.TextReuseTextDocument <- function(x, bands, progress) {
     dplyr::select_(~-band) %>%
     dplyr::ungroup()
 
-  class(buckets) <- c(class(buckets), "lsh_buckets")
+  class(buckets) <- c("lsh_buckets", class(buckets))
 
   buckets
 
