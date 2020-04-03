@@ -76,7 +76,7 @@ lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
   assert_that(check_banding(h, bands))
 
   # To assign rows in data frame to bands
-  b_assign <-  dplyr::data_frame(band =
+  b_assign <-  tibble::tibble(band =
       rep(vapply(1:bands, function(i) rep(i, r), integer(r)), d)
     )
 
@@ -84,7 +84,7 @@ lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
   col_names <- names(all_minhashes)
 
   buckets <- all_minhashes %>%
-    dplyr::as_data_frame() %>%
+    dplyr::as_tibble() %>%
     tidyr::gather_("doc", "hash", col_names) %>%
     dplyr::mutate_(doc = ~as.character(doc)) %>%
     dplyr::bind_cols(b_assign) %>%
@@ -134,12 +134,12 @@ lsh.TextReuseTextDocument <- function(x, bands, progress) {
   assert_that(check_banding(h, bands))
 
   # To assign rows in data frame to bands
-  b_assign <-  dplyr::data_frame(band =
+  b_assign <-  tibble::tibble(band =
       rep(vapply(1:bands, function(i) rep(i, r), integer(r)), 1)
     )
 
 
-  buckets <- dplyr::data_frame(doc = x$meta$id, hash = all_minhashes) %>%
+  buckets <- tibble::tibble(doc = x$meta$id, hash = all_minhashes) %>%
     dplyr::bind_cols(b_assign) %>%
     dplyr::group_by_(~doc, ~band) %>%
     dplyr::summarize_(buckets = ~digest::digest(list(hash, unique(band)))) %>%

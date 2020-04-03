@@ -30,7 +30,7 @@ lsh_query <- function(buckets, id) {
     dplyr::filter_(~buckets %in% signatures) %>%
     `$`("doc")
 
-  res <- dplyr::data_frame(a = id, b = docs, score = NA_real_) %>%
+  res <- tibble::tibble(a = id, b = docs, score = NA_real_) %>%
     dplyr::filter_(~a != b) %>%
     dplyr::distinct_(~a, ~b)
 
