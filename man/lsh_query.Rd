@@ -15,7 +15,7 @@ lsh_query(buckets, id)
 An \code{lsh_candidates} data frame with matches to the document specified.
 }
 \description{
-This function retrieves the matches for a single document from an \code{lsh_buckets} object created by \code{\link{lsh}}. See \code{\link{lsh_candidates}} to rerieve all pairs of matches.
+This function retrieves the matches for a single document from an \code{lsh_buckets} object created by \code{\link{lsh}}. See \code{\link{lsh_candidates}} to retrieve all pairs of matches.
 }
 \examples{
 dir <- system.file("extdata/legal", package = "textreuse")

@@ -1,4 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 textreuse
 =========
 
@@ -6,7 +7,8 @@ textreuse
 [![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
 [![Build
 Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse)
-[![Build status](https://ci.appveyor.com/api/projects/status/9qwf0473xi8cyuoh/branch/master?svg=true)](https://ci.appveyor.com/project/lmullen/textreuse-6xljc/branch/master)
+[![Build
+status](https://ci.appveyor.com/api/projects/status/9qwf0473xi8cyuoh/branch/master?svg=true)](https://ci.appveyor.com/project/lmullen/textreuse-6xljc/branch/master)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://codecov.io/github/ropensci/textreuse?branch=master)
 [![rOpenSci
@@ -41,8 +43,8 @@ citation("textreuse")
 #> To cite package 'textreuse' in publications use:
 #> 
 #>   Lincoln Mullen (2016). textreuse: Detect Text Reuse and Document
-#>   Similarity. R package version 0.1.4.
-#>   https://CRAN.R-project.org/package=textreuse
+#>   Similarity. https://docs.ropensci.org/textreuse,
+#>   https://github.com/ropensci/textreuse.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -50,8 +52,7 @@ citation("textreuse")
 #>     title = {textreuse: Detect Text Reuse and Document Similarity},
 #>     author = {Lincoln Mullen},
 #>     year = {2016},
-#>     note = {R package version 0.1.4},
-#>     url = {https://CRAN.R-project.org/package=textreuse},
+#>     note = {https://docs.ropensci.org/textreuse, https://github.com/ropensci/textreuse},
 #>   }
 ```
 
@@ -76,8 +77,8 @@ Examples
 --------
 
 There are three main approaches that one may take when using this
-package: pairwise comparions, minhashing/locality sensitive hashing, and
-extracting matching passages through text alignment.
+package: pairwise comparisons, minhashing/locality sensitive hashing,
+and extracting matching passages through text alignment.
 
 See the [introductory
 vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-introduction.html)
@@ -116,7 +117,7 @@ names(corpus)
 #> [1] "ca1851-match"   "ca1851-nomatch" "ny1850-match"
 corpus[["ca1851-match"]]
 #> TextReuseTextDocument
-#> file : /usr/local/lib/R/3.5/site-library/textreuse/extdata/legal/ca1851-match.txt 
+#> file : /Users/lmullen/R/library/textreuse/extdata/legal/ca1851-match.txt 
 #> hash_func : hash_string 
 #> id : ca1851-match 
 #> minhash_func : 
@@ -247,7 +248,7 @@ cores, if available. (This works only on non-Windows machines.) To use
 multiple cores, set `options("mc.cores" = 4L)`, where the number is how
 many cores you wish to use.
 
-### Contributing and acknowledgements
+### Contributing and acknowledgments
 
 Please note that this project is released with a [Contributor Code of
 Conduct](CONDUCT.md). By participating in this project you agree to

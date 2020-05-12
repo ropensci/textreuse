@@ -27,7 +27,7 @@ specific paths for working with the package.
 
 \code{vignette("textreuse-alignment", package = "textreuse")}
 
-Another good place to beign with the package is the documentation for loading
+Another good place to begin with the package is the documentation for loading
 documents (\code{\link{TextReuseTextDocument}} and
 \code{\link{TextReuseCorpus}}), for \link{tokenizers},
 \link[=similarity-functions]{similarity functions}, and

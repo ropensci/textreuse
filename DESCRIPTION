@@ -1,8 +1,8 @@
 Package: textreuse
 Type: Package
 Title: Detect Text Reuse and Document Similarity
-Version: 0.1.4.9000
-Date: 2016-11-28
+Version: 0.1.5
+Date: 2020-05-12
 Authors@R: c(person("Lincoln", "Mullen", role = c("aut", "cre"),
     email = "lincoln@lincolnmullen.com", comment = c(ORCID = "0000-0001-5103-6917")))
 Description: Tools for measuring similarity among documents and detecting
