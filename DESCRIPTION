@@ -21,11 +21,12 @@ Depends:
 Imports:
     assertthat (>= 0.1),
     digest (>= 0.6.8),
-    dplyr (>= 0.4.3),
+    dplyr (>= 0.8.0),
     NLP (>= 0.1.8),
     Rcpp (>= 0.12.0),
     RcppProgress  (>= 0.1),
     stringr (>= 1.0.0),
+    tibble (>= 3.0.1),
     tidyr (>= 0.3.1)
 Suggests:
     testthat (>= 0.11.0),
@@ -33,4 +34,5 @@ Suggests:
     rmarkdown (>= 0.8),
     covr
 LinkingTo: BH, Rcpp, RcppProgress
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.0
+Encoding: UTF-8

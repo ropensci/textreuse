@@ -48,5 +48,5 @@
 "_PACKAGE"
 
 if (getRversion() >= "2.15.1") {
- utils::globalVariables(c("doc.x", "doc.y", "up", "dn", "a", "b"))
+ utils::globalVariables(c("doc.x", "doc.y", "up", "dn", "a", "b", ".data", "band", "hash"))
 }

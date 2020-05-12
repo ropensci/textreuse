@@ -10,9 +10,8 @@ buckets <- lsh(corpus, bands = 50)
 candidates <- lsh_candidates(buckets)
 scores <- lsh_compare(candidates, corpus, jaccard_similarity)
 
-test_that("returns a data frame with additional class", {
+test_that("returns a data frame", {
   expect_is(buckets, "tbl_df")
-  expect_is(buckets, "lsh_buckets")
 })
 
 test_that("returns error if improper number of bands are chosen", {

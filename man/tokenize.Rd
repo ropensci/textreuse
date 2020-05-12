@@ -4,8 +4,15 @@
 \alias{tokenize}
 \title{Recompute the tokens for a document or corpus}
 \usage{
-tokenize(x, tokenizer, ..., hash_func = hash_string, minhash_func = NULL,
-  keep_tokens = FALSE, keep_text = TRUE)
+tokenize(
+  x,
+  tokenizer,
+  ...,
+  hash_func = hash_string,
+  minhash_func = NULL,
+  keep_tokens = FALSE,
+  keep_text = TRUE
+)
 }
 \arguments{
 \item{x}{A \code{\link{TextReuseTextDocument}} or
