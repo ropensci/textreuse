@@ -23,7 +23,7 @@ minhashes(x)
 minhashes(x) <- value
 }
 \arguments{
-\item{x}{The object to acess.}
+\item{x}{The object to access.}
 
 \item{value}{The value to assign.}
 }
