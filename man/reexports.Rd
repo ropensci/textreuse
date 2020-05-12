@@ -4,11 +4,8 @@
 \name{reexports}
 \alias{reexports}
 \alias{meta}
-\alias{reexports}
 \alias{meta<-}
-\alias{reexports}
 \alias{content}
-\alias{reexports}
 \alias{content<-}
 \title{Objects exported from other packages}
 \keyword{internal}
@@ -17,6 +14,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{NLP}{\code{\link[NLP]{meta}}, \code{\link[NLP]{meta<-}}, \code{\link[NLP]{content}}, \code{\link[NLP]{content<-}}}
+  \item{NLP}{\code{\link[NLP]{content}}, \code{\link[NLP]{content<-}}, \code{\link[NLP]{meta}}, \code{\link[NLP]{meta<-}}}
 }}
 

@@ -23,16 +23,16 @@ lsh_query <- function(buckets, id) {
               is.string(id))
 
   signatures <- buckets %>%
-    dplyr::filter_(~doc == id) %>%
+    dplyr::filter(.data$doc == id) %>%
     `$`("buckets")
 
   docs <- buckets %>%
-    dplyr::filter_(~buckets %in% signatures) %>%
+    dplyr::filter(.data$buckets %in% signatures) %>%
     `$`("doc")
 
-  res <- dplyr::data_frame(a = id, b = docs, score = NA_real_) %>%
-    dplyr::filter_(~a != b) %>%
-    dplyr::distinct_(~a, ~b)
+  res <- tibble::tibble(a = id, b = docs, score = NA_real_) %>%
+    dplyr::filter(.data$a != .data$b) %>%
+    dplyr::distinct(.data$a, .data$b)
 
   class(res) <- c("textreuse_candidates", class(res))
 
