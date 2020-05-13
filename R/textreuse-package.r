@@ -39,7 +39,7 @@
 #'   \href{http://books.google.com/books?id=4PHEAAAAIAAJ&pg=PA51#v=onepage&q&f=false}{Google
 #'    Books}.
 #'
-#' @useDynLib textreuse
+#' @useDynLib textreuse, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 #' @import RcppProgress
 #' @import stringr
