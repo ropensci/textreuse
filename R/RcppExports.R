@@ -9,18 +9,18 @@
 #' hash_string(s)
 #' @export
 hash_string <- function(x) {
-    .Call('_textreuse_hash_string', PACKAGE = 'textreuse', x)
+    .Call(`_textreuse_hash_string`, x)
 }
 
 shingle_ngrams <- function(words, n) {
-    .Call('_textreuse_shingle_ngrams', PACKAGE = 'textreuse', words, n)
+    .Call(`_textreuse_shingle_ngrams`, words, n)
 }
 
 skip_ngrams <- function(words, n, k) {
-    .Call('_textreuse_skip_ngrams', PACKAGE = 'textreuse', words, n, k)
+    .Call(`_textreuse_skip_ngrams`, words, n, k)
 }
 
 sw_matrix <- function(m, a, b, match, mismatch, gap, progress) {
-    .Call('_textreuse_sw_matrix', PACKAGE = 'textreuse', m, a, b, match, mismatch, gap, progress)
+    .Call(`_textreuse_sw_matrix`, m, a, b, match, mismatch, gap, progress)
 }
 
