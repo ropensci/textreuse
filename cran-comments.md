@@ -1,6 +1,8 @@
 This is a maintenance release to handle changes in the forthcoming
 dplyr 1.0.0.
 
+This resubmission handles a problem with a URL to CONDUCT.md.
+
 ## Test environments
 
 * local OS X 10.15.4 install: R-release
