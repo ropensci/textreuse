@@ -42,7 +42,7 @@ citation("textreuse")
 #> 
 #> To cite package 'textreuse' in publications use:
 #> 
-#>   Lincoln Mullen (2016). textreuse: Detect Text Reuse and Document
+#>   Lincoln Mullen (2020). textreuse: Detect Text Reuse and Document
 #>   Similarity. https://docs.ropensci.org/textreuse,
 #>   https://github.com/ropensci/textreuse.
 #> 
@@ -51,7 +51,7 @@ citation("textreuse")
 #>   @Manual{,
 #>     title = {textreuse: Detect Text Reuse and Document Similarity},
 #>     author = {Lincoln Mullen},
-#>     year = {2016},
+#>     year = {2020},
 #>     note = {https://docs.ropensci.org/textreuse, https://github.com/ropensci/textreuse},
 #>   }
 ```
@@ -251,8 +251,8 @@ many cores you wish to use.
 ### Contributing and acknowledgments
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CONDUCT.md). By participating in this project you agree to
-abide by its terms.
+Conduct](https://github.com/ropensci/textreuse/blob/master/CONDUCT.md).
+By participating in this project you agree to abide by its terms.
 
 Thanks to [Noam Ross](http://www.noamross.net/) for his thorough [peer
 review](https://github.com/ropensci/onboarding/issues/20) of this
