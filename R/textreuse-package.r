@@ -1,4 +1,4 @@
-#'@details
+#' @details
 #' The best place to begin with this package in the introductory vignette.
 #'
 #' \code{vignette("textreuse-introduction", package = "textreuse")}
@@ -48,5 +48,5 @@
 "_PACKAGE"
 
 if (getRversion() >= "2.15.1") {
- utils::globalVariables(c("doc.x", "doc.y", "up", "dn", "a", "b", ".data", "band", "hash"))
+  utils::globalVariables(c("doc.x", "doc.y", "up", "dn", "a", "b", ".data", "band", "hash"))
 }
