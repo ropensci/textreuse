@@ -1,10 +1,11 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-textreuse
-=========
+    ## Warning: package 'dplyr' was built under R version 4.3.2
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
-[![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
+# textreuse
+
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
+[![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
 [![Build
 Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse)
 [![Build
@@ -14,8 +15,7 @@ Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](
 [![rOpenSci
 badge](https://badges.ropensci.org/20_status.svg)](https://github.com/ropensci/onboarding/issues/20)
 
-Overview
---------
+## Overview
 
 This [R](https://www.r-project.org/) package provides a set of functions
 for measuring similarity among documents and detecting passages which
@@ -39,11 +39,10 @@ citation.
 
 ``` r
 citation("textreuse")
-#> 
 #> To cite package 'textreuse' in publications use:
 #> 
-#>   Lincoln Mullen (2020). textreuse: Detect Text Reuse and Document
-#>   Similarity. https://docs.ropensci.org/textreuse,
+#>   Mullen L (2020). _textreuse: Detect Text Reuse and Document
+#>   Similarity_. https://docs.ropensci.org/textreuse,
 #>   https://github.com/ropensci/textreuse.
 #> 
 #> A BibTeX entry for LaTeX users is
@@ -52,12 +51,12 @@ citation("textreuse")
 #>     title = {textreuse: Detect Text Reuse and Document Similarity},
 #>     author = {Lincoln Mullen},
 #>     year = {2020},
-#>     note = {https://docs.ropensci.org/textreuse, https://github.com/ropensci/textreuse},
+#>     note = {https://docs.ropensci.org/textreuse,
+#> https://github.com/ropensci/textreuse},
 #>   }
 ```
 
-Installation
-------------
+## Installation
 
 To install this package from CRAN:
 
@@ -73,8 +72,7 @@ To install the development version from GitHub, use
 devtools::install_github("ropensci/textreuse", build_vignettes = TRUE)
 ```
 
-Examples
---------
+## Examples
 
 There are three main approaches that one may take when using this
 package: pairwise comparisons, minhashing/locality sensitive hashing,
@@ -117,7 +115,7 @@ names(corpus)
 #> [1] "ca1851-match"   "ca1851-nomatch" "ny1850-match"
 corpus[["ca1851-match"]]
 #> TextReuseTextDocument
-#> file : /Users/lmullen/R/library/textreuse/extdata/legal/ca1851-match.txt 
+#> file : C:/Users/Bach/AppData/Local/Temp/RtmpQLSaQ0/temp_libpath1d3054406c5/textreuse/extdata/legal/ca1851-match.txt 
 #> hash_func : hash_string 
 #> id : ca1851-match 
 #> minhash_func : 
@@ -149,7 +147,7 @@ prefer.
 
 ``` r
 pairwise_candidates(comparisons)
-#> # A tibble: 3 x 3
+#> # A tibble: 3 × 3
 #>   a              b              score
 #> * <chr>          <chr>          <dbl>
 #> 1 ca1851-match   ca1851-nomatch 0    
@@ -195,14 +193,20 @@ apply a comparison function to just those candidates.
 
 ``` r
 buckets <- lsh(ats, bands = 50, progress = FALSE)
+#> Warning: `gather_()` was deprecated in tidyr 1.2.0.
+#> ℹ Please use `gather()` instead.
+#> ℹ The deprecated feature was likely used in the textreuse package.
+#>   Please report the issue at <https://github.com/ropensci/textreuse/issues>.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 candidates <- lsh_candidates(buckets)
 scores <- lsh_compare(candidates, ats, jaccard_similarity, progress = FALSE)
 scores
-#> # A tibble: 2 x 3
-#>   a                     b                      score
-#>   <chr>                 <chr>                  <dbl>
-#> 1 practicalthought00nev thoughtsonpopery00nevi 0.463
-#> 2 remember00palm        remembermeorholy00palm 0.701
+#> # A tibble: 1 × 3
+#>   a              b                      score
+#>   <chr>          <chr>                  <dbl>
+#> 1 remember00palm remembermeorholy00palm 0.701
 ```
 
 For details, see the [minhash
