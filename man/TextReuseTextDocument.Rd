@@ -9,10 +9,18 @@
 \alias{has_minhashes}
 \title{TextReuseTextDocument}
 \usage{
-TextReuseTextDocument(text, file = NULL, meta = list(),
-  tokenizer = tokenize_ngrams, ..., hash_func = hash_string,
-  minhash_func = NULL, keep_tokens = FALSE, keep_text = TRUE,
-  skip_short = TRUE)
+TextReuseTextDocument(
+  text,
+  file = NULL,
+  meta = list(),
+  tokenizer = tokenize_ngrams,
+  ...,
+  hash_func = hash_string,
+  minhash_func = NULL,
+  keep_tokens = FALSE,
+  keep_text = TRUE,
+  skip_short = TRUE
+)
 
 is.TextReuseTextDocument(x)
 

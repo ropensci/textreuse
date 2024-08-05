@@ -4,8 +4,7 @@
 \alias{pairwise_compare}
 \title{Pairwise comparisons among documents in a corpus}
 \usage{
-pairwise_compare(corpus, f, ..., directional = FALSE,
-  progress = interactive())
+pairwise_compare(corpus, f, ..., directional = FALSE, progress = interactive())
 }
 \arguments{
 \item{corpus}{A \code{\link{TextReuseCorpus}}.}
