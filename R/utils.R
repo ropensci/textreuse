@@ -40,10 +40,7 @@ assertthat::on_failure(has_id) <- function(call, env) {
 # People might row_bind() two of these data frames, so we can't rely just on
 # the class.
 is_lsh_buckets <- function(x) {
-  class_check <- inherits(x, "lsh_buckets")
-  col_check <- identical(names(x), c("doc", "buckets")) &
-    inherits(x, "data.frame")
-  class_check | col_check
+  identical(names(x), c("doc", "buckets")) & inherits(x, "data.frame")
 }
 
 assertthat::on_failure(is_lsh_buckets) <- function(call, env) {

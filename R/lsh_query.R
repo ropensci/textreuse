@@ -1,6 +1,6 @@
 #' Query a LSH cache for matches to a single document
 #'
-#' This function retrieves the matches for a single document from an \code{lsh_buckets} object created by \code{\link{lsh}}. See \code{\link{lsh_candidates}} to rerieve all pairs of matches.
+#' This function retrieves the matches for a single document from an \code{lsh_buckets} object created by \code{\link{lsh}}. See \code{\link{lsh_candidates}} to retrieve all pairs of matches.
 #'
 #' @param buckets An \code{lsh_buckets} object created by \code{\link{lsh}}.
 #' @param id The document ID to find matches for.
@@ -23,16 +23,16 @@ lsh_query <- function(buckets, id) {
               is.string(id))
 
   signatures <- buckets %>%
-    dplyr::filter_(~doc == id) %>%
+    dplyr::filter(.data$doc == id) %>%
     `$`("buckets")
 
   docs <- buckets %>%
-    dplyr::filter_(~buckets %in% signatures) %>%
+    dplyr::filter(.data$buckets %in% signatures) %>%
     `$`("doc")
 
-  res <- dplyr::data_frame(a = id, b = docs, score = NA_real_) %>%
-    dplyr::filter_(~a != b) %>%
-    dplyr::distinct_(~a, ~b)
+  res <- tibble::tibble(a = id, b = docs, score = NA_real_) %>%
+    dplyr::filter(.data$a != .data$b) %>%
+    dplyr::distinct(.data$a, .data$b)
 
   class(res) <- c("textreuse_candidates", class(res))
 
