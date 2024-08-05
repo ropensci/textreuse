@@ -31,6 +31,7 @@ lsh_query <- function(buckets, id) {
     `$`("doc")
 
   res <- tibble::tibble(a = id, b = docs, score = NA_real_) %>%
+
     dplyr::filter(.data$a != .data$b) %>%
     dplyr::distinct(.data$a, .data$b)
 
