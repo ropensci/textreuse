@@ -1,8 +1,6 @@
 ---
-output:
-  md_document:
-    variant: markdown_github
-pagetitle: Detect Text Reuse and Document Similarity
+output: md_document
+title: Detect Text Reuse and Document Similarity
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -54,7 +52,7 @@ devtools::install_github("ropensci/textreuse", build_vignettes = TRUE)
 
 ## Examples
 
-There are three main approaches that one may take when using this package: pairwise comparions, minhashing/locality sensitive hashing, and extracting matching passages through text alignment.
+There are three main approaches that one may take when using this package: pairwise comparisons, minhashing/locality sensitive hashing, and extracting matching passages through text alignment.
 
 See the [introductory vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-introduction.html) for a description of the classes provided by this package.
 
@@ -149,9 +147,9 @@ vignette("textreuse-alignment", package = "textreuse")
 
 Loading the corpus and creating tokens benefit from using multiple cores, if available. (This works only on non-Windows machines.) To use multiple cores, set `options("mc.cores" = 4L)`, where the number is how many cores you wish to use.
 
-### Contributing and acknowledgements
+### Contributing and acknowledgments
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](https://github.com/ropensci/textreuse/blob/master/CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 Thanks to [Noam Ross](http://www.noamross.net/) for his thorough [peer review](https://github.com/ropensci/onboarding/issues/20) of this package for [rOpenSci](https://ropensci.org/).
 

@@ -84,11 +84,11 @@ lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
   col_names <- names(all_minhashes)
 
   buckets <- all_minhashes %>%
-    dplyr::as_tibble() %>%
+    tibble::as_tibble() %>%
     tidyr::gather_("doc", "hash", col_names) %>%
-    dplyr::mutate_(doc = ~as.character(doc)) %>%
+    dplyr::mutate(doc = as.character(.data$doc)) %>%
     dplyr::bind_cols(b_assign) %>%
-    dplyr::group_by_(~doc, ~band)
+    dplyr::group_by(.data$doc, .data$band)
 
     rm(b_assign)
 
@@ -99,13 +99,13 @@ lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
 
   # include the band in the signature hash to avoid false matches
   buckets <- buckets %>%
-    dplyr::summarize_(buckets = ~digest_progress(list(hash, unique(band)),
+    dplyr::summarize(buckets = digest_progress(list(hash, unique(band)),
                                                  pb, progress))
 
   if (progress) close(pb)
 
   buckets <- buckets %>%
-    dplyr::select_(~-band) %>%
+    dplyr::select(-.data$band) %>%
     dplyr::ungroup()
 
   class(buckets) <- c("lsh_buckets", class(buckets))
@@ -141,9 +141,9 @@ lsh.TextReuseTextDocument <- function(x, bands, progress) {
 
   buckets <- tibble::tibble(doc = x$meta$id, hash = all_minhashes) %>%
     dplyr::bind_cols(b_assign) %>%
-    dplyr::group_by_(~doc, ~band) %>%
-    dplyr::summarize_(buckets = ~digest::digest(list(hash, unique(band)))) %>%
-    dplyr::select_(~-band) %>%
+    dplyr::group_by(.data$doc, .data$band) %>%
+    dplyr::summarize(buckets = digest::digest(list(hash, unique(band)))) %>%
+    dplyr::select(-.data$band) %>%
     dplyr::ungroup()
 
   class(buckets) <- c("lsh_buckets", class(buckets))

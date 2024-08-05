@@ -1,11 +1,12 @@
-This is a preventative maintenance release of the `textreuse` package. It fixes
-tests that will fail when the in-development version of the BH package is 
-released.
+This is a maintenance release to handle changes in the forthcoming
+dplyr 1.0.0.
+
+This resubmission handles a problem with a URL to CONDUCT.md.
 
 ## Test environments
 
-* local OS X 10.11.6 install: R-release
-* Ubuntu 14.04 (on Travis-CI): R-devel, R-release, R-oldrel
+* local OS X 10.15.4 install: R-release
+* Ubuntu 18.04 (on Travis-CI): R-devel, R-release, R-oldrel
 * Win-builder: R-devel, R-release
 
 ## R CMD check results

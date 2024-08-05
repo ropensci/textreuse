@@ -1,3 +1,7 @@
+# textreuse 0.1.5
+
+- Updates due to dplyr 1.0.0 release
+
 # textreuse 0.1.4
 
 - Preventative maintenance release to avoid failing tests when new version of
