@@ -237,7 +237,7 @@ meta.TextReuseTextDocument <- function(x, tag = NULL, ...) {
 #' \code{\link{TextReuseTextDocument}} and \code{\link{TextReuseCorpus}}
 #' objects.
 #' @name TextReuseTextDocument-accessors
-#' @param x The object to acess.
+#' @param x The object to access.
 #' @param value The value to assign.
 #' @return Either a vector or a named list of vectors.
 NULL

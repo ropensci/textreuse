@@ -22,14 +22,15 @@ lsh_candidates <- function(buckets) {
 
   candidates <- buckets %>%
     dplyr::left_join(buckets, by = "buckets") %>%
-    dplyr::filter_(~doc.x != doc.y) %>%
+    dplyr::filter(.data$doc.x != .data$doc.y) %>%
     dplyr::distinct(doc.x, doc.y) %>%
-    dplyr::arrange_(~doc.x, ~doc.y) %>%
-    dplyr::mutate_(dn = ~pmin(doc.x, doc.y), up = ~pmax(doc.x, doc.y)) %>%
-    dplyr::distinct_(~up, ~dn) %>%
+    dplyr::arrange(.data$doc.x, .data$doc.y) %>%
+    dplyr::mutate(dn = pmin(.data$doc.x, .data$doc.y),
+                  up = pmax(.data$doc.x, .data$doc.y)) %>%
+    dplyr::distinct(.data$up, .data$dn) %>%
     dplyr::select(a = dn, b = up) %>%
-    dplyr::arrange_(~a, ~b) %>%
-    dplyr::mutate_(score = NA_real_)
+    dplyr::arrange(.data$a, .data$b) %>%
+    dplyr::mutate(score = NA_real_)
 
   class(candidates) <- c("textreuse_candidates", class(candidates))
 
