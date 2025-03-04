@@ -192,7 +192,7 @@ vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-minha
 
 ### Text alignment
 
-We can also extract the optimal alignment between to documents with a
+We can also extract the optimal alignment between two documents with a
 version of the
 [Smith-Waterman](https://en.wikipedia.org/wiki/Smith-Waterman_algorithm)
 algorithm, used for protein sequence alignment, adapted for natural
