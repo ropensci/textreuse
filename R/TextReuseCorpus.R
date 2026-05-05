@@ -167,10 +167,13 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
     names(docs) <- filenames(paths)
   }
 
+  skipped <- character()
+
   # Filter documents that were skipped because they were too short
   if (skip_short) {
-    skipped <- names(Filter(is.null, docs))
-    docs <- Filter(Negate(is.null), docs)
+    skipped_docs <- vapply(docs, is.null, logical(1))
+    skipped <- names(docs)[skipped_docs]
+    docs <- docs[!skipped_docs]
     if (length(skipped) > 0)
       warning("Skipped ", length(skipped), " documents that were too short. ",
               "Use `skipped()` to get their IDs.")

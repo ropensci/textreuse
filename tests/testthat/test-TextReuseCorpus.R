@@ -101,6 +101,20 @@ test_that("skips documents that are too short", {
   expect_warning(short_docs <- TextReuseCorpus(text = texts, skip_short = TRUE),
                  "Skipping document with ID")
   expect_lt(length(short_docs), length(texts))
+  expect_equal(skipped(short_docs), "short")
+})
+
+test_that("skipped IDs are always available", {
+  texts <- c("short-a" = "Too short",
+             "long" = "Just long enough yo",
+             "short-b" = "Also short")
+  expect_warning(short_docs <- TextReuseCorpus(text = texts, skip_short = TRUE),
+                 "Skipping document with ID")
+  expect_equal(skipped(short_docs), c("short-a", "short-b"))
+
+  all_docs <- TextReuseCorpus(text = texts, tokenizer = NULL,
+                              skip_short = FALSE)
+  expect_equal(skipped(all_docs), character())
 })
 
 test_that("skips documents that are too short for skip n-grams", {

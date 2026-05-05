@@ -15,6 +15,8 @@
 - Add `lsh_add()` for adding new documents to an existing LSH bucket cache
 - Add `as_sparse_matrix()` and preserve all document IDs when converting
   candidate pairs to matrices
+- Make `TextReuseCorpus()` skipped-document bookkeeping deterministic and
+  available even when `skip_short = FALSE`
 
 # textreuse 0.1.4
 
