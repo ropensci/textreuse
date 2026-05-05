@@ -69,7 +69,7 @@ Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
   for Dummies}" (November 14, 2013).
 }
 \seealso{
-\code{\link{minhash_generator}}, \code{\link{lsh_candidates}},
- \code{\link{lsh_query}}, \code{\link{lsh_probability}},
+\code{\link{minhash_generator}}, \code{\link{lsh_add}},
+ \code{\link{lsh_candidates}}, \code{\link{lsh_query}}, \code{\link{lsh_probability}},
  \code{\link{lsh_threshold}}
 }

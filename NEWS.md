@@ -12,6 +12,7 @@
 - Parallelize `lsh_compare()` when `options(mc.cores)` is set on non-Windows
   platforms
 - Add user interrupt checks to long-running C++ hashing and n-gram loops
+- Add `lsh_add()` for adding new documents to an existing LSH bucket cache
 
 # textreuse 0.1.4
 

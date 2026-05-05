@@ -40,6 +40,21 @@ test_that("additional documents can be added", {
   expect_equal(buckets_combined$doc, buckets$doc)
 })
 
+test_that("lsh buckets can be extended with new documents", {
+  corpus2 <- rehash(corpus, minhash, type = "minhashes")
+  buckets1and2 <- lsh(corpus2[1:2], bands = 50)
+  buckets_added <- lsh_add(buckets1and2, corpus2[[3]], bands = 50)
+  expect_is(buckets_added, "lsh_buckets")
+  expect_equal(buckets_added$buckets, buckets$buckets)
+  expect_equal(buckets_added$doc, buckets$doc)
+})
+
+test_that("lsh buckets are replaced when adding an existing document", {
+  corpus2 <- rehash(corpus, minhash, type = "minhashes")
+  buckets_added <- lsh_add(buckets[1:100, ], corpus2[[1]], bands = 50)
+  expect_equal(sum(buckets_added$doc == names(corpus2)[1]), 50)
+})
+
 test_that("candidates can be scored", {
   correct <- jaccard_similarity(corpus[["ca1851-match"]],
                                 corpus[["ny1850-match"]])
