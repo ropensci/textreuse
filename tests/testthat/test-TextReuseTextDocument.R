@@ -92,6 +92,18 @@ test_that("skips documents that are too short", {
   expect_null(short_doc)
 })
 
+test_that("skips documents that are too short for skip n-grams", {
+  text <- "one two three four five"
+  expect_warning(short_doc <-
+                   TextReuseTextDocument(text = text,
+                                         meta = list(id = "short-skip"),
+                                         tokenizer = tokenize_skip_ngrams,
+                                         n = 3, k = 2,
+                                         skip_short = TRUE),
+                 "Skipping document with ID")
+  expect_null(short_doc)
+})
+
 test_that("gives warning when skipping short documents from file", {
   skip_on_cran()
   too_short <- tempfile("tooshort", fileext = ".txt")

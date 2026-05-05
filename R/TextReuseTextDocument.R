@@ -87,13 +87,11 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
 
   # Check length of document
   if (skip_short) {
-    n_call <- match.call(expand.dots = TRUE)[["n"]]
-    if (is.null(n_call))
-      n_call <- 3
-    if (wordcount(text) < n_call + 1) {
+    min_words <- short_document_word_minimum(tokenizer, list(...))
+    if (wordcount(text) < min_words) {
       warning("Skipping document with ID '", document_id,
               "' because it has too few words ",
-              "to create at least two n-grams with n = ", n_call, ".",
+              "to create tokens with the requested tokenizer.",
               call. = FALSE, noBreaks. = TRUE)
       return(NULL)
     }
@@ -167,6 +165,19 @@ TextReuseTextDocument <- function(text, file = NULL, meta = list(),
 
   doc
 
+}
+
+short_document_word_minimum <- function(tokenizer, args) {
+  n <- args$n
+  if (is.null(n)) n <- 3
+
+  if (!is.null(tokenizer) && identical(tokenizer, tokenize_skip_ngrams)) {
+    k <- args$k
+    if (is.null(k)) k <- 1
+    return(n + n * k - k)
+  }
+
+  n + 1
 }
 
 #' @importFrom NLP meta
