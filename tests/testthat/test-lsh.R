@@ -46,6 +46,13 @@ test_that("candidates can be scored", {
   expect_equal(scores[[1,3]], correct)
 })
 
+test_that("pre-scored candidates are not recalculated", {
+  candidates_scored <- candidates
+  candidates_scored$score[1] <- 1
+  rescored <- lsh_compare(candidates_scored, corpus, function(a, b) 0)
+  expect_equal(rescored$score[1], 1)
+})
+
 test_that("scores can be converted to a matrix", {
   m <- as.matrix(scores)
   expect_is(m, "matrix")

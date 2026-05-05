@@ -9,6 +9,8 @@
   displayed alignments
 - Add `count_matches()` and `matching_tokens()` helpers for inspecting absolute
   match counts and matched tokens
+- Parallelize `lsh_compare()` when `options(mc.cores)` is set on non-Windows
+  platforms
 
 # textreuse 0.1.4
 
