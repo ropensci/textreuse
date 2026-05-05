@@ -17,7 +17,7 @@ Description: Tools for measuring similarity among documents and detecting
     comparisons; minhash and locality sensitive hashing algorithms; and a
     version of the Smith-Waterman local alignment algorithm suitable for
     natural language.
-License: MIT + file LICENSE
+License: MIT
 LazyData: TRUE
 URL: https://docs.ropensci.org/textreuse/,
     https://github.com/ropensci/textreuse
