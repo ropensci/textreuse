@@ -26,6 +26,8 @@
 #'   negative integer or zero.
 #' @param edit_mark A single character used for displaying for displaying
 #'   insertions/deletions in the documents.
+#' @param preserve_punctuation Preserve punctuation in the displayed alignment.
+#'   The alignment still compares tokens after stripping punctuation.
 #' @param progress Display a progress bar and messages while computing the
 #'   alignment.
 #'
@@ -69,7 +71,8 @@
 #'
 #' @export
 align_local <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
-                        edit_mark = "#", progress = interactive()) {
+                        edit_mark = "#", preserve_punctuation = FALSE,
+                        progress = interactive()) {
  assert_that(identical(class(a), class(b)))
  UseMethod("align_local", a)
 }
@@ -77,21 +80,25 @@ align_local <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
 #' @export
 align_local.TextReuseTextDocument <- function(a, b, match = 2L, mismatch = -1L,
                                               gap = -1L, edit_mark = "#",
+                                              preserve_punctuation = FALSE,
                                               progress = interactive()) {
   align_local(content(a), content(b), match = match, mismatch = mismatch,
-              gap = gap, edit_mark = edit_mark)
+              gap = gap, edit_mark = edit_mark,
+              preserve_punctuation = preserve_punctuation)
 }
 
 #' @export
 align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
-                                edit_mark = "#", progress = interactive()) {
+                                edit_mark = "#", preserve_punctuation = FALSE,
+                                progress = interactive()) {
 
   assert_that(is.string(a),
               is.string(b),
               is_integer_like(match),
               is_integer_like(mismatch),
               is_integer_like(gap),
-              is.string(edit_mark))
+              is.string(edit_mark),
+              is.flag(preserve_punctuation))
 
   if (match <= 0 || mismatch > 0 || gap > 0 || !(str_length(edit_mark) == 1)) {
     stop("The scoring parameters should have the following characteristics:\n",
@@ -109,10 +116,10 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
   # Prepare the character vectors. Tokenize to words to compare word by word.
   # Use all lower case for the comparison, but use original capitalization in
   # the output.
-  a_orig <- tokenize_words(a, lowercase = FALSE)
-  b_orig <- tokenize_words(b, lowercase = FALSE)
-  a <- str_to_lower(a_orig)
-  b <- str_to_lower(b_orig)
+  a_orig <- align_tokens(a, preserve_punctuation = preserve_punctuation)
+  b_orig <- align_tokens(b, preserve_punctuation = preserve_punctuation)
+  a <- normalize_alignment_tokens(a_orig)
+  b <- normalize_alignment_tokens(b_orig)
 
   # Only show a progress bar for long computations
   n_rows <- length(b) + 1
@@ -133,6 +140,12 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
 
   # Find the starting place in the matrix
   alignment_score <- max(m)
+  if (alignment_score == 0) {
+    alignment <- list(a_edits = "", b_edits = "", score = alignment_score)
+    class(alignment) <- c("textreuse_alignment", "list")
+    return(alignment)
+  }
+
   max_match <- which(m == alignment_score, arr.ind = TRUE, useNames = FALSE)
 
   if (nrow(max_match) > 1) {
@@ -196,7 +209,7 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
       # Diagonals are a special case, because instead of an insertion or a
       # deletion we might have a substitution of words. If that is the case,
       # then treat it like a double insertion and deletion.
-      if (str_to_lower(aword) == str_to_lower(bword)) {
+      if (a[col_i - 1] == b[row_i - 1]) {
         b_out[out_i] <- bword
         a_out[out_i] <- aword
       } else {
@@ -224,6 +237,16 @@ align_local.default <- function(a, b, match = 2L, mismatch = -1L, gap = -1L,
 
   alignment
 
+}
+
+align_tokens <- function(x, preserve_punctuation) {
+  if (!preserve_punctuation) return(tokenize_words(x, lowercase = FALSE))
+  tokens <- str_split(str_squish(x), "\\s+")[[1]]
+  tokens[tokens != ""]
+}
+
+normalize_alignment_tokens <- function(x) {
+  str_to_lower(str_replace_all(x, "[[:punct:]]", ""))
 }
 
 #' @export

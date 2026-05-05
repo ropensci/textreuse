@@ -11,6 +11,7 @@ align_local(
   mismatch = -1L,
   gap = -1L,
   edit_mark = "#",
+  preserve_punctuation = FALSE,
   progress = interactive()
 )
 }
@@ -32,6 +33,9 @@ negative integer or zero.}
 
 \item{edit_mark}{A single character used for displaying for displaying
 insertions/deletions in the documents.}
+
+\item{preserve_punctuation}{Preserve punctuation in the displayed alignment.
+The alignment still compares tokens after stripping punctuation.}
 
 \item{progress}{Display a progress bar and messages while computing the
 alignment.}

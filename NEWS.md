@@ -3,6 +3,10 @@
 - Updates due to dplyr 1.0.0 release
 - Add an `encoding` argument for reading files in `TextReuseTextDocument()` and
   `TextReuseCorpus()`
+- Return an empty local alignment instead of an error when two texts have no
+  matching words
+- Add `preserve_punctuation` to `align_local()` for preserving punctuation in
+  displayed alignments
 
 # textreuse 0.1.4
 
