@@ -5,23 +5,23 @@ title: Detect Text Reuse and Document Similarity
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  warning = FALSE,
   fig.path = "README-"
 )
-suppressPackageStartupMessages(library(dplyr))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
 ```
 
 # textreuse
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
-[![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
-[![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) 
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
+[![CRAN_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
 [![Build status](https://ci.appveyor.com/api/projects/status/9qwf0473xi8cyuoh/branch/master?svg=true)](https://ci.appveyor.com/project/lmullen/textreuse-6xljc/branch/master)
-[![Coverage Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://codecov.io/github/ropensci/textreuse?branch=master)
-[![rOpenSci badge](https://badges.ropensci.org/20_status.svg)](https://github.com/ropensci/onboarding/issues/20)
+[![Coverage Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://app.codecov.io/github/ropensci/textreuse?branch=master)
+[![rOpenSci badge](https://badges.ropensci.org/20_status.svg)](https://github.com/ropensci/software-review/issues/20)
 
 ## Overview
 
@@ -62,7 +62,7 @@ vignette("textreuse-introduction", package = "textreuse")
 
 ### Pairwise comparisons
 
-In this example we will load a tiny corpus of three documents. These documents are drawn from Kellen Funk's [research](http://kellenfunk.org/field-code/) into the propagation of legal codes of civil procedure in the nineteenth-century United States.
+In this example we will load a tiny corpus of three documents. These documents are drawn from Kellen Funk's [research](https://kellenfunk.org/field-code/) into the propagation of legal codes of civil procedure in the nineteenth-century United States.
 
 ```{r}
 library(textreuse)
@@ -151,8 +151,8 @@ Loading the corpus and creating tokens benefit from using multiple cores, if ava
 
 Please note that this project is released with a [Contributor Code of Conduct](https://github.com/ropensci/textreuse/blob/master/CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-Thanks to [Noam Ross](http://www.noamross.net/) for his thorough [peer review](https://github.com/ropensci/onboarding/issues/20) of this package for [rOpenSci](https://ropensci.org/).
+Thanks to [Noam Ross](https://www.noamross.net/) for his thorough [peer review](https://github.com/ropensci/software-review/issues/20) of this package for [rOpenSci](https://ropensci.org/).
 
 ------------------------------------------------------------------------
 
-[![rOpenSCi logo](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![rOpenSCi logo](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
