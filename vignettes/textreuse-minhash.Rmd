@@ -1,6 +1,8 @@
 ---
 title: "Minhash and locality-sensitive hashing"
-author: "Lincoln Mullen and Yaoxiang Li"
+author:
+  - "Lincoln Mullen"
+  - "Yaoxiang Li"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
