@@ -79,7 +79,7 @@ specified.
 }
 \details{
 If \code{skip_short = TRUE}, this function will skip very short or
-  empty documents. A very short document is one where there are two few words
+  empty documents. A very short document is one where there are too few words
   to create at least two n-grams. For example, if five-grams are desired,
   then a document must be at least six words long. If no value of \code{n} is
   provided, then the function assumes a value of \code{n = 3}. A warning will
