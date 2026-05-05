@@ -11,6 +11,7 @@
   match counts and matched tokens
 - Parallelize `lsh_compare()` when `options(mc.cores)` is set on non-Windows
   platforms
+- Add user interrupt checks to long-running C++ hashing and n-gram loops
 
 # textreuse 0.1.4
 

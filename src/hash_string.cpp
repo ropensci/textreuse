@@ -18,6 +18,7 @@ IntegerVector hash_string(std::vector < std::string > x) {
   IntegerVector hash_vec(length);
 
   for(unsigned int i = 0; i < length; i++) {
+    if (i % 1024 == 0) Rcpp::checkUserInterrupt();
     hash_vec[i] = hash_fn(x[i]);
   }
 
