@@ -1,4 +1,4 @@
-# textreuse 0.1.5
+# textreuse 0.1.6
 
 - Updates due to dplyr 1.0.0 release
 - Add an `encoding` argument for reading files in `TextReuseTextDocument()` and
@@ -18,6 +18,9 @@
 - Make `TextReuseCorpus()` skipped-document bookkeeping deterministic and
   available even when `skip_short = FALSE`
 - Add token-index helpers for finding candidate pairs from shared n-grams
+- Refresh README, vignette, and pkgdown documentation examples against current
+  package output
+- Update article authorship metadata and package citation output
 
 # textreuse 0.1.4
 
