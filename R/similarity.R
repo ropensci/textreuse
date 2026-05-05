@@ -35,6 +35,11 @@
 #'   how much \code{b} borrows from \code{a}, but says nothing about how much of
 #'   \code{a} borrows from \code{b}.
 #'
+#'   The function \code{count_matches} returns the numerator used by
+#'   \code{ratio_of_matches}: the number of items in \code{b} also found in
+#'   \code{a}. The function \code{matching_tokens} returns those matching items
+#'   from \code{b}, preserving their order and duplicates.
+#'
 #' @param a The first set (or bag) to be compared. The origin bag for
 #'   directional comparisons.
 #' @param b The second set (or bag) to be compared. The destination bag for
@@ -50,6 +55,8 @@
 #' jaccard_bag_similarity(a, b)
 #' ratio_of_matches(a, b)
 #' ratio_of_matches(b, a)
+#' count_matches(a, b)
+#' matching_tokens(a, b)
 #'
 #' ny         <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")
 #' ca_match   <- system.file("extdata/legal/ca1851-match.txt", package = "textreuse")
@@ -134,4 +141,37 @@ ratio_of_matches.default <- function(a, b) {
 ratio_of_matches.TextReuseTextDocument <- function(a, b) {
   assert_that(all(class(a) == class(b)))
   ratio_of_matches(a$hashes, b$hashes)
+}
+
+#' @export
+#' @rdname similarity-functions
+count_matches <- function(a, b) UseMethod("count_matches")
+
+#' @export
+count_matches.default <- function(a, b) {
+  length(matching_tokens(a, b))
+}
+
+#' @export
+count_matches.TextReuseTextDocument <- function(a, b) {
+  assert_that(all(class(a) == class(b)))
+  count_matches(a$hashes, b$hashes)
+}
+
+#' @export
+#' @rdname similarity-functions
+matching_tokens <- function(a, b) UseMethod("matching_tokens")
+
+#' @export
+matching_tokens.default <- function(a, b) {
+  assert_that(all(class(a) == class(b)))
+  b[b %in% a]
+}
+
+#' @export
+matching_tokens.TextReuseTextDocument <- function(a, b) {
+  assert_that(all(class(a) == class(b)),
+              has_tokens(a),
+              has_tokens(b))
+  matching_tokens(a$tokens, b$tokens)
 }

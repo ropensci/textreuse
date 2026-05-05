@@ -7,6 +7,8 @@
   matching words
 - Add `preserve_punctuation` to `align_local()` for preserving punctuation in
   displayed alignments
+- Add `count_matches()` and `matching_tokens()` helpers for inspecting absolute
+  match counts and matched tokens
 
 # textreuse 0.1.4
 
