@@ -1,6 +1,6 @@
 ---
 title: "Introduction to the textreuse package"
-author: "Lincoln Mullen"
+author: "Lincoln Mullen and Yaoxiang Li"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
