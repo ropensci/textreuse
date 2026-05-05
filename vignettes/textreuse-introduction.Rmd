@@ -17,7 +17,7 @@ vignette("textreuse-minhash", package = "textreuse")
 vignette("textreuse-alignment", package = "textreuse")
 ```
 
-For this vignette we will use a small corpus of eight documents published by the [American Tract Society](https://en.wikipedia.org/wiki/American_Tract_Society) and available from the Internet Archive. The [full corpus](https://lincolnmullen.com/blog/corpus-of-american-tract-society-publications/) is also available to be downloaded if you wish to test the package.
+For this vignette we will use a small corpus of eight documents published by the [American Tract Society](https://en.wikipedia.org/wiki/American_Tract_Society) and available from the Internet Archive.
 
 ## TextReuse classes
 

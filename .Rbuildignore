@@ -1,5 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.git$
+^\.r-lib$
 ^README\.Rmd$
 ^README-*\.png$
 ^data-raw$
