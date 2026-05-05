@@ -20,7 +20,6 @@
 - Add token-index helpers for finding candidate pairs from shared n-grams
 - Refresh README, vignette, and pkgdown documentation examples against current
   package output
-- Update article authorship metadata and package citation output
 
 # textreuse 0.1.4
 
