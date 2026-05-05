@@ -61,7 +61,7 @@ or discarded?}
 }
 \description{
 This is the constructor function for a \code{TextReuseCorpus}, modeled on the
-virtual S3 class \code{\link[tm]{Corpus}} from the \code{tm} package. The
+virtual S3 class \code{Corpus} from the \code{tm} package. The
 object is a \code{TextReuseCorpus}, which is basically a list containing
 objects of class \code{\link{TextReuseTextDocument}}. Arguments are passed
 along to that constructor function. To create the corpus, you can pass either

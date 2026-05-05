@@ -85,7 +85,7 @@ lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
 
   buckets <- all_minhashes %>%
     tibble::as_tibble() %>%
-    tidyr::gather_("doc", "hash", col_names) %>%
+    tidyr::gather("doc", "hash", col_names) %>%
     dplyr::mutate(doc = as.character(.data$doc)) %>%
     dplyr::bind_cols(b_assign) %>%
     dplyr::group_by(.data$doc, .data$band)

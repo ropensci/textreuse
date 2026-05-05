@@ -2,16 +2,14 @@
 
 # textreuse
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
-[![CRAN\_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
-[![Build
-Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
+[![CRAN\_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
 [![Build
 status](https://ci.appveyor.com/api/projects/status/9qwf0473xi8cyuoh/branch/master?svg=true)](https://ci.appveyor.com/project/lmullen/textreuse-6xljc/branch/master)
 [![Coverage
-Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://codecov.io/github/ropensci/textreuse?branch=master)
+Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://app.codecov.io/github/ropensci/textreuse?branch=master)
 [![rOpenSci
-badge](https://badges.ropensci.org/20_status.svg)](https://github.com/ropensci/onboarding/issues/20)
+badge](https://badges.ropensci.org/20_status.svg)](https://github.com/ropensci/software-review/issues/20)
 
 ## Overview
 
@@ -38,18 +36,20 @@ citation.
     citation("textreuse")
     #> To cite package 'textreuse' in publications use:
     #> 
-    #>   Li Y, Mullen L (2024). _textreuse: Detect Text Reuse and Document
-    #>   Similarity_. https://docs.ropensci.org/textreuse,
-    #>   https://github.com/ropensci/textreuse.
+    #>   Mullen L, Li Y (2026). _textreuse: Detect Text Reuse and Document
+    #>   Similarity_. R package version 0.1.5,
+    #>   https://github.com/ropensci/textreuse,
+    #>   <https://docs.ropensci.org/textreuse>.
     #> 
     #> A BibTeX entry for LaTeX users is
     #> 
     #>   @Manual{,
     #>     title = {textreuse: Detect Text Reuse and Document Similarity},
-    #>     author = {Yaoxiang Li and Lincoln Mullen},
-    #>     year = {2024},
-    #>     note = {https://docs.ropensci.org/textreuse,
+    #>     author = {Lincoln Mullen and Yaoxiang Li},
+    #>     year = {2026},
+    #>     note = {R package version 0.1.5, 
     #> https://github.com/ropensci/textreuse},
+    #>     url = {https://docs.ropensci.org/textreuse},
     #>   }
 
 ## Installation
@@ -80,7 +80,7 @@ for a description of the classes provided by this package.
 
 In this example we will load a tiny corpus of three documents. These
 documents are drawn from Kellen Funk’s
-[research](http://kellenfunk.org/field-code/) into the propagation of
+[research](https://kellenfunk.org/field-code/) into the propagation of
 legal codes of civil procedure in the nineteenth-century United States.
 
     library(textreuse)
@@ -102,7 +102,7 @@ a whole or the individual documents that make it up.
     #> [1] "ca1851-match"   "ca1851-nomatch" "ny1850-match"
     corpus[["ca1851-match"]]
     #> TextReuseTextDocument
-    #> file : C:/Users/bach/AppData/Local/Temp/RtmpecFDvh/temp_libpath4c4124c4b59/textreuse/extdata/legal/ca1851-match.txt 
+    #> file : C:/Users/Bach/AppData/Local/R/win-library/4.4/textreuse/extdata/legal/ca1851-match.txt 
     #> hash_func : hash_string 
     #> id : ca1851-match 
     #> minhash_func : 
@@ -170,13 +170,6 @@ Now we can calculate potential matches, extract the candidates, and
 apply a comparison function to just those candidates.
 
     buckets <- lsh(ats, bands = 50, progress = FALSE)
-    #> Warning: `gather_()` was deprecated in tidyr 1.2.0.
-    #> ℹ Please use `gather()` instead.
-    #> ℹ The deprecated feature was likely used in the textreuse package.
-    #>   Please report the issue at <https://github.com/ropensci/textreuse/issues>.
-    #> This warning is displayed once every 8 hours.
-    #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-    #> generated.
     candidates <- lsh_candidates(buckets)
     scores <- lsh_compare(candidates, ats, jaccard_similarity, progress = FALSE)
     scores
@@ -192,7 +185,7 @@ vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-minha
 
 ### Text alignment
 
-We can also extract the optimal alignment between to documents with a
+We can also extract the optimal alignment between two documents with a
 version of the
 [Smith-Waterman](https://en.wikipedia.org/wiki/Smith-Waterman_algorithm)
 algorithm, used for protein sequence alignment, adapted for natural
@@ -228,11 +221,11 @@ Please note that this project is released with a [Contributor Code of
 Conduct](https://github.com/ropensci/textreuse/blob/master/CONDUCT.md).
 By participating in this project you agree to abide by its terms.
 
-Thanks to [Noam Ross](http://www.noamross.net/) for his thorough [peer
-review](https://github.com/ropensci/onboarding/issues/20) of this
+Thanks to [Noam Ross](https://www.noamross.net/) for his thorough [peer
+review](https://github.com/ropensci/software-review/issues/20) of this
 package for [rOpenSci](https://ropensci.org/).
 
 ------------------------------------------------------------------------
 
 [![rOpenSCi
-logo](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+logo](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)

@@ -18,6 +18,10 @@ test_that("returns error if improper number of bands are chosen", {
   expect_error(lsh(corpus, bands = 33), "The number of hashes")
 })
 
+test_that("creates buckets without warnings", {
+  expect_warning(lsh(corpus, bands = 50), NA)
+})
+
 test_that("returns pairs of candidates without duplicates", {
   expect_is(candidates, "data.frame")
   expect_named(candidates, c("a", "b", "score"))
