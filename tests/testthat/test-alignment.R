@@ -21,3 +21,9 @@ test_that("works with TextReuseTextDocuments", {
   expect_is(doc_res, "textreuse_alignment")
   expect_gt(wordcount(doc_res$a_edits), 200)
 })
+
+test_that("prints alignment with a trailing blank line", {
+  res <- align_local("this is a match", "this is a match")
+  output <- capture.output(print(res))
+  expect_equal(tail(output, 1), "")
+})

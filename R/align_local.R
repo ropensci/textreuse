@@ -234,5 +234,6 @@ print.textreuse_alignment <- function(x, ...) {
   cat(str_wrap(x$a_edits, width = 72))
   cat("\n\nDocument B:\n")
   cat(str_wrap(x$b_edits, width = 72))
+  cat("\n\n")
   invisible(x)
 }
