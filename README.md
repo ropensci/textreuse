@@ -4,8 +4,6 @@
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
 [![CRAN\_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
-[![Build
-status](https://ci.appveyor.com/api/projects/status/9qwf0473xi8cyuoh/branch/master?svg=true)](https://ci.appveyor.com/project/lmullen/textreuse-6xljc/branch/master)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://app.codecov.io/github/ropensci/textreuse?branch=master)
 [![rOpenSci
@@ -21,7 +19,7 @@ minhash and locality sensitive hashing algorithms; and a version of the
 Smith-Waterman local alignment algorithm suitable for natural language.
 It is broadly useful for, for example, detecting duplicate documents in
 a corpus prior to text analysis, or for identifying borrowed passages
-between texts. The classes provides by this package follow the model of
+between texts. The classes provided by this package follow the model of
 other natural language processing packages for R, especially the
 [NLP](https://cran.r-project.org/package=NLP) and
 [tm](https://cran.r-project.org/package=tm) packages. (However, this
@@ -71,7 +69,7 @@ package: pairwise comparisons, minhashing/locality sensitive hashing,
 and extracting matching passages through text alignment.
 
 See the [introductory
-vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-introduction.html)
+vignette](https://docs.ropensci.org/textreuse/articles/textreuse-introduction.html)
 for a description of the classes provided by this package.
 
     vignette("textreuse-introduction", package = "textreuse")
@@ -138,7 +136,7 @@ prefer.
     #> 3 ca1851-nomatch ny1850-match   0
 
 See the [pairwise
-vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-pairwise.html)
+vignette](https://docs.ropensci.org/textreuse/articles/textreuse-pairwise.html)
 for a fuller description.
 
     vignette("textreuse-pairwise", package = "textreuse")
@@ -179,7 +177,7 @@ apply a comparison function to just those candidates.
     #> 1 remember00palm remembermeorholy00palm 0.701
 
 For details, see the [minhash
-vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-minhash.html).
+vignette](https://docs.ropensci.org/textreuse/articles/textreuse-minhash.html).
 
     vignette("textreuse-minhash", package = "textreuse")
 
@@ -204,7 +202,7 @@ will be extracted, and variations in the alignment will be marked.
     #> This is a #### match
 
 For details, see the [text alignment
-vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-alignment.html).
+vignette](https://docs.ropensci.org/textreuse/articles/textreuse-alignment.html).
 
     vignette("textreuse-alignment", package = "textreuse")
 
