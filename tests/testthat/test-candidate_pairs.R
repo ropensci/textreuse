@@ -17,3 +17,18 @@ test_that("can be converted to matrix", {
   expect_is(m, "matrix")
   expect_equal(names(corpus), colnames(m))
 })
+
+test_that("matrix conversion can keep all document ids", {
+  pairs_with_ids <- pairs[1, ]
+  attr(pairs_with_ids, "all-doc-ids") <- names(corpus)
+  m <- as.matrix(pairs_with_ids)
+  expect_equal(names(corpus), colnames(m))
+  expect_equal(names(corpus), rownames(m))
+})
+
+test_that("can be converted to sparse matrix", {
+  m <- as_sparse_matrix(pairs)
+  expect_is(m, "dgCMatrix")
+  expect_equal(names(corpus), colnames(m))
+  expect_equal(as.matrix(m), as.matrix(pairs))
+})

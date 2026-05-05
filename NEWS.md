@@ -13,6 +13,8 @@
   platforms
 - Add user interrupt checks to long-running C++ hashing and n-gram loops
 - Add `lsh_add()` for adding new documents to an existing LSH bucket cache
+- Add `as_sparse_matrix()` and preserve all document IDs when converting
+  candidate pairs to matrices
 
 # textreuse 0.1.4
 

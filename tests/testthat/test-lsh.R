@@ -71,7 +71,7 @@ test_that("pre-scored candidates are not recalculated", {
 test_that("scores can be converted to a matrix", {
   m <- as.matrix(scores)
   expect_is(m, "matrix")
-  expect_equal(colnames(m), sort(unique(c(scores$a, scores$b))))
+  expect_equal(colnames(m), names(corpus))
 })
 
 test_that("can be queried for a single document", {
