@@ -1,10 +1,12 @@
 ---
 title: "Introduction to the textreuse package"
-author: "Lincoln Mullen"
+author:
+  - "Lincoln Mullen"
+  - "Yaoxiang Li"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to the textreuse packages}
+  %\VignetteIndexEntry{Introduction to the textreuse package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -17,7 +19,7 @@ vignette("textreuse-minhash", package = "textreuse")
 vignette("textreuse-alignment", package = "textreuse")
 ```
 
-For these vignette we will use a small corpus of eight documents published by the [American Tract Society](https://en.wikipedia.org/wiki/American_Tract_Society) and available from the Internet Archive. The [full corpus](http://lincolnmullen.com/blog/corpus-of-american-tract-society-publications/) is also available to be downloaded if you wish to test the package.
+For this vignette we will use a small corpus of eight documents published by the [American Tract Society](https://en.wikipedia.org/wiki/American_Tract_Society) and available from the Internet Archive.
 
 ## TextReuse classes
 
@@ -146,7 +148,7 @@ You can write your own similarity functions, which should accept two sets or bag
 
 ## Parallelization
 
-This package will use multiple cores for a few functions is an option is set. This only benefits the corpus loading and tokenizing functions, which are often the slowest parts of an analysis. This is implemented with the [parallel package](https://cran.r-project.org/view=HighPerformanceComputing), and does not work on Windows machines. (Regardless of the options set, this package will never attempt to parallelize computations on Windows.)
+This package will use multiple cores for a few functions if an option is set. This benefits corpus loading, tokenizing, and LSH candidate scoring, which are often among the slowest parts of an analysis. This is implemented with the [parallel package](https://cran.r-project.org/view=HighPerformanceComputing), and does not work on Windows machines. (Regardless of the options set, this package will never attempt to parallelize computations on Windows.)
 
 To use the parallel option, you must specify the number of CPU cores that you wish to use:
 

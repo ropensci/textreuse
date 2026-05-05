@@ -13,7 +13,8 @@ lsh_compare(candidates, corpus, f, progress = interactive())
 
 \item{f}{A comparison function such as \code{\link{jaccard_similarity}}.}
 
-\item{progress}{Display a progress bar while comparing documents.}
+\item{progress}{Display a progress bar while comparing documents. Progress
+bars are disabled when using parallel processing.}
 }
 \value{
 A data frame with values calculated for \code{score}.

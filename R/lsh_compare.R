@@ -13,7 +13,8 @@
 #' @param candidates A data frame returned by \code{\link{lsh_candidates}}.
 #' @param corpus The same \code{\link{TextReuseCorpus}} corpus which was used to generate the candidates.
 #' @param f A comparison function such as \code{\link{jaccard_similarity}}.
-#' @param progress Display a progress bar while comparing documents.
+#' @param progress Display a progress bar while comparing documents. Progress
+#'   bars are disabled when using parallel processing.
 #' @return A data frame with values calculated for \code{score}.
 #' @examples
 #' dir <- system.file("extdata/legal", package = "textreuse")
@@ -30,23 +31,36 @@ lsh_compare <- function(candidates, corpus, f, progress = interactive()) {
               is.function(f),
               is.TextReuseCorpus(corpus))
 
-  num_rows <- nrow(candidates)
+  rows_to_score <- which(is.na(candidates$score))
+  num_rows <- length(rows_to_score)
+  use_parallel <- using_parallel()
+
+  if (num_rows == 0) {
+    attr(candidates, "all-doc-ids") <- names(corpus)
+    return(candidates)
+  }
+
   if (progress) {
     message("Making ", prettyNum(num_rows, big.mark = ","),
             " comparisons.")
-    pb <- txtProgressBar(min = 0, max = num_rows, style = 3)
+    if (!use_parallel) {
+      pb <- txtProgressBar(min = 0, max = num_rows, style = 3)
+    }
   }
 
-  for (i in seq_len(num_rows)) {
-    if (!is.na(candidates[i, "score"])) next()
+  apply_fun <- get_apply_function()
+  scores <- apply_fun(seq_along(rows_to_score), function(j) {
+    i <- rows_to_score[j]
     a <- candidates$a[i]
     b <- candidates$b[i]
     score <- f(corpus[[a]], corpus[[b]])
-    candidates[i, "score"] <- score
-    if (progress) setTxtProgressBar(pb, i)
-  }
+    if (progress && !use_parallel) setTxtProgressBar(pb, j)
+    score
+  })
 
-  if (progress) close(pb)
+  candidates$score[rows_to_score] <- unlist(scores, use.names = FALSE)
+
+  if (progress && !use_parallel) close(pb)
 
   attr(candidates, "all-doc-ids") <- names(corpus)
 

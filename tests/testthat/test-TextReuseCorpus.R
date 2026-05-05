@@ -26,6 +26,18 @@ test_that("has accessor functions", {
   expect_equal(length(corpus_a), 3)
 })
 
+test_that("can read corpus files with an explicit encoding", {
+  dir <- tempfile("encoded-corpus")
+  dir.create(dir)
+  on.exit(unlink(dir, recursive = TRUE))
+  text <- enc2utf8("Café crème is naïve text.")
+  writeBin(charToRaw(paste0(text, "\n")), file.path(dir, "encoded.txt"))
+
+  corpus <- TextReuseCorpus(dir = dir, encoding = "UTF-8", tokenizer = NULL)
+  expect_equal(as.character(content(corpus[["encoded"]])), text)
+  expect_equal(Encoding(as.character(content(corpus[["encoded"]]))), "UTF-8")
+})
+
 test_that("has the right classes", {
   expect_is(corpus_a, "TextReuseCorpus")
   expect_is(corpus_a, "Corpus")
@@ -89,6 +101,32 @@ test_that("skips documents that are too short", {
   expect_warning(short_docs <- TextReuseCorpus(text = texts, skip_short = TRUE),
                  "Skipping document with ID")
   expect_lt(length(short_docs), length(texts))
+  expect_equal(skipped(short_docs), "short")
+})
+
+test_that("skipped IDs are always available", {
+  texts <- c("short-a" = "Too short",
+             "long" = "Just long enough yo",
+             "short-b" = "Also short")
+  expect_warning(short_docs <- TextReuseCorpus(text = texts, skip_short = TRUE),
+                 "Skipping document with ID")
+  expect_equal(skipped(short_docs), c("short-a", "short-b"))
+
+  all_docs <- TextReuseCorpus(text = texts, tokenizer = NULL,
+                              skip_short = FALSE)
+  expect_equal(skipped(all_docs), character())
+})
+
+test_that("skips documents that are too short for skip n-grams", {
+  texts <- c("short" = "one two three four five",
+             "long" = "one two three four five six seven")
+  expect_warning(short_docs <- TextReuseCorpus(text = texts,
+                                               tokenizer = tokenize_skip_ngrams,
+                                               n = 3, k = 2,
+                                               skip_short = TRUE),
+                 "Skipping document with ID")
+  expect_equal(length(short_docs), 1)
+  expect_equal(names(short_docs), "long")
 })
 
 test_that("gives warning when skipping short documents from files", {

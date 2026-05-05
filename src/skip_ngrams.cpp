@@ -20,6 +20,7 @@ CharacterVector skip_ngrams(CharacterVector words, int n, int k) {
 
     int window = n + n * k - k;
     for(int i = 0; i < w - window + 1; i++) { // loop over the words
+      if (i % 1024 == 0) Rcpp::checkUserInterrupt();
       NumericVector subset(n); // the subset we are going to make of words
       for(int j = 0; j < n; j++) { // loop over number of n in ngrams
         subset[j] = i + j + j * k;

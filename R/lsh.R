@@ -41,13 +41,14 @@
 #'  signatures, or buckets.
 #'
 #'@references Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
-#'  \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
-#'  (Cambridge University Press, 2011), ch. 3. See also Matthew Casperson,
+#'  \emph{Mining of Massive Datasets} (Cambridge University Press, 2011), ch.
+#'  3. See also Matthew Casperson,
 #'  "\href{http://matthewcasperson.blogspot.com/2013/11/minhash-for-dummies.html}{Minhash
 #'   for Dummies}" (November 14, 2013).
 #'
-#'@seealso \code{\link{minhash_generator}}, \code{\link{lsh_candidates}},
-#'  \code{\link{lsh_query}}, \code{\link{lsh_probability}},
+#'@seealso \code{\link{minhash_generator}}, \code{\link{lsh_add}},
+#'  \code{\link{lsh_candidates}}, \code{\link{lsh_query}},
+#'  \code{\link{lsh_probability}},
 #'  \code{\link{lsh_threshold}}
 #'
 #' @examples
@@ -61,6 +62,36 @@
 #'@export
 lsh <- function(x, bands, progress = interactive()) {
   UseMethod("lsh", x)
+}
+
+#' Add documents to a LSH cache
+#'
+#' This function adds buckets for one or more new documents to an existing
+#' \code{lsh_buckets} object. Use the same \code{bands} value and minhash
+#' function that were used to create the original buckets.
+#'
+#' @param buckets An \code{lsh_buckets} object created by \code{\link{lsh}}.
+#' @param x A \code{\link{TextReuseCorpus}} or
+#'   \code{\link{TextReuseTextDocument}} with minhashes.
+#' @inheritParams lsh
+#' @return An updated \code{lsh_buckets} object.
+#' @seealso \code{\link{lsh}}, \code{\link{lsh_query}},
+#'   \code{\link{lsh_candidates}}
+#' @export
+lsh_add <- function(buckets, x, bands, progress = interactive()) {
+  assert_that(is_lsh_buckets(buckets))
+
+  new_buckets <- lsh(x, bands = bands, progress = progress)
+  new_doc_ids <- unique(new_buckets$doc)
+
+  buckets <- buckets %>%
+    dplyr::filter(!.data$doc %in% new_doc_ids) %>%
+    dplyr::bind_rows(new_buckets) %>%
+    dplyr::arrange(.data$doc)
+
+  class(buckets) <- c("lsh_buckets", setdiff(class(buckets), "lsh_buckets"))
+
+  buckets
 }
 
 #' @export
@@ -85,7 +116,7 @@ lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
 
   buckets <- all_minhashes %>%
     tibble::as_tibble() %>%
-    tidyr::gather_("doc", "hash", col_names) %>%
+    tidyr::gather("doc", "hash", col_names) %>%
     dplyr::mutate(doc = as.character(.data$doc)) %>%
     dplyr::bind_cols(b_assign) %>%
     dplyr::group_by(.data$doc, .data$band)
@@ -107,6 +138,8 @@ lsh.TextReuseCorpus <- function(x, bands, progress = interactive()) {
   buckets <- buckets %>%
     dplyr::select(-.data$band) %>%
     dplyr::ungroup()
+
+  class(buckets) <- c("lsh_buckets", class(buckets))
 
   buckets
 
@@ -143,6 +176,8 @@ lsh.TextReuseTextDocument <- function(x, bands, progress) {
     dplyr::summarize(buckets = digest::digest(list(hash, unique(band)))) %>%
     dplyr::select(-.data$band) %>%
     dplyr::ungroup()
+
+  class(buckets) <- c("lsh_buckets", class(buckets))
 
   buckets
 

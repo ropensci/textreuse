@@ -1,0 +1,35 @@
+:root {
+  --bs-body-font-size: 16px;
+  --bs-body-line-height: 1.5;
+}
+
+body,
+.contents,
+.template-home,
+.template-article,
+.template-reference-topic,
+.template-news,
+.ref-index {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.contents p,
+.contents li,
+.contents table,
+.contents dl,
+.contents .sourceCode,
+.contents pre,
+.contents code,
+.ref-description,
+.ref-usage,
+.ref-examples {
+  font-size: 1rem;
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-size: 1rem;
+}

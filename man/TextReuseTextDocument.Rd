@@ -19,7 +19,8 @@ TextReuseTextDocument(
   minhash_func = NULL,
   keep_tokens = FALSE,
   keep_text = TRUE,
-  skip_short = TRUE
+  skip_short = TRUE,
+  encoding = "unknown"
 )
 
 is.TextReuseTextDocument(x)
@@ -64,6 +65,8 @@ discarded?}
 
 \item{skip_short}{Should short documents be skipped? (See details.)}
 
+\item{encoding}{Encoding to be used when reading files.}
+
 \item{x}{An R object to check.}
 }
 \value{
@@ -88,7 +91,7 @@ This constructor function follows a three-step process. It reads in
   objects, which can result in significant memory savings for large corpora.
 
   If \code{skip_short = TRUE}, this function will return \code{NULL} for very
-  short or empty documents. A very short document is one where there are two
+  short or empty documents. A very short document is one where there are too
   few words to create at least two n-grams. For example, if five-grams are
   desired, then a document must be at least six words long. If no value of
   \code{n} is provided, then the function assumes a value of \code{n = 3}. A

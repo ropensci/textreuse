@@ -1,5 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.git$
+^\.r-lib$
 ^README\.Rmd$
 ^README-*\.png$
 ^data-raw$
@@ -10,4 +12,5 @@ wordnet
 ^cran-comments\.md$
 ^Makefile$
 ^_pkgdown\.yml$
+^pkgdown$
 docs/

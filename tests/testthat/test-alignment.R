@@ -21,3 +21,24 @@ test_that("works with TextReuseTextDocuments", {
   expect_is(doc_res, "textreuse_alignment")
   expect_gt(wordcount(doc_res$a_edits), 200)
 })
+
+test_that("prints alignment with a trailing blank line", {
+  res <- align_local("this is a match", "this is a match")
+  output <- capture.output(print(res))
+  expect_equal(tail(output, 1), "")
+})
+
+test_that("returns empty alignment when there is no match", {
+  expect_warning(res <- align_local("abc", "xyz"), NA)
+  expect_equal(res$score, 0)
+  expect_equal(res$a_edits, "")
+  expect_equal(res$b_edits, "")
+})
+
+test_that("can preserve punctuation in alignment output", {
+  res <- align_local("Hello, world! This is a match.",
+                     "hello world this is a match",
+                     preserve_punctuation = TRUE)
+  expect_equal(res$a_edits, "Hello, world! This is a match.")
+  expect_equal(res$b_edits, "hello world this is a match")
+})

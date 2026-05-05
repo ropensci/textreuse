@@ -63,13 +63,14 @@ buckets
 }
 \references{
 Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
- \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
- (Cambridge University Press, 2011), ch. 3. See also Matthew Casperson,
+ \emph{Mining of Massive Datasets} (Cambridge University Press, 2011), ch.
+ 3. See also Matthew Casperson,
  "\href{http://matthewcasperson.blogspot.com/2013/11/minhash-for-dummies.html}{Minhash
   for Dummies}" (November 14, 2013).
 }
 \seealso{
-\code{\link{minhash_generator}}, \code{\link{lsh_candidates}},
- \code{\link{lsh_query}}, \code{\link{lsh_probability}},
+\code{\link{minhash_generator}}, \code{\link{lsh_add}},
+ \code{\link{lsh_candidates}}, \code{\link{lsh_query}},
+ \code{\link{lsh_probability}},
  \code{\link{lsh_threshold}}
 }

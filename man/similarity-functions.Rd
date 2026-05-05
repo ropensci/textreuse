@@ -6,6 +6,8 @@
 \alias{jaccard_dissimilarity}
 \alias{jaccard_bag_similarity}
 \alias{ratio_of_matches}
+\alias{count_matches}
+\alias{matching_tokens}
 \title{Measure similarity/dissimilarity in documents}
 \usage{
 jaccard_similarity(a, b)
@@ -15,6 +17,10 @@ jaccard_dissimilarity(a, b)
 jaccard_bag_similarity(a, b)
 
 ratio_of_matches(a, b)
+
+count_matches(a, b)
+
+matching_tokens(a, b)
 }
 \arguments{
 \item{a}{The first set (or bag) to be compared. The origin bag for
@@ -59,6 +65,11 @@ The functions \code{jaccard_similarity} and
   in \code{b}. Note that this similarity measure is directional: it measures
   how much \code{b} borrows from \code{a}, but says nothing about how much of
   \code{a} borrows from \code{b}.
+
+  The function \code{count_matches} returns the numerator used by
+  \code{ratio_of_matches}: the number of items in \code{b} also found in
+  \code{a}. The function \code{matching_tokens} returns those matching items
+  from \code{b}, preserving their order and duplicates.
 }
 \examples{
 jaccard_similarity(1:6, 3:10)
@@ -70,6 +81,8 @@ jaccard_similarity(a, b)
 jaccard_bag_similarity(a, b)
 ratio_of_matches(a, b)
 ratio_of_matches(b, a)
+count_matches(a, b)
+matching_tokens(a, b)
 
 ny         <- system.file("extdata/legal/ny1850-match.txt", package = "textreuse")
 ca_match   <- system.file("extdata/legal/ca1851-match.txt", package = "textreuse")
@@ -93,6 +106,5 @@ ratio_of_matches(ny, ca_nomatch)
 }
 \references{
 Jure Leskovec, Anand Rajaraman, and Jeff Ullman,
-  \href{http://www.mmds.org/#book}{\emph{Mining of Massive Datasets}}
-  (Cambridge University Press, 2011).
+  \emph{Mining of Massive Datasets} (Cambridge University Press, 2011).
 }

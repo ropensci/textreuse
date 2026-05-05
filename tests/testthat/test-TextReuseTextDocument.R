@@ -46,6 +46,18 @@ test_that("can be created from a character vector not just a file", {
   expect_equal(text, as.character(doc))
 })
 
+test_that("can read files with an explicit encoding", {
+  text <- enc2utf8("Café crème is naïve text.")
+  file <- tempfile(fileext = ".txt")
+  writeBin(charToRaw(paste0(text, "\n")), file)
+  on.exit(file.remove(file))
+
+  doc <- TextReuseTextDocument(file = file, encoding = "UTF-8",
+                               tokenizer = NULL)
+  expect_equal(as.character(doc), text)
+  expect_equal(Encoding(as.character(doc)), "UTF-8")
+})
+
 test_that("can be retokenized", {
   text <- "This is the text. But also this."
   a <- TextReuseTextDocument(text, meta = test_meta, tokenizer = tokenize_words,
@@ -75,6 +87,18 @@ test_that("skips documents that are too short", {
   expect_warning(short_doc <-
                    TextReuseTextDocument(text = "Too short",
                                          meta = list(id = "short"),
+                                         skip_short = TRUE),
+                 "Skipping document with ID")
+  expect_null(short_doc)
+})
+
+test_that("skips documents that are too short for skip n-grams", {
+  text <- "one two three four five"
+  expect_warning(short_doc <-
+                   TextReuseTextDocument(text = text,
+                                         meta = list(id = "short-skip"),
+                                         tokenizer = tokenize_skip_ngrams,
+                                         n = 3, k = 2,
                                          skip_short = TRUE),
                  "Skipping document with ID")
   expect_null(short_doc)

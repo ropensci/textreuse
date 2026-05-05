@@ -4,5 +4,5 @@ docs :
 	Rscript -e "pkgdown::clean_site(); pkgdown::build_site(run_dont_run = TRUE)"
 
 deploy-docs :
-	rsync --checksum --delete -avz docs/* reclaim:~/www/lincolnmullen.com/software/textreuse/
+	@echo "Documentation is published by rOpenSci at https://docs.ropensci.org/textreuse/"
 

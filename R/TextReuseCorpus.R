@@ -1,7 +1,7 @@
 #' TextReuseCorpus
 #'
 #' This is the constructor function for a \code{TextReuseCorpus}, modeled on the
-#' virtual S3 class \code{\link[tm]{Corpus}} from the \code{tm} package. The
+#' virtual S3 class \code{Corpus} from the \code{tm} package. The
 #' object is a \code{TextReuseCorpus}, which is basically a list containing
 #' objects of class \code{\link{TextReuseTextDocument}}. Arguments are passed
 #' along to that constructor function. To create the corpus, you can pass either
@@ -15,7 +15,7 @@
 #' specified.
 #'
 #' @details If \code{skip_short = TRUE}, this function will skip very short or
-#'   empty documents. A very short document is one where there are two few words
+#'   empty documents. A very short document is one where there are too few words
 #'   to create at least two n-grams. For example, if five-grams are desired,
 #'   then a document must be at least six words long. If no value of \code{n} is
 #'   provided, then the function assumes a value of \code{n = 3}. A warning will
@@ -45,6 +45,7 @@
 #' @param keep_text Should the text be saved in the documents that are returned
 #'   or discarded?
 #' @param skip_short Should short documents be skipped? (See details.)
+#' @param encoding Encoding to be used when reading files.
 #'
 #' @seealso \link[=TextReuseTextDocument-accessors]{Accessors for TextReuse
 #'   objects}.
@@ -65,7 +66,8 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                             minhash_func = NULL,
                             keep_tokens = FALSE,
                             keep_text = TRUE,
-                            skip_short = TRUE) {
+                            skip_short = TRUE,
+                            encoding = "unknown") {
 
   if (!is.null(tokenizer)) {
     assert_that(is.function(tokenizer),
@@ -115,6 +117,7 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                                  keep_tokens = keep_tokens,
                                  keep_text = keep_text,
                                  skip_short = skip_short,
+                                 encoding = encoding,
                                  meta = list(id = names(text)[i],
                                              tokenizer = tokenizer_name,
                                              hash_func = hash_func_name,
@@ -151,6 +154,7 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                                  keep_tokens = keep_tokens,
                                  keep_text = keep_text,
                                  skip_short = skip_short,
+                                 encoding = encoding,
                                  meta = list(tokenizer = tokenizer_name,
                                              hash_func = hash_func_name,
                                              minhash_func = minhash_func_name))
@@ -163,10 +167,13 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
     names(docs) <- filenames(paths)
   }
 
+  skipped <- character()
+
   # Filter documents that were skipped because they were too short
   if (skip_short) {
-    skipped <- names(Filter(is.null, docs))
-    docs <- Filter(Negate(is.null), docs)
+    skipped_docs <- vapply(docs, is.null, logical(1))
+    skipped <- names(docs)[skipped_docs]
+    docs <- docs[!skipped_docs]
     if (length(skipped) > 0)
       warning("Skipped ", length(skipped), " documents that were too short. ",
               "Use `skipped()` to get their IDs.")

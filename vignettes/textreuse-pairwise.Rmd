@@ -1,6 +1,8 @@
 ---
 title: "Pairwise comparisons for document similarity"
-author: "Lincoln Mullen"
+author:
+  - "Lincoln Mullen"
+  - "Yaoxiang Li"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

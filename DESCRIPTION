@@ -1,16 +1,16 @@
 Package: textreuse
 Type: Package
 Title: Detect Text Reuse and Document Similarity
-Version: 0.1.5
-Date: 2024-05-24
+Version: 1.0.0
+Date: 2026-05-05
 Authors@R: c(
-    person("Yaoxiang", "Li", role = c("aut", "cre"),
-        email = "liyaoxiang@outlook.com", 
-        comment = c(ORCID="0000-0001-9200-1016")),
     person("Lincoln", "Mullen", role = c("aut"),
         email = "lincoln@lincolnmullen.com",
         comment = c(ORCID = "0000-0001-5103-6917")
-    ))
+    ),
+    person("Yaoxiang", "Li", role = c("aut", "cre"),
+        email = "liyaoxiang@outlook.com", 
+        comment = c(ORCID="0000-0001-9200-1016")))
 Description: Tools for measuring similarity among documents and detecting
     passages which have been reused. Implements shingled n-gram, skip n-gram,
     and other tokenizers; similarity/dissimilarity functions; pairwise
@@ -19,7 +19,7 @@ Description: Tools for measuring similarity among documents and detecting
     natural language.
 License: MIT
 LazyData: TRUE
-URL: https://docs.ropensci.org/textreuse (website)
+URL: https://docs.ropensci.org/textreuse/,
     https://github.com/ropensci/textreuse
 BugReports: https://github.com/ropensci/textreuse/issues
 VignetteBuilder: knitr
@@ -30,16 +30,17 @@ Imports:
     digest (>= 0.6.8),
     dplyr (>= 0.8.0),
     NLP (>= 0.1.8),
+    Matrix,
     Rcpp (>= 0.12.0),
     RcppProgress  (>= 0.1),
     stringr (>= 1.0.0),
     tibble (>= 3.0.1),
-    tidyr (>= 0.3.1)
+    tidyr (>= 1.0.0)
 Suggests:
     testthat (>= 0.11.0),
     knitr (>= 1.11),
     rmarkdown (>= 0.8),
     covr
 LinkingTo: BH, Rcpp, RcppProgress
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Encoding: UTF-8

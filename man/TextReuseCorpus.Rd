@@ -18,7 +18,8 @@ TextReuseCorpus(
   minhash_func = NULL,
   keep_tokens = FALSE,
   keep_text = TRUE,
-  skip_short = TRUE
+  skip_short = TRUE,
+  encoding = "unknown"
 )
 
 is.TextReuseCorpus(x)
@@ -57,11 +58,13 @@ or discarded?}
 
 \item{skip_short}{Should short documents be skipped? (See details.)}
 
+\item{encoding}{Encoding to be used when reading files.}
+
 \item{x}{An R object to check.}
 }
 \description{
 This is the constructor function for a \code{TextReuseCorpus}, modeled on the
-virtual S3 class \code{\link[tm]{Corpus}} from the \code{tm} package. The
+virtual S3 class \code{Corpus} from the \code{tm} package. The
 object is a \code{TextReuseCorpus}, which is basically a list containing
 objects of class \code{\link{TextReuseTextDocument}}. Arguments are passed
 along to that constructor function. To create the corpus, you can pass either
@@ -76,7 +79,7 @@ specified.
 }
 \details{
 If \code{skip_short = TRUE}, this function will skip very short or
-  empty documents. A very short document is one where there are two few words
+  empty documents. A very short document is one where there are too few words
   to create at least two n-grams. For example, if five-grams are desired,
   then a document must be at least six words long. If no value of \code{n} is
   provided, then the function assumes a value of \code{n = 3}. A warning will

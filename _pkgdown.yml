@@ -1,10 +1,9 @@
-url: https://lincolnmullen.com/software/textreuse
+url: https://docs.ropensci.org/textreuse/
 
 template:
-  params:
-    bootswatch: united
-    ganalytics: "UA-25121492-1"
+  bootstrap: 5
+  bootswatch: united
 
 authors:
-  Lincoln Mullen:
-    href: "https://lincolnmullen.com"
+  Yaoxiang Li:
+    href: "https://github.com/yaoxiangli"

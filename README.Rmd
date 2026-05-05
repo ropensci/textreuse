@@ -5,27 +5,26 @@ title: Detect Text Reuse and Document Similarity
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  warning = FALSE,
   fig.path = "README-"
 )
-suppressPackageStartupMessages(library(dplyr))
+suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
 ```
 
 # textreuse
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
-[![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
-[![Build Status](https://travis-ci.org/ropensci/textreuse.svg?branch=master)](https://travis-ci.org/ropensci/textreuse) 
-[![Build status](https://ci.appveyor.com/api/projects/status/9qwf0473xi8cyuoh/branch/master?svg=true)](https://ci.appveyor.com/project/lmullen/textreuse-6xljc/branch/master)
-[![Coverage Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://codecov.io/github/ropensci/textreuse?branch=master)
-[![rOpenSci badge](https://badges.ropensci.org/20_status.svg)](https://github.com/ropensci/onboarding/issues/20)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
+[![CRAN_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
+[![Coverage Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://app.codecov.io/github/ropensci/textreuse?branch=master)
+[![rOpenSci badge](https://badges.ropensci.org/20_status.svg)](https://github.com/ropensci/software-review/issues/20)
 
 ## Overview
 
-This [R](https://www.r-project.org/) package provides a set of functions for measuring similarity among documents and detecting passages which have been reused. It implements shingled n-gram, skip n-gram, and other tokenizers; similarity/dissimilarity functions; pairwise comparisons; minhash and locality sensitive hashing algorithms; and a version of the Smith-Waterman local alignment algorithm suitable for natural language. It is broadly useful for, for example, detecting duplicate documents in a corpus prior to text analysis, or for identifying borrowed passages between texts. The classes provides by this package follow the model of other natural language processing packages for R, especially the [NLP](https://cran.r-project.org/package=NLP) and [tm](https://cran.r-project.org/package=tm) packages. (However, this package has no dependency on Java, which should make it easier to install.)
+This [R](https://www.r-project.org/) package provides a set of functions for measuring similarity among documents and detecting passages which have been reused. It implements shingled n-gram, skip n-gram, and other tokenizers; similarity/dissimilarity functions; pairwise comparisons; minhash and locality sensitive hashing algorithms; and a version of the Smith-Waterman local alignment algorithm suitable for natural language. It is broadly useful for, for example, detecting duplicate documents in a corpus prior to text analysis, or for identifying borrowed passages between texts. The classes provided by this package follow the model of other natural language processing packages for R, especially the [NLP](https://cran.r-project.org/package=NLP) and [tm](https://cran.r-project.org/package=tm) packages. (However, this package has no dependency on Java, which should make it easier to install.)
 
 ### Citation
 
@@ -54,7 +53,7 @@ devtools::install_github("ropensci/textreuse", build_vignettes = TRUE)
 
 There are three main approaches that one may take when using this package: pairwise comparisons, minhashing/locality sensitive hashing, and extracting matching passages through text alignment.
 
-See the [introductory vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-introduction.html) for a description of the classes provided by this package.
+See the [introductory vignette](https://docs.ropensci.org/textreuse/articles/textreuse-introduction.html) for a description of the classes provided by this package.
 
 ```{r eval = FALSE}
 vignette("textreuse-introduction", package = "textreuse")
@@ -62,7 +61,7 @@ vignette("textreuse-introduction", package = "textreuse")
 
 ### Pairwise comparisons
 
-In this example we will load a tiny corpus of three documents. These documents are drawn from Kellen Funk's [research](http://kellenfunk.org/field-code/) into the propagation of legal codes of civil procedure in the nineteenth-century United States.
+In this example we will load a tiny corpus of three documents. These documents are drawn from Kellen Funk's [research](https://kellenfunk.org/field-code/) into the propagation of legal codes of civil procedure in the nineteenth-century United States.
 
 ```{r}
 library(textreuse)
@@ -92,7 +91,7 @@ We can convert that matrix to a data frame of pairs and scores if we prefer.
 pairwise_candidates(comparisons)
 ```
 
-See the [pairwise vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-pairwise.html) for a fuller description.
+See the [pairwise vignette](https://docs.ropensci.org/textreuse/articles/textreuse-pairwise.html) for a fuller description.
 
 ```{r eval=FALSE}
 vignette("textreuse-pairwise", package = "textreuse")
@@ -121,7 +120,7 @@ scores <- lsh_compare(candidates, ats, jaccard_similarity, progress = FALSE)
 scores
 ```
 
-For details, see the [minhash vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-minhash.html).
+For details, see the [minhash vignette](https://docs.ropensci.org/textreuse/articles/textreuse-minhash.html).
 
 ```{r eval=FALSE}
 vignette("textreuse-minhash", package = "textreuse")
@@ -129,7 +128,7 @@ vignette("textreuse-minhash", package = "textreuse")
 
 ### Text alignment
 
-We can also extract the optimal alignment between to documents with a version of the  [Smith-Waterman](https://en.wikipedia.org/wiki/Smith-Waterman_algorithm) algorithm, used for protein sequence alignment, adapted for natural language. The longest matching substring according to scoring values will be extracted, and variations in the alignment will be marked.
+We can also extract the optimal alignment between two documents with a version of the  [Smith-Waterman](https://en.wikipedia.org/wiki/Smith-Waterman_algorithm) algorithm, used for protein sequence alignment, adapted for natural language. The longest matching substring according to scoring values will be extracted, and variations in the alignment will be marked.
 
 ```{r}
 a <- "'How do I know', she asked, 'if this is a good match?'"
@@ -137,7 +136,7 @@ b <- "'This is a match', he replied."
 align_local(a, b)
 ```
 
-For details, see the [text alignment vignette](https://cran.r-project.org/package=textreuse/vignettes/textreuse-alignment.html).
+For details, see the [text alignment vignette](https://docs.ropensci.org/textreuse/articles/textreuse-alignment.html).
 
 ```{r eval=FALSE}
 vignette("textreuse-alignment", package = "textreuse")
@@ -151,8 +150,8 @@ Loading the corpus and creating tokens benefit from using multiple cores, if ava
 
 Please note that this project is released with a [Contributor Code of Conduct](https://github.com/ropensci/textreuse/blob/master/CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-Thanks to [Noam Ross](http://www.noamross.net/) for his thorough [peer review](https://github.com/ropensci/onboarding/issues/20) of this package for [rOpenSci](https://ropensci.org/).
+Thanks to [Noam Ross](https://www.noamross.net/) for his thorough [peer review](https://github.com/ropensci/software-review/issues/20) of this package for [rOpenSci](https://ropensci.org/).
 
 ------------------------------------------------------------------------
 
-[![rOpenSCi logo](http://ropensci.org/public_images/github_footer.png)](http://ropensci.org)
+[![rOpenSCi logo](https://ropensci.org/public_images/github_footer.png)](https://ropensci.org)
