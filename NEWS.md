@@ -1,6 +1,6 @@
-# textreuse 0.1.6
+# textreuse 1.0.0
 
-- Updates due to dplyr 1.0.0 release
+- Update dplyr/tidyr compatibility for current releases
 - Add an `encoding` argument for reading files in `TextReuseTextDocument()` and
   `TextReuseCorpus()`
 - Return an empty local alignment instead of an error when two texts have no

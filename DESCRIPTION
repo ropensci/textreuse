@@ -1,7 +1,7 @@
 Package: textreuse
 Type: Package
 Title: Detect Text Reuse and Document Similarity
-Version: 0.1.6
+Version: 1.0.0
 Date: 2026-05-05
 Authors@R: c(
     person("Lincoln", "Mullen", role = c("aut"),
@@ -19,7 +19,7 @@ Description: Tools for measuring similarity among documents and detecting
     natural language.
 License: MIT + file LICENSE
 LazyData: TRUE
-URL: https://docs.ropensci.org/textreuse,
+URL: https://docs.ropensci.org/textreuse/,
     https://github.com/ropensci/textreuse
 BugReports: https://github.com/ropensci/textreuse/issues
 VignetteBuilder: knitr

@@ -51,7 +51,7 @@ The sample data provided in the \code{extdata/ats} directory
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://docs.ropensci.org/textreuse}
+  \item \url{https://docs.ropensci.org/textreuse/}
   \item \url{https://github.com/ropensci/textreuse}
   \item Report bugs at \url{https://github.com/ropensci/textreuse/issues}
 }
