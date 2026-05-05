@@ -17,6 +17,7 @@
   candidate pairs to matrices
 - Make `TextReuseCorpus()` skipped-document bookkeeping deterministic and
   available even when `skip_short = FALSE`
+- Add token-index helpers for finding candidate pairs from shared n-grams
 
 # textreuse 0.1.4
 
