@@ -1,6 +1,8 @@
 # textreuse 0.1.5
 
 - Updates due to dplyr 1.0.0 release
+- Add an `encoding` argument for reading files in `TextReuseTextDocument()` and
+  `TextReuseCorpus()`
 
 # textreuse 0.1.4
 

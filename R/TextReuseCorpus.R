@@ -45,6 +45,7 @@
 #' @param keep_text Should the text be saved in the documents that are returned
 #'   or discarded?
 #' @param skip_short Should short documents be skipped? (See details.)
+#' @param encoding Encoding to be used when reading files.
 #'
 #' @seealso \link[=TextReuseTextDocument-accessors]{Accessors for TextReuse
 #'   objects}.
@@ -65,7 +66,8 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                             minhash_func = NULL,
                             keep_tokens = FALSE,
                             keep_text = TRUE,
-                            skip_short = TRUE) {
+                            skip_short = TRUE,
+                            encoding = "unknown") {
 
   if (!is.null(tokenizer)) {
     assert_that(is.function(tokenizer),
@@ -115,6 +117,7 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                                  keep_tokens = keep_tokens,
                                  keep_text = keep_text,
                                  skip_short = skip_short,
+                                 encoding = encoding,
                                  meta = list(id = names(text)[i],
                                              tokenizer = tokenizer_name,
                                              hash_func = hash_func_name,
@@ -151,6 +154,7 @@ TextReuseCorpus <- function(paths, dir = NULL, text = NULL, meta = list(),
                                  keep_tokens = keep_tokens,
                                  keep_text = keep_text,
                                  skip_short = skip_short,
+                                 encoding = encoding,
                                  meta = list(tokenizer = tokenizer_name,
                                              hash_func = hash_func_name,
                                              minhash_func = minhash_func_name))

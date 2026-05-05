@@ -26,6 +26,18 @@ test_that("has accessor functions", {
   expect_equal(length(corpus_a), 3)
 })
 
+test_that("can read corpus files with an explicit encoding", {
+  dir <- tempfile("encoded-corpus")
+  dir.create(dir)
+  on.exit(unlink(dir, recursive = TRUE))
+  text <- enc2utf8("Café crème is naïve text.")
+  writeBin(charToRaw(paste0(text, "\n")), file.path(dir, "encoded.txt"))
+
+  corpus <- TextReuseCorpus(dir = dir, encoding = "UTF-8", tokenizer = NULL)
+  expect_equal(as.character(content(corpus[["encoded"]])), text)
+  expect_equal(Encoding(as.character(content(corpus[["encoded"]]))), "UTF-8")
+})
+
 test_that("has the right classes", {
   expect_is(corpus_a, "TextReuseCorpus")
   expect_is(corpus_a, "Corpus")
