@@ -12,4 +12,5 @@ wordnet
 ^cran-comments\.md$
 ^Makefile$
 ^_pkgdown\.yml$
+^pkgdown$
 docs/
