@@ -1,25 +1,58 @@
 # textreuse 1.0.0
 
-- Update dplyr/tidyr compatibility for current releases
-- Add an `encoding` argument for reading files in `TextReuseTextDocument()` and
-  `TextReuseCorpus()`
-- Return an empty local alignment instead of an error when two texts have no
-  matching words
-- Add `preserve_punctuation` to `align_local()` for preserving punctuation in
-  displayed alignments
-- Add `count_matches()` and `matching_tokens()` helpers for inspecting absolute
-  match counts and matched tokens
-- Parallelize `lsh_compare()` when `options(mc.cores)` is set on non-Windows
-  platforms
-- Add user interrupt checks to long-running C++ hashing and n-gram loops
-- Add `lsh_add()` for adding new documents to an existing LSH bucket cache
-- Add `as_sparse_matrix()` and preserve all document IDs when converting
-  candidate pairs to matrices
-- Make `TextReuseCorpus()` skipped-document bookkeeping deterministic and
-  available even when `skip_short = FALSE`
-- Add token-index helpers for finding candidate pairs from shared n-grams
-- Refresh README, vignette, and pkgdown documentation examples against current
-  package output
+This release brings together several years of maintenance and feature work to
+make textreuse easier to use on current R installations and more practical for
+larger document collections.
+
+## Text input and corpus construction
+
+- `TextReuseTextDocument()` and `TextReuseCorpus()` now accept an `encoding`
+  argument, making it easier to read source files whose text encoding is known
+  or differs from the platform default.
+- `TextReuseCorpus()` now keeps skipped-document bookkeeping deterministic.
+  Skipped documents are reported consistently, and skip metadata is available
+  even when `skip_short = FALSE`.
+- Very short documents are handled more predictably when skip n-grams are used,
+  avoiding assertion failures and making corpus construction easier to diagnose.
+
+## Alignment and match inspection
+
+- `align_local()` now returns an empty local alignment instead of throwing an
+  error when two texts have no matching words. This makes batch alignment
+  workflows easier to run because no-match pairs can be represented directly.
+- `align_local()` gains `preserve_punctuation`, allowing displayed alignments to
+  keep punctuation from the original texts when that context is useful.
+- New `count_matches()` and `matching_tokens()` helpers expose absolute match
+  counts and the matched tokens themselves, so users can inspect what drove a
+  similarity score rather than relying only on a ratio.
+
+## Candidate generation and comparison
+
+- New token-index helpers find candidate document pairs from shared n-grams,
+  giving users another way to identify likely reuse pairs before running more
+  expensive comparisons.
+- `pairwise_candidates()` and matrix conversion now preserve all document IDs,
+  including documents without returned candidate pairs.
+- `as_sparse_matrix()` provides a sparse matrix representation of candidate
+  results, which is more convenient for downstream modeling, graph analysis, and
+  workflows with many documents.
+
+## Locality-sensitive hashing
+
+- `lsh_add()` can add new documents to an existing LSH bucket cache, so users can
+  extend an index without rebuilding it from scratch.
+- `lsh_compare()` can run comparisons in parallel on non-Windows platforms when
+  `options(mc.cores)` is set.
+- Long-running C++ hashing and n-gram loops now check for user interrupts, so
+  expensive jobs can be stopped more cleanly from R.
+
+## Compatibility and documentation
+
+- Compatibility with current dplyr and tidyr releases has been refreshed.
+- README, vignette, reference, and pkgdown examples were regenerated against
+  current package output.
+- Stale external links and documentation badges were updated so package checks
+  and the public documentation site are cleaner.
 
 # textreuse 0.1.4
 
