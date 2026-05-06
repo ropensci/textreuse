@@ -1,6 +1,10 @@
 This is a new release with bug fixes, documentation refreshes, and helper
 functions added after a long maintenance interval.
 
+This resubmission fixes a moved URL in README.md:
+https://github.com/hadley/devtools was replaced with
+https://github.com/r-lib/devtools.
+
 This is also a maintainer change release. The maintainer has changed from
 Lincoln Mullen <lincoln@lincolnmullen.com> to Yaoxiang Li
 <liyaoxiang@outlook.com>. The previous maintainer, Lincoln Mullen, has

@@ -57,7 +57,7 @@ To install this package from CRAN:
     install.packages("textreuse")
 
 To install the development version from GitHub, use
-[devtools](https://github.com/hadley/devtools).
+[devtools](https://github.com/r-lib/devtools).
 
     # install.packages("devtools")
     devtools::install_github("ropensci/textreuse", build_vignettes = TRUE)
