@@ -1,6 +1,12 @@
 This is a new release with bug fixes, documentation refreshes, and helper
 functions added after a long maintenance interval.
 
+This is also a maintainer change release. The maintainer has changed from
+Lincoln Mullen <lincoln@lincolnmullen.com> to Yaoxiang Li
+<liyaoxiang@outlook.com>. The previous maintainer, Lincoln Mullen, has
+confirmed by email that he supports the maintainer transition. I can provide
+the email thread if requested.
+
 ## Test environments
 
 * local Windows 11 install: R 4.4.2
