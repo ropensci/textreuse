@@ -1,7 +1,7 @@
 Package: textreuse
 Type: Package
 Title: Detect Text Reuse and Document Similarity
-Version: 1.0.0
+Version: 1.0.1
 Date: 2026-05-06
 Authors@R: c(
     person("Lincoln", "Mullen", role = "aut",

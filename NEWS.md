@@ -1,8 +1,11 @@
-# textreuse 1.0.0
+# textreuse 1.0.1
 
 This release brings together several years of maintenance and feature work to
 make textreuse easier to use on current R installations and more practical for
 larger document collections.
+
+This is a CRAN resubmission that fixes a moved README URL reported by CRAN
+incoming checks.
 
 ## Text input and corpus construction
 

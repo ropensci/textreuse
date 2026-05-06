@@ -35,7 +35,7 @@ citation.
     #> To cite package 'textreuse' in publications use:
     #> 
     #>   Mullen L, Li Y (2026). _textreuse: Detect Text Reuse and Document
-    #>   Similarity_. R package version 1.0.0,
+    #>   Similarity_. R package version 1.0.1,
     #>   https://github.com/ropensci/textreuse,
     #>   <https://docs.ropensci.org/textreuse/>.
     #> 
@@ -45,7 +45,7 @@ citation.
     #>     title = {textreuse: Detect Text Reuse and Document Similarity},
     #>     author = {Lincoln Mullen and Yaoxiang Li},
     #>     year = {2026},
-    #>     note = {R package version 1.0.0, 
+    #>     note = {R package version 1.0.1, 
     #> https://github.com/ropensci/textreuse},
     #>     url = {https://docs.ropensci.org/textreuse/},
     #>   }

@@ -21,9 +21,9 @@ There were no ERRORs or WARNINGs.
 
 Local checks were run with:
 
-`R CMD check --no-manual textreuse_1.0.0.tar.gz`
+`R CMD check --no-manual textreuse_1.0.1.tar.gz`
 
-`R CMD check --as-cran --no-manual textreuse_1.0.0.tar.gz`
+`R CMD check --as-cran --no-manual textreuse_1.0.1.tar.gz`
 
 The `--as-cran` check reported three NOTEs:
 
