@@ -10,6 +10,7 @@ wordnet
 ^appveyor\.yml$
 ^CONDUCT\.md$
 ^cran-comments\.md$
+^AGENTS\.md$
 ^Makefile$
 ^_pkgdown\.yml$
 ^pkgdown$

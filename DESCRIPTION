@@ -1,8 +1,8 @@
 Package: textreuse
 Type: Package
 Title: Detect Text Reuse and Document Similarity
-Version: 1.0.1
-Date: 2026-05-06
+Version: 1.0.1.9000
+Date: 2026-07-24
 Authors@R: c(
     person("Lincoln", "Mullen", role = "aut",
         comment = c(ORCID = "0000-0001-5103-6917")
@@ -27,7 +27,7 @@ Depends:
 Imports:
     assertthat (>= 0.1),
     digest (>= 0.6.8),
-    dplyr (>= 0.8.0),
+    dplyr (>= 1.1.0),
     NLP (>= 0.1.8),
     Matrix,
     Rcpp (>= 0.12.0),
