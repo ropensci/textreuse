@@ -1,8 +1,11 @@
-# textreuse 1.0.1.9000
+# textreuse 1.0.2
 
 - Updated locality-sensitive hashing helpers for current `dplyr` and
   `tidyselect`, eliminating deprecated-selection and expected many-to-many join
   warnings.
+- Replaced inactive Travis CI and AppVeyor configurations with GitHub Actions
+  checks and coverage reporting.
+- Updated external documentation links to their current secure locations.
 
 # textreuse 1.0.1
 

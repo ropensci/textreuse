@@ -5,9 +5,7 @@
 ^README\.Rmd$
 ^README-*\.png$
 ^data-raw$
-^\.travis\.yml$
 wordnet
-^appveyor\.yml$
 ^CONDUCT\.md$
 ^cran-comments\.md$
 ^AGENTS\.md$
@@ -15,3 +13,4 @@ wordnet
 ^_pkgdown\.yml$
 ^pkgdown$
 docs/
+^\.github$

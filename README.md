@@ -4,6 +4,7 @@
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
 [![CRAN\_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
+[![R-CMD-check](https://github.com/ropensci/textreuse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/textreuse/actions/workflows/R-CMD-check.yaml)
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://app.codecov.io/github/ropensci/textreuse?branch=master)
 [![rOpenSci
@@ -35,8 +36,7 @@ citation.
     #> To cite package 'textreuse' in publications use:
     #> 
     #>   Mullen L, Li Y (2026). _textreuse: Detect Text Reuse and Document
-    #>   Similarity_. R package version 1.0.1,
-    #>   https://github.com/ropensci/textreuse,
+    #>   Similarity_. R package version 1.0.2,
     #>   <https://docs.ropensci.org/textreuse/>.
     #> 
     #> A BibTeX entry for LaTeX users is
@@ -45,8 +45,7 @@ citation.
     #>     title = {textreuse: Detect Text Reuse and Document Similarity},
     #>     author = {Lincoln Mullen and Yaoxiang Li},
     #>     year = {2026},
-    #>     note = {R package version 1.0.1, 
-    #> https://github.com/ropensci/textreuse},
+    #>     note = {R package version 1.0.2},
     #>     url = {https://docs.ropensci.org/textreuse/},
     #>   }
 
@@ -100,7 +99,7 @@ a whole or the individual documents that make it up.
     #> [1] "ca1851-match"   "ca1851-nomatch" "ny1850-match"
     corpus[["ca1851-match"]]
     #> TextReuseTextDocument
-    #> file : C:/Users/Bach/AppData/Local/R/win-library/4.4/textreuse/extdata/legal/ca1851-match.txt 
+    #> file : C:/Users/Bach/AppData/Local/R/win-library/4.4/textreuse/extdata/legal/ca1851-match.txt
     #> hash_func : hash_string 
     #> id : ca1851-match 
     #> minhash_func : 
