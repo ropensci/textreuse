@@ -1,3 +1,9 @@
+# textreuse 1.0.1.9000
+
+- Updated locality-sensitive hashing helpers for current `dplyr` and
+  `tidyselect`, eliminating deprecated-selection and expected many-to-many join
+  warnings.
+
 # textreuse 1.0.1
 
 This release brings together several years of maintenance and feature work to

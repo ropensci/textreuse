@@ -88,7 +88,7 @@ str(alignment)
 }
 \references{
 For a useful description of the algorithm, see
-  \href{http://etherealbits.com/2013/04/string-alignment-dynamic-programming-dna/}{this
+  \href{https://www.etherealbits.com/2013/04/string-alignment-dynamic-programming-dna/}{this
   post}. For the application of the Smith-Waterman algorithm to natural
   language, see David A. Smith, Ryan Cordell, and Elizabeth Maddock Dillon,
   "Infectious Texts: Modeling Text Reuse in Nineteenth-Century Newspapers,"

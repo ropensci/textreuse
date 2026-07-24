@@ -78,7 +78,7 @@ for a description of the classes provided by this package.
 
 In this example we will load a tiny corpus of three documents. These
 documents are drawn from Kellen Funk’s
-[research](https://kellenfunk.org/field-code/) into the propagation of
+[research](https://doi.org/10.1093/ahr/123.1.132) into the propagation of
 legal codes of civil procedure in the nineteenth-century United States.
 
     library(textreuse)

@@ -21,7 +21,8 @@ lsh_candidates <- function(buckets) {
   assert_that(is_lsh_buckets(buckets))
 
   candidates <- buckets %>%
-    dplyr::left_join(buckets, by = "buckets") %>%
+    dplyr::left_join(buckets, by = "buckets",
+                     relationship = "many-to-many") %>%
     dplyr::filter(.data$doc.x != .data$doc.y) %>%
     dplyr::distinct(doc.x, doc.y) %>%
     dplyr::arrange(.data$doc.x, .data$doc.y) %>%

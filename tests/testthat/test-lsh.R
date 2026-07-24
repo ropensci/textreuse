@@ -23,6 +23,7 @@ test_that("creates buckets without warnings", {
 })
 
 test_that("returns pairs of candidates without duplicates", {
+  expect_warning(lsh_candidates(buckets), NA)
   expect_is(candidates, "data.frame")
   expect_named(candidates, c("a", "b", "score"))
   expect_equal(candidates[[1, 1]], "ca1851-match")
