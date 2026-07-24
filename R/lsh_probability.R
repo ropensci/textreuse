@@ -20,7 +20,8 @@
 #'
 #' \deqn{p = 1 - (1 - s^{r})^{b}}
 #'
-#' According to \href{http://infolab.stanford.edu/~ullman/mmds/book.pdf}{MMDS},
+#' According to the
+#' \href{https://www.cambridge.org/core/books/mining-of-massive-datasets/C1B37BA2CBB8361B94FDD1C6F4E47922}{MMDS book page},
 #' that equation approximates an S-curve. This implies that there is a threshold
 #' (\code{t}) for \code{s} approximated by this equation.
 #'

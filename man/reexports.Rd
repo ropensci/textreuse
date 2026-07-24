@@ -14,6 +14,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{NLP}{\code{\link[NLP:generics]{content}}, \code{\link[NLP:generics]{content<-}}, \code{\link[NLP:generics]{meta}}, \code{\link[NLP:generics]{meta<-}}}
+  \item{NLP}{\code{\link[NLP:content]{content()}}, \code{\link[NLP:content<-]{content<-()}}, \code{\link[NLP:meta]{meta()}}, \code{\link[NLP:meta<-]{meta<-()}}}
 }}
 

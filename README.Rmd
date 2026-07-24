@@ -19,6 +19,7 @@ suppressWarnings(suppressPackageStartupMessages(library(dplyr)))
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/textreuse)](https://cran.r-project.org/package=textreuse)
 [![CRAN_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/textreuse)](https://cran.r-project.org/package=textreuse)
+[![R-CMD-check](https://github.com/ropensci/textreuse/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/textreuse/actions/workflows/R-CMD-check.yaml)
 [![Coverage Status](https://img.shields.io/codecov/c/github/ropensci/textreuse/master.svg)](https://app.codecov.io/github/ropensci/textreuse?branch=master)
 [![rOpenSci badge](https://badges.ropensci.org/20_status.svg)](https://github.com/ropensci/software-review/issues/20)
 

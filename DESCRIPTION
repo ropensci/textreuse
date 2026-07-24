@@ -1,7 +1,7 @@
 Package: textreuse
 Type: Package
 Title: Detect Text Reuse and Document Similarity
-Version: 1.0.1.9000
+Version: 1.0.2
 Date: 2026-07-24
 Authors@R: c(
     person("Lincoln", "Mullen", role = "aut",
@@ -41,5 +41,5 @@ Suggests:
     rmarkdown (>= 0.8),
     covr
 LinkingTo: BH, Rcpp, RcppProgress
-RoxygenNote: 7.3.2
 Encoding: UTF-8
+Config/roxygen2/version: 8.0.0
