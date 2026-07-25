@@ -32,6 +32,25 @@ test_that("returns pairs of candidates without duplicates", {
   expect_equal(nrow(candidates), 1)
 })
 
+test_that("candidate generation handles repeated and unmatched buckets", {
+  synthetic <- tibble::tibble(
+    doc = c("b", "a", "a", "c"),
+    buckets = c("shared", "shared", "shared", "unique")
+  )
+  class(synthetic) <- c("lsh_buckets", class(synthetic))
+
+  result <- lsh_candidates(synthetic)
+  expect_s3_class(result, "textreuse_candidates")
+  expect_equal(result$a, "a")
+  expect_equal(result$b, "b")
+  expect_true(is.na(result$score))
+
+  empty <- lsh_candidates(synthetic[synthetic$buckets == "unique", ])
+  expect_s3_class(empty, "textreuse_candidates")
+  expect_named(empty, c("a", "b", "score"))
+  expect_equal(nrow(empty), 0L)
+})
+
 test_that("additional documents can be added", {
   corpus2 <- rehash(corpus, minhash, type = "minhashes")
   buckets1and2 <- lsh(corpus2[1:2], bands = 50)

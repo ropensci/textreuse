@@ -19,17 +19,17 @@
 #' @export
 lsh_candidates <- function(buckets) {
   assert_that(is_lsh_buckets(buckets))
+  x <- y <- NULL
 
+  # The inequality join creates each unordered pair only once, avoiding the
+  # duplicate orientations and self-pairs produced by a full bucket self-join.
   candidates <- buckets %>%
-    dplyr::left_join(buckets, by = "buckets",
-                     relationship = "many-to-many") %>%
-    dplyr::filter(.data$doc.x != .data$doc.y) %>%
-    dplyr::distinct(doc.x, doc.y) %>%
-    dplyr::arrange(.data$doc.x, .data$doc.y) %>%
-    dplyr::mutate(dn = pmin(.data$doc.x, .data$doc.y),
-                  up = pmax(.data$doc.x, .data$doc.y)) %>%
-    dplyr::distinct(.data$up, .data$dn) %>%
-    dplyr::select(a = dn, b = up) %>%
+    dplyr::inner_join(
+      buckets,
+      by = dplyr::join_by(buckets, x$doc < y$doc)
+    ) %>%
+    dplyr::distinct(.data$doc.x, .data$doc.y) %>%
+    dplyr::transmute(a = .data$doc.x, b = .data$doc.y) %>%
     dplyr::arrange(.data$a, .data$b) %>%
     dplyr::mutate(score = NA_real_)
 

@@ -33,8 +33,7 @@ Imports:
     Rcpp (>= 0.12.0),
     RcppProgress  (>= 0.1),
     stringr (>= 1.0.0),
-    tibble (>= 3.0.1),
-    tidyr (>= 1.0.0)
+    tibble (>= 3.0.1)
 Suggests:
     testthat (>= 0.11.0),
     knitr (>= 1.11),
